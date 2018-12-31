@@ -10,7 +10,7 @@
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
                                     <div style="float: left">
-                                        <h3>Tiền Chi Tại Chi Nhánh</h3>
+                                        <h3>Tiền Chi Chi Nhánh</h3>
                                     </div>
                                     <div style="float: right">
                                         <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewHistory()">Thêm Mới</button>
