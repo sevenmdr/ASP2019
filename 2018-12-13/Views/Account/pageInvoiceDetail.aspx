@@ -21,7 +21,7 @@
     <script src="/js/simple.money.format.js"></script>
     <script type="text/javascript">
         function LoadDataUpdate() {
-            CallWebMethod();
+            CallWebMethod(); 
         }
     </script>
 </head>
