@@ -306,9 +306,22 @@
         }
     </script>
 
-    <script src="/plugins/cookie/js.cookie.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/dist/semantic.min.js"></script>
+   
+
+
+        <script src="/dist/semantic.min.js"></script>
+        <script src="/js/main.js"></script>
+     <script src="/plugins/cookie/js.cookie.js"></script>
+<%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>--%>
+<%--    <script src="/plugins/radioslider/jquery.radios-to-slider.js"></script>
+    <link href="/plugins/radioslider/radios-to-slider.css" rel="stylesheet" />--%>
+   <%-- <script src="/js/comon/renderControl.js"></script>
+    <script src="/js/customjs/custom-progress.js"></script>--%>
+    <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
+    <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
+<%--    <script src="/UploadJS/js/jquery.fileupload.js"></script>--%>
+
 
     <%-- <script src="/js/customjs/custom-modal.js"></script>--%>
 </body>

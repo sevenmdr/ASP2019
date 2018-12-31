@@ -57,6 +57,7 @@
     <script type="text/javascript">
         var dataListMainNotCheckIn;
         function LoadCardView(data, id) {
+            if (data && data.length > 0) {
             var myNode = document.getElementById(id);
             myNode.innerHTML = '';
     var re = new RegExp(",", 'g');
@@ -84,7 +85,9 @@
 `)
         }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+                document.getElementById(id).innerHTML = markup.replace(re, '');;
+                   }
+    else { document.getElementById(id).innerHTML = '' }
 }
         function LoadDataCustomerCareNotCheckIN() {
             GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {

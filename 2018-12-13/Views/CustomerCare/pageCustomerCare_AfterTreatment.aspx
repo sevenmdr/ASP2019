@@ -56,6 +56,7 @@
     <script type="text/javascript">
         var dataListMain;
         function LoadCardView(data, id) {
+            if (data && data.length > 0) {
             var myNode = document.getElementById(id);
             myNode.innerHTML = '';
             var re = new RegExp(",", 'g');
@@ -83,7 +84,9 @@
 `)
                 }
 `;
-            document.getElementById(id).innerHTML = markup.replace(re, '');;
+                document.getElementById(id).innerHTML = markup.replace(re, '');;
+                 }
+    else { document.getElementById(id).innerHTML = '' }
         }
         function LoadDataCustomerCareTreat() {
             GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {

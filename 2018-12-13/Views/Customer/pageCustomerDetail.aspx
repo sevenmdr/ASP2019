@@ -16,8 +16,15 @@
     <link rel="shortcut icon" href="~/img/favicon.ico" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
     <script src="/js/comon/noti_function.js"></script>
+        <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
+     <script src="/js/comon/renderControl.js"></script>
+    <script src="/js/customjs/custom-progress.js"></script>
+    <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
+    <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
+    <script src="/UploadJS/js/jquery.fileupload.js"></script>
     <script type="text/javascript">
+
         var dataInfo;
         function ChaneUpdateData(data) {
             dataInfo = data[0];
@@ -147,14 +154,14 @@
                     contentType: 'application/json; charset=utf-8',
                     async: true,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        notiError();
+                        notiError("Lỗi Hệ Thống");
                     },
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
                             location.reload();
                         } else {
-                            notiError();
+                            notiError("Lỗi Thêm Mới");
                         }
                     }
                 });

@@ -4,7 +4,7 @@ function notiSuccess() {
         size: "normal",
         rounded: false,
         delayIndicator: true,
-        msg: "This is default notification",
+        msg: "Thành Công ",
         //icon: null,
         //title: "aaaaaa",
         soundPath: '/plugins/lobibox/sounds/',   // The folder path where sounds are located
@@ -18,12 +18,12 @@ function notiSuccess() {
 
     });
 }
-function notiError() {
+function notiError(errormess) {
     Lobibox.notify("error", {
         size: "normal",
         rounded: false,
         delayIndicator: true,
-        msg: "This is default notification",
+        msg: errormess,
         //icon: null,
         //title: "aaaaaa",
         soundPath: '/plugins/lobibox/sounds/',   // The folder path where sounds are located
@@ -31,7 +31,7 @@ function notiError() {
         sound: 'sound2',
         showClass: "fadeInDown",
         hideClass: "zoomOut",
-        delay: 4000,
+        delay: 6000,
         sound: true,
         img: null,
 

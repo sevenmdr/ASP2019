@@ -171,14 +171,14 @@
                     contentType: 'application/json; charset=utf-8',
                     async: true,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        notiError();
+                        notiError("Lỗi Hệ Thống");
                     },
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
                             LoadStatusAjax();
                         } else {
-                            notiError();
+                            notiError(result.d);
                         }
 
                     }

@@ -261,14 +261,14 @@
                 async: true,
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
-                    notiError();
+                    notiError("Lỗi Hệ Thống");
                 },
                 success: function (result) {
                     if (result.d == "1") {
                         notiSuccess();
                         
                     } else {
-                        notiError();
+                        notiError("Lỗi Đổi Trạng Thái");
                     }
 
                 }

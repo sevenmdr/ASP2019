@@ -1,82 +1,106 @@
 ﻿//LoadCombo - Normal
 function LoadCombo(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
-
-
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
 <div class="item" data-value=${item.ID}>${item.Name}</div>
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
 }
 //LoadCombo - With Value
 function LoadComboWithValue(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
 
 
     ${ (data).map(item => ` <div class="item" data-value=${item.Value}>${item.Name}</div>`)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+    else { document.getElementById(id).innerHTML = '' }
 }
 
 //LoadCombo - Token
 function LoadComboToken(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
 
 
     ${ (data).map(item => `  <option value=${item.ID}>${item.Name}</option>`)
-        }
+            }
 `;
 
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+    else { document.getElementById(id).innerHTML = '' }
 }
 //LoadCombo - DetailValue
 function LoadComboDetail(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `${(data).map(item => `<div class="item" data-value=${item.ID}><div>${item.Name}</div><div class="money" id=${item.ID}money>${item.Price}</div></div>`)}`;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `${(data).map(item => `<div class="item" data-value=${item.ID}><div>${item.Name}</div><div class="money" id=${item.ID}money>${item.Price}</div></div>`)}`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+
+    else { document.getElementById(id).innerHTML = '' }
 }
+
 
 //RenFoderImage
 function RenFoder(data, id) {
-    debugger
-    var myNode = document.getElementById(id);
+   // debugger
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
         myNode.innerHTML = '';
         var re = new RegExp(",", 'g');
         const markup = `${(data).map(item => ` <a class="item">${item.FolderName}</a>`)}`;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
 
 }
 
-     //RenFoderImage
-function RenderImage (data, id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+//RenFoderImage
+function RenderImage(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
                          
                               
                             <img src=${item.link} alt="" title="" style="width: 200px;height: 200px;"/></a>
             
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
 
 }
 
 //RenderSchedule - pageGeneralInfo
-function RenScheduleList (data, id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+function RenScheduleList(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
                              <div class="event">
                                             <div class="label">
@@ -95,18 +119,21 @@ function RenScheduleList (data, id) {
                                             </div>
                                         </div>
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
 
 }
 
 //Render Radio - pageGeneralInfo
 function RenStatusNotYet(id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${ `
                                    <div class="step">
                                                 <div class="content">
@@ -124,16 +151,18 @@ function RenStatusNotYet(id) {
                                                 </div>
                                             </div>
 `
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+
 
 }
 function RenStatusCheckIn(id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+   
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${ `
                                           <div class="step">
                                                 <div class="content">
@@ -151,16 +180,18 @@ function RenStatusCheckIn(id) {
                                                 </div>
                                             </div>
 `
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+  
 
 }
 function RenStatusCheckOUT(id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+  
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${ `
                                       <div class="step">
                                                 <div class="content">
@@ -178,9 +209,10 @@ function RenStatusCheckOUT(id) {
                                                 </div>
                                             </div>
 `
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+
 
 }
 
