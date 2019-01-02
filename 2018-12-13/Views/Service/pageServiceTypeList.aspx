@@ -27,7 +27,7 @@
 
                             </div>
                         </form>
-                        <div class="ui segment" style="float: left;">
+                        <div class="ui segment" style="float: left;width:100%">
                             <table class="ui celled padded table" id="dtContent">
                                 <thead>
                                     <tr>
@@ -94,7 +94,6 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-    <script src="/plugins/datatable/jquery.dataTables.js"></script>
     <script src="/js/customjs/custom-datatable.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
    

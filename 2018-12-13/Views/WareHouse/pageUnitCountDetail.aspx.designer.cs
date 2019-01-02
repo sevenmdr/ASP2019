@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2018_12_13.Views.Supplier {
+namespace _2018_12_13.Views.WareHouse {
     
     
-    public partial class pageSupplierDetail {
+    public partial class pageUnitCountDetail
+    {
         
         /// <summary>
         /// ScriptManager1 control.

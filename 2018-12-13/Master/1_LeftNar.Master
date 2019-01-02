@@ -117,17 +117,17 @@
                 <div class="content">
                     <a class="item" href="/Views/WareHouse/pageWareHouseList.aspx">Danh Sách Kho
                     </a>
-                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Đơn Vị Tính
+                    <a class="item" href="/Views/WareHouse/pageUnitCountList.aspx">Đơn Vị Tính
                     </a>
-                    <a class="item" href="/Views/Service/pageServiceList.aspx">Loại Sản Phẩm
+                    <a class="item" href="/Views/WareHouse/pageProductTypeList.aspx">Loại Sản Phẩm
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Sản Phẩm
+                    <a class="item" href="/Views/WareHouse/pageProductList.aspx">Sản Phẩm
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Cài Đặt Định Mức
+                    <a class="item" href="/Views/WareHouse/pageNormSettingList.aspx">Cài Đặt Định Mức
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Định Mức Tồn
+                    <a class="item" href="/Views/WareHouse/pageNormStockList.aspx">Định Mức Tồn
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Nhà Cung Cấp
+                    <a class="item" href="/Views/WareHouse/pageSupplierList.aspx">Nhà Cung Cấp
                     </a>
                     <a class="item" href="/Views/Discount/pageDiscountList.aspx">Nhập Kho
                     </a>

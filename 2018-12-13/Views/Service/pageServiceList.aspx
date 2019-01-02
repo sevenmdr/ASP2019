@@ -27,7 +27,7 @@
 
                             </div>
                         </form>
-                        <div class="ui segment" style="float: left;">
+                        <div class="ui segment" style="float: left; width:100%">
                             <table class="ui celled padded table" id="dtContent">
                                 <thead>
                                     <tr>

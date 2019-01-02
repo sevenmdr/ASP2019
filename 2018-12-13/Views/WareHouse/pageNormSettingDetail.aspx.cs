@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.WareHouse
 {
-    public partial class pageWareHouseDetail : WebPageBase
+    public partial class pageNormSettingDetail : WebPageBase
     {
         public static string _CurrentID { get; set; }
 
