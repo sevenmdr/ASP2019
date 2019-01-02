@@ -6,36 +6,38 @@
 <head runat="server">
     <title>VTTech Solution</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="~/img/favicon.ico" />
+    <%--    <link rel="icon" href="~/img/favicon.ico" />--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />
-    <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/main.custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/img/favicon.ico" />
-    <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
+    <%--    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />--%>
+    <%--    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />--%>
+    <%--    <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />--%>
+    <%--    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/dist/semantic.min.css" rel="stylesheet" />
+    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />--%>
+    <%--    <script src="/dist/semantic.min.js"></script>--%>
+    <%--    <link href="/css/main.custom.css" rel="stylesheet" />--%>
+    <%--    <link rel="shortcut icon" href="~/img/favicon.ico" />
+    <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />--%>
     <script src="/js/comon/noti_function.js"></script>
-        <script src="/js/customjs/custom-validation.js"></script>
+    <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
     <script src="/js/comon/load_datasource.js"></script>
-     <script src="/js/comon/renderControl.js"></script>
-    <script src="/js/customjs/custom-progress.js"></script>
-    <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
+    <%--    <script src="/js/comon/renderControl.js"></script>--%>
+    <%--    <script src="/js/customjs/custom-progress.js"></script>--%>
+    <%--  <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
     <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
-    <script src="/UploadJS/js/jquery.fileupload.js"></script>
-    <script type="text/javascript">
+    <script src="/UploadJS/js/jquery.fileupload.js"></script>--%>
 
+    <script type="text/javascript">
         var dataInfo;
         function ChaneUpdateData(data) {
             dataInfo = data[0];
         }
-
     </script>
 </head>
 
 <body>
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div class="header">
         Thông Tin Khách Hàng
@@ -120,20 +122,14 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="actions">
         <div style="float: right">
             <button class="ui teal button" form="form3" onclick="ExcuteData()">Save</button>
         </div>
-
     </div>
-
-
-
     <script>
         function ExcuteData() {
+
             var data = new Object();
             data.Gender_ID = Number($('#Gender_ID').dropdown('get value')) ? Number($('#Gender_ID').dropdown('get value')) : 0;
             data.Type_Cat_ID = Number($('#Type_Cat_ID').dropdown('get value')) ? Number($('#Type_Cat_ID').dropdown('get value')) : 0;
@@ -206,11 +202,9 @@
         }
     </script>
     <script src="/dist/semantic.min.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
-    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
-    <script src="/js/customjs/custom-validation.js"></script>
-    <script src="/js/main.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
 </body>
 

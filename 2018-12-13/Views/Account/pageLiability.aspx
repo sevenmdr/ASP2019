@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="sixteen wide tablet ten wide computer column">
                     <div class="ui segments" style="background-color: white">
-                        <form class="ui form segment form3" id="form3" style="height: 65px">
+                        <form class="ui form segment form3" style="height: 65px">
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
                                     <div style="float: left">

@@ -34,7 +34,9 @@
                                         Username:
                                     </label>
                                     <div class="ui fluid icon input">
-                                        <input runat="server" name="name" id="u_name" type="name" autocomplete="off" style="width: 100%!important; min-width: 100%; width: 100%;">
+                                        <input runat="server" name="name" id="u_name" type="name" value="ad"
+                                            autocomplete="off" style="width: 100%!important; min-width: 100%; width: 100%;
+                                            font-size:15px">
                                         <i class="icon mail outline"></i>
                                     </div>
                                 </div>
@@ -43,7 +45,7 @@
                                         Password:
                                     </label>
                                     <div class="ui fluid icon input">
-                                        <input runat="server" name="password" id="u_pass" type="password" autocomplete="off" style="width: 100%!important; min-width: 100%; width: 100%;">
+                                        <input runat="server" name="password" id="u_pass" type="password" autocomplete="off" style="font-size:15px;width: 100%!important; min-width: 100%; width: 100%;">
                                         <i class="icon key"></i>
                                     </div>
                                 </div>

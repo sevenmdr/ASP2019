@@ -23,18 +23,16 @@
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
     <script src="/plugins/lobibox/js/notifications.js"></script>
     <script src="/js/comon/noti_function.js"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
     <script src="/js/comon/renderControl.js"></script>
-    <script src="/js/customjs/custom-validation.js"></script>
-
+    <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div id="contextWrap">
         <div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
@@ -62,30 +60,28 @@
                     <i class="dropdown icon"></i>Chăm Sóc Khách Hàng
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Sau Điều Trị
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">Sinh Nhật
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Chưa Đến Chi Nhánh
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Chưa Làm Dịch Vụ
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Lịch
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
                     </a>
                 </div>
 
                 <div class="title item">
                     <i class="calendar outline icon titleIcon icon"></i>
-                    <i class="dropdown icon"></i>Lịch Hẹn
+                    <i class="dropdown icon"></i>Kế Toán
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">
-                        <i class="calendar alternate icon titleIcon icon"></i>
-                        Trong Ngày
+                    <a class="item" href="#">Chi Tại Chi Nhánh
                     </a>
-                    <a class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">
-                        <i class="calendar alternate outline icon titleIcon icon"></i>
-                        Theo Ngày
+                    <a class="item" href="#">Danh Sách Thu Chi
+                    </a>
+                    <a class="item" href="#">Công Nợ Khách Hàng
                     </a>
                 </div>
 
@@ -100,6 +96,48 @@
                     </a>
 
                 </div>
+
+                <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Dịch Vụ & Khuyến Mãi
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
+                    </a>
+                </div>
+
+                <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Kho
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/WareHouse/pageWareHouseList.aspx">Danh Sách Kho
+                    </a>
+                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Đơn Vị Tính
+                    </a>
+                    <a class="item" href="/Views/Service/pageServiceList.aspx">Loại Sản Phẩm
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Sản Phẩm
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Cài Đặt Định Mức
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Định Mức Tồn
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Nhà Cung Cấp
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Nhập Kho
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Xuất Kho 
+                    </a>
+                     <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chốt Kho
+                    </a>
+                </div>
+
+
             </div>
 
             <div class="ui dropdown item displaynone scrolling">
@@ -155,9 +193,6 @@
                 </div>
             </div>
 
-            <div class="ui divider"></div>
-
-
             <div class="ui dropdown item displaynone scrolling">
                 <span>Khách Hàng</span>
                 <i class="dollar sign icon"></i>
@@ -175,7 +210,7 @@
             </div>
 
 
-
+            <div class="ui divider"></div>
             <a class="item hiddenCollapse">
                 <div class="ui one mini inverted statistics">
                     <div class="statistic">
@@ -271,14 +306,13 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="ui small test modal" id="divDetailPopup"></div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
-
     </div>
-
     <script>
         $('#divDetailPopup').modal({
             autofocus: false
@@ -306,23 +340,10 @@
         }
     </script>
 
-   
-
-
-        <script src="/dist/semantic.min.js"></script>
-        <script src="/js/main.js"></script>
-     <script src="/plugins/cookie/js.cookie.js"></script>
-<%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>
-    <script src="/js/customjs/custom-datatable.js"></script>--%>
-<%--    <script src="/plugins/radioslider/jquery.radios-to-slider.js"></script>
-    <link href="/plugins/radioslider/radios-to-slider.css" rel="stylesheet" />--%>
-   <%-- <script src="/js/comon/renderControl.js"></script>
-    <script src="/js/customjs/custom-progress.js"></script>--%>
-    <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
-    <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
-<%--    <script src="/UploadJS/js/jquery.fileupload.js"></script>--%>
-
-
-    <%-- <script src="/js/customjs/custom-modal.js"></script>--%>
+    <script src="/dist/semantic.min.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/plugins/cookie/js.cookie.js"></script>
+    <script src="/js/customjs/custom-modal.js"></script>
 </body>
 </html>

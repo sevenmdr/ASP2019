@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="sixteen wide tablet ten wide computer column">
                     <div class="ui segments" style="background-color: white;border: none;">
-                        <form class="ui form segment form3" id="form3">
+                        <form class="ui form segment form3">
                             <div class="ui segment" style="border: none;">
                                 <div class="five fields" style="margin: 0px;">
                                     <div class="field">

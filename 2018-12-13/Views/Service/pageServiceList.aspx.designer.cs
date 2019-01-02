@@ -7,9 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2018_12_13.Views.Appointment {
+namespace _2018_12_13.Views.Service {
     
     
-    public partial class pageAppointmentInDay {
+    public partial class pageServiceList
+    {
     }
 }

@@ -435,9 +435,9 @@ D:\Source\2019\2018-12-13\bin\de\DevExpress.Office.v18.1.Core.resources.dll
 D:\Source\2019\2018-12-13\bin\es\DevExpress.Office.v18.1.Core.resources.dll
 D:\Source\2019\2018-12-13\bin\ja\DevExpress.Office.v18.1.Core.resources.dll
 D:\Source\2019\2018-12-13\bin\ru\DevExpress.Office.v18.1.Core.resources.dll
-D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csprojAssemblyReference.cache
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.dll.licenses
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csproj.CoreCompileInputs.cache
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csproj.CopyComplete
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.dll
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.pdb
+D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csprojAssemblyReference.cache

@@ -17,8 +17,7 @@
                                             <div id="txtNameMain"></div>
                                         </div>
                                         <div class="meta">
-                                           <a>&nbsp&nbsp</a><div id="txtPhoneMain"></div>
-                                            
+                                           <a>&nbsp&nbsp</a><div id="txtPhoneMain"></div> 
                                         </div>
                                     </div>
                             </div>
@@ -83,9 +82,6 @@
                     break;
             }
         })
-
- 
-
 
         // Status //////////////
         function addNewStatus(customerID) {
@@ -191,17 +187,11 @@
             $("#divDetailPopup").load("/Views/Sms/pageSmsDetail.aspx?type=" + 6 + "&CustomerID=" + ("<%=CustomerID.ToString() %>"));
         }
 
-
-
-
     </script>
-
 
     <script src="/dist/semantic.min.js"></script>
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
     <script src="/js/customjs/custom-datatable.js"></script>
-<%--    <script src="/plugins/radioslider/jquery.radios-to-slider.js"></script>
-    <link href="/plugins/radioslider/radios-to-slider.css" rel="stylesheet" />--%>
     <script src="/js/comon/renderControl.js"></script>
     <script src="/js/customjs/custom-progress.js"></script>
     <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>

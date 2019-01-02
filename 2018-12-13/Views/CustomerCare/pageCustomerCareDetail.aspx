@@ -34,7 +34,7 @@
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                <form class="ui form segment form3" id="form3">
+                <form class="ui form segment form3">
                     <div class="field">
                         <div class="field">
                             <label>Loại Dịch Vụ</label>
