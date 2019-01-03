@@ -159,7 +159,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
+
 </body>
 
 </html>

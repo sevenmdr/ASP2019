@@ -12,7 +12,7 @@
         success: function (result) {
 
             fn(JSON.parse(result.d)["Table1"]);
-        //    LoadComboDetail(JSON.parse(result.d)["Table1"], "ccbServiceTab");
+            //    LoadComboDetail(JSON.parse(result.d)["Table1"], "ccbServiceTab");
             // LoadCombo(JSON.parse(result.d)["Table2"], "ccbDiscountTab");
 
 
@@ -228,13 +228,13 @@ function GetDataComboTreatment(link, fn) {
 
 //LoadData CustomerCare AfterTreatment
 function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
-        var x = "";
+    var x = "";
     $.ajax({
         url: link,
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "Branch_ID": Branch_ID, "Date": Date}),
+        data: JSON.stringify({ "Branch_ID": Branch_ID, "Date": Date }),
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -247,7 +247,7 @@ function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
     })
     return x;
 }
-      //GetCombo CustomerCare AfterTreatment
+//GetCombo CustomerCare AfterTreatment
 function GetDataComboBranch(link, fn) {
     var x = "";
     $.ajax({
@@ -376,7 +376,7 @@ function GetImageByFolder(link, folderName, fn) {
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "folderName": folderName}),
+        data: JSON.stringify({ "folderName": folderName }),
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -437,7 +437,7 @@ function GetDataSourceAppointmentList(link, Branch_ID, fn) {
 
 
 // Load list Appointment By Dat,
-function GetDataSourceAppointmentListByDay(link, Branch_ID,dateFrom,dateTo, fn) {
+function GetDataSourceAppointmentListByDay(link, Branch_ID, dateFrom, dateTo, fn) {
     var x = "";
     $.ajax({
         url: link,
@@ -468,6 +468,104 @@ function GetDataSourceSerchCustomer(link, keyword, fn) {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({ "keyword": keyword }),
         async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//LoadComboBranchh
+function GetDataComboBranch(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}
+// Load list WareHouse,
+function GetDataSourceWareHouse(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Load list Supplier,
+function GetDataSourceSupplier(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Load list Supplier,
+function GetDataSourceProductType(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataSourceUnit(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);

@@ -16,6 +16,13 @@ $('.ui.form1').form({
                 prompt: 'Please select at least two skills'
             }]
         },
+        branchwarehouse: {
+            identifier: 'branchwarehouse',
+            rules: [{
+                type: 'minCount[1]',
+                prompt: 'Please select at least two skills'
+            }]
+        },
         gender: {
             identifier: 'gender',
             rules: [{
@@ -156,6 +163,19 @@ $('.ui.form3').form({
             rules: [
                 {
                     type: 'exactLength[10]',
+                    prompt: 'Please enter exactly 10 characters'
+                },
+                {
+                    type: 'number',
+                    prompt: 'Please enter number'
+                }
+            ]
+        },
+        codewarehouse: {
+            identifier: 'codewarehouse',
+            rules: [
+                {
+                    type: 'exactLength[5]',
                     prompt: 'Please enter exactly 10 characters'
                 },
                 {

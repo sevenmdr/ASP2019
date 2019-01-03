@@ -12,6 +12,15 @@
     <link href="/css/main.custom.css" rel="stylesheet" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
 
+    <script>
+                              function LoadComboBranchWareHouse() {
+                                  GetDataComboBranch("/Views/WareHouse/pageWareHouseDetail.aspx/LoadComboMain",
+                                      function (Branch) {
+                LoadComboToken(Branch, "BranchWare")
+            });
+               }
+               
+        </script>
 </head>
 
 <body>
@@ -24,36 +33,32 @@
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                <form class="ui form segment form3">
+                <form class="ui form segment form3" id="form3">
                     <div class="two fields">
                         <div class="field">
-                          <%--  <label>Loại Chi Chú</label>
-                            <div class="ui fluid search selection dropdown" id="TypeHistory">
-                                <input type="hidden" name="historyType" />
-                                <i class="dropdown icon"></i>
-                                <input class="search" autocomplete="off" tabindex="0" />
-                                <div class="default text">Loại Lịch Sử</div>
-                                <div id="ccbHistoryType" class="menu" tabindex="-1">
-                                </div>
-                            </div>--%>
+                            <div class="field">
+                                <label>Mã Kho</label>
+                                <input id="CodeWare" name="codewarehouse" type="text" />
+                            </div>
                         </div>
                         <div class="field">
-                        <%--    <label>Loại Complain</label>
-                            <div class="ui fluid search selection dropdown">
-                                <input id="ComplaintInput" type="hidden" name="complainType" />
-                                <i class="dropdown icon"></i>
-                                <input class="search" autocomplete="off" tabindex="0" />
-                                <div class="default text">Loại Complain</div>
-                                <div id="ccbComplainType" class="menu" tabindex="-1">
-                                </div>
-                            </div>--%>
+                            <div class="field">
+                                <label>Tên Kho</label>
+                                <input id="NameWare" name="namewarehouse" type="text" />
+                            </div>
                         </div>
                     </div>
-
                     <div class="field">
                         <div class="field">
-                            <label>Nội Dung</label>
-                            <textarea id="txtNameHistory" name="content"></textarea>
+                            <label>Chi Nhánh</label>
+                            <select id="BranchWare" name="branchwarehouse" multiple="" class="label ui selection fluid dropdown">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="field">
+                            <label>Địa Chỉ</label>
+                            <textarea id="AddressWare" name="content"></textarea>
                         </div>
                     </div>
 
@@ -71,95 +76,71 @@
     </div>
 
     <script type="text/javascript">
-        //var DataComboHistory;
-        //var DataComboCompalaint;
-        function ChangeTypeHistory() {
 
-            //if (Number($('#TypeHistory').dropdown('get value')) == 56) {
-
-            //    $('#TypeComplain').removeClass("disabled");
-            //    $("#ComplaintInput").attr('name', "complainType");
-            //}
-            //else {
-            //    $('#TypeComplain').dropdown('clear')
-            //    $('#TypeComplain').addClass("disabled");
-            //    $("#ComplaintInput").attr('name', "NotVali");
-            //}
-        }
         function ExcuteData() {
-            //var data = new Object();
-            //data.TypeHistory_ID = Number($('#TypeHistory').dropdown('get value')) ? Number($('#TypeHistory').dropdown('get value')) : 0;
-            //data.TypeCompalint_ID = Number($('#TypeComplain').dropdown('get value')) ? Number($('#TypeComplain').dropdown('get value')) : 0;
-            //data.Content = $('#txtNameHistory').val() ? $('#txtNameHistory').val() : "";
-            //$('#form3').form('validate form');
-            //if ($('#form3').form('is valid')) {
-            //    $.ajax({
-            //        url: "/Views/Customer/pageHistoryDetail.aspx/ExcuteData",
-            //        dataType: "json",
-            //        type: "POST",
-            //        data: JSON.stringify({ 'data': JSON.stringify(data) }),
-            //        contentType: 'application/json; charset=utf-8',
-            //        async: true,
-            //        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //            notiError("Lỗi Hệ Thống");
-            //        },
-            //        success: function (result) {
-            //            if (result.d == "1") {
-            //                notiSuccess();
-            //                LoadHistoryAjax();
-            //            } else {
-            //                notiError("Lỗi Thao Tác");
-            //            }
-            //        }
-            //    })
-            //    $('#divDetailPopup').modal('hide');
-            //    document.getElementById("divDetailPopup").innerHTML = '';
-            //}
+            var data = new Object();
+            data.Code = $('#CodeWare').val() ? $('#CodeWare').val() : "";
+            data.Name = $('#NameWare').val() ? $('#NameWare').val() : "";
+            data.Address = $('#AddressWare').val() ? $('#AddressWare').val() : "";
+            data.BranchID = $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length)/2) ? $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length)/2) : "";
+            $('#form3').form('validate form');
+            if ($('#form3').form('is valid')) {
+                $.ajax({
+                    url: "/Views/WareHouse/pageWareHouseDetail.aspx/ExcuteData",
+                    dataType: "json",
+                    type: "POST",
+                    data: JSON.stringify({ 'data': JSON.stringify(data) }),
+                    contentType: 'application/json; charset=utf-8',
+                    async: true,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        notiError();
+                    },
+                    success: function (result) {
+                        if (result.d == "1") {
+                            notiSuccess();
+                            LoadWareHouseAjax();
+                        } else {
+                            notiError(result.d);
+                        }
+
+                    }
+                });
+                $('#divDetailPopup').modal('hide');
+                document.getElementById("divDetailPopup").innerHTML = '';
+            }
             return false;
         }
-        // Loadcombo status type
+        // Loadcombo BranchWareHouse 
 
-        function LoadComboHistory() {
 
-           <%-- GetDataComboTypeHistory("/Views/Customer/pageHistoryDetail.aspx/LoadComboMain", function (_DataComboHistory, _DataComboCompalaint) {
-                DataComboStatus = _DataComboHistory
-                if ((<%=_typeHistory%>).toString() == "1") {
-                    DataComboStatus = DataComboStatus.filter(word => word["ID"] != 56);
-                }
-                LoadCombo(DataComboStatus, "ccbHistoryType")
-                DataComboCompalaint = _DataComboCompalaint
-                LoadCombo(DataComboCompalaint, "ccbComplainType")
-            });--%>
-        }
 
         $(document).ready(function () {
-            //LoadComboHistory();
-            //$('#TypeComplain').addClass("disabled");
-            //LoadDataUpdate();
+              LoadComboBranchWareHouse();
+            LoadDataUpdateWareHouse();
         });
 
-        function LoadDataUpdate() {
-        <%--    let dataHistory = ([<%=_dataHistory%>][0]);--%>
-            //if (dataHistory) {
-            //    $("#TypeHistory").dropdown("refresh");
-            //    $("#TypeComplain").dropdown("refresh");
-            //    $("#TypeHistory").dropdown("set selected", dataHistory[0].Type);
-            //    $("#TypeComplain").dropdown("set selected", dataHistory[0].Complaint);
-            //    $('#txtNameHistory').val((dataHistory[0].Content));
-
-            //}
+        function LoadDataUpdateWareHouse() {
+            let dataWareHouse = ([<%=_dataWareHouse%>][0]);
+            if (dataWareHouse) {
+                $('#BranchWare').dropdown('clear')
+                $('#BranchWare').dropdown('set selected', (dataWareHouse[0].BranchID.split(",")));
+                $('#CodeWare').val((dataWareHouse[0].Code));
+                $('#NameWare').val((dataWareHouse[0].Name));
+                 $('#AddressWare').val((dataWareHouse[0].Address));
+            }
         }
     </script>
 
-    
+
     <script src="/dist/semantic.min.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
+        <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
+
 </body>
 
 </html>

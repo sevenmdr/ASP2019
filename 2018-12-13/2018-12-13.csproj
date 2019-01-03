@@ -1921,7 +1921,6 @@
     <Content Include="Views\Customer\pageTreatmentList.aspx" />
     <Content Include="Views\Discount\pageDiscountDetail.aspx" />
     <Content Include="Views\Discount\pageDiscountList.aspx" />
-    <Content Include="Views\Employee\pageEmployeeDetail.aspx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Login\Logout.aspx" />
     <Content Include="Views\Login\pageChangePassword.aspx" />
@@ -2324,13 +2323,6 @@
     <Compile Include="Views\Discount\pageDiscountList.aspx.designer.cs">
       <DependentUpon>pageDiscountList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Employee\pageEmployeeDetail.aspx.cs">
-      <DependentUpon>pageEmployeeDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Employee\pageEmployeeDetail.aspx.designer.cs">
-      <DependentUpon>pageEmployeeDetail.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2700,6 +2692,7 @@
     <Folder Include="App_Start\" />
     <Folder Include="Models\BindingList\" />
     <Folder Include="Views\Customer\UploadedFiles\" />
+    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

@@ -24,36 +24,16 @@
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                <form class="ui form segment form3">
-                    <div class="two fields">
-                        <div class="field">
-                          <%--  <label>Loại Chi Chú</label>
-                            <div class="ui fluid search selection dropdown" id="TypeHistory">
-                                <input type="hidden" name="historyType" />
-                                <i class="dropdown icon"></i>
-                                <input class="search" autocomplete="off" tabindex="0" />
-                                <div class="default text">Loại Lịch Sử</div>
-                                <div id="ccbHistoryType" class="menu" tabindex="-1">
-                                </div>
-                            </div>--%>
-                        </div>
-                        <div class="field">
-                        <%--    <label>Loại Complain</label>
-                            <div class="ui fluid search selection dropdown">
-                                <input id="ComplaintInput" type="hidden" name="complainType" />
-                                <i class="dropdown icon"></i>
-                                <input class="search" autocomplete="off" tabindex="0" />
-                                <div class="default text">Loại Complain</div>
-                                <div id="ccbComplainType" class="menu" tabindex="-1">
-                                </div>
-                            </div>--%>
-                        </div>
-                    </div>
+                <form class="ui form segment form3" id="form3">
+                       <div class="field">
+                                <label>Loại Sản Phẩm</label>
+                                <input id="TypeProduct" name="name" type="text" />
+                            </div>
 
                     <div class="field">
                         <div class="field">
-                            <label>Nội Dung</label>
-                            <textarea id="txtNameHistory" name="content"></textarea>
+                            <label>Ghi Chú</label>
+                            <textarea id="NoteTypeProduct" name="content"></textarea>
                         </div>
                     </div>
 
@@ -71,83 +51,51 @@
     </div>
 
     <script type="text/javascript">
-        //var DataComboHistory;
-        //var DataComboCompalaint;
-        function ChangeTypeHistory() {
+      function ExcuteData() {
+            var data = new Object();
+            data.Name = $('#TypeProduct').val() ? $('#TypeProduct').val() : "";
+          data.Note = $('#NoteTypeProduct').val() ? $('#NoteTypeProduct').val() : "";
+          debugger
+            $('#form3').form('validate form');
+            if ($('#form3').form('is valid')) {
+                $.ajax({
+                    url: "/Views/WareHouse/pageProductTypeDetail.aspx/ExcuteData",
+                    dataType: "json",
+                    type: "POST",
+                    data: JSON.stringify({ 'data': JSON.stringify(data) }),
+                    contentType: 'application/json; charset=utf-8',
+                    async: true,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        notiError();
+                    },
+                    success: function (result) {
+                        if (result.d == "1") {
+                            notiSuccess();
+                            LoadProductTypeAjax();
+                        } else {
+                            notiError(result.d);
+                        }
 
-            //if (Number($('#TypeHistory').dropdown('get value')) == 56) {
-
-            //    $('#TypeComplain').removeClass("disabled");
-            //    $("#ComplaintInput").attr('name', "complainType");
-            //}
-            //else {
-            //    $('#TypeComplain').dropdown('clear')
-            //    $('#TypeComplain').addClass("disabled");
-            //    $("#ComplaintInput").attr('name', "NotVali");
-            //}
-        }
-        function ExcuteData() {
-            //var data = new Object();
-            //data.TypeHistory_ID = Number($('#TypeHistory').dropdown('get value')) ? Number($('#TypeHistory').dropdown('get value')) : 0;
-            //data.TypeCompalint_ID = Number($('#TypeComplain').dropdown('get value')) ? Number($('#TypeComplain').dropdown('get value')) : 0;
-            //data.Content = $('#txtNameHistory').val() ? $('#txtNameHistory').val() : "";
-            //$('#form3').form('validate form');
-            //if ($('#form3').form('is valid')) {
-            //    $.ajax({
-            //        url: "/Views/Customer/pageHistoryDetail.aspx/ExcuteData",
-            //        dataType: "json",
-            //        type: "POST",
-            //        data: JSON.stringify({ 'data': JSON.stringify(data) }),
-            //        contentType: 'application/json; charset=utf-8',
-            //        async: true,
-            //        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //            notiError("Lỗi Hệ Thống");
-            //        },
-            //        success: function (result) {
-            //            if (result.d == "1") {
-            //                notiSuccess();
-            //                LoadHistoryAjax();
-            //            } else {
-            //                notiError("Lỗi Thao Tác");
-            //            }
-            //        }
-            //    })
-            //    $('#divDetailPopup').modal('hide');
-            //    document.getElementById("divDetailPopup").innerHTML = '';
-            //}
+                    }
+                });
+                $('#divDetailPopup').modal('hide');
+                document.getElementById("divDetailPopup").innerHTML = '';
+            }
             return false;
-        }
-        // Loadcombo status type
-
-        function LoadComboHistory() {
-
-           <%-- GetDataComboTypeHistory("/Views/Customer/pageHistoryDetail.aspx/LoadComboMain", function (_DataComboHistory, _DataComboCompalaint) {
-                DataComboStatus = _DataComboHistory
-                if ((<%=_typeHistory%>).toString() == "1") {
-                    DataComboStatus = DataComboStatus.filter(word => word["ID"] != 56);
-                }
-                LoadCombo(DataComboStatus, "ccbHistoryType")
-                DataComboCompalaint = _DataComboCompalaint
-                LoadCombo(DataComboCompalaint, "ccbComplainType")
-            });--%>
         }
 
         $(document).ready(function () {
-            //LoadComboHistory();
-            //$('#TypeComplain').addClass("disabled");
-            //LoadDataUpdate();
+            LoadDataUpdateProductType();
         });
 
-        function LoadDataUpdate() {
-        <%--    let dataHistory = ([<%=_dataHistory%>][0]);--%>
-            //if (dataHistory) {
-            //    $("#TypeHistory").dropdown("refresh");
-            //    $("#TypeComplain").dropdown("refresh");
-            //    $("#TypeHistory").dropdown("set selected", dataHistory[0].Type);
-            //    $("#TypeComplain").dropdown("set selected", dataHistory[0].Complaint);
-            //    $('#txtNameHistory').val((dataHistory[0].Content));
 
-            //}
+            function LoadDataUpdateProductType() {
+            let dataProductType = ([<%=_dataProductType%>][0]);
+            if (dataProductType) {
+
+                $('#TypeProduct').val((dataProductType[0].Name));
+                 $('#NoteTypeProduct').val((dataProductType[0].Note));
+            }
         }
     </script>
 
@@ -158,8 +106,9 @@
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
+        <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
+<%--    <script src="/js/customjs/custom-modal.js"></script>--%>
 </body>
 
 </html>
