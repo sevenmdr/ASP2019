@@ -15,15 +15,13 @@ namespace _2018_12_13.Views.Discount
 
     public class DiscountTable
     {
-        public DiscountTable(string id,string stt,string serviceName,string ServiceTypeName)
+        public DiscountTable(string id, string serviceName, string ServiceTypeName)
         {
             this.ID = id;
-            this.STT = stt;
             this.ServiceTypeName = ServiceTypeName;
             this.ServiceName = serviceName;
         }
         public string ID { get; set; }
-        public string STT { get; set; }
         public string ServiceTypeName { get; set; }
         public string ServiceName { get; set; }
     }
@@ -34,11 +32,17 @@ namespace _2018_12_13.Views.Discount
         public static string _DataTableServiceLeft { get; set; }
         public static string _DataTableServiceRight { get; set; }
         public static string _DataDiscountType { get; set; }
+        public static string _DataDiscount { get; set; }
+        private static List<DiscountTable> _Service { get; set; }
+        private static List<DiscountTable> _ServiceType { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var curr = Request.QueryString["CurrentID"];
-            InitializeCombo();
+            InitializeComboType();
+            InitializeService();
+            //Loadata(Convert.ToInt32(2));
+
             if (curr != null)
             {
                 _CurrentID = curr.ToString();
@@ -49,37 +53,65 @@ namespace _2018_12_13.Views.Discount
                 _CurrentID = null;
             }
         }
-        //private void LoadDataInitialize()
-        //{
-        //    _DataTableServiceLeft = "";
-        //    _DataTableServiceRight = "";
+        private void Loadata(int id)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Content");
+            dt.Columns.Add("DateForm");
+            dt.Columns.Add("DateTo");
+            dt.Columns.Add("Amount", typeof(Decimal));
+            dt.Columns.Add("Percent", typeof(Int32));
+            dt.Columns.Add("Type");
+            dt.Columns.Add("Rule");
+            dt.Columns.Add("Left");
+            dt.Columns.Add("Right");
 
-        //    DataTable dt1 = new DataTable();
-        //    dt1.Columns.Add("ID"); dt1.Columns.Add("STT"); dt1.Columns.Add("ServiceTypeName");
-        //    dt1.Columns.Add("ServiceName");
+            var service = new[] { "1"};
 
-        //    DataTable dt2 = new DataTable();
-        //    dt2.Columns.Add("ID"); dt2.Columns.Add("STT"); dt2.Columns.Add("ServiceTypeName");
-        //    dt2.Columns.Add("ServiceName");
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Discount_LoadDetail]", CommandType.StoredProcedure,
+                  "@Current", SqlDbType.Int, Convert.ToInt32(id));
+            }
+            if (dt != null)
+            {
+                _DataDiscount = JsonConvert.SerializeObject(dt);
+                if (dt.Rows[0]["Type"].ToString() == "1")
+                {
+                    var drrContain = from items in _Service
+                                     where service.Contains(items.ID)
+                                     select items;
+                    var drrNotContain = from items in _Service
+                                        where !service.Contains(items.ID)
+                                        select items;
+                    _DataTableServiceLeft = JsonConvert.SerializeObject(drrNotContain);
+                    _DataTableServiceRight = JsonConvert.SerializeObject(drrContain);
 
+                }
+                if (dt.Rows[0]["Type"].ToString() == "2")
+                {
+                    var drrContain = from items in _ServiceType
+                                     where service.Contains(items.ID)
+                                     select items;
+                    var drrNotContain = from items in _ServiceType
+                                        where !service.Contains(items.ID)
+                                        select items;
+                    _DataTableServiceLeft = JsonConvert.SerializeObject(drrNotContain);
+                    _DataTableServiceRight = JsonConvert.SerializeObject(drrContain);
+                }
 
-        //    DataRow dr1 = dt1.NewRow();
-        //    dr1["ID"] = "1"; dr1["STT"] = "1"; dr1["ServiceName"] = "Service 1"; dr1["ServiceTypeName"] = "Service Type 1";
-        //    DataRow dr2 = dt1.NewRow();
-        //    dr2["ID"] = "2"; dr2["STT"] = "1"; dr2["ServiceName"] = "Service 1"; dr2["ServiceTypeName"] = "Service Type 1";
-        //    DataRow dr3 = dt1.NewRow();
-        //    dr3["ID"] = "3"; dr3["STT"] = "1"; dr3["ServiceName"] = "Service 1"; dr3["ServiceTypeName"] = "Service Type 1";
-        //    dt1.Rows.Add(dr1);
-        //    dt1.Rows.Add(dr2);
-        //    dt1.Rows.Add(dr3);
-
-        //    _DataTableServiceLeft = JsonConvert.SerializeObject(dt1);
-        //    _DataTableServiceRight = "";
-        //}
-        private void InitializeCombo()
+            }
+            else
+            {
+                _DataDiscount = "";
+            }
+        }
+        private void InitializeComboType()
         {
             _DataDiscountType = "";
-           
+
             DataTable dt = new DataTable();
             dt.Columns.Add("ID"); dt.Columns.Add("Name");
             DataRow dr1 = dt.NewRow();
@@ -97,19 +129,49 @@ namespace _2018_12_13.Views.Discount
             dt.Rows.Add(dr1); dt.Rows.Add(dr2); dt.Rows.Add(dr3);
             _DataDiscountType = JsonConvert.SerializeObject(dt);
         }
+        private void InitializeService()
+        {
+            _Service = new List<DiscountTable>();
+            _ServiceType = new List<DiscountTable>();
+            DataSet ds = new DataSet();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                ds = confunc.ExecuteDataSet("[YYY_sp_Discount_LoadListService]", CommandType.StoredProcedure);
+            }
+            if (ds != null)
+            {
+                DataTable dtService = ds.Tables[0];
+                DataTable dtServiceType = ds.Tables[1];
+                foreach (DataRow dr in dtService.Rows)
+                {
+                    _Service.Add(new DiscountTable(dr[0].ToString(), dr[1].ToString(), ""));
+                }
+                foreach (DataRow dr in dtServiceType.Rows)
+                {
+                    _ServiceType.Add(new DiscountTable(dr[0].ToString(), "", dr[1].ToString()));
+                }
+            }
+            else
+            {
+                _Service = null;
+                _ServiceType = null;
+            }
+
+        }
+
         [System.Web.Services.WebMethod]
-        public static string ExecuteFromLeft(string id, string left, string right/*,string type*/)
+        public static string ExecuteFromLeft(string id, string left, string right)
         {
             try
             {
-                List<DiscountTable> dtLeft =(JsonConvert.DeserializeObject<List<DiscountTable>>(left)!=null) ? JsonConvert.DeserializeObject<List<DiscountTable>>(left)
+                List<DiscountTable> dtLeft = (JsonConvert.DeserializeObject<List<DiscountTable>>(left) != null) ? JsonConvert.DeserializeObject<List<DiscountTable>>(left)
                     : new List<DiscountTable>();
-                List<DiscountTable> dtRight =(JsonConvert.DeserializeObject<List<DiscountTable>>(right)!=null) ? JsonConvert.DeserializeObject<List<DiscountTable>>(right)
+                List<DiscountTable> dtRight = (JsonConvert.DeserializeObject<List<DiscountTable>>(right) != null) ? JsonConvert.DeserializeObject<List<DiscountTable>>(right)
                     : new List<DiscountTable>();
                 var drr = from items in dtLeft
-                              where items.ID == id
-                              select items;
-                foreach(var dr in drr)
+                          where items.ID == id
+                          select items;
+                foreach (var dr in drr)
                 {
                     dtRight.Add(dr);
                     dtLeft.Remove(dr);
@@ -127,7 +189,7 @@ namespace _2018_12_13.Views.Discount
         }
 
         [System.Web.Services.WebMethod]
-        public static string ExecuteFromRight(string id, string left, string right/*,string type*/)
+        public static string ExecuteFromRight(string id, string left, string right)
         {
             try
             {
@@ -160,15 +222,9 @@ namespace _2018_12_13.Views.Discount
         {
             try
             {
-                List<DiscountTable> dtLeft = new List<DiscountTable>();
-                List<DiscountTable> dtRight = new List<DiscountTable>();
-                dtLeft.Add(new DiscountTable("1","1","Service 1",""));
-                dtLeft.Add(new DiscountTable("2", "2", "Service 2", ""));
-                dtLeft.Add(new DiscountTable("3", "3", "Service 3", ""));
-
                 JArray array = new JArray();
-                array.Add(new JavaScriptSerializer().Serialize(dtLeft));
-                array.Add(new JavaScriptSerializer().Serialize(dtRight));
+                array.Add(new JavaScriptSerializer().Serialize(_Service));
+                array.Add(new JavaScriptSerializer().Serialize(new List<DiscountTable>()));
                 return array.ToString();
             }
             catch (Exception ex)
@@ -182,15 +238,9 @@ namespace _2018_12_13.Views.Discount
         {
             try
             {
-                List<DiscountTable> dtLeft = new List<DiscountTable>();
-                List<DiscountTable> dtRight = new List<DiscountTable>();
-                dtLeft.Add(new DiscountTable("1", "1", "", "Service Type 1"));
-                dtLeft.Add(new DiscountTable("2", "2", "", "Service Type 2"));
-                dtLeft.Add(new DiscountTable("3", "3", "", "Service Type 3"));
-
                 JArray array = new JArray();
-                array.Add(new JavaScriptSerializer().Serialize(dtLeft));
-                array.Add(new JavaScriptSerializer().Serialize(dtRight));
+                array.Add(new JavaScriptSerializer().Serialize(_ServiceType));
+                array.Add(new JavaScriptSerializer().Serialize(new List<DiscountTable>()));
                 return array.ToString();
             }
             catch (Exception ex)
@@ -199,28 +249,8 @@ namespace _2018_12_13.Views.Discount
             }
         }
 
+   
 
-
-
-        private void Loadata(int id)
-        {
-            //DataTable dt = new DataTable();
-            //using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
-            //{
-            //    dt = confunc.ExecuteDataTable("[YYY_sp_Customer_History_LoadDetail]", CommandType.StoredProcedure,
-            //      "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
-            //}
-            //if (dt != null)
-            //{
-            //    _dataHistory = JsonConvert.SerializeObject(dt);
-            //}
-            //else
-            //{
-            //    _dataHistory = "";
-            //}
-
-        }
-       
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data)
         {
@@ -263,7 +293,6 @@ namespace _2018_12_13.Views.Discount
             //    {
             //        return "0";
             //    }
-
 
             //}
             return "0";

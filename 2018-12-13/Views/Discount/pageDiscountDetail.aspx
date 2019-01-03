@@ -25,7 +25,6 @@
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
                 <form class="ui form segment form3">
-
                     <div class="field">
                         <div class="field">
                             <div class="field">
@@ -34,11 +33,24 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="field">
                         <div class="field">
                             <label>Nội Dung</label>
                             <input id="txtContent" name="content" type="text" />
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Số Lượng ( 1 - 100 )</label>
+                            <input id="percentDiscount" name="percentDiscount" type="number" onchange="return ExecutePercentDiscount()" />
+                        </div>
+                        <div class="field">
+                            <label>Số Tiền</label>
+                            <div class="ui right labeled fluid input">
+                                <div class="ui label">$</div>
+                                <input id="amountDiscount" name="amountDiscount" type="number" class="money" onchange="return ExecuteAmountDiscount()" />
+                                <div class="ui basic label">VND</div>
+                            </div>
                         </div>
                     </div>
                     <div class="three fields">
@@ -55,11 +67,11 @@
                         </div>
                         <div class="field">
                             <label>Từ</label>
-                            <input id="dateFrom" class="flatpickr" type="text" placeholder="Date From .." />
+                            <input id="dateFromdetail" class="flatpickr" type="text" placeholder="Date From .." />
                         </div>
                         <div class="field">
                             <label>Đến</label>
-                            <input id="dateTo" class="flatpickr" type="text" placeholder="Date To .." />
+                            <input id="dateTodetail" class="flatpickr" type="text" placeholder="Date To .." />
                         </div>
                     </div>
                     <div class="sixteen wide column">
@@ -70,12 +82,11 @@
                             </div>
                             <div class="ui segment">
                                 <div class="ui two column middle aligned very relaxed stackable grid">
-                                    <div class="column" id="TableContentLeft" style="height:450px">
-                                        <table class="ui celled padded table" id="dtContentLeft" style="width: 100% ">
+                                    <div class="column" id="TableContentLeft">
+                                        <table class="ui celled padded table" id="dtContentLeft" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center">ID</th>
-                                                    <th style="text-align: center; width: 10px;">STT</th>
                                                     <th style="text-align: center">Tên</th>
                                                     <th style="text-align: center">Nhóm</th>
                                                     <th style="text-align: center; width: 10px;">Chọn</th>
@@ -86,14 +97,12 @@
 
 
                                     <div class="ui vertical divider">
-                                        Select
                                     </div>
-                                    <div class="column" id="TableContentRight"  style="height:450px">
+                                    <div class="column" id="TableContentRight">
                                         <table class="ui celled padded table" id="dtContentRight" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center">ID</th>
-                                                    <th style="text-align: center; width: 10px;">STT</th>
                                                     <th style="text-align: center">Tên</th>
                                                     <th style="text-align: center">Nhóm</th>
                                                     <th style="text-align: center; width: 10px;">Xóa</th>
@@ -105,7 +114,6 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -126,6 +134,15 @@
         var DataTableServiceRight;
         var DataDiscountType;
         var Type = 0;
+        function ExecutePercentDiscount() {
+            if (Number($('#percentDiscount').val()) != 0)
+                $('#amountDiscount').val(0);
+        }
+        function ExecuteAmountDiscount() {
+            if (Number($('#amountDiscount').val()) != 0)
+                $('#percentDiscount').val(0);
+
+        }
         function ChangeDiscountType() {
             DataTableServiceLeft = "";
             DataTableServiceRight = "";
@@ -150,7 +167,10 @@
             }
             LoadTableLeftAndRight();
         }
+
+
         function LoadLeftRightInitializeByService() {
+
             $.ajax({
                 url: "/Views/Discount/pageDiscountDetail.aspx/LoadLeftRightInitializeByService",
                 dataType: "json",
@@ -197,6 +217,7 @@
             DataTableServiceRight = "";
         }
         function LoadTableLeftAndRight() {
+
             $('#dtContentLeft').DataTable().destroy();
             $("#TableContentLeft").replaceWith(divCloneLeft.clone());
             $('#dtContentRight').DataTable().destroy();
@@ -211,9 +232,8 @@
                 destroy: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
-                    { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                    { "visible": true, "targets": 2, "data": "ServiceName", width: "120px" },
-                    { "visible": true, "targets": 3, "data": "ServiceTypeName" },
+                    { "visible": true, "targets": 1, "data": "ServiceName", width: "120px" },
+                    { "visible": true, "targets": 2, "data": "ServiceTypeName" },
                     {
                         "targets": -1,
                         "data": null,
@@ -255,9 +275,8 @@
                 destroy: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
-                    { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                    { "visible": true, "targets": 2, "data": "ServiceName", width: "120px" },
-                    { "visible": true, "targets": 3, "data": "ServiceTypeName" },
+                    { "visible": true, "targets": 1, "data": "ServiceName", width: "120px" },
+                    { "visible": true, "targets": 2, "data": "ServiceTypeName" },
                     {
                         "targets": -1,
                         "data": null,
@@ -374,25 +393,32 @@
                 enableTime: false,
                 defaultDate: new Date(),
             });
-            DataTableServiceLeft = ([<%=_DataTableServiceLeft%>][0]);
-            DataTableServiceRight = ([<%=_DataTableServiceRight%>][0]);
-            DataDiscountType = ([<%=_DataDiscountType%>][0]);
             divCloneLeft = $("#TableContentLeft").clone();
             divCloneRight = $("#TableContentRight").clone();
+            DataDiscountType = ([<%=_DataDiscountType%>][0]);
             LoadCombo(DataDiscountType, "ccbDiscountType")
+            LoadDataUpdate();
+
+            DataTableServiceLeft = ([<%=_DataTableServiceLeft%>][0]);
+            DataTableServiceRight = ([<%=_DataTableServiceRight%>][0]);
+
+
             LoadTableLeftAndRight();
         });
 
         function LoadDataUpdate() {
-        <%--    let dataHistory = ([<%=_dataHistory%>][0]);--%>
-            //if (dataHistory) {
-            //    $("#TypeHistory").dropdown("refresh");
-            //    $("#TypeComplain").dropdown("refresh");
-            //    $("#TypeHistory").dropdown("set selected", dataHistory[0].Type);
-            //    $("#TypeComplain").dropdown("set selected", dataHistory[0].Complaint);
-            //    $('#txtNameHistory').val((dataHistory[0].Content));
+            let DataDiscount = ([<%=_DataDiscount%>][0]);
 
-            //}
+            if (DataDiscount) {
+                $('#amountDiscount').val(DataDiscount[0].Amount);
+                $('#percentDiscount').val(DataDiscount[0].Percent);
+                $("#TypeDiscountType ").dropdown("set selected", DataDiscount[0].Type);
+                $("#dateFromdetail").flatpickr({ defaultDate: DataDiscount[0].DateForm });
+                $("#dateTodetail").flatpickr({ defaultDate: DataDiscount[0].DateTo });
+                $('#txtName').val(DataDiscount[0].Name);
+                $('#txtContent').val(DataDiscount[0].Content);
+
+            }
         }
     </script>
 
@@ -403,8 +429,9 @@
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
+
 </body>
 
 </html>
