@@ -10,6 +10,7 @@
 namespace _2018_12_13.Views.Discount {
     
     
-    public partial class pageDiscountList {
+    public partial class pageDiscountList
+    {
     }
 }

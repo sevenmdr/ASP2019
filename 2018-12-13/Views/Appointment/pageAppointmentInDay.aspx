@@ -114,7 +114,7 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
+<%--    <script src="/js/customjs/custom-modal.js"></script>--%>
     <script src="/js/comon/load_datasource.js"></script>
 
 

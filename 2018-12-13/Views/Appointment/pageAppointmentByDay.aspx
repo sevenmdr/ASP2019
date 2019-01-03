@@ -36,9 +36,6 @@
                                     <div style="float: right; width: 200px">
                                         <input id="dateFrom" class="flatpickr" type="text" placeholder="Date From ...." onchange="LoadAppointmentListByDayAjax()" />
                                     </div>
-
-
-
                                 </div>
 
 

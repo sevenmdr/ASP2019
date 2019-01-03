@@ -10,7 +10,8 @@
 namespace _2018_12_13.Views.Service {
     
     
-    public partial class pageServiceTypeDetail {
+    public partial class pageServiceTypeDetail
+    {
         
         /// <summary>
         /// ScriptManager1 control.

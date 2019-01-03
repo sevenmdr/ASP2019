@@ -10,24 +10,17 @@
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
                                     <div style="float: left">
-                                        <h3>Tiền Chi Chi Nhánh</h3>
+                                        <h3>Loại Dịch Vụ</h3>
                                     </div>
                                     <div style="float: right">
-                                        <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewHistory()">Thêm Mới</button>
+                                        <button class="ui blue basic button" data-value="fade up" onclick="return AddNewUnitCount()">Thêm Mới</button>
                                     </div>
-                                    <div style="float: right">
-                                        <input class="flatpickr" type="text" placeholder="Đến Ngày.." />
-                                    </div>
-                                    <div style="float: right">
-                                        <input class="flatpickr" type="text" placeholder="Từ Ngày.." />
-                                    </div>
-                                    
                                 </div>
 
 
                             </div>
                         </form>
-                        <div class="ui segment" style="float: left;width:100%">
+                        <div class="ui segment" style="float: left; width: 100%">
                             <table class="ui celled padded table" id="dtContent">
                                 <thead>
                                     <tr>
@@ -36,30 +29,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="single line">20-11-2018</td>
-                                        <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; 
-                                                        there is variability in this increase, however, with some nonresponders.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="single line">20-11-2018</td>
-                                        <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; 
-                                                        there is variability in this increase, however, with some nonresponders.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="single line">20-11-2018</td>
-                                        <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; 
-                                                        there is variability in this increase, however, with some nonresponders.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="single line">20-11-2018</td>
-                                        <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; 
-                                                        there is variability in this increase, however, with some nonresponders.
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td class="single line">20-11-2018</td>
                                         <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; 
@@ -77,24 +46,24 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
-                enableTime: false,
-                defaultDate: new Date(),
-            });
-    
+
             $('#dtContent').DataTable({
                 info: false,
                 paging: false,
                 ordering: false,
-                searching: true,
+                searching: false,
             });
         });
-
+        function AddNewUnitCount() {
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/WareHouse/pageUnitCountDetail.aspx");
+            $('#divDetailPopup').modal('show');
+            return false;
+        }
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-    <script src="/js/customjs/custom-datatable.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-   
+    <script src="/js/customjs/custom-modal.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 </asp:Content>

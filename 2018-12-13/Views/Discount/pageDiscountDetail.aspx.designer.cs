@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2018_12_13.Views.Service {
+namespace _2018_12_13.Views.Discount {
     
     
-    public partial class pageServiceDetail
+    public partial class pageDiscountDetail
     {
         
         /// <summary>

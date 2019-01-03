@@ -6,7 +6,7 @@
 <head runat="server">
     <title>VTTech Solution</title>
     <meta charset="utf-8" />
-    <%--    <link rel="icon" href="~/img/favicon.ico" />--%>
+    <%--    <link rel="icon" href="/img/favicon.ico" />--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <%--    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />--%>
     <%--    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />--%>
@@ -16,7 +16,7 @@
     <link href="/dist/semantic.min.custom.css" rel="stylesheet" />--%>
     <%--    <script src="/dist/semantic.min.js"></script>--%>
     <%--    <link href="/css/main.custom.css" rel="stylesheet" />--%>
-    <%--    <link rel="shortcut icon" href="~/img/favicon.ico" />
+    <%--    <link rel="shortcut icon" href="/img/favicon.ico" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />--%>
     <script src="/js/comon/noti_function.js"></script>
     <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
