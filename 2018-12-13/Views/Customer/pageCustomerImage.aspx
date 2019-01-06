@@ -3,14 +3,14 @@
 <head runat="server">
     <link rel="stylesheet" href="/UploadJS/css/jquery.fileupload.css" />
     <link rel="stylesheet" href="/UploadJS/css/jquery.fileupload-ui.css" />
-   <script src="/dist/semantic.min.js"></script>
-<script src="/plugins/datatable/jquery.dataTables.js"></script>
-<script src="/js/customjs/custom-datatable.js"></script>
-<script src="/plugins/gridalicius/jquery.grid-a-licious.min.js"></script>
-<script src="/plugins/fluidbox/dist/js/jquery.fluidbox.min.js"></script>
-<script src="/js/customjs/custom-gallery.js"></script>
-<script src="/js/comon/load_datasource.js"></script>
-<script src="/js/customjs/custom-modal.js"></script>
+    <script src="/dist/semantic.min.js"></script>
+    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>
+    <script src="/plugins/gridalicius/jquery.grid-a-licious.min.js"></script>
+    <script src="/plugins/fluidbox/dist/js/jquery.fluidbox.min.js"></script>
+    <script src="/js/customjs/custom-gallery.js"></script>
+    <script src="/js/comon/load_datasource.js"></script>
+    <script src="/js/customjs/custom-modal.js"></script>
     <style>
         .upload-btn-wrapper {
             position: relative;
@@ -114,7 +114,6 @@
                 </div>
             </div>
         </div>
-        <%-- <div class="ui small test modal" id="divImageGallary"></div>--%>
     </div>
 </div>
 
@@ -126,7 +125,7 @@
 
     var customerID = ("<%=_CustomerID %>");
     var folderName;
-    var url;
+    var url = "FileUploadHandler.ashx";
     $(document).ready(function () {
 
         $('#fileupload').fileupload().bind('fileuploaddone', function (e, data) {
@@ -135,12 +134,12 @@
         $('#fileupload').fileupload().bind('fileuploadfail', function (e, data) {
             //  notiError();
         });
- 
+
         $('#fileupload').fileupload({
             url: url,
             done: function (e, data) {
                 var resulf = data._response["result"];
-                if (resulf == "1") {
+                if (resulf != "0") {
                     notiSuccess();
                 }
                 else {
@@ -163,28 +162,28 @@
     function LoadFolderTree() {
         GetDataSourceImageFolder("/Views/Customer/pageCustomerImage.aspx/LoadAllFolder", customerID, function (data) {
             RenFoder(data, "divFolderName");
-               $('.ui.menu#divFolderName a.item').on('click', function () {
-            $(this)
-                .addClass('active')
-                .siblings()
-                       .removeClass('active');
-                   var textTab = $("#divFolderName a.active.item")[0].innerHTML;
-                   
-                   if (textTab) {
-                       
-                        folderName = textTab;
-                   }
-                   else {
-                        folderName = "Image";
-                   }
-          
-                
-            document.getElementById("txtHeaderFolder").innerHTML = folderName;
-            LoadImage(folderName);
-            url = 'FileUploadHandler.ashx?CustomerID=' + customerID + '&FolderName=' + folderName;
+            $('.ui.menu#divFolderName a.item').on('click', function () {
+                $(this)
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+                var textTab = $("#divFolderName a.active.item")[0].innerHTML;
+
+                if (textTab) {
+
+                    folderName = textTab;
+                }
+                else {
+                    folderName = "Image";
+                }
+
+
+                document.getElementById("txtHeaderFolder").innerHTML = folderName;
+                LoadImage(folderName);
+                url = '/UploadClass/FileUploadHandler.ashx?CustomerID=' + customerID + '&FolderName=' + folderName+'&Type=Image';
+            });
         });
-        });
-     
+
 
     }
     function LoadImage(textTab) {
@@ -202,7 +201,7 @@
 
 </script>
 <link href="/plugins/fluidbox/dist/css/fluidbox.min.css" rel="stylesheet" />
-   <script src="/dist/semantic.min.js"></script>
+<script src="/dist/semantic.min.js"></script>
 <script src="/plugins/datatable/jquery.dataTables.js"></script>
 <script src="/js/customjs/custom-datatable.js"></script>
 <script src="/plugins/gridalicius/jquery.grid-a-licious.min.js"></script>

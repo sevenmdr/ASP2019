@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,25 +12,15 @@ namespace _2018_12_13
     /// <summary>
     /// Summary description for FileUploadHandler
     /// </summary>
-    public class FileUploadHandler : IHttpHandler
+    public class FileUploadHandleAvatar : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
             try
             {
-                
-                //if (context.Request.QueryString["upload"] != null)
                 if (context.Request.Files[0] != null)
                 {
-                    string customerID = context.Request.QueryString["CustomerID"];
-                    string folderName = context.Request.QueryString["FolderName"];
-                    if (customerID == null || folderName == null || folderName=="undefined"|| customerID== "undefined")
-                    {
-                        context.Response.Write("0");
-                        return;
-                    }
-
                     string pathrefer = context.Request.UrlReferrer.ToString();
                     string Serverpath = HttpContext.Current.Server.MapPath("UploadedFiles");
 
@@ -64,49 +55,37 @@ namespace _2018_12_13
                         }
                     }
 
-                    string ext = (Path.GetExtension(fileDirectory + "\\" + file)).ToLower() ;
+                    string ext = (Path.GetExtension(fileDirectory + "\\" + file)).ToLower();
                     if (ext != ".jpg" && ext != ".png" && ext != ".jpeg")
                     {
                         context.Response.Write("0");
                         return;
                     }
                     var fileLength = context.Request.ContentLength;
-                    if(fileLength> 5000000)
+                    if (fileLength > 5000000)
                     {
                         context.Response.Write("0");
                         return;
                     }
-                    file = Guid.NewGuid() + ext; // Creating a unique name for the file 
+                    file = Guid.NewGuid() + ext;
+
+
                     using (var binaryReader = new BinaryReader(context.Request.Files[0].InputStream))
                     {
                         byte[] fileData = null;
                         fileData = binaryReader.ReadBytes(context.Request.Files[0].ContentLength);
-                        FtpWebRequest req = (FtpWebRequest)WebRequest.Create(String.Format(@"{0}{1}/{2}/{3}", Comon.Global.sys_ServerImageFolder, customerID, folderName, file));
-                        req.UseBinary = true;
-                        req.Method = WebRequestMethods.Ftp.UploadFile;
-                        req.Credentials = new NetworkCredential(Comon.Global.sys_ServerImageUserName, Comon.Global.sys_ServerImagePassword);
-                        req.ContentLength = fileData.Length;
-                        Stream reqStream = req.GetRequestStream();
-                        reqStream.Write(fileData, 0, fileData.Length);
-                        reqStream.Close();
+                        //FtpWebRequest req = (FtpWebRequest)WebRequest.Create(String.Format(@"{0}{1}/{2}", Comon.Global.sys_ServerImageFolderAvatarCustomer, customerID, file));
+                        //req.UseBinary = true;
+                        //req.Method = WebRequestMethods.Ftp.UploadFile;
+                        //req.Credentials = new NetworkCredential(Comon.Global.sys_ServerImageUserName, Comon.Global.sys_ServerImagePassword);
+                        //req.ContentLength = fileData.Length;
+                        //Stream reqStream = req.GetRequestStream();
+                        //reqStream.Write(fileData, 0, fileData.Length);
+                        //reqStream.Close();
+                        // Convert byte[] to Base64 String
+                        string base64String = Convert.ToBase64String(fileData);
+                        context.Response.Write(base64String);
                     }
-                       
-
-
-
-
-
-
-
-                   
-
-
-
-                   // fileDirectory = Serverpath + "\\" + file;
-
-                  //  postedFile.SaveAs(fileDirectory);
-
-                  //  context.Response.AddHeader("Vary", "Accept");
                     try
                     {
                         if (context.Request["HTTP_ACCEPT"].Contains("application/json"))
@@ -119,7 +98,7 @@ namespace _2018_12_13
                         context.Response.ContentType = "text/plain";
                     }
 
-                    context.Response.Write("1");
+
 
 
                 }

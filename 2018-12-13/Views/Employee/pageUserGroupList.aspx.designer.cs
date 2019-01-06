@@ -7,9 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2018_12_13.Views.Customer {
+namespace _2018_12_13.Views.Employee {
     
     
-    public partial class pageCustomerMain {
+    public partial class pageUserGroupList
+    {
     }
 }

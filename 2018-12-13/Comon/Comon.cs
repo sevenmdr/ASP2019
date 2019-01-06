@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,7 +32,7 @@ namespace _2018_12_13.Comon
                 streamReader.Close();
                 return directories;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -46,13 +49,13 @@ namespace _2018_12_13.Comon
             // Co roi nhung chua co 1 folder hinh anh nao
             if (currrentdirectories.Count == 0)
             {
-                CreateDirectoryFTP(customer+"/"+ directory);
+                CreateDirectoryFTP(customer + "/" + directory);
                 return true;
             }
             else
             {
                 bool resulf = false;
-                foreach(var dr in currrentdirectories)
+                foreach (var dr in currrentdirectories)
                 {
                     if (dr == directory)
                         resulf = true;
@@ -85,14 +88,14 @@ namespace _2018_12_13.Comon
         public static List<string> GetImageFromDirectory(string directory)
         {
             List<string> stringName = new List<string>();
-            stringName = GetAllDirectoryInFolder( directory);
-            if(stringName==null)
+            stringName = GetAllDirectoryInFolder(directory);
+            if (stringName == null)
             {
                 return null;
             }
-            for(int i =0;i<stringName.Count;i++)
+            for (int i = 0; i < stringName.Count; i++)
             {
-                stringName[i]= String.Format(@"{0}{1}/{2}", Global.sys_HTTPImageRoot, directory, stringName[i]);
+                stringName[i] = String.Format(@"{0}{1}/{2}", Global.sys_HTTPImageRoot, directory, stringName[i]);
             }
             return stringName;
         }
@@ -131,5 +134,48 @@ namespace _2018_12_13.Comon
             }
             return str;
         }
+
+        // COnvert Image Format
+        public static Stream ConvertImage(Stream originalStream, ImageFormat format)
+        {
+            var image = Image.FromStream(originalStream);
+            var stream = new MemoryStream();
+            image.Save(stream, format);
+            stream.Position = 0;
+            return stream;
+        }
+        // Resize Image
+        public static string ResizeImage(byte[] byteArrayIn, int width, int height)
+        {
+            using (var ms = new MemoryStream(byteArrayIn))
+            {
+                Image image = Image.FromStream(ms);
+                var destRect = new Rectangle(0, 0, width, height);
+                var destImage = new Bitmap(width, height);
+                destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+                using (var graphics = Graphics.FromImage(destImage))
+                {
+                    graphics.CompositingMode = CompositingMode.SourceCopy;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                    using (var wrapMode = new ImageAttributes())
+                    {
+                        wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                        graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                    }
+                }
+                Bitmap bImage = destImage; 
+                System.IO.MemoryStream ms1 = new MemoryStream();
+                bImage.Save(ms1, ImageFormat.Jpeg);
+                byte[] byteImage = ms1.ToArray();
+                var SigBase64 = Convert.ToBase64String(byteImage);
+                return SigBase64;
+            }
+        }
+
+
     }
 }

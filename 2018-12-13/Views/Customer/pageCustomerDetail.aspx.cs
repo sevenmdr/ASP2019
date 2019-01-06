@@ -12,21 +12,27 @@ namespace _2018_12_13.Views.Customer
 {
     public partial class pageCustomerDetail : WebPageBase
     {
-        private static int id { get; set; }
+        private static int _CurrentID { get; set; }
+        public static string _defaultAvatar { get; set; }
+
+        public static string _dataInfo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            _defaultAvatar = Comon.Global.sys_DefaultAvatar;
             var v = Request.QueryString["CustomerID"];
             if (v != null)
             {
-                id = Convert.ToInt32(v == null ? "0" : v.ToString());
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", string.Format("ChaneUpdateData({0})", Loadata(id)), true);
+                _CurrentID = Convert.ToInt32(v == null ? "0" : v.ToString());
+                Loadata(_CurrentID);
             }
             else
             {
-                id = 0;
+                _CurrentID = 0;
+                _dataInfo = "";
             }
         }
-        private string Loadata(int id)
+        private void Loadata(int id)
         {
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
@@ -34,13 +40,13 @@ namespace _2018_12_13.Views.Customer
                 dt = confunc.ExecuteDataTable("[YYY_sp_Customer_LoadToEdit]", CommandType.StoredProcedure,
                   "@CurrentID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
             }
-             if (dt != null)
+            if (dt != null)
             {
-                return JsonConvert.SerializeObject(dt);
+                _dataInfo= JsonConvert.SerializeObject(dt);
             }
             else
             {
-                return "";
+                _dataInfo = "";
             }
 
         }
@@ -78,7 +84,7 @@ namespace _2018_12_13.Views.Customer
             try
             {
                 CustomerDetail DataMain = JsonConvert.DeserializeObject<CustomerDetail>(data);
-                if (id == 0)
+                if (_CurrentID == 0)
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
@@ -92,6 +98,7 @@ namespace _2018_12_13.Views.Customer
                      "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                      "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                      "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
+                       "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                      "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
@@ -111,10 +118,11 @@ namespace _2018_12_13.Views.Customer
                       "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                       "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                       "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
+                       "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                       "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                          "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-                         "@CurrentID", SqlDbType.Int, id
+                         "@CurrentID", SqlDbType.Int, _CurrentID
                     );
                     }
                 }
@@ -122,6 +130,7 @@ namespace _2018_12_13.Views.Customer
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return "0";
             }
 
@@ -142,6 +151,6 @@ namespace _2018_12_13.Views.Customer
         public int Type_Cat_ID { get; set; }
         public int Language_ID { get; set; }
         public string Birthday { get; set; }
-
+        public string Avatar { get; set; }
     }
 }

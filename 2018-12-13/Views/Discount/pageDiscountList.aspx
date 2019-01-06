@@ -32,10 +32,14 @@
                                     <tr>
                                         <th style="text-align: center">ID</th>
                                         <th style="text-align: center; width: 25px;">STT</th>
-                                        <th style="text-align: center">Bác Sĩ</th>
-                                        <th style="text-align: center">Nội Dung</th>
-                                        <th style="text-align: center">Ngày</th>
                                         <th style="text-align: center">Loại</th>
+                                        <th style="text-align: center">Tên CTKM</th>
+                                        <th style="text-align: center">Từ Ngày</th>
+                                        <th style="text-align: center">Đến Ngày</th>
+                                        <th style="text-align: center">Phần Trăm Giảm</th>
+                                        <th style="text-align: center">Số Tiền Giảm</th>
+                                        <th style="text-align: center">Dịch Vụ Giảm</th>
+                                        <th style="text-align: center">Nội Dung</th>
                                         <th style="text-align: center; width: 30px;">Sửa</th>
                                         <th style="text-align: center; width: 30px;">Xóa</th>
                                     </tr>
@@ -67,10 +71,14 @@
                     "columnDefs": [
                         { "visible": false, "targets": 0, "data": "ID" },
                         { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                        { "visible": true, "targets": 2, "data": "DoctorName", width: "120px" },
-                        { "visible": true, "targets": 3, "data": "Content" },
-                        { "visible": true, "targets": 4, "data": "CreatedString", width: "120px", "className": "center" },
-                        { "visible": true, "targets": 5, "data": "TypeName", width: "120px" },
+                        { "visible": true, "targets": 2, "data": "Type" , width: "250px" },
+                        { "visible": true, "targets": 3, "data": "Name", width: "250px" },
+                        { "visible": true, "targets": 4, "data": "DateFrom" , width: "150px"},
+                        { "visible": true, "targets": 5, "data": "DateTo", width: "150px" },
+                        { "visible": true, "targets": 6, "data": "Percent", width: "150px" },
+                        { "visible": true, "targets": 7, "data": "Amount" , width: "150px"},
+                        { "visible": true, "targets":8, "data": "Rule" },
+                           { "visible": true, "targets": 9, "data": "Content" , width: "150px"},
                         {
                             "targets": -2,
                             "data": null,
@@ -92,7 +100,7 @@
                 document.getElementById("dtContent").className = "ui celled table";
                 $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                     var data = table.row($(this).parents('tr')).data();
-                    EditDiscount(data["ID"], customerID);
+                    EditDiscount(data["ID"]);
                 });
                 $('#dtContent tbody ').on('click', '.buttonDeleteClass', function () {
                     var data = table.row($(this).parents('tr')).data();
@@ -120,25 +128,25 @@
 
         }
         function ExecuteDeleteDiscount(id) {
-            //$.ajax({
-            //    url: "/Views/Customer/pageStatusList.aspx/DeleteItem",
-            //    dataType: "json",
-            //    type: "POST",
-            //    data: JSON.stringify({ 'id': id }),
-            //    contentType: 'application/json; charset=utf-8',
-            //    async: false,
-            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //        notiError();
-            //    },
-            //    success: function (result) {
-            //        if (result.d == "1") {
-            //            notiSuccess();
-            //            LoadStatusAjax();
-            //        } else {
-            //            notiError();
-            //        }
-            //    }
-            //})
+            $.ajax({
+                url: "/Views/Discount/pageDiscountList.aspx/DeleteItem",
+                dataType: "json",
+                type: "POST",
+                data: JSON.stringify({ 'id': id }),
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    notiError();
+                },
+                success: function (result) {
+                    if (result.d == "1") {
+                        notiSuccess();
+                        LoadDiscountAjax();
+                    } else {
+                        notiError();
+                    }
+                }
+            })
         }
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
@@ -154,9 +162,7 @@
 
     </script>
 
-    <script src="/dist/semantic.min.js"></script>
+        <script src="/dist/semantic.min.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/comon/load_datasource.js"></script>
-    <script src="/js/comon/renderControl.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 </asp:Content>

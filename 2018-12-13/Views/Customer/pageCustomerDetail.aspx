@@ -6,7 +6,11 @@
 <head runat="server">
     <title>VTTech Solution</title>
     <meta charset="utf-8" />
-    <%--    <link rel="icon" href="/img/favicon.ico" />--%>
+    <link rel="stylesheet" href="/UploadJS/css/jquery.fileupload.css" />
+    <link rel="stylesheet" href="/UploadJS/css/jquery.fileupload-ui.css" />
+    <script src="/UploadJS/js/vendor/jquery.ui.widget.js"></script>
+    <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
+    <script src="/UploadJS/js/jquery.fileupload.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <%--    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />--%>
     <%--    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />--%>
@@ -27,12 +31,36 @@
     <script src="/UploadJS/js/jquery.iframe-transport.js"></script>
     <script src="/UploadJS/js/jquery.fileupload.js"></script>--%>
 
-    <script type="text/javascript">
+    <%-- <script type="text/javascript">
         var dataInfo;
         function ChaneUpdateData(data) {
             dataInfo = data[0];
         }
-    </script>
+    </script>--%>
+
+    <style>
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn {
+            color: gray;
+            background-color: white;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,7 +74,12 @@
 
     <div class="image content">
         <div class="ui massive image">
-            <img id="logo" src="/img/avatar/people/Glenn.png" />
+            <img id="avatarCustomerUpload" src="#" style="width: 100%; height: 150px" />
+            <div>&nbsp</div>
+            <div class="btn btn-success upload-btn-wrapper">
+                <button class="btn" style="width: 100%">3Mp ( png ,jpg )</button>
+                <input id="fileuploadAvatar" type="file" name="files[]" />
+            </div>
         </div>
         <div class="description">
             <div class="sixteen wide tablet eight wide computer column">
@@ -128,6 +161,9 @@
         </div>
     </div>
     <script>
+        var urlAvatar = "/UploadClass/FileUploadHandler.ashx?Type=Avatar";
+        var avatarString = ("<%=_defaultAvatar %>");
+        var DataComboGender;
         function ExcuteData() {
 
             var data = new Object();
@@ -139,7 +175,7 @@
             data.Phone1 = $('#Phone1').val() ? $('#Phone1').val() : "";
             data.Name = $('#Name').val() ? $('#Name').val() : "";
             data.Birthday = $('#Birthday').val() ? $('#Birthday').val() : "";
-
+            data.Avatar = avatarString;
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
@@ -166,9 +202,9 @@
             }
             return false;
         }
-        // Loadcombo status type
-        var DataComboGender;
+
         function LoadComboCustomer() {
+
             GetDataComboCustomer("/Views/Customer/pageCustomerDetail.aspx/LoadComboMain", function (dataLangue, dataSource, dataGender) {
                 LoadCombo(dataGender, "cbbGender")
                 LoadCombo(dataSource, "cbbSource")
@@ -176,28 +212,58 @@
             });
         }
         $(document).ready(function () {
+     
+            $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
             LoadComboCustomer();
-
             $(".flatpickr").flatpickr({
                 dateFormat: 'd-m-Y',
                 enableTime: false,
                 defaultDate: new Date(),
             });
+            $('#fileuploadAvatar').fileupload({
+                url: urlAvatar,
+                done: function (e, data) {
+                    var resulf = data._response["result"];
+                    if (resulf != "0") {
+                        avatarString = resulf;
+                        $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
+                    }
+                    else {
+                        notiError("Lỗi Upload");
+                    }
+                },
+                fail: function (e, data) {
+                    notiError();
+                },
+                maxFileSize: 5000000,
+                maxNumberOfFiles: 1,
+                minFileSize: undefined,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+
+            });
             LoadDataUpdate();
         });
         function LoadDataUpdate() {
-            if (dataInfo) {
+            let dataInfo = ([<%=_dataInfo%>][0]);
+            if (dataInfo != undefined) {
                 $("#Gender_ID ").dropdown("refresh");
-                $("#Gender_ID ").dropdown("set selected", dataInfo.Gender_ID);
+                $("#Gender_ID ").dropdown("set selected", dataInfo[0].Gender_ID);
                 $("#Type_Cat_ID ").dropdown("refresh");
-                $("#Type_Cat_ID ").dropdown("set selected", dataInfo.Type_Cat_ID);
+                $("#Type_Cat_ID ").dropdown("set selected", dataInfo[0].Type_Cat_ID);
                 $("#Language_ID ").dropdown("refresh");
-                $("#Language_ID ").dropdown("set selected", dataInfo.Language_ID);
-                $('#Name').val((dataInfo.Name));
-                $('#Email1').val((dataInfo.Email1));
-                $('#Address').val((dataInfo.Address));
-                $('#Phone1').val((dataInfo.Phone1));
-                $(".flatpickr").flatpickr({ defaultDate: dataInfo.Birthday });
+                $("#Language_ID ").dropdown("set selected", dataInfo[0].Language_ID);
+                $('#Name').val((dataInfo[0].Name));
+                $('#Email1').val((dataInfo[0].Email1));
+                $('#Address').val((dataInfo[0].Address));
+                $('#Phone1').val((dataInfo[0].Phone1));
+                if (dataInfo[0].Avatar == '' || dataInfo[0].Avatar == undefined) {
+                    $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
+                }
+                else {
+                    $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + dataInfo[0].Avatar);
+                    avatarString = dataInfo[0].Avatar;
+                }
+                $(".flatpickr").flatpickr({ defaultDate: dataInfo[0].Birthday });
             }
         }
     </script>

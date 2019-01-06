@@ -15,15 +15,13 @@ namespace _2018_12_13.Views.Discount
 
     public class DiscountTable
     {
-        public DiscountTable(string id, string serviceName, string ServiceTypeName)
+        public DiscountTable(string id, string Name)
         {
             this.ID = id;
-            this.ServiceTypeName = ServiceTypeName;
-            this.ServiceName = serviceName;
+            this.Name = Name;
         }
         public string ID { get; set; }
-        public string ServiceTypeName { get; set; }
-        public string ServiceName { get; set; }
+        public string Name { get; set; }
     }
     public partial class pageDiscountDetail : WebPageBase
     {
@@ -51,6 +49,9 @@ namespace _2018_12_13.Views.Discount
             else
             {
                 _CurrentID = null;
+                _DataTableServiceLeft = null;
+                _DataTableServiceRight = null;
+                _DataDiscount = null;
             }
         }
         private void Loadata(int id)
@@ -68,7 +69,7 @@ namespace _2018_12_13.Views.Discount
             dt.Columns.Add("Left");
             dt.Columns.Add("Right");
 
-            var service = new[] { "1"};
+          
 
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
@@ -77,7 +78,8 @@ namespace _2018_12_13.Views.Discount
             }
             if (dt != null)
             {
-                _DataDiscount = JsonConvert.SerializeObject(dt);
+                string[] service = dt.Rows[0]["Rule"].ToString().Split('-');
+              _DataDiscount = JsonConvert.SerializeObject(dt);
                 if (dt.Rows[0]["Type"].ToString() == "1")
                 {
                     var drrContain = from items in _Service
@@ -105,6 +107,8 @@ namespace _2018_12_13.Views.Discount
             }
             else
             {
+                _DataTableServiceLeft = "";
+                _DataTableServiceRight = "";
                 _DataDiscount = "";
             }
         }
@@ -144,11 +148,11 @@ namespace _2018_12_13.Views.Discount
                 DataTable dtServiceType = ds.Tables[1];
                 foreach (DataRow dr in dtService.Rows)
                 {
-                    _Service.Add(new DiscountTable(dr[0].ToString(), dr[1].ToString(), ""));
+                    _Service.Add(new DiscountTable(dr[0].ToString(), dr[1].ToString()));
                 }
                 foreach (DataRow dr in dtServiceType.Rows)
                 {
-                    _ServiceType.Add(new DiscountTable(dr[0].ToString(), "", dr[1].ToString()));
+                    _ServiceType.Add(new DiscountTable(dr[0].ToString(), dr[1].ToString()));
                 }
             }
             else
@@ -254,49 +258,64 @@ namespace _2018_12_13.Views.Discount
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data)
         {
-            //try
-            //{
-            //    HistoryDetail DataMain = JsonConvert.DeserializeObject<HistoryDetail>(data);
-            //    if (_CurrentID == null)
-            //    {
-            //        using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            //        {
-            //            connFunc.ExecuteDataTable("YYY_sp_Customer_History_Insert", CommandType.StoredProcedure,
-            //                "@Customer_ID", SqlDbType.Int, _CurrentID,
-            //                "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
-            //                "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-            //                "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-            //                "@branch_ID", SqlDbType.Int, Comon.Global.sys_branchID,
-            //                "@Type", SqlDbType.Int, DataMain.TypeHistory_ID,
-            //                "@Complaint", SqlDbType.Int, DataMain.TypeCompalint_ID
-            //            );
-            //        }
-            //    }
-            //    else
-            //    {
-            //        using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            //        {
-            //            connFunc.ExecuteDataTable("YYY_sp_Customer_History_Update", CommandType.StoredProcedure,
-            //                "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
-            //                "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
-            //                "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-            //                 "@IdCurrent", SqlDbType.Int, _CurrentID,
-            //                 "@Type", SqlDbType.Int, DataMain.TypeHistory_ID,
-            //                 "@Complaint", SqlDbType.Int, DataMain.TypeCompalint_ID
-
-            //            );
-            //        }
-            //    }
-            //    return "1";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        return "0";
-            //    }
-
-            //}
-            return "0";
+            try
+            {
+                DiscountDetail DataMain = JsonConvert.DeserializeObject<DiscountDetail>(data);
+                if (_CurrentID == null)
+                {
+                    using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                    {
+                        connFunc.ExecuteDataTable("YYY_sp_Discount_Insert", CommandType.StoredProcedure,
+                            "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
+                            "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
+                            "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                             "@Percent", SqlDbType.Int, DataMain.Percent,
+                             "@Amount", SqlDbType.Decimal, DataMain.Amount,
+                             "@Type", SqlDbType.Int, DataMain.Type,
+                             "@Rule", SqlDbType.NVarChar, DataMain.Rule,
+                             "@Date_From", SqlDbType.DateTime, Convert.ToDateTime(DataMain.DateFrom),
+                             "@Date_To", SqlDbType.DateTime, Convert.ToDateTime(DataMain.DateTo),
+                             "@Note", SqlDbType.NVarChar, DataMain.Content
+                        );
+                    }
+                }
+                else
+                {
+                using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                {
+                        connFunc.ExecuteDataTable("YYY_sp_Discount_Update", CommandType.StoredProcedure,
+                            "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
+                            "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
+                            "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                             "@CurrentID", SqlDbType.Int, _CurrentID,
+                             "@Percent", SqlDbType.Int, DataMain.Percent,
+                             "@Amount", SqlDbType.Decimal, DataMain.Amount,
+                             "@Type", SqlDbType.Int, DataMain.Type,
+                             "@Rule", SqlDbType.NVarChar, DataMain.Rule,
+                             "@Date_From", SqlDbType.DateTime, Convert.ToDateTime(DataMain.DateFrom),
+                             "@Date_To", SqlDbType.DateTime, Convert.ToDateTime(DataMain.DateTo),
+                             "@Note", SqlDbType.NVarChar, DataMain.Content
+                    );
+                }
+            }
+            return "1";
         }
+                catch (Exception ex)
+                {
+                    return "0";
+                }
+        }
+    }
+    public class DiscountDetail
+    {
+        public string Name { get; set; }
+        public string DateFrom { get; set; }
+        public string DateTo { get; set; }
+        public int Amount { get; set; }
+        public int Percent { get; set; }
+        public int Type { get; set; }
+        public string Content { get; set; }
+        public string Rule { get; set; }
     }
 
 }

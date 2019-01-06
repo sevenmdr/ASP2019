@@ -125,6 +125,28 @@ $('.ui.form3').form({
                 prompt: 'Please select a gender'
             }]
         },
+        State: {
+            identifier: 'State',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+        }, 
+        Employee: {
+            identifier: 'Employee',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+    },
+        GroupUser: {
+            identifier: 'GroupUser',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+        },
+
         username: {
             identifier: 'username',
             rules: [{
@@ -263,6 +285,13 @@ $('.ui.form3').form({
                 prompt: 'Please enter status type'
             }]
         },
+        discountType: {
+            identifier: 'discountType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter status type'
+            }]
+        },      
         serviceTab: {
             identifier: 'serviceTab',
             rules: [{
@@ -275,6 +304,20 @@ $('.ui.form3').form({
             rules: [{
                 type: 'integer[1..100]',
                 prompt: 'Please enter number of unit'
+            }]
+        },
+        discountPercent: {
+            identifier: 'discountPercent',
+            rules: [{
+                type: 'integer[1..100]',
+                prompt: 'Please enter number of unit'
+            }]
+        },
+        discountAmount: {
+            identifier: 'discountAmount',
+            rules: [{
+                type: 'regExp[/^[0-9,]{0,12}$/]',
+                prompt: 'Please enter amount discount'
             }]
         },
         discountOther: {

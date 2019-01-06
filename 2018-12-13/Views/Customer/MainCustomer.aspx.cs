@@ -16,6 +16,8 @@ namespace _2018_12_13.Views.Customer
         protected string CustName { get; set; }
         protected string CustCode { get; set; }
         protected string Phone { get; set; }
+        protected string Avatar { get; set; }
+        protected string defaultAvatar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             var v = Request.QueryString["CustomerID"];
@@ -31,6 +33,7 @@ namespace _2018_12_13.Views.Customer
         }
         private void Loadata(int CustomerID)
         {
+            defaultAvatar = Comon.Global.sys_DefaultAvatar;
             DataSet ds = new DataSet();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
@@ -42,12 +45,13 @@ namespace _2018_12_13.Views.Customer
                 CustName = ds.Tables["Table"].Rows[0]["Name"].ToString();
                 CustCode = ds.Tables["Table"].Rows[0]["Cust_Code"].ToString();
                 Phone = ds.Tables["Table"].Rows[0]["Phone1"].ToString();
+                Avatar = ds.Tables["Table"].Rows[0]["Avatar"].ToString();
             }
             else
             {
                 CustName = "";
                 CustCode = "";
-                Phone = "";
+                Phone = ""; Avatar = "";
             }
 
         }

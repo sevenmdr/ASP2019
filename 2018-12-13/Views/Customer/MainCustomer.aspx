@@ -10,14 +10,14 @@
                         <div class="ui items">
                             <div class="item">
                                 <a class="ui small circular image">
-                                    <img src="/img/avatar/people/Meggie.png" alt="label-image">
+                                    <img id="avatarCustomerLabel" src="#" alt="label-image" style="width: 100px !important;">
                                     <i class="circle mini red icon avt" data-content="Offline" data-variation="inverted redli"></i></a>&nbsp;<div class="middle aligned content hiddenui">
                                         <div class="header">
-                                            <i  class="asterisk teal loading icon"></i>
+                                            <i class="asterisk teal loading icon"></i>
                                             <div id="txtNameMain"></div>
                                         </div>
                                         <div class="meta">
-                                           <a>&nbsp&nbsp</a><div id="txtPhoneMain"></div> 
+                                            <a>&nbsp&nbsp</a><div id="txtPhoneMain"></div>
                                         </div>
                                     </div>
                             </div>
@@ -37,7 +37,7 @@
             </div>
             <div id="divMainPage">
             </div>
-           
+
         </div>
     </div>
 
@@ -45,9 +45,18 @@
     <script>
 
         $(document).ready(function () {
+            let avatarCustomer = "<%=Avatar.ToString() %>";
+            let avatarDefault = "<%=defaultAvatar %>";
             document.getElementById("txtNameMain").innerHTML = "<%=CustName.ToString() %>" + "(" + "<%=CustCode.ToString() %>" + ")";
             document.getElementById("txtPhoneMain").innerHTML = "<%=Phone.ToString() %>"
             document.getElementById("divMainPage").innerHTML = '';
+            if (avatarCustomer == '' || avatarCustomer == undefined) {
+                $('#avatarCustomerLabel').attr('src', 'data:image/png;base64, ' + avatarDefault);
+            }
+            else {
+                $('#avatarCustomerLabel').attr('src', 'data:image/png;base64, ' + avatarCustomer);
+            }
+
             $("#divMainPage").load("/Views/Customer/pageGeneralInfo.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
         });
 

@@ -196,7 +196,7 @@
 
         });
         function LoadDataUpdate() {
-            debugger
+
             if (dataInfo) {
                 $("#branch_ID ").dropdown("refresh");
                 $("#branch_ID ").dropdown("set selected", dataInfo.Branch_ID);

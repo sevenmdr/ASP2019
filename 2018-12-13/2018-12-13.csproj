@@ -1903,7 +1903,6 @@
     <Content Include="Views\Customer\MainCustomer.aspx" />
     <Content Include="Views\Customer\pageCustomerDetail.aspx" />
     <Content Include="Views\Customer\pageCustomerImage.aspx" />
-    <Content Include="Views\Customer\pageCustomerUploadImage.aspx" />
     <Content Include="Views\Customer\pageHistoryDetail.aspx" />
     <Content Include="Views\Customer\pageHistoryList.aspx" />
     <Content Include="Views\Customer\pageImageNewFolder.aspx" />
@@ -1921,6 +1920,14 @@
     <Content Include="Views\Customer\pageTreatmentList.aspx" />
     <Content Include="Views\Discount\pageDiscountDetail.aspx" />
     <Content Include="Views\Discount\pageDiscountList.aspx" />
+    <Content Include="Views\Employee\pageEmployeeDetail.aspx" />
+    <Content Include="Views\Employee\pageEmployeeGroupDetail.aspx" />
+    <Content Include="Views\Employee\pageEmployeeGroupList.aspx" />
+    <Content Include="Views\Employee\pageEmployeeList.aspx" />
+    <Content Include="Views\Employee\pageUserDetail.aspx" />
+    <Content Include="Views\Employee\pageUserGroupDetail.aspx" />
+    <Content Include="Views\Employee\pageUserGroupList.aspx" />
+    <Content Include="Views\Employee\pageUserList.aspx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Login\Logout.aspx" />
     <Content Include="Views\Login\pageChangePassword.aspx" />
@@ -1947,7 +1954,7 @@
     <Content Include="Views\WareHouse\pageUnitCountList.aspx" />
     <Content Include="Views\WareHouse\pageWareHouseList.aspx" />
     <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
-    <Content Include="Views\Customer\FileUploadHandler.ashx" />
+    <Content Include="UploadClass\FileUploadHandler.ashx" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -2112,7 +2119,7 @@
     <Compile Include="Views\CustomerCare\pageCustomerCare_RemindAppointment.aspx.designer.cs">
       <DependentUpon>pageCustomerCare_RemindAppointment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customer\FileUploadHandler.ashx.cs">
+    <Compile Include="UploadClass\FileUploadHandler.ashx.cs">
       <DependentUpon>FileUploadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -2197,13 +2204,6 @@
     </Compile>
     <Compile Include="Views\Customer\pageCustomerImage.aspx.designer.cs">
       <DependentUpon>pageCustomerImage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Customer\pageCustomerUploadImage.aspx.cs">
-      <DependentUpon>pageCustomerUploadImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Customer\pageCustomerUploadImage.aspx.designer.cs">
-      <DependentUpon>pageCustomerUploadImage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\pageHistoryDetail.aspx.cs">
       <DependentUpon>pageHistoryDetail.aspx</DependentUpon>
@@ -2323,6 +2323,62 @@
     <Compile Include="Views\Discount\pageDiscountList.aspx.designer.cs">
       <DependentUpon>pageDiscountList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employee\pageEmployeeDetail.aspx.cs">
+      <DependentUpon>pageEmployeeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeDetail.aspx.designer.cs">
+      <DependentUpon>pageEmployeeDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeGroupDetail.aspx.cs">
+      <DependentUpon>pageEmployeeGroupDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeGroupDetail.aspx.designer.cs">
+      <DependentUpon>pageEmployeeGroupDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeGroupList.aspx.cs">
+      <DependentUpon>pageEmployeeGroupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeGroupList.aspx.designer.cs">
+      <DependentUpon>pageEmployeeGroupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeList.aspx.cs">
+      <DependentUpon>pageEmployeeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageEmployeeList.aspx.designer.cs">
+      <DependentUpon>pageEmployeeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserDetail.aspx.cs">
+      <DependentUpon>pageUserDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserDetail.aspx.designer.cs">
+      <DependentUpon>pageUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserGroupDetail.aspx.cs">
+      <DependentUpon>pageUserGroupDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserGroupDetail.aspx.designer.cs">
+      <DependentUpon>pageUserGroupDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserGroupList.aspx.cs">
+      <DependentUpon>pageUserGroupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserGroupList.aspx.designer.cs">
+      <DependentUpon>pageUserGroupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserList.aspx.cs">
+      <DependentUpon>pageUserList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\pageUserList.aspx.designer.cs">
+      <DependentUpon>pageUserList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2402,7 +2458,6 @@
     </Compile>
     <Compile Include="Views\WareHouse\pageProductDetail.aspx.cs">
       <DependentUpon>pageProductDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\WareHouse\pageProductDetail.aspx.designer.cs">
       <DependentUpon>pageProductDetail.aspx</DependentUpon>
@@ -2691,8 +2746,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\" />
     <Folder Include="Models\BindingList\" />
-    <Folder Include="Views\Customer\UploadedFiles\" />
-    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
