@@ -477,6 +477,20 @@ $('.ui.form3').form({
                 prompt: 'Please enter folder name'
             }]
         },
+        productType: {
+            identifier: 'productType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter doctor'
+            }]
+        },
+        CountTypeDefault: {
+            identifier: 'CountTypeDefault',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter doctor'
+            }]
+        },
     }
 });
 

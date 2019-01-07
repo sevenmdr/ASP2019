@@ -11,7 +11,7 @@
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
-
+       
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                <form class="ui form segment form3">
+                <form class="ui form segment form3" id="form3">
                     <div class="three fields">
                         <div class="field">
                             <label>Tên</label>
@@ -104,13 +104,9 @@
                                                     <th style="text-align: center">idUnit</th>
                                                     <th style="text-align: center">state</th>
                                                     <th style="text-align: center">idDetail</th>
-                                                    <th style="text-align: center">Number</th>
-                                                    <th style="text-align: center">Tên</th>
+                                                    <th style="text-align: center; max-width: 150px;">Hệ Số</th>
+                                                    <th style="text-align: left">Tên</th>
                                                     <th style="text-align: center; max-width: 60px;">Xóa</th>
-
-
-
-
                                                 </tr>
                                             </thead>
                                         </table>
@@ -139,12 +135,14 @@
         var DataComboTypeProduct; // Data loai san pham
         var DataunitCountChoosen;
 
+
         $(document).ready(function () {
-            divCloneLeft = $("#dtContentUnitCount").clone();
+            divContentUnitCount = $("#TableUnitCount").clone();
             document.getElementById("textShowMessage").innerHTML = "";
             DataComboTypeProduct = ([<%=_DataComboTypeProduct%>][0]);
             DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
-            DataunitCountChoosen = ([<%=_DataunitCountChoosen%>][0]);
+
+            DataunitCountChoosen = ([<%=_DataunitCountChoosen%>][0]) === undefined ? [] : ([<%=_DataunitCountChoosen%>][0]);
 
             LoadCombo(DataComboTypeUnitCount, "cbbUnitCountTpye")
             LoadCombo(DataComboTypeUnitCount, "cbbUnitCountTpyeDefault")
@@ -152,12 +150,10 @@
             LoadDataUpdate();
         });
         function LoadDataTable() {
-            debugger
-     
-             var  _DataunitCountChoosen = DataunitCountChoosen.filter(word => word["state"] == "1");
-            // select state =1
+            let _DataunitCountChoosen = DataunitCountChoosen.filter(word => word["state"] == "1");
+         
             $('#dtContentUnitCount').DataTable().destroy();
-            $("#TableUnitCount").replaceWith(divCloneLeft.clone());
+            $("#TableUnitCount").replaceWith(divContentUnitCount.clone());
             var table = $('#dtContentUnitCount').DataTable({
                 data: _DataunitCountChoosen,
                 info: false,
@@ -182,38 +178,29 @@
             });
             document.getElementById("dtContentUnitCount").className = "ui celled table";
             $('#dtContentUnitCount tbody ').on('click', '.buttonDeleteClass', function (e) {
+
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
-                var id;
-                if (data == undefined) {
+                var row_clicked = $(this).closest('tr');
+                var index = table.row(row_clicked).index();
+                if (data === undefined) {
 
                     var selected_row = $(this).parents('tr');
                     if (selected_row.hasClass('child')) {
                         selected_row = selected_row.prev();
                     }
                     var rowData = $('#dtContentUnitCount').DataTable().row(selected_row).data();
-                    id = rowData.ID;
-
-                } else {
-
-                    id = data.ID;
                 }
-                DeleteUnitCount(id);
+                else {
+                    DeleteUnitCount(index);
+                }
+
             });
 
         }
 
-        function DeleteUnitCount(id) {
-            //DataunitCountChoosen.forEach(function (result, index) {
-            //    if (result["ID"] === id) {
-            //        DataunitCountChoosen.splice(index, 1);
-            //    }
-            //});
-            // set  DataunitCountChoosen state = 0
-            debugger
-           let objIndex = DataunitCountChoosen.findIndex((obj => obj.id == id));
-            //Update object's name property.
-            DataunitCountChoosen[objIndex].state = "0"
+        function DeleteUnitCount(index) {
+            _DataunitCountChoosen[index].state = "0"
             LoadDataTable();
         }
         function LoadDataUpdate() {
@@ -232,7 +219,6 @@
             return false;
         }
         function ExecuteUnitCount() {
-
             let unitCountTpye = Number($('#unitCountTpye').dropdown('get value')) ? Number($('#unitCountTpye').dropdown('get value')) : 0;
             let unitCountTypeDefault = Number($('#unitCountTypeDefault').dropdown('get value')) ? Number($('#unitCountTypeDefault').dropdown('get value')) : 0;
             let UnitChange = $('#UnitChange').val() ? $('#UnitChange').val() : 0;
@@ -240,18 +226,20 @@
                 document.getElementById("textShowMessage").innerHTML = "Chọn Loại Đơn Vị Tính, Đơn Vị Tính Chuẩn Và Hệ Số Quy Đổi";
             }
             else {
+
                 document.getElementById("textShowMessage").innerHTML = "";
                 var element = {};
-                element.ID = unitCountTpye.toString();
+                element.IDUnit = unitCountTpye.toString();
                 element.Number = UnitChange;
                 element.idDetail = "0";
-                element.state = "1";
                 element.Name = $('#unitCountTpye').dropdown('get text');
+                element.state = "1";
                 DataunitCountChoosen.push(element);
+                $('#unitCountTpye').dropdown('clear');
+                $('#UnitChange').val(0);
                 LoadDataTable();
             }
-            $('#unitCountTpye').dropdown('clear');
-            $('#UnitChange').val(0);
+
             return false;
         }
         function ExcuteData() {
@@ -297,7 +285,7 @@
     <script src="/js/comon/noti_function.js"></script>
     <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-  
+
 </body>
 
 </html>

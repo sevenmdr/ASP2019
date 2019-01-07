@@ -1938,11 +1938,14 @@
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
+    <Content Include="Views\WareHouse\pageInputList.aspx" />
+    <Content Include="Views\WareHouse\pageInputDetail.aspx" />
     <Content Include="Views\WareHouse\pageProductTypeDetail.aspx" />
     <Content Include="Views\WareHouse\pageProductDetail.aspx" />
     <Content Include="Views\WareHouse\pageNormSettingDetail.aspx" />
     <Content Include="Views\WareHouse\pageNormStockDetail.aspx" />
     <Content Include="Views\WareHouse\pageSupplierDetail.aspx" />
+    <Content Include="Views\WareHouse\pageWareHouseGeneral.aspx" />
     <Content Include="Views\WareHouse\pageUnitCountDetail.aspx" />
     <Content Include="Views\WareHouse\pageProductTypeList.aspx" />
     <Content Include="Views\WareHouse\pageProductList.aspx" />
@@ -1950,7 +1953,6 @@
     <Content Include="Views\WareHouse\pageNormStockList.aspx" />
     <Content Include="Views\WareHouse\pageSupplierList.aspx" />
     <Content Include="Views\WareHouse\pageWareHouseDetail.aspx" />
-    <Content Include="Views\WareHouse\pageInputDetail.aspx" />
     <Content Include="Views\WareHouse\pageUnitCountList.aspx" />
     <Content Include="Views\WareHouse\pageWareHouseList.aspx" />
     <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
@@ -2449,6 +2451,19 @@
     <Compile Include="Views\User\pageUserDetail.aspx.designer.cs">
       <DependentUpon>pageUserDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\WareHouse\pageInputList.aspx.cs">
+      <DependentUpon>pageInputList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageInputList.aspx.designer.cs">
+      <DependentUpon>pageInputList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageInputDetail.aspx.cs">
+      <DependentUpon>pageInputDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageInputDetail.aspx.designer.cs">
+      <DependentUpon>pageInputDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\WareHouse\pageProductTypeDetail.aspx.cs">
       <DependentUpon>pageProductTypeDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2482,6 +2497,13 @@
     </Compile>
     <Compile Include="Views\WareHouse\pageSupplierDetail.aspx.designer.cs">
       <DependentUpon>pageSupplierDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareHouseGeneral.aspx.cs">
+      <DependentUpon>pageWareHouseGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareHouseGeneral.aspx.designer.cs">
+      <DependentUpon>pageWareHouseGeneral.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\WareHouse\pageUnitCountDetail.aspx.cs">
       <DependentUpon>pageUnitCountDetail.aspx</DependentUpon>
@@ -2531,13 +2553,6 @@
     </Compile>
     <Compile Include="Views\WareHouse\pageWareHouseDetail.aspx.designer.cs">
       <DependentUpon>pageWareHouseDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WareHouse\pageInputDetail.aspx.cs">
-      <DependentUpon>pageInputDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\WareHouse\pageInputDetail.aspx.designer.cs">
-      <DependentUpon>pageInputDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\WareHouse\pageUnitCountList.aspx.cs">
       <DependentUpon>pageUnitCountList.aspx</DependentUpon>
