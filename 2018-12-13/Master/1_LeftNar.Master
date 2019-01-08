@@ -117,7 +117,7 @@
                 <div class="content">
                     <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Xuất Kho 
+                    <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
                     <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chốt Kho
                     </a>
