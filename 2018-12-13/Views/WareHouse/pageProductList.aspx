@@ -12,6 +12,30 @@
                     <div style="float: right">
                         <button class="ui blue basic button" data-value="fade up" onclick="return AddNewProduct()">Thêm Mới</button>
                     </div>
+                    <div style="float: right; width: 200px">
+                        <div class="ui fluid search selection dropdown" id="ManageList" onchange="LoadProductAjax()">
+                            <input type="hidden" name="ware" />
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0" />
+                            <div class="default text">Quản Lý Tồn Kho</div>
+                            <div id="cbbManage" class="menu" tabindex="-1">
+                                <div class="item" data-value="2">Tất Cả</div>
+                                <div class="item" data-value="1">Quản Lý Tồn Kho</div>
+                                <div class="item" data-value="0">Không Quản Lý Tồn Kho</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: right; width: 200px">
+                        <div class="ui fluid search selection dropdown" id="TypeProductList" onchange="LoadProductAjax()">
+                            <input type="hidden" name="ware" />
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0" />
+                            <div class="default text">Loại Sản Phẩm</div>
+                            <div id="cbbTypeProduct" class="menu" tabindex="-1">
+                                <div class="item" data-value="0">Tất Cả</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -25,7 +49,6 @@
                         <th style="text-align: center; width: 25px;">STT</th>
                         <th style="text-align: center">Mã Sản Phẩm</th>
                         <th style="text-align: center">Tên Sản Phẩm</th>
-                        <th style="text-align: center">Loại Sản Phẩm</th>
                         <th style="text-align: center">Đơn Vị Tính Chính</th>
                         <th style="text-align: center">Ghi Chú</th>
                         <th style="text-align: center; max-width: 70px;">Định Mức 1</th>
@@ -42,12 +65,25 @@
 
 <script type="text/javascript">
     var divClone;
+    var DataComboTypeProduct; // Data dvt
+    var DataListProduct
     function LoadProductAjax() {
+
         GetDataSourceProduct("/Views/WareHouse/pageProductList.aspx/LoadataProduct", function (data) {
+            
+            if ($('#ManageList').dropdown('get value') && $('#ManageList').dropdown('get value') != "2") {
+                DataListProduct = data.filter(word => word["IsManager"] == $('#ManageList').dropdown('get value'));
+            }
+            else {
+                DataListProduct = data;
+            }
+            if ($('#TypeProductList').dropdown('get value') && $('#TypeProductList').dropdown('get value') != "0") {
+                DataListProduct = DataListProduct.filter(word => word["Type_ID"] == $('#TypeProductList').dropdown('get value'));
+            }
             $('#dtContent').DataTable().destroy();
             $("#TableContent").replaceWith(divClone.clone());
             var table = $('#dtContent').DataTable({
-                data: data,
+                data: DataListProduct,
                 info: false,
                 paging: false,
                 ordering: false,
@@ -57,13 +93,12 @@
                     { "visible": false, "targets": 0, "data": "ID" },
                     { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
                     { "visible": true, "targets": 2, "data": "Code", width: "50px", "className": "center" },
-                    { "visible": true, "targets": 3, "data": "Name", width: "120px" },
-                    { "visible": true, "targets": 4, "data": "TypeName", width: "250px" },
-                    { "visible": true, "targets": 5, "data": "UnitName", width: "200px" },
-                    { "visible": true, "targets": 6, "data": "Note" },
-                    { "visible": true, "targets": 7, "data": "N1" },
-                    { "visible": true, "targets": 8, "data": "N2" },
-                    { "visible": true, "targets": 9, "data": "N3" },
+                    { "visible": true, "targets": 3, "data": "Name", width: "300px" },
+                    { "visible": true, "targets": 4, "data": "UnitName", width: "200px" },
+                    { "visible": true, "targets": 5, "data": "Note" },
+                    { "visible": true, "targets": 6, "data": "N1" },
+                    { "visible": true, "targets": 7, "data": "N2" },
+                    { "visible": true, "targets": 8, "data": "N3" },
 
                     {
                         "targets": -2,
@@ -124,6 +159,8 @@
 
         divClone = $("#TableContent").clone();
         LoadProductAjax();
+        DataComboTypeProduct = ([<%=_DataComboTypeProduct%>][0]);
+        LoadCombo(DataComboTypeProduct, "cbbTypeProduct");
     });
     function AddNewProduct() {
         document.getElementById("divDetailPopup").innerHTML = '';

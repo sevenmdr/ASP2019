@@ -31,7 +31,7 @@ namespace _2018_12_13.Views.WareHouse
         public string InputCode { get; set; } //txtCode
 
         public string TotalAmount { get; set; }//TotalAmount
-        public string DateInput { get; set; }//dateInput
+        public string dateOutput { get; set; }//dateInput
         public string Content { get; set; }//txtContent
 
         public string Ware { get; set; }//txtContent
@@ -41,9 +41,8 @@ namespace _2018_12_13.Views.WareHouse
     public partial class pageOutputDetail : WebPageBase
     {
         public static string _CurrentID { get; set; }
-        public static string _DataInputMain { get; set; }
+        public static string _DataOutputMain { get; set; }
         public static string _DataComboProduct { get; set; }
-        public static string _DataComboSupplier { get; set; }
         public static string _DataComboUnitCount { get; set; }
         public static string _DataProductChoosen { get; set; }
         public static string _DataComboWare { get; set; }
@@ -61,7 +60,7 @@ namespace _2018_12_13.Views.WareHouse
             else
             {
                 _CurrentID = null;
-                _DataInputMain = null;
+                _DataOutputMain = null;
                 _DataProductChoosen = null;
             }
             //_CurrentID = "9";
@@ -71,22 +70,16 @@ namespace _2018_12_13.Views.WareHouse
         private void InitializeComboType()
         {
             _DataComboProduct = "";
-            _DataComboSupplier = "";
             _DataComboWare = "";
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
             {
                  dt = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_UnitReceipt]", CommandType.StoredProcedure);
             }
-            DataTable dt1 = new DataTable();
-            using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            {
-                dt1 = connFunc.ExecuteDataTable("YYY_sp_Product_Combo_Supplier", CommandType.StoredProcedure);
-            }
             DataTable dt2 = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
             {
-                dt2 = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_Product]", CommandType.StoredProcedure);
+                dt2 = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_Product_IsManager]", CommandType.StoredProcedure);
             }
             DataTable dt3 = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
@@ -94,7 +87,6 @@ namespace _2018_12_13.Views.WareHouse
                 dt3 = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_BranchWareHouse]", CommandType.StoredProcedure);
             }
             _DataComboProduct = JsonConvert.SerializeObject(dt2);
-            _DataComboSupplier = JsonConvert.SerializeObject(dt1);
             _DataComboUnitCount = JsonConvert.SerializeObject(dt);
             _DataComboWare = JsonConvert.SerializeObject(dt3);
         }
@@ -103,7 +95,7 @@ namespace _2018_12_13.Views.WareHouse
             DataSet ds = new DataSet();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                ds = confunc.ExecuteDataSet("[YYY_sp_Product_Reciept_LoadDetail]", CommandType.StoredProcedure,
+                ds = confunc.ExecuteDataSet("[YYY_sp_Product_Export_LoadDetail]", CommandType.StoredProcedure,
                   "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
             }
             if (ds.Tables[1] != null && ds.Tables[1].Rows.Count>0)
@@ -116,11 +108,11 @@ namespace _2018_12_13.Views.WareHouse
             }
             if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                _DataInputMain = JsonConvert.SerializeObject(ds.Tables[0]);
+                _DataOutputMain = JsonConvert.SerializeObject(ds.Tables[0]);
             }
             else
             {
-                _DataInputMain = "";
+                _DataOutputMain = "";
             }
 
         }
@@ -138,9 +130,8 @@ namespace _2018_12_13.Views.WareHouse
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
-                        connFunc.ExecuteDataTable("YYY_sp_Product_Receipt_Insert", CommandType.StoredProcedure,
-                            "@date", SqlDbType.DateTime,Convert.ToDateTime( DataMain.DateInput),
-                            "@Amount", SqlDbType.Decimal, DataMain.TotalAmount,
+                        connFunc.ExecuteDataTable("[YYY_sp_Product_Export_Insert]", CommandType.StoredProcedure,
+                            "@date", SqlDbType.DateTime,Convert.ToDateTime( DataMain.dateOutput),
                             "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                             "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                             "@Ware_ID", SqlDbType.Int, DataMain.Ware,
@@ -153,9 +144,8 @@ namespace _2018_12_13.Views.WareHouse
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
-                        connFunc.ExecuteDataTable("YYY_sp_Product_Receipt_Update", CommandType.StoredProcedure,
-                            "@date", SqlDbType.NVarChar, Convert.ToDateTime(DataMain.DateInput),
-                            "@Amount", SqlDbType.Decimal, DataMain.TotalAmount,
+                        connFunc.ExecuteDataTable("[YYY_sp_Product_Export_Update]", CommandType.StoredProcedure,
+                            "@date", SqlDbType.NVarChar, Convert.ToDateTime(DataMain.dateOutput),
                             "@Ware_ID", SqlDbType.Int, DataMain.Ware,
                             "@Note", SqlDbType.Int, DataMain.Content.Replace("'", "").Trim(),
                             "@data", SqlDbType.Structured, DataProductDetail.Rows.Count > 0 ? DataProductDetail : null,

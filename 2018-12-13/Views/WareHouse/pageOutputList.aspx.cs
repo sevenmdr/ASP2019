@@ -17,12 +17,12 @@ namespace _2018_12_13.Views.WareHouse
         }
         [System.Web.Services.WebMethod]
 
-        public static string LoadataInput(string datefrom ,string dateto)
+        public static string LoadataOutput(string datefrom ,string dateto)
         {
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("[YYY_sp_Product_Receipt_LoadList]", CommandType.StoredProcedure,
+                dt = confunc.ExecuteDataTable("[YYY_sp_Product_Export_LoadList]", CommandType.StoredProcedure,
                   "@UserID", SqlDbType.Int, Comon.Global.sys_userid,
                   "@datefrom", SqlDbType.DateTime, Convert.ToDateTime(datefrom),
                   "@dateto", SqlDbType.DateTime, Convert.ToDateTime(dateto));
@@ -43,7 +43,7 @@ namespace _2018_12_13.Views.WareHouse
             {
                 using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                 {
-                    connFunc.ExecuteDataTable("[YYY_sp_Product_Reciept_Delete]", CommandType.StoredProcedure,
+                    connFunc.ExecuteDataTable("[YYY_sp_Product_Export_Delete]", CommandType.StoredProcedure,
                         "@CurrentID", SqlDbType.Int, id,
                         "@Datenow", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                         "@userID", SqlDbType.Int, Comon.Global.sys_userid

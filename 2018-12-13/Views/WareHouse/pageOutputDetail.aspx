@@ -19,37 +19,26 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div class="header">
-        Nhập Hàng
+        Xuất Hàng
     </div>
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
                 <form class="ui form segment form3" id="form3">
-                    <div class="three fields">
+                    <div class="two fields">
                         <div class="field">
-                            <label>Mã Nhập Hàng</label>
+                            <label>Mã Xuất Hàng</label>
                             <input id="txtCode" name="name" type="text" disabled />
                         </div>
                         <div class="field">
-                            <label>Ngày Nhập</label>
-                            <input id="dateInput" class="flatpickr" type="text" placeholder="Select Date.." />
-                        </div>
-                        <div class="field">
-                            <label>Tổng Tiền</label>
-                            <div class="ui input">
-                                <div class="ui right disabled labeled fluid input">
-                                    <div class="ui label">$</div>
-                                    <input id="TotalAmount" type="number" class="money" disabled />
-                                    <div class="ui basic label">VND</div>
-                                </div>
-                            </div>
+                            <label>Ngày Xuất</label>
+                            <input id="dateOutput" class="flatpickr" type="text" placeholder="Select Date.." />
                         </div>
                     </div>
                     <div class="two field">
                         <div class="field">
                             <label>Ghi Chú</label>
                             <input id="txtContent" name="content" type="text" />
-
                         </div>
                         <div class="field">
                             <label>Kho</label>
@@ -68,7 +57,7 @@
                         <div class="sixteen wide column">
                             <div class="ui segments">
                                 <div class="ui segment">
-                                    <h5 class="ui header">Chi Tiết Nhập Hàng
+                                    <h5 class="ui header">Chi Tiết Xuất Hàng
                                     </h5>
                                 </div>
                                 <div class="ui segment">
@@ -86,43 +75,23 @@
                                                 </div>
                                             </div>
                                             <div class="field">
-                                                <label>Nhà Cung Cấp</label>
-                                                <div class="ui fluid search selection dropdown" id="supplier">
+                                                <label>Số Lượng</label>
+                                                <input id="numberProduct" type="number" name="numberProduct" />
+                                            </div>
+                                            <div class="field">
+                                                <label>Đơn Vị Xuất</label>
+                                                <div class="ui fluid search selection dropdown" id="productDetailUnit">
                                                     <input type="hidden" />
                                                     <i class="dropdown icon"></i>
                                                     <input class="search" autocomplete="off" tabindex="0" />
-                                                    <div class="default text">Nhà Cung Cấp</div>
-                                                    <div id="cbbSupplier" class="menu" tabindex="-1">
+                                                    <div class="default text">Đơn Vị Xuất</div>
+                                                    <div id="cbbProductDetailUnit" class="menu" tabindex="-1">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="field">
-                                            </div>
-
                                         </div>
                                     </div>
-                                    <div class="three fields">
-                                        <div class="field">
-                                            <label>Số Lượng</label>
-                                            <input id="numberProduct" type="number" name="numberProduct" />
-                                        </div>
-                                        <div class="field">
-                                            <label>Đơn Vị Nhập</label>
-                                            <div class="ui fluid search selection dropdown" id="productDetailUnit">
-                                                <input type="hidden" />
-                                                <i class="dropdown icon"></i>
-                                                <input class="search" autocomplete="off" tabindex="0" />
-                                                <div class="default text">Đơn Vị Nhập</div>
-                                                <div id="cbbProductDetailUnit" class="menu" tabindex="-1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <label>Thành Tiền</label>
-                                            <input id="amountProduct" name="amountProduct" type="number" />
-                                        </div>
 
-                                    </div>
                                     <div class="field">
                                         <div class="ui blue button" onclick="return ExecuteProductDetail()">Thêm</div>
                                     </div>
@@ -138,15 +107,12 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center">idProduct</th>
-                                                <th style="text-align: center">SupplierID</th>
                                                 <th style="text-align: center">UnitCountID</th>
                                                 <th style="text-align: center">state</th>
                                                 <th style="text-align: center">idDetail</th>
                                                 <th style="text-align: center">Sản Phẩm</th>
                                                 <th style="text-align: center; max-width: 100px;">Số Lượng</th>
                                                 <th style="text-align: center; max-width: 100px;">Đơn Vị</th>
-                                                <th style="text-align: center; max-width: 150px;">Thành Tiền</th>
-                                                <th style="text-align: center">Nhà Cung Cấp</th>
                                                 <th style="text-align: center; max-width: 60px;">Xóa</th>
                                             </tr>
                                         </thead>
@@ -172,7 +138,6 @@
 
     <script type="text/javascript">
         var divContentProductDetail;
-        var DataComboSupplier; // Data nha cung cap
         var DataComboUnitCount; // Data dvt
         var DataComboProduct; // Data sp
         var DataComboWare; // Data sp
@@ -180,7 +145,6 @@
         var DataProductChoosen;
         var DataProductChoosenInitialize;
         function LoadComboUnit() {
-
             var _DataComboUnitCount = DataComboUnitCount.filter(word => word["Product_ID"] == Number($('#product').dropdown('get value')));
             LoadCombo(_DataComboUnitCount, "cbbProductDetailUnit")
         }
@@ -190,10 +154,9 @@
                 enableTime: false,
                 defaultDate: new Date(),
             });
-             $('#numberProduct').val(1);
+            $('#numberProduct').val(1);
             divContentProductDetail = $("#TableProductDetail").clone();
             document.getElementById("textShowMessage").innerHTML = "";
-            DataComboSupplier = ([<%=_DataComboSupplier%>][0]);
             DataComboProduct = ([<%=_DataComboProduct%>][0]);
             DataComboProductInitialize = ([<%=_DataComboProduct%>][0]);
             DataComboUnitCount = ([<%=_DataComboUnitCount%>][0]);
@@ -202,7 +165,6 @@
 
             DataProductChoosen = ([<%=_DataProductChoosen%>][0]) === undefined ? [] : ([<%=_DataProductChoosen%>][0]);
             DataProductChoosenInitialize = ([<%=_DataProductChoosen%>][0]) === undefined ? [] : ([<%=_DataProductChoosen%>][0]);
-            LoadCombo(DataComboSupplier, "cbbSupplier")
             LoadCombo(DataComboProduct, "cbbProduct")
             LoadCombo(DataComboWare, "cbbWare")
 
@@ -222,15 +184,12 @@
                 destroy: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "idProduct" },
-                    { "visible": false, "targets": 1, "data": "SupplierID" },
-                    { "visible": false, "targets": 2, "data": "UnitCountID" },
-                    { "visible": false, "targets": 3, "data": "state" },
-                    { "visible": false, "targets": 4, "data": "idDetail" },
-                    { "visible": true, "targets": 5, "data": "NameProduct" },
-                    { "visible": true, "targets": 6, "data": "Number" },
-                    { "visible": true, "targets": 7, "data": "NameUnit" },
-                    { "visible": true, "targets": 8, "data": "Amount" },
-                    { "visible": true, "targets": 9, "data": "NameSupplier" },
+                    { "visible": false, "targets": 1, "data": "UnitCountID" },
+                    { "visible": false, "targets": 2, "data": "state" },
+                    { "visible": false, "targets": 3, "data": "idDetail" },
+                    { "visible": true, "targets": 4, "data": "NameProduct" },
+                    { "visible": true, "targets": 5, "data": "Number" },
+                    { "visible": true, "targets": 6, "data": "NameUnit" },
 
                     {
                         "targets": -1,
@@ -257,7 +216,7 @@
             $('#dtTableProductDetail tbody ').on('click', '.buttonDeleteClass', function (e) {
 
                 e.preventDefault();
-                
+
                 var data = table.row($(this).parents('tr')).data();
                 var row_clicked = $(this).closest('tr');
                 var index = table.row(row_clicked).index();
@@ -274,13 +233,7 @@
                 }
 
             });
-            var TotalAmount = 0;
-            DataProductChoosen.forEach(function (element) {
-                if (element["state"] == "1") {
-                    TotalAmount = TotalAmount + Number(element["Amount"]);
-                }
-            });
-            $('#TotalAmount').val(TotalAmount);
+           
         }
 
         function DeleteProductDetail(index) {
@@ -288,49 +241,41 @@
             LoadDataTable();
         }
         function LoadDataUpdate() {
-            let DataInputMain = ([<%=_DataInputMain%>][0]);
+            let DataOutputMain = ([<%=_DataOutputMain%>][0]);
             LoadDataTable();
-            if (DataInputMain) {
-                $('#txtCode').val((DataInputMain[0].Code));
-                $('#dateInput').val((DataInputMain[0].DateReceipt));
-                $('#TotalAmount').val((DataInputMain[0].Amount));
-                $('#txtContent').val((DataInputMain[0].Content));
+            if (DataOutputMain) {
+                $('#txtCode').val((DataOutputMain[0].Code));
+                $('#dateOutput').val((DataOutputMain[0].DateExport));
+                $('#txtContent').val((DataOutputMain[0].Content));
                 $("#Ware").dropdown("refresh");
-                $("#Ware").dropdown("set selected", DataInputMain[0].Ware);
+                $("#Ware").dropdown("set selected", DataOutputMain[0].Ware);
 
             }
         }
 
         function ExecuteProductDetail() {
             let product = Number($('#product').dropdown('get value')) ? Number($('#product').dropdown('get value')) : 0;
-            let supplier = Number($('#supplier').dropdown('get value')) ? Number($('#supplier').dropdown('get value')) : 0;
             let productDetailUnit = Number($('#productDetailUnit').dropdown('get value')) ? Number($('#productDetailUnit').dropdown('get value')) : 0;
             let numberProduct = $('#numberProduct').val() ? $('#numberProduct').val() : 0;
-            let amountProduct = $('#amountProduct').val() ? $('#amountProduct').val() : 0;
-            if (product == 0 || supplier == 0 || productDetailUnit == 0 || numberProduct < 1 || amountProduct < 0) {
-                document.getElementById("textShowMessage").innerHTML = "Đơn Vị Nhập, Số Lượng Nhập,Tiền Nhập,Nhà Cung Cấp,Hàng Nhập";
+            if (product == 0 || productDetailUnit == 0 || numberProduct < 1 ) {
+                document.getElementById("textShowMessage").innerHTML = "Đơn Vị Xuất, Số Lượng Xuất,Hàng Xuất";
             }
             else {
 
                 document.getElementById("textShowMessage").innerHTML = "";
                 var element = {};
                 element.idProduct = product;
-                element.SupplierID = supplier;
                 element.NameProduct = $('#product').dropdown('get text');
-                element.NameSupplier = $('#supplier').dropdown('get text');
                 element.UnitCountID = productDetailUnit;
                 element.NameUnit = $('#productDetailUnit').dropdown('get text');
                 element.Number = numberProduct;
-                element.Amount = amountProduct;
                 element.state = "1";
                 element.idDetail = "0";
                 DataProductChoosen.push(element);
 
                 $('#product').dropdown('clear');
-                $('#supplier').dropdown('clear');
                 $('#productDetailUnit').dropdown('clear');
                 $('#numberProduct').val(1);
-                $('#amountProduct').val(0);
                 LoadDataTable();
             }
 
@@ -338,9 +283,8 @@
         }
         function ExcuteData() {
             var data = new Object();
-            data.InputCode = "";
-            data.TotalAmount = $('#TotalAmount').val() ? $('#TotalAmount').val() : 0;
-            data.DateInput = $('#dateInput').val() ? $('#dateInput').val() : "";
+            data.OutputCode = "";
+            data.DateOutput = $('#dateOutput').val() ? $('#dateOutput').val() : "";
             data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
             data.Ware = Number($('#Ware').dropdown('get value')) ? Number($('#Ware').dropdown('get value')) : 0;
 
@@ -375,7 +319,7 @@
             if ($('#form3').form('is valid')) {
 
                 $.ajax({
-                    url: "/Views/WareHouse/pageInputDetail.aspx/ExcuteData",
+                    url: "/Views/WareHouse/pageOutputDetail.aspx/ExcuteData",
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({ 'data': JSON.stringify(data), 'dataProduct': JSON.stringify(DataProductChoosenInitialize) }),
@@ -387,7 +331,7 @@
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
-                            LoadInputAjax();
+                            LoadOutputAjax();
                         } else {
                             notiError("Lỗi Thao Tác");
                         }

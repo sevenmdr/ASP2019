@@ -1933,8 +1933,8 @@
     <Content Include="Views\Login\pageChangePassword.aspx" />
     <Content Include="Views\Searching\Searching.aspx" />
     <Content Include="Views\Service\pageServiceDetail.aspx" />
-    <Content Include="Views\Service\pageServiceTypeDetail.aspx" />
     <Content Include="Views\Service\pageServiceList.aspx" />
+    <Content Include="Views\Service\pageServiceTypeDetail.aspx" />
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
@@ -2412,17 +2412,9 @@
     </Compile>
     <Compile Include="Views\Service\pageServiceDetail.aspx.cs">
       <DependentUpon>pageServiceDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Service\pageServiceDetail.aspx.designer.cs">
       <DependentUpon>pageServiceDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Service\pageServiceTypeDetail.aspx.cs">
-      <DependentUpon>pageServiceTypeDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Service\pageServiceTypeDetail.aspx.designer.cs">
-      <DependentUpon>pageServiceTypeDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\pageServiceList.aspx.cs">
       <DependentUpon>pageServiceList.aspx</DependentUpon>
@@ -2430,6 +2422,13 @@
     </Compile>
     <Compile Include="Views\Service\pageServiceList.aspx.designer.cs">
       <DependentUpon>pageServiceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\pageServiceTypeDetail.aspx.cs">
+      <DependentUpon>pageServiceTypeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Service\pageServiceTypeDetail.aspx.designer.cs">
+      <DependentUpon>pageServiceTypeDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\pageServiceTypeList.aspx.cs">
       <DependentUpon>pageServiceTypeList.aspx</DependentUpon>

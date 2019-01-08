@@ -11,9 +11,20 @@ namespace _2018_12_13.Views.WareHouse
 {
     public partial class pageProductList : System.Web.UI.Page
     {
+        public static string _DataComboTypeProduct { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            InitializeComboType();
+        }
+        private void InitializeComboType()
+        {
+            _DataComboTypeProduct = "";
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+            {
+                dt = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_Product_Type_FilterList]", CommandType.StoredProcedure);
+            }
+            _DataComboTypeProduct = JsonConvert.SerializeObject(dt);
         }
         [System.Web.Services.WebMethod]
 
