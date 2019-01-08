@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.WareHouse
 {
-    public partial class pageInputList : System.Web.UI.Page
+    public partial class pageOutputList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

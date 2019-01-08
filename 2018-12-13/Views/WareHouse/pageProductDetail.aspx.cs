@@ -35,6 +35,11 @@ namespace _2018_12_13.Views.WareHouse
         public string DefaultUnit { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
+        public string isManage { get; set; }
+        public string N1 { get; set; }
+        public string N2 { get; set; }
+        public string N3 { get; set; }
+
     }
 
 
@@ -49,7 +54,7 @@ namespace _2018_12_13.Views.WareHouse
         {
             var curr = Request.QueryString["CurrentID"];
             InitializeComboType();
-           
+
             if (curr != null)
             {
                 _CurrentID = curr.ToString();
@@ -70,7 +75,7 @@ namespace _2018_12_13.Views.WareHouse
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
             {
-                 dt = connFunc.ExecuteDataTable("YYY_sp_Product_Combo_Unit", CommandType.StoredProcedure);
+                dt = connFunc.ExecuteDataTable("YYY_sp_Product_Combo_Unit", CommandType.StoredProcedure);
             }
             DataTable dt1 = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
@@ -88,7 +93,7 @@ namespace _2018_12_13.Views.WareHouse
                 ds = confunc.ExecuteDataSet("[YYY_sp_Product_LoadDetail]", CommandType.StoredProcedure,
                   "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
             }
-            if (ds.Tables[1] != null && ds.Tables[1].Rows.Count>0)
+            if (ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
             {
                 _DataunitCountChoosen = JsonConvert.SerializeObject(ds.Tables[1]);
             }
@@ -115,7 +120,7 @@ namespace _2018_12_13.Views.WareHouse
                 DataProduct DataMain = JsonConvert.DeserializeObject<DataProduct>(data);
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 DataTable DataUnit = new DataTable();
-                 DataUnit = JsonConvert.DeserializeObject<DataTable>(dataUnit);
+                DataUnit = JsonConvert.DeserializeObject<DataTable>(dataUnit);
                 if (_CurrentID == null)
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
@@ -127,7 +132,11 @@ namespace _2018_12_13.Views.WareHouse
                             "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                             "@Unit", SqlDbType.Int, DataMain.DefaultUnit,
                             "@Note", SqlDbType.Int, DataMain.Content.Replace("'", "").Trim(),
-                            "@table_data", SqlDbType.Structured, DataUnit.Rows.Count>0?DataUnit:null
+                            "@N1", SqlDbType.Int, DataMain.N1,
+                            "@N2", SqlDbType.Int, DataMain.N2,
+                            "@N3", SqlDbType.Int, DataMain.N3,
+                            "@isManage", SqlDbType.Int, DataMain.isManage,
+                            "@table_data", SqlDbType.Structured, DataUnit.Rows.Count > 0 ? DataUnit : null
                         );
                     }
                 }
@@ -143,8 +152,12 @@ namespace _2018_12_13.Views.WareHouse
                             "@data", SqlDbType.Structured, DataUnit.Rows.Count > 0 ? DataUnit : null,
                             "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                             "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                            "@N1", SqlDbType.Int, DataMain.N1,
+                            "@N2", SqlDbType.Int, DataMain.N2,
+                            "@N3", SqlDbType.Int, DataMain.N3,
+                             "@isManage", SqlDbType.Int, DataMain.isManage,
                             "@currentID", SqlDbType.Int, Convert.ToInt32(_CurrentID)
-                            
+
 
                         );
                     }

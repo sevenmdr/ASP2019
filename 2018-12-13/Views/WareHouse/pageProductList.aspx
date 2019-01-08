@@ -28,8 +28,9 @@
                         <th style="text-align: center">Loại Sản Phẩm</th>
                         <th style="text-align: center">Đơn Vị Tính Chính</th>
                         <th style="text-align: center">Ghi Chú</th>
-                        <th style="text-align: center">Ngày Tạo</th>
-                        <th style="text-align: center">Người Tạo</th>
+                        <th style="text-align: center; max-width: 70px;">Định Mức 1</th>
+                        <th style="text-align: center; max-width: 70px;">Định Mức 2</th>
+                        <th style="text-align: center; max-width: 70px;">Định Mức 3</th>
                         <th style="text-align: center; width: 30px;">Sửa</th>
                         <th style="text-align: center; width: 30px;">Xóa</th>
                     </tr>
@@ -39,9 +40,9 @@
     </div>
 </div>
 
- <script type="text/javascript">
-         var divClone;
-        function LoadProductAjax() {
+<script type="text/javascript">
+    var divClone;
+    function LoadProductAjax() {
         GetDataSourceProduct("/Views/WareHouse/pageProductList.aspx/LoadataProduct", function (data) {
             $('#dtContent').DataTable().destroy();
             $("#TableContent").replaceWith(divClone.clone());
@@ -57,11 +58,13 @@
                     { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
                     { "visible": true, "targets": 2, "data": "Code", width: "50px", "className": "center" },
                     { "visible": true, "targets": 3, "data": "Name", width: "120px" },
-                    { "visible": true, "targets": 4, "data": "TypeName" , width: "250px" },
+                    { "visible": true, "targets": 4, "data": "TypeName", width: "250px" },
                     { "visible": true, "targets": 5, "data": "UnitName", width: "200px" },
                     { "visible": true, "targets": 6, "data": "Note" },
-                    { "visible": true, "targets": 7, "data": "CreatedString", width: "120px", "className": "center" },
-                   { "visible": true, "targets": 8, "data": "NguoiTao" },
+                    { "visible": true, "targets": 7, "data": "N1" },
+                    { "visible": true, "targets": 8, "data": "N2" },
+                    { "visible": true, "targets": 9, "data": "N3" },
+
                     {
                         "targets": -2,
                         "data": null,
@@ -91,12 +94,12 @@
             });
 
         })
-        }
-                    function DeleteProductList(id) {
+    }
+    function DeleteProductList(id) {
         const promise = notiConfirm();
         promise.then(function () { ExecuteDeleteProduct(id); }, function () { });
-        }
-         function ExecuteDeleteProduct(id) {
+    }
+    function ExecuteDeleteProduct(id) {
         $.ajax({
             url: "/Views/WareHouse/pageProductList.aspx/DeleteItem",
             dataType: "json",
@@ -117,26 +120,26 @@
             }
         })
     }
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-          divClone = $("#TableContent").clone();
-                         LoadProductAjax();
-        });
-        function AddNewProduct() {
-            document.getElementById("divDetailPopup").innerHTML = '';
-            $("#divDetailPopup").load("/Views/WareHouse/pageProductDetail.aspx");
-            $('#divDetailPopup').modal('show');
-            return false;
-        }
-        function EditProduct(CurrentID) {
-                 document.getElementById("divDetailPopup").innerHTML = '';
-                 $("#divDetailPopup").load("/Views/WareHouse/pageProductDetail.aspx?CurrentID=" + CurrentID);
-            $('#divDetailPopup').modal('show');
-            return false;
-        }
-    </script>
+        divClone = $("#TableContent").clone();
+        LoadProductAjax();
+    });
+    function AddNewProduct() {
+        document.getElementById("divDetailPopup").innerHTML = '';
+        $("#divDetailPopup").load("/Views/WareHouse/pageProductDetail.aspx");
+        $('#divDetailPopup').modal('show');
+        return false;
+    }
+    function EditProduct(CurrentID) {
+        document.getElementById("divDetailPopup").innerHTML = '';
+        $("#divDetailPopup").load("/Views/WareHouse/pageProductDetail.aspx?CurrentID=" + CurrentID);
+        $('#divDetailPopup').modal('show');
+        return false;
+    }
+</script>
 
-    <script src="/dist/semantic.min.js"></script>
-    <script src="/js/comon/load_datasource.js"></script>
+<%--<script src="/dist/semantic.min.js"></script>--%>
+<%--<script src="/js/comon/load_datasource.js"></script>--%>
 
 

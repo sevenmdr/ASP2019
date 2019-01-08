@@ -136,8 +136,8 @@
     }
 </script>
 
-<script src="/dist/semantic.min.js"></script>
+<%--<script src="/dist/semantic.min.js"></script>
 <script src="/js/customjs/custom-datatable.js"></script>
-<script src="/js/comon/load_datasource.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
+<script src="/js/comon/load_datasource.js"></script>--%>
+<%--<script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>--%>
 

@@ -11,7 +11,7 @@
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
-       
+    <%--        <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>--%>
 </head>
 
 <body>
@@ -43,8 +43,8 @@
                         </div>
                         <div class="field">
                             <label>Đơn Vị Tính Chuẩn</label>
-                            <div class="ui fluid search selection dropdown" id="unitCountTypeDefault">
-                                <input type="hidden" name="CountTypeDefault" onchange="return onchangeCountTypeDefault()" />
+                            <div class="ui fluid search selection dropdown" id="unitCountTypeDefault" onchange="return onchangeCountTypeDefault()">
+                                <input type="hidden" name="CountTypeDefault" />
                                 <i class="dropdown icon"></i>
                                 <input class="search" autocomplete="off" tabindex="0" />
                                 <div class="default text">Đơn Vị Tính Chuẩn</div>
@@ -53,6 +53,36 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Định Mức 1</label>
+                            <div class="ui right labeled fluid input">
+                                <div class="ui label">|||</div>
+                                <input id="txtNorm1" name="Norm" type="number" />
+                                <div class="ui basic label" id="Norm1"></div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Định Mức 2</label>
+                            <div class="ui right labeled fluid input">
+                                <div class="ui label">|||</div>
+                                <input id="txtNorm2" name="Norm" type="number" />
+                                <div class="ui basic label" id="Norm2"></div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Định Mức 3</label>
+                            <div class="ui right labeled fluid input">
+                                <div class="ui label">|||</div>
+                                <input id="txtNorm3" name="Norm" type="number" />
+                                <div class="ui basic label" id="Norm3"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="field">
                         <div class="field">
                             <label>Ghi Chú</label>
@@ -60,6 +90,16 @@
 
                         </div>
                     </div>
+                    <div class="field">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input id="chkIsmanage" type="checkbox" checked="checked" name="newsletter" onchange="return onChangeIsManage()" />
+                                <label id="lbQLTK" class="coloring red">Mặt Hàng Quản Lý Tồn Kho</label>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="row">
                         <div class="sixteen wide column">
@@ -132,30 +172,33 @@
     <script type="text/javascript">
         var divContentUnitCount;
         var DataComboTypeUnitCount; // data don vi tinh
+        var DataComboTypeUnitCountDefault; // data don vi tinh
         var DataComboTypeProduct; // Data loai san pham
         var DataunitCountChoosen;
-
+        var DataunitCountChoosenInitialize;
 
         $(document).ready(function () {
+
             divContentUnitCount = $("#TableUnitCount").clone();
             document.getElementById("textShowMessage").innerHTML = "";
             DataComboTypeProduct = ([<%=_DataComboTypeProduct%>][0]);
             DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
+            DataComboTypeUnitCountDefault = ([<%=_DataComboTypeUnitCount%>][0]);
 
             DataunitCountChoosen = ([<%=_DataunitCountChoosen%>][0]) === undefined ? [] : ([<%=_DataunitCountChoosen%>][0]);
-
+            DataunitCountChoosenInitialize = ([<%=_DataunitCountChoosen%>][0]) === undefined ? [] : ([<%=_DataunitCountChoosen%>][0]);
             LoadCombo(DataComboTypeUnitCount, "cbbUnitCountTpye")
-            LoadCombo(DataComboTypeUnitCount, "cbbUnitCountTpyeDefault")
+            LoadCombo(DataComboTypeUnitCountDefault, "cbbUnitCountTpyeDefault")
             LoadCombo(DataComboTypeProduct, "cbbproductType")
             LoadDataUpdate();
         });
         function LoadDataTable() {
-            let _DataunitCountChoosen = DataunitCountChoosen.filter(word => word["state"] == "1");
-         
+
+            DataunitCountChoosen = DataunitCountChoosen.filter(word => word["state"] == "1");
             $('#dtContentUnitCount').DataTable().destroy();
             $("#TableUnitCount").replaceWith(divContentUnitCount.clone());
             var table = $('#dtContentUnitCount').DataTable({
-                data: _DataunitCountChoosen,
+                data: DataunitCountChoosen,
                 info: false,
                 paging: false,
                 ordering: false,
@@ -177,6 +220,15 @@
                 ],
             });
             document.getElementById("dtContentUnitCount").className = "ui celled table";
+            // Load lai don vi tinh
+            var dataunit = DataComboTypeUnitCount;
+            for (var element in DataunitCountChoosen) {
+                let x = DataunitCountChoosen[element]["IDUnit"];
+                dataunit = dataunit.filter(word => word["ID"] != x);
+            }
+            LoadCombo(dataunit, "cbbUnitCountTpye")
+
+
             $('#dtContentUnitCount tbody ').on('click', '.buttonDeleteClass', function (e) {
 
                 e.preventDefault();
@@ -192,6 +244,7 @@
                     var rowData = $('#dtContentUnitCount').DataTable().row(selected_row).data();
                 }
                 else {
+
                     DeleteUnitCount(index);
                 }
 
@@ -200,10 +253,11 @@
         }
 
         function DeleteUnitCount(index) {
-            _DataunitCountChoosen[index].state = "0"
+            DataunitCountChoosen[index].state = "0";
             LoadDataTable();
         }
         function LoadDataUpdate() {
+
             let DataProductMain = ([<%=_DataProductMain%>][0]);
             LoadDataTable();
             if (DataProductMain) {
@@ -212,13 +266,44 @@
                 $("#productType").dropdown("set selected", DataProductMain[0].Type);
                 $("#unitCountTypeDefault").dropdown("set selected", DataProductMain[0].DefaultUnit);
                 $('#txtName').val((DataProductMain[0].Name));
+                $('#txtNorm1').val((DataProductMain[0].N1));
+                $('#txtNorm2').val((DataProductMain[0].N2));
+                $('#txtNorm3').val((DataProductMain[0].N3));
                 $('#txtContent').val((DataProductMain[0].Content));
+                if ((DataProductMain[0].isManage.toString() === "1")) {
+                    $("#chkIsmanage").prop('checked', true);
+                   document.getElementById("lbQLTK").innerHTML = "Mặt Hàng Quản Lý Tồn Kho";
+                }
+                else {
+                    $("#chkIsmanage").prop('checked', false);
+                    document.getElementById("lbQLTK").innerHTML = "";
+                }
+
+
+                let unitName = DataComboTypeUnitCountDefault.filter(word => word["ID"] == DataProductMain[0].Type)[0]["Name"];
+                document.getElementById("Norm1").innerHTML = unitName;
+                document.getElementById("Norm2").innerHTML = unitName;
+                document.getElementById("Norm3").innerHTML = unitName;
             }
         }
         function onchangeCountTypeDefault() {
+            let unitName = $('#unitCountTypeDefault').dropdown('get text');
+            document.getElementById("Norm1").innerHTML = unitName;
+            document.getElementById("Norm2").innerHTML = unitName;
+            document.getElementById("Norm3").innerHTML = unitName;
+            return false;
+        }
+        function onChangeIsManage() {
+            if (document.getElementById("chkIsmanage").checked) {
+                document.getElementById("lbQLTK").innerHTML = "Mặt Hàng Quản Lý Tồn Kho";
+            }
+            else {
+                document.getElementById("lbQLTK").innerHTML = "";
+            }
             return false;
         }
         function ExecuteUnitCount() {
+
             let unitCountTpye = Number($('#unitCountTpye').dropdown('get value')) ? Number($('#unitCountTpye').dropdown('get value')) : 0;
             let unitCountTypeDefault = Number($('#unitCountTypeDefault').dropdown('get value')) ? Number($('#unitCountTypeDefault').dropdown('get value')) : 0;
             let UnitChange = $('#UnitChange').val() ? $('#UnitChange').val() : 0;
@@ -226,12 +311,12 @@
                 document.getElementById("textShowMessage").innerHTML = "Chọn Loại Đơn Vị Tính, Đơn Vị Tính Chuẩn Và Hệ Số Quy Đổi";
             }
             else {
-
                 document.getElementById("textShowMessage").innerHTML = "";
                 var element = {};
-                element.IDUnit = unitCountTpye.toString();
-                element.Number = UnitChange;
                 element.idDetail = "0";
+                element.IDUnit = unitCountTpye.toString();
+                element.Number = UnitChange.toString();
+
                 element.Name = $('#unitCountTpye').dropdown('get text');
                 element.state = "1";
                 DataunitCountChoosen.push(element);
@@ -248,6 +333,36 @@
             data.DefaultUnit = Number($('#unitCountTypeDefault').dropdown('get value')) ? Number($('#unitCountTypeDefault').dropdown('get value')) : 0;
             data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
             data.Name = $('#txtName').val() ? $('#txtName').val() : "";
+            data.N1 = $('#txtNorm1').val() ? $('#txtNorm1').val() : "0";
+            data.N2 = $('#txtNorm2').val() ? $('#txtNorm2').val() : "0";
+            data.N3 = $('#txtNorm3').val() ? $('#txtNorm3').val() : "0";
+            data.isManage = (document.getElementById("chkIsmanage").checked) ? "1" : "0";
+
+
+            // Execute datatable UNIT
+
+            for (var element in DataunitCountChoosen) {
+                let idunit = DataunitCountChoosen[element]["IDUnit"];
+                let currentElement = DataunitCountChoosenInitialize.filter(word => word["IDUnit"] == idunit);
+                if (currentElement == undefined || currentElement == "") // Chua ton tai
+                {
+                    DataunitCountChoosenInitialize.push(DataunitCountChoosen[element]);
+                }
+            }
+
+            for (var element in DataunitCountChoosenInitialize) {
+                let idunit = DataunitCountChoosenInitialize[element]["IDUnit"];
+                let currentElement = DataunitCountChoosen.filter(word => word["IDUnit"] == idunit);
+                if (currentElement == undefined || currentElement == "") // Chua ton tai
+                {
+                    DataunitCountChoosenInitialize[element]["state"] = 0
+                    //  DataunitCountChoosenInitialize= DataunitCountChoosenInitialize.filter(word => word["ID"] != idunit);
+
+                }
+
+            }
+
+
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
 
@@ -255,7 +370,7 @@
                     url: "/Views/WareHouse/pageProductDetail.aspx/ExcuteData",
                     dataType: "json",
                     type: "POST",
-                    data: JSON.stringify({ 'data': JSON.stringify(data), 'dataUnit': JSON.stringify(DataunitCountChoosen) }),
+                    data: JSON.stringify({ 'data': JSON.stringify(data), 'dataUnit': JSON.stringify(DataunitCountChoosenInitialize) }),
                     contentType: 'application/json; charset=utf-8',
                     async: true,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -264,6 +379,7 @@
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
+                            LoadProductAjax();
                         } else {
                             notiError("Lỗi Thao Tác");
                         }

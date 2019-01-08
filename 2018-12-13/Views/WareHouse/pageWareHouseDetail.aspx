@@ -13,14 +13,14 @@
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
 
     <script>
-                              function LoadComboBranchWareHouse() {
-                                  GetDataComboBranch("/Views/WareHouse/pageWareHouseDetail.aspx/LoadComboMain",
-                                      function (Branch) {
-                LoadComboToken(Branch, "BranchWare")
-            });
-               }
-               
-        </script>
+        function LoadComboBranchWareHouse() {
+            GetDataComboBranch("/Views/WareHouse/pageWareHouseDetail.aspx/LoadComboMain",
+                function (Branch) {
+                    LoadComboToken(Branch, "BranchWare")
+                });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -82,7 +82,7 @@
             data.Code = $('#CodeWare').val() ? $('#CodeWare').val() : "";
             data.Name = $('#NameWare').val() ? $('#NameWare').val() : "";
             data.Address = $('#AddressWare').val() ? $('#AddressWare').val() : "";
-            data.BranchID = $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length)/2) ? $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length)/2) : "";
+            data.BranchID = $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length) / 2) ? $('#BranchWare').dropdown('get value').toString().substring(0, ($('#BranchWare').dropdown('get value').toString().length) / 2) : "";
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
@@ -115,7 +115,7 @@
 
 
         $(document).ready(function () {
-              LoadComboBranchWareHouse();
+            LoadComboBranchWareHouse();
             LoadDataUpdateWareHouse();
         });
 
@@ -126,7 +126,7 @@
                 $('#BranchWare').dropdown('set selected', (dataWareHouse[0].BranchID.split(",")));
                 $('#CodeWare').val((dataWareHouse[0].Code));
                 $('#NameWare').val((dataWareHouse[0].Name));
-                 $('#AddressWare').val((dataWareHouse[0].Address));
+                $('#AddressWare').val((dataWareHouse[0].Address));
             }
         }
     </script>
@@ -138,7 +138,7 @@
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
-        <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
 
 </body>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/1_LeftNar.Master" AutoEventWireup="true" CodeBehind="pageInputList.aspx.cs" Inherits="_2018_12_13.Views.WareHouse.pageInputList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/1_LeftNar.Master" AutoEventWireup="true" CodeBehind="pageOutputList.aspx.cs" Inherits="_2018_12_13.Views.WareHouse.pageOutputList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pusher">

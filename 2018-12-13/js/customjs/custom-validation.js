@@ -491,6 +491,13 @@ $('.ui.form3').form({
                 prompt: 'Please enter doctor'
             }]
         },
+        ware: {
+            identifier: 'ware',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter branch'
+            }]
+        },
     }
 });
 

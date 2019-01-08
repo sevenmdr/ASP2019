@@ -115,7 +115,7 @@
                     <i class="dropdown icon"></i>Kho
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Nhập Kho
+                    <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
                     </a>
                     <a class="item" href="/Views/Discount/pageDiscountList.aspx">Xuất Kho 
                     </a>

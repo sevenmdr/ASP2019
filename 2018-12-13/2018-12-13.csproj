@@ -1938,6 +1938,8 @@
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
+    <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
+    <Content Include="Views\WareHouse\pageOutputList.aspx" />
     <Content Include="Views\WareHouse\pageInputList.aspx" />
     <Content Include="Views\WareHouse\pageInputDetail.aspx" />
     <Content Include="Views\WareHouse\pageProductTypeDetail.aspx" />
@@ -1955,7 +1957,6 @@
     <Content Include="Views\WareHouse\pageWareHouseDetail.aspx" />
     <Content Include="Views\WareHouse\pageUnitCountList.aspx" />
     <Content Include="Views\WareHouse\pageWareHouseList.aspx" />
-    <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
     <Content Include="UploadClass\FileUploadHandler.ashx" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -2451,6 +2452,19 @@
     <Compile Include="Views\User\pageUserDetail.aspx.designer.cs">
       <DependentUpon>pageUserDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\WareHouse\pageOutputDetail.aspx.cs">
+      <DependentUpon>pageOutputDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageOutputDetail.aspx.designer.cs">
+      <DependentUpon>pageOutputDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageOutputList.aspx.cs">
+      <DependentUpon>pageOutputList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageOutputList.aspx.designer.cs">
+      <DependentUpon>pageOutputList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\WareHouse\pageInputList.aspx.cs">
       <DependentUpon>pageInputList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2567,13 +2581,6 @@
     </Compile>
     <Compile Include="Views\WareHouse\pageWareHouseList.aspx.designer.cs">
       <DependentUpon>pageWareHouseList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WareHouse\pageOutputDetail.aspx.cs">
-      <DependentUpon>pageOutputDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\WareHouse\pageOutputDetail.aspx.designer.cs">
-      <DependentUpon>pageOutputDetail.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
