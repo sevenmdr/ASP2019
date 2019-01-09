@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bug.txt" />
     <Content Include="Content\components\accordion.css" />
     <Content Include="Content\components\accordion.js" />
     <Content Include="Content\components\accordion.min.css" />
