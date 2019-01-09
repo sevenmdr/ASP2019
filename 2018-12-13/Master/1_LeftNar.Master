@@ -128,6 +128,8 @@
                     </a>
                     <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
+                     <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    </a>
                     <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
                     </a>
                     <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt

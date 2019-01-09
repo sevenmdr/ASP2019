@@ -1,6 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageProductList.aspx.cs" Inherits="_2018_12_13.Views.WareHouse.pageProductList" %>
-
-
 <div class="sixteen wide tablet ten wide computer column">
     <div class="ui segments" style="background-color: white">
         <form class="ui form segment form3" style="height: 65px">

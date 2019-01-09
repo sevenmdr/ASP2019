@@ -1938,6 +1938,7 @@
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
+    <Content Include="Views\WareHouse\pageWareReview.aspx" />
     <Content Include="Views\WareHouse\pageLockWare.aspx" />
     <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
     <Content Include="Views\WareHouse\pageOutputList.aspx" />
@@ -2451,6 +2452,13 @@
     </Compile>
     <Compile Include="Views\User\pageUserDetail.aspx.designer.cs">
       <DependentUpon>pageUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareReview.aspx.cs">
+      <DependentUpon>pageWareReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareReview.aspx.designer.cs">
+      <DependentUpon>pageWareReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\WareHouse\pageLockWare.aspx.cs">
       <DependentUpon>pageLockWare.aspx</DependentUpon>

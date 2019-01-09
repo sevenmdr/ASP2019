@@ -64,11 +64,11 @@
                                             <div style="float: left">
                                                 <div class="ui right disabled labeled fluid input" style="width: 200px">
                                                     <div class="ui label">Mã Code</div>
-                                                    <input id="headerLockCode" type="text" value="" disable />
+                                                    <input id="headerLockCode" type="text" value="" disabled />
                                                     <div class="ui basic label"></div>
                                                 </div>
                                             </div>
-                                            <div style="float: left; width: 200px" class="ui fluid search selection dropdown" id="wareLock">
+                                            <div style="float: left; width: 200px" class="ui fluid search selection dropdown" id="wareLock" onchange="event.preventDefault();return OnChangeWare()">
                                                 <input type="hidden" name="warehouse" />
                                                 <input class="search" autocomplete="off" tabindex="0" />
                                                 <div class="default text">Chọn Kho</div>
@@ -214,11 +214,21 @@
             LoadCombo(DataWare, "cbbWareHouse");
             $("#wareLock").dropdown("refresh");
             $('#wareLock').removeClass("disabled");
-            GetDataLockDetailNew("/Views/WareHouse/pageLockWare.aspx/LoadLockDetailNew", function (data) {
-                dataDetailLock = data;
-                RenderLockDetail(dataDetailLock, "dtContentLockWareDetailBody");
-                document.getElementById("dtContentLockWareDetail").className = "ui celled table";
-            })
+
+            return false;
+        }
+        function OnChangeWare() {
+
+            if (newOrUpdate == "0") {
+                let wareID = Number($('#wareLock').dropdown('get value')) ? Number($('#wareLock').dropdown('get value')) : 0;
+                if (wareID != "0") {
+                    GetDataLockDetailNew("/Views/WareHouse/pageLockWare.aspx/LoadLockDetailNew", wareID, function (data) {
+                        dataDetailLock = data;
+                        RenderLockDetail(dataDetailLock, "dtContentLockWareDetailBody");
+                        document.getElementById("dtContentLockWareDetail").className = "ui celled table";
+                    });
+                }
+            }
             return false;
         }
         function EditLock(CurrentID, Code, WareID) {
@@ -228,7 +238,7 @@
 
             $("#wareLock").dropdown("refresh");
             $("#wareLock").dropdown("set selected", Number(WareID));
-             $('#wareLock').addClass("disabled");
+            $('#wareLock').addClass("disabled");
             document.getElementById("warehouseDetail").style.display = "block";
             dataDetailLock = "";
 
@@ -247,10 +257,9 @@
             return false;
         }
         function ExecuteLock() {
-
             let idWare = Number($('#wareLock').dropdown('get value')) ? Number($('#wareLock').dropdown('get value')) : 0;
             if (idWare == "0") {
-                document.getElementById("textShowMessage").innerHTML = "Chọn Chi Nhánh";
+                document.getElementById("textShowMessage").innerHTML = "Chọn Kho";
             }
             else {
 
