@@ -10,6 +10,6 @@
 namespace _2018_12_13.Views.WareHouse {
     
     
-    public partial class pageLockWareDetail {
+    public partial class pageLockWare {
     }
 }

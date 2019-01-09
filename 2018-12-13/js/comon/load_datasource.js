@@ -852,3 +852,46 @@ function GetDataSourceServiceType(link, fn) {
     })
     return x;
 }
+
+// Load Lock Detail New, and Not New
+
+function GetDataLockDetailNew(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataLockDetail(link, idLock, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "idLock": idLock}),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}

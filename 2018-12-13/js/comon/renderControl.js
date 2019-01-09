@@ -60,7 +60,7 @@ function LoadComboDetail(data, id) {
 
 //RenFoderImage
 function RenFoder(data, id) {
-   // debugger
+    // debugger
     if (data && data.length > 0) {
         var myNode = document.getElementById(id);
         myNode.innerHTML = '';
@@ -130,10 +130,10 @@ function RenScheduleList(data, id) {
 //Render Radio - pageGeneralInfo
 function RenStatusNotYet(id) {
 
-        var myNode = document.getElementById(id);
-        myNode.innerHTML = '';
-        var re = new RegExp(",", 'g');
-        const markup = `
+    var myNode = document.getElementById(id);
+    myNode.innerHTML = '';
+    var re = new RegExp(",", 'g');
+    const markup = `
     ${ `
                                    <div class="step">
                                                 <div class="content">
@@ -151,18 +151,18 @@ function RenStatusNotYet(id) {
                                                 </div>
                                             </div>
 `
-            }
+        }
 `;
-        document.getElementById(id).innerHTML = markup.replace(re, '');
+    document.getElementById(id).innerHTML = markup.replace(re, '');
 
 
 }
 function RenStatusCheckIn(id) {
-   
-        var myNode = document.getElementById(id);
-        myNode.innerHTML = '';
-        var re = new RegExp(",", 'g');
-        const markup = `
+
+    var myNode = document.getElementById(id);
+    myNode.innerHTML = '';
+    var re = new RegExp(",", 'g');
+    const markup = `
     ${ `
                                           <div class="step">
                                                 <div class="content">
@@ -180,18 +180,18 @@ function RenStatusCheckIn(id) {
                                                 </div>
                                             </div>
 `
-            }
+        }
 `;
-        document.getElementById(id).innerHTML = markup.replace(re, '');
-  
+    document.getElementById(id).innerHTML = markup.replace(re, '');
+
 
 }
 function RenStatusCheckOUT(id) {
-  
-        var myNode = document.getElementById(id);
-        myNode.innerHTML = '';
-        var re = new RegExp(",", 'g');
-        const markup = `
+
+    var myNode = document.getElementById(id);
+    myNode.innerHTML = '';
+    var re = new RegExp(",", 'g');
+    const markup = `
     ${ `
                                       <div class="step">
                                                 <div class="content">
@@ -209,11 +209,42 @@ function RenStatusCheckOUT(id) {
                                                 </div>
                                             </div>
 `
-            }
+        }
 `;
-        document.getElementById(id).innerHTML = markup.replace(re, '');
+    document.getElementById(id).innerHTML = markup.replace(re, '');
 
 
 }
 
 
+//Render Table Ware Lock
+function RenderLockDetail(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.ID}</td>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+<td><div class="ui right labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input class="numberLeftDetail" type="number" value=${item.NumberLeft} />
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}

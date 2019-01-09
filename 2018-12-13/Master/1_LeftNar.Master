@@ -28,6 +28,15 @@
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
     <script src="/js/comon/renderControl.js"></script>
+
+
+
+<%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
+    <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">
+    <link href="/plugins/editable/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="/plugins/datatable/dataTables.semanticui.css" />--%>
+
+
     <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
 </head>
 <body>
@@ -119,7 +128,7 @@
                     </a>
                     <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chốt Kho
+                    <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
                     </a>
                     <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
                     </a>
@@ -333,7 +342,13 @@
     <script src="/js/main.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
+
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
 
+
+<%--    <script src="/plugins/jsgrid/jsgrid.js"></script>
+    <script src="/plugins/jsgrid/db.js"></script>
+    <script src="/plugins/editable/mindmup-editabletable.js"></script>
+    <script src="/js/customjs/custom-editable.js"></script>--%>
 </body>
 </html>
