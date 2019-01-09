@@ -47,7 +47,7 @@
                             <label>Giá Tiền</label>
                             <div class="ui right labeled fluid input">
                                 <div class="ui label">$</div>
-                                <input id="txtAmount" name="Amount" type="number" />
+                                <input id="txtAmount" name="discountAmount" type="number" />
                                 <div class="ui basic label">VND</div>
                             </div>
                         </div>
@@ -64,13 +64,13 @@
                                         <div class="ui segment">
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerConsulAmount" name="PerConsulAmount" type="number" />
+                                                <input id="txtPerConsulAmount" name="discountAmount" type="number" onchange="return ExecuteAmountConsult()" />
                                                 <div class="ui basic label">VND</div>
                                             </div>
                                             <div class="ui divider"></div>
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerConsulPercent" name="PerConsulPercent" type="number" />
+                                                <input id="txtPerConsulPercent" name="discountPercent" type="number" onchange="return ExecutePercentConsult()" />
                                                 <div class="ui basic label">%</div>
                                             </div>
                                         </div>
@@ -89,13 +89,13 @@
                                         <div class="ui segment">
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerTreatAmount" name="PerTreatAmount" type="number" />
+                                                <input id="txtPerTreatAmount" name="discountAmount" type="number" onchange="return ExecuteAmountTreat()" />
                                                 <div class="ui basic label">VND</div>
                                             </div>
                                             <div class="ui divider"></div>
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerTreatPercent" name="PerTreatPercent" type="number" />
+                                                <input id="txtPerTreatPercent" name="discountPercent" type="number" onchange="return ExecutePercentTreat()" />
                                                 <div class="ui basic label">%</div>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                     <div class="ui form">
                                         <div class="four fields">
                                             <div class="field">
-                                                <div class="ui fluid search selection dropdown" id="productDetail">
+                                                <div class="ui fluid search selection dropdown" id="productDetail" onchange="LoadComboUnit()">
                                                     <input type="hidden" name="productDetail" />
                                                     <i class="dropdown icon"></i>
                                                     <input class="search" autocomplete="off" tabindex="0" />
@@ -210,24 +210,56 @@
 
         var DataproductChoosen;
         var DataProductChoosenInitialize;
+        function ExecuteAmountConsult() {
+            if (Number($('#txtPerConsulAmount').val()) != 0) {
+                $("#txtPerConsulAmount").attr('name', "discountAmount");
+                $('#txtPerConsulPercent').val(0);
 
+                $("#txtPerConsulPercent").attr('name', "NotVali");
+            }
+        }
+        function ExecutePercentConsult() {
+            if (Number($('#txtPerConsulPercent').val()) != 0) {
+                $("#txtPerConsulPercent").attr('name', "discountPercent");
+                $('#txtPerConsulAmount').val(0);
+                $("#txtPerConsulAmount").attr('name', "NotVali");
+            }
+        }
+        function ExecuteAmountTreat() {
+            if (Number($('#txtPerTreatAmount').val()) != 0) {
+                $("#txtPerTreatAmount").attr('name', "discountAmount");
+                $('#txtPerTreatPercent').val(0);
 
+                $("#txtPerTreatPercent").attr('name', "NotVali");
+            }
+        }
+        function ExecutePercentTreat() {
+            if (Number($('#txtPerTreatPercent').val()) != 0) {
+                $("#txtPerTreatPercent").attr('name', "discountPercent");
+                $('#txtPerTreatAmount').val(0);
+                $("#txtPerTreatAmount").attr('name', "NotVali");
+            }
+        }
+        function LoadComboUnit() {
+            var _DataComboUnitCount = DataComboTypeUnitCount.filter(word => word["Product_ID"] == Number($('#productDetail').dropdown('get value')));
+            LoadCombo(_DataComboUnitCount, "cbbunitCount")
+        }
         $(document).ready(function () {
 
             divContentProductDetail = $("#TableProductDetail").clone();
             document.getElementById("textShowMessage").innerHTML = "";
+             $('#numberProduct').val(1);
+            DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
+                    DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
+                    DataComboProduct = ([<%=_DataComboProduct%>][0]);
 
-           DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
-            DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
-            DataComboProduct = ([<%=_DataComboProduct%>][0]);
-
-            DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
-            DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
+                    DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
+                    DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
 
 
             LoadCombo(DataComboTypeService, "cbbserviceType")
             // Load test unit name
-            LoadCombo(DataComboTypeUnitCount, "cbbunitCount")
+            LoadCombo(DataComboProduct, "cbbproductDetail")
             LoadDataUpdate();
         });
         function LoadDataTable() {
@@ -301,6 +333,10 @@
             let DataProductMain = ([<%=_DataProductMain%>][0]);
             LoadDataTable();
             if (DataProductMain) {
+                $("#txtPerConsulAmount").attr('name', "NotVali");
+                $("#txtPerConsulPercent").attr('name', "NotVali");
+                $("#txtPerTreatAmount").attr('name', "NotVali");
+                $("#txtPerTreatPercent").attr('name', "NotVali");
                 $("#serviceType").dropdown("refresh");
                 $("#serviceType").dropdown("set selected", DataProductMain[0].ServiceType); //ServiceType
 
@@ -345,84 +381,85 @@
             else {
                 document.getElementById("textShowMessage").innerHTML = "";
                 var element = {};
-                element.idProduct =productDetail;
+                element.idProduct = productDetail;
                 element.idUnit = unitCount;
                 element.state = "1";
                 element.idDetail = "0";
                 element.ProductName = $('#productDetail').dropdown('get text');
                 element.Number = unitCount;
                 element.UnitName = $('#unitCount').dropdown('get text');
-          
                 DataproductChoosen.push(element);
                 $('#productDetail').dropdown('clear');
                 $('#unitCount').dropdown('clear');
-                $('#numberProduct').val(0);
+                $('#numberProduct').val(1);
                 LoadDataTable();
             }
 
             return false;
         }
         function ExcuteData() {
-            //var data = new Object();
-            //data.Type = Number($('#serviceType').dropdown('get value')) ? Number($('#serviceType').dropdown('get value')) : 0;
-            //data.DefaultUnit = Number($('#unitCountTypeDefault').dropdown('get value')) ? Number($('#unitCountTypeDefault').dropdown('get value')) : 0;
-            //data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
-            //data.Name = $('#txtName').val() ? $('#txtName').val() : "";
-            //data.N1 = $('#txtNorm1').val() ? $('#txtNorm1').val() : "0";
-            //data.N2 = $('#txtNorm2').val() ? $('#txtNorm2').val() : "0";
-            //data.N3 = $('#txtNorm3').val() ? $('#txtNorm3').val() : "0";
-            //data.isManage = (document.getElementById("chkIsproduct").checked) ? "1" : "0";
+            var data = new Object();
+            data.ServiceType = Number($('#serviceType').dropdown('get value')) ? Number($('#serviceType').dropdown('get value')) : 0;
+            data.PerConsulAmount = $('#txtPerConsulAmount').val() ? $('#txtPerConsulAmount').val() : 0;
+            data.PerConsulPercent = $('#txtPerConsulPercent').val() ? $('#txtPerConsulPercent').val() : 0;
+            data.Amount = $('#txtAmount').val() ? $('#txtAmount').val() : 0;
+            data.PerTreatAmount = $('#txtPerTreatAmount').val() ? $('#txtPerTreatAmount').val() : 0;
+            data.PerTreatPercent = $('#txtPerTreatPercent').val() ? $('#txtPerTreatPercent').val() : 0;
+            data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
+            data.Name = $('#txtName').val() ? $('#txtName').val() : "";
+            data.IsPro = (document.getElementById("chkIsproduct").checked) ? "1" : "0";
 
 
-            //// Execute datatable UNIT
+            // Execute datatable UNIT
 
-            //for (var element in DataproductChoosen) {
-            //    let idunit = DataproductChoosen[element]["IDUnit"];
-            //    let currentElement = DataProductChoosenInitialize.filter(word => word["IDUnit"] == idunit);
-            //    if (currentElement == undefined || currentElement == "") // Chua ton tai
-            //    {
-            //        DataProductChoosenInitialize.push(DataproductChoosen[element]);
-            //    }
-            //}
+            for (var element in DataproductChoosen) {
+                let idunit = DataproductChoosen[element]["idUnit"];
+                let currentElement = DataProductChoosenInitialize.filter(word => word["idUnit"] == idunit);
+                if (currentElement == undefined || currentElement == "") // Chua ton tai
+                {
+                    DataProductChoosenInitialize.push(DataproductChoosen[element]);
+                }
+            }
 
-            //for (var element in DataProductChoosenInitialize) {
-            //    let idunit = DataProductChoosenInitialize[element]["IDUnit"];
-            //    let currentElement = DataproductChoosen.filter(word => word["IDUnit"] == idunit);
-            //    if (currentElement == undefined || currentElement == "") // Chua ton tai
-            //    {
-            //        DataProductChoosenInitialize[element]["state"] = 0
-            //        //  DataProductChoosenInitialize= DataProductChoosenInitialize.filter(word => word["ID"] != idunit);
+            for (var element in DataProductChoosenInitialize) {
+                let idunit = DataProductChoosenInitialize[element]["idUnit"];
+                let currentElement = DataproductChoosen.filter(word => word["idUnit"] == idunit);
+                if (currentElement == undefined || currentElement == "") // Chua ton tai
+                {
+                    DataProductChoosenInitialize[element]["state"] = 0
+                    //  DataProductChoosenInitialize= DataProductChoosenInitialize.filter(word => word["ID"] != idunit);
 
-            //    }
+                }
 
-           // }
+            }
 
+            debugger
 
-            //$('#form3').form('validate form');
-            //if ($('#form3').form('is valid')) {
+            $('#form3').form('validate form');
+            if ($('#form3').form('is valid')) {
 
-            //    $.ajax({
-            //        url: "/Views/WareHouse/pageProductDetail.aspx/ExcuteData",
-            //        dataType: "json",
-            //        type: "POST",
-            //        data: JSON.stringify({ 'data': JSON.stringify(data), 'dataUnit': JSON.stringify(DataProductChoosenInitialize) }),
-            //        contentType: 'application/json; charset=utf-8',
-            //        async: true,
-            //        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //            notiError("Lỗi Hệ Thống");
-            //        },
-            //        success: function (result) {
-            //            if (result.d == "1") {
-            //                notiSuccess();
-            //                LoadProductAjax();
-            //            } else {
-            //                notiError("Lỗi Thao Tác");
-            //            }
-            //        }
-            //    })
-            //    $('#divDetailPopup').modal('hide');
-            //    document.getElementById("divDetailPopup").innerHTML = '';
-            //}
+                $.ajax({
+                    url: "/Views/Service/pageServiceDetail.aspx/ExcuteData",
+                    dataType: "json",
+                    type: "POST",
+                    data: JSON.stringify({ 'data': JSON.stringify(data), 'dataService': JSON.stringify(DataProductChoosenInitialize) }),
+                    contentType: 'application/json; charset=utf-8',
+                    async: true,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        notiError("Lỗi Hệ Thống");
+                    },
+                    success: function (result) {
+                        if (result.d == "1") {
+                            notiSuccess();
+                            LoadServiceAjax();
+                        } else {
+                            notiError("Lỗi Thao Tác");
+                        }
+                    }
+                })
+                $('#divDetailPopup').modal('hide');
+                document.getElementById("divDetailPopup").innerHTML = '';
+            }
             return false;
         }
     </script>

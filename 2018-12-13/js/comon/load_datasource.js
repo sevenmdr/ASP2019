@@ -916,3 +916,45 @@ function GetDataReviewWareHouse(link, wareID, fn) {
     })
     return x;
 }
+
+function GetDataWareHouseExImNor(link, wareID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "wareID": wareID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// load Data Source Service
+function GetDataSourceService(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}

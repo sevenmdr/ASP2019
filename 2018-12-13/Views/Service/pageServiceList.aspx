@@ -15,6 +15,29 @@
                                     <div style="float: right">
                                         <button class="ui blue basic button" data-value="fade up" onclick="return AddNewService()">Thêm Mới</button>
                                     </div>
+                                    <div style="float: right; width: 200px">
+                                        <div class="ui fluid search selection dropdown" id="productlist" onchange="LoadServiceAjax()">
+                                            <input type="hidden" name="ware" />
+                                            <i class="dropdown icon"></i>
+                                            <input class="search" autocomplete="off" tabindex="0" />
+                                            <div class="default text">Sản Phẩm/Dịch Vụ</div>
+                                            <div id="cbbproductlist" class="menu" tabindex="-1">
+                                                <div class="item" data-value="2">Tất Cả</div>
+                                                <div class="item" data-value="1">Sản Phẩm</div>
+                                                <div class="item" data-value="0">Dịch Vụ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="float: right; width: 200px">
+                                        <div class="ui fluid search selection dropdown" id="TypeServiceList" onchange="LoadServiceAjax()">
+                                            <input type="hidden" name="ware" />
+                                            <i class="dropdown icon"></i>
+                                            <input class="search" autocomplete="off" tabindex="0" />
+                                            <div class="default text">Loại Sản Phẩm</div>
+                                            <div id="cbbTypeService" class="menu" tabindex="-1">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -28,10 +51,10 @@
                                         <th style="text-align: center; width: 25px;">STT</th>
                                         <th style="text-align: center">Mã Dịch Vụ</th>
                                         <th style="text-align: center">Tên Dịch Vụ</th>
-                                        <th style="text-align: center">Loại Dịch Vụ</th>
                                         <th style="text-align: center">Giá Tiền</th>
+                                        <th style="text-align: center">Hoa Hồng Tư Vấn</th>
+                                        <th style="text-align: center">Hoa Hồng Điều Trị</th>
                                         <th style="text-align: center">Ghi Chú</th>
-                                        <th style="text-align: center; max-width: 70px;">Là SP</th>
                                         <th style="text-align: center; width: 30px;">Sửa</th>
                                         <th style="text-align: center; width: 30px;">Xóa</th>
                                     </tr>
@@ -45,12 +68,22 @@
     </div>
     <script type="text/javascript">
         var divClone;
-        function LoadProductAjax() {
+        var DataListService
+        function LoadServiceAjax() {
             GetDataSourceProduct("/Views/Service/pageServiceList.aspx/LoadataService", function (data) {
+                if ($('#productlist').dropdown('get value') && $('#productlist').dropdown('get value') != "2") {
+                    DataListService = data.filter(word => word["IsProduct"] == $('#productlist').dropdown('get value'));
+                }
+                else {
+                    DataListService = data;
+                }
+                if ($('#TypeServiceList').dropdown('get value') && $('#TypeServiceList').dropdown('get value') != "0") {
+                    DataListService = DataListService.filter(word => word["ServiceCat_ID"] == $('#TypeServiceList').dropdown('get value'));
+                }
                 $('#dtContent').DataTable().destroy();
                 $("#TableContent").replaceWith(divClone.clone());
                 var table = $('#dtContent').DataTable({
-                    data: data,
+                    data: DataListService,
                     info: false,
                     paging: false,
                     ordering: false,
@@ -59,12 +92,12 @@
                     "columnDefs": [
                         { "visible": false, "targets": 0, "data": "ID" },
                         { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                        { "visible": true, "targets": 2, "data": "Code", width: "50px", "className": "center" },
-                        { "visible": true, "targets": 3, "data": "Name", width: "120px" },
-                        { "visible": true, "targets": 4, "data": "TypeName", width: "250px" },
-                        { "visible": true, "targets": 5, "data": "Amount" },
-                        { "visible": true, "targets": 6, "data": "Note" },
-                        { "visible": true, "targets": 7, "data": "isPro" },
+                        { "visible": true, "targets": 2, "data": "Service_Code", width: "100px", "className": "center" },
+                        { "visible": true, "targets": 3, "data": "Name", width: "400px" },
+                        { "visible": true, "targets": 4, "data": "Amount" , width: "200px"},
+                        { "visible": true, "targets": 5, "data": "PerConsult", width: "200px" },
+                        { "visible": true, "targets": 6, "data": "PerTreat", width: "200px" },
+                        { "visible": true, "targets": 7, "data": "Content" },
                         {
                             "targets": -2,
                             "data": null,
@@ -82,11 +115,10 @@
 
                     ],
                 });
-
                 document.getElementById("dtContent").className = "ui celled table";
                 $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                     var data = table.row($(this).parents('tr')).data();
-                    EditProduct(data["ID"]);
+                    EditService(data["ID"]);
                 });
                 $('#dtContent tbody ').on('click', '.buttonDeleteClass', function () {
                     var data = table.row($(this).parents('tr')).data();
@@ -113,7 +145,7 @@
                 success: function (result) {
                     if (result.d == "1") {
                         notiSuccess();
-                        LoadProductAjax();
+                        LoadServiceAjax();
                     } else {
                         notiError(result.d);
                     }
@@ -123,7 +155,9 @@
         $(document).ready(function () {
 
             divClone = $("#TableContent").clone();
-            LoadProductAjax();
+            LoadServiceAjax();
+                    DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
+        LoadCombo(DataComboTypeService, "cbbTypeService");
         });
         function AddNewService() {
             document.getElementById("divDetailPopup").innerHTML = '';
@@ -131,7 +165,7 @@
             $('#divDetailPopup').modal('show');
             return false;
         }
-        function EditProduct(CurrentID) {
+        function EditService(CurrentID) {
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Service/pageServiceDetail.aspx?CurrentID=" + CurrentID);
             $('#divDetailPopup').modal('show');
@@ -139,6 +173,7 @@
         }
     </script>
 
-    <%--<script src="/dist/semantic.min.js"></script>--%>
-    <%--<script src="/js/comon/load_datasource.js"></script>--%>
+    <script src="/dist/semantic.min.js"></script>
+    <script src="/js/comon/load_datasource.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 </asp:Content>

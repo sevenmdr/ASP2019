@@ -286,3 +286,50 @@ function RenderLockReview(data, id) {
     else { document.getElementById(id).innerHTML = '' }
 
 }
+
+
+
+//Render Table Ware Review
+function RenderImportExportNorm(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.ID}</td>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+
+<td><div class="ui right disabled labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input type="number" value=${item.Number} disabled/>
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+<td><div class="ui right disabled labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input type="number" value=${item.NumberMain} disabled/>
+                                    <div class="ui basic label">${item.UnitMainName}</div>
+                                </div></td>
+
+<td>${item.DateExe}</td>
+<td>${item.TypeName}</td>
+
+
+
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}

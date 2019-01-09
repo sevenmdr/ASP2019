@@ -1938,6 +1938,7 @@
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
+    <Content Include="Views\WareHouse\pageWareImportExportNorm.aspx" />
     <Content Include="Views\WareHouse\pageWareReview.aspx" />
     <Content Include="Views\WareHouse\pageLockWare.aspx" />
     <Content Include="Views\WareHouse\pageOutputDetail.aspx" />
@@ -2452,6 +2453,13 @@
     </Compile>
     <Compile Include="Views\User\pageUserDetail.aspx.designer.cs">
       <DependentUpon>pageUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareImportExportNorm.aspx.cs">
+      <DependentUpon>pageWareImportExportNorm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageWareImportExportNorm.aspx.designer.cs">
+      <DependentUpon>pageWareImportExportNorm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\WareHouse\pageWareReview.aspx.cs">
       <DependentUpon>pageWareReview.aspx</DependentUpon>
