@@ -9,12 +9,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace _2018_12_13.Views.Service
 {
     public class UnitCountDetail
     {
-        public UnitCountDetail(string idUnit, string Number, string name, string state, string idDetail)
+        public UnitCountDetail(string idUnit, float Number, string name, string state, string idDetail)
         {
             this.IDUnit = idUnit;
             this.Name = name;
@@ -24,7 +25,7 @@ namespace _2018_12_13.Views.Service
         }
         public string IDUnit { get; set; }
         public string Name { get; set; }
-        public string Number { get; set; }
+        public float Number { get; set; }
         public string state { get; set; }
         public string idDetail { get; set; }
     }
@@ -50,7 +51,6 @@ namespace _2018_12_13.Views.Service
         public static string _DataComboTypeService { get; set; }
         public static string _DataComboTypeUnitCount { get; set; }
         public static string _DataproductChoosen { get; set; }
-
         public static string _DataProductMain { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -121,6 +121,28 @@ namespace _2018_12_13.Views.Service
             }
 
         }
+        //public static DataTable ToDataTable<T>(this IList<T> data)
+        //{
+        //    PropertyDescriptorCollection props =
+        //    TypeDescriptor.GetProperties(typeof(T));
+        //    DataTable table = new DataTable();
+        //    for (int i = 0; i < props.Count; i++)
+        //    {
+        //        PropertyDescriptor prop = props[i];
+        //        if(prop.Name="Nu,be")
+        //        table.Columns.Add(prop.Name, prop.PropertyType);
+        //    }
+        //    object[] values = new object[props.Count];
+        //    foreach (T item in data)
+        //    {
+        //        for (int i = 0; i < values.Length; i++)
+        //        {
+        //            values[i] = props[i].GetValue(item);
+        //        }
+        //        table.Rows.Add(values);
+        //    }
+        //    return table;
+        //}
 
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data, string dataService)
@@ -130,6 +152,7 @@ namespace _2018_12_13.Views.Service
                 DataService DataMain = JsonConvert.DeserializeObject<DataService>(data);
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 DataTable DataService = new DataTable();
+
                 DataService = JsonConvert.DeserializeObject<DataTable>(dataService);
                 if (_CurrentID == null)
                 {

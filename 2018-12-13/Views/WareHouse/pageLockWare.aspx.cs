@@ -97,6 +97,7 @@ namespace _2018_12_13.Views.WareHouse
             {
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 DataTable DataDetail = new DataTable();
+               
                 DataDetail = JsonConvert.DeserializeObject<DataTable>(dataDetail);
                 if (newOrUpdate == "0")
                 {

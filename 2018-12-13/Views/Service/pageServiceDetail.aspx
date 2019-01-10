@@ -374,7 +374,7 @@
 
             let productDetail = Number($('#productDetail').dropdown('get value')) ? Number($('#productDetail').dropdown('get value')) : 0;
             let unitCount = Number($('#unitCount').dropdown('get value')) ? Number($('#unitCount').dropdown('get value')) : 0;
-            let numberProduct = $('#numberProduct').val() ? $('#numberProduct').val() : 0;
+            let numberProduct = parseFloat($('#numberProduct').val()) ? parseFloat($('#numberProduct').val()) : 0;
             if (productDetail == 0 || unitCount == 0 || numberProduct <= 0) {
                 document.getElementById("textShowMessage").innerHTML = "Chọn Vật Liệu, Đơn Vị Tính Và Số Lượng";
             }
@@ -386,7 +386,7 @@
                 element.state = "1";
                 element.idDetail = "0";
                 element.ProductName = $('#productDetail').dropdown('get text');
-                element.Number = unitCount;
+                element.Number = numberProduct.toString();
                 element.UnitName = $('#unitCount').dropdown('get text');
                 DataproductChoosen.push(element);
                 $('#productDetail').dropdown('clear');
@@ -411,10 +411,9 @@
 
 
             // Execute datatable UNIT
-
             for (var element in DataproductChoosen) {
-                let idunit = DataproductChoosen[element]["idUnit"];
-                let currentElement = DataProductChoosenInitialize.filter(word => word["idUnit"] == idunit);
+                let idunit = DataproductChoosen[element]["idProduct"];
+                let currentElement = DataProductChoosenInitialize.filter(word => word["idProduct"] == idunit);
                 if (currentElement == undefined || currentElement == "") // Chua ton tai
                 {
                     DataProductChoosenInitialize.push(DataproductChoosen[element]);
@@ -422,8 +421,8 @@
             }
 
             for (var element in DataProductChoosenInitialize) {
-                let idunit = DataProductChoosenInitialize[element]["idUnit"];
-                let currentElement = DataproductChoosen.filter(word => word["idUnit"] == idunit);
+                let idunit = DataProductChoosenInitialize[element]["idProduct"];
+                let currentElement = DataproductChoosen.filter(word => word["idProduct"] == idunit);
                 if (currentElement == undefined || currentElement == "") // Chua ton tai
                 {
                     DataProductChoosenInitialize[element]["state"] = 0
@@ -432,8 +431,6 @@
                 }
 
             }
-
-            debugger
 
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {

@@ -31,7 +31,7 @@
 
 
 
-<%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
+    <%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
     <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">
     <link href="/plugins/editable/index.css" rel="stylesheet">
     <link rel="stylesheet" href="/plugins/datatable/dataTables.semanticui.css" />--%>
@@ -128,9 +128,9 @@
                     </a>
                     <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
-                     <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
                     </a>
-                     <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
+                    <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
                     </a>
                     <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
                     </a>
@@ -138,6 +138,21 @@
                     </a>
                 </div>
 
+                <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Marketing
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
+                    </a>
+
+                </div>
 
             </div>
 
@@ -350,7 +365,7 @@
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
 
 
-<%--    <script src="/plugins/jsgrid/jsgrid.js"></script>
+    <%--    <script src="/plugins/jsgrid/jsgrid.js"></script>
     <script src="/plugins/jsgrid/db.js"></script>
     <script src="/plugins/editable/mindmup-editabletable.js"></script>
     <script src="/js/customjs/custom-editable.js"></script>--%>

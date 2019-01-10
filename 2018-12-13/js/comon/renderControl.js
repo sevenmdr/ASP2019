@@ -333,3 +333,31 @@ function RenderImportExportNorm(data, id) {
     else { document.getElementById(id).innerHTML = '' }
 
 }
+
+
+// Render Table Import Excel
+function RenderTableImportExcel(data, id) {
+  
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+
+<td>${item.Name}</td>
+<td>${item.Phone}</td>
+
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}

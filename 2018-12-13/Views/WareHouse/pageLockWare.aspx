@@ -241,7 +241,7 @@
             $('#wareLock').addClass("disabled");
             document.getElementById("warehouseDetail").style.display = "block";
             dataDetailLock = "";
-
+            debugger
             GetDataLockDetail("/Views/WareHouse/pageLockWare.aspx/LoadLockDetail", CurrentID, function (data) {
                 dataDetailLock = data;
                 RenderLockDetail(dataDetailLock, "dtContentLockWareDetailBody");

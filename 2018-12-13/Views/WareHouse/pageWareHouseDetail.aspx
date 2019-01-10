@@ -37,7 +37,7 @@
                     <div class="two fields">
                         <div class="field">
                             <div class="field">
-                                <label>Mã Kho</label>
+                                <label>Mã Kho (5 Ký tự)</label>
                                 <input id="CodeWare" name="codewarehouse" type="text" />
                             </div>
                         </div>

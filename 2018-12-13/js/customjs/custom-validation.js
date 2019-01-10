@@ -201,7 +201,7 @@ $('.ui.form3').form({
                     prompt: 'Please enter exactly 10 characters'
                 },
                 {
-                    type: 'number',
+                    type: 'empty',
                     prompt: 'Please enter number'
                 }
             ]
@@ -498,6 +498,13 @@ $('.ui.form3').form({
                 prompt: 'Please enter branch'
             }]
         },
+        sourceType: {
+            identifier: 'sourceType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter sourceType'
+            }]
+        },
     }
 });
 
@@ -547,7 +554,23 @@ $('.ui.form4').form({
                 type: 'checked',
                 prompt: 'You must agree to the terms and conditions'
             }]
-        }
+        },
+        sourceType: {
+            identifier: 'sourceType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter a sourceType'
+            }]
+        },
+
+        fileUpload: {
+            identifier: 'fileUpload',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter a fileUpload'
+            }]
+        },
+        
     }
 });
 $(".setdata.button").on("click", function () {

@@ -24,6 +24,9 @@ namespace _2018_12_13.Comon
         public static string sys_CodePayment = "PT";
         public static string sys_PassworDefault = "Jarim";
         public static string sys_SMSRemind { get; set; }
+
+
+
         public static void Initalize()
         {
             sys_userid = 1;

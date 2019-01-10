@@ -45,7 +45,7 @@
                     <tr>
                         <th style="text-align: center">ID</th>
                         <th style="text-align: center; width: 25px;">STT</th>
-                        <th style="text-align: center">Mã Sản Phẩm</th>
+                        <th style="text-align: center">MSP</th>
                         <th style="text-align: center">Tên Sản Phẩm</th>
                         <th style="text-align: center">Đơn Vị Tính Chính</th>
                         <th style="text-align: center">Ghi Chú</th>

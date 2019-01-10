@@ -68,7 +68,7 @@
 
                     <div class="two fields">
                         <div class="field">
-                            <label>Phần Trăm ( 1 - 100 )</label>
+                            <label>Số Lượng ( 1 - 100 )</label>
                             <input id="Quanlity" name="numberService" type="number" onchange="ExcuteMoney()" />
                         </div>
                         <div class="field">

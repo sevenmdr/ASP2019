@@ -634,8 +634,12 @@
     <Content Include="img\bg\5.png" />
     <Content Include="img\bg\6.png" />
     <Content Include="img\bg\7.png" />
+    <Content Include="img\ButtonImg\action.png" />
+    <Content Include="img\ButtonImg\checked.png" />
     <Content Include="img\ButtonImg\edit.png" />
     <Content Include="img\ButtonImg\delete.png" />
+    <Content Include="img\ButtonImg\info.png" />
+    <Content Include="img\ButtonImg\recover.png" />
     <Content Include="img\ButtonImg\select.png" />
     <Content Include="img\ButtonImg\location.png" />
     <Content Include="img\ButtonImg\printer.png" />
@@ -1932,6 +1936,16 @@
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Login\Logout.aspx" />
     <Content Include="Views\Login\pageChangePassword.aspx" />
+    <Content Include="Views\Marketing\pageTicketAllByDay.aspx" />
+    <Content Include="Views\Marketing\pageImport.aspx" />
+    <Content Include="Views\Marketing\pageTicketDetail.aspx" />
+    <Content Include="Views\Marketing\pageTicketListRecover.aspx" />
+    <Content Include="Views\Marketing\pageTicketList.aspx" />
+    <Content Include="Views\Marketing\pageTicketGeneral.aspx" />
+    <Content Include="Views\Marketing\pageTicketColorCodeDetail.aspx" />
+    <Content Include="Views\Marketing\pageTicketSourceDetail.aspx" />
+    <Content Include="Views\Marketing\pageTicketColorCodeList.aspx" />
+    <Content Include="Views\Marketing\pageTicketSourceList.aspx" />
     <Content Include="Views\Searching\Searching.aspx" />
     <Content Include="Views\Service\pageServiceDetail.aspx" />
     <Content Include="Views\Service\pageServiceList.aspx" />
@@ -1939,6 +1953,7 @@
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
+    <Content Include="Views\WareHouse\pageLockWareDetail.aspx" />
     <Content Include="Views\WareHouse\pageWareImportExportNorm.aspx" />
     <Content Include="Views\WareHouse\pageWareReview.aspx" />
     <Content Include="Views\WareHouse\pageLockWare.aspx" />
@@ -2407,6 +2422,76 @@
     <Compile Include="Views\Login\pageChangePassword.aspx.designer.cs">
       <DependentUpon>pageChangePassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Marketing\pageTicketAllByDay.aspx.cs">
+      <DependentUpon>pageTicketAllByDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketAllByDay.aspx.designer.cs">
+      <DependentUpon>pageTicketAllByDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageImport.aspx.cs">
+      <DependentUpon>pageImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageImport.aspx.designer.cs">
+      <DependentUpon>pageImport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketDetail.aspx.cs">
+      <DependentUpon>pageTicketDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketDetail.aspx.designer.cs">
+      <DependentUpon>pageTicketDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketListRecover.aspx.cs">
+      <DependentUpon>pageTicketListRecover.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketListRecover.aspx.designer.cs">
+      <DependentUpon>pageTicketListRecover.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketList.aspx.cs">
+      <DependentUpon>pageTicketList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketList.aspx.designer.cs">
+      <DependentUpon>pageTicketList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketGeneral.aspx.cs">
+      <DependentUpon>pageTicketGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketGeneral.aspx.designer.cs">
+      <DependentUpon>pageTicketGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketColorCodeDetail.aspx.cs">
+      <DependentUpon>pageTicketColorCodeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketColorCodeDetail.aspx.designer.cs">
+      <DependentUpon>pageTicketColorCodeDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketSourceDetail.aspx.cs">
+      <DependentUpon>pageTicketSourceDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketSourceDetail.aspx.designer.cs">
+      <DependentUpon>pageTicketSourceDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketColorCodeList.aspx.cs">
+      <DependentUpon>pageTicketColorCodeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketColorCodeList.aspx.designer.cs">
+      <DependentUpon>pageTicketColorCodeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketSourceList.aspx.cs">
+      <DependentUpon>pageTicketSourceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Marketing\pageTicketSourceList.aspx.designer.cs">
+      <DependentUpon>pageTicketSourceList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Searching\Searching.aspx.cs">
       <DependentUpon>Searching.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2454,6 +2539,13 @@
     </Compile>
     <Compile Include="Views\User\pageUserDetail.aspx.designer.cs">
       <DependentUpon>pageUserDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageLockWareDetail.aspx.cs">
+      <DependentUpon>pageLockWareDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WareHouse\pageLockWareDetail.aspx.designer.cs">
+      <DependentUpon>pageLockWareDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\WareHouse\pageWareImportExportNorm.aspx.cs">
       <DependentUpon>pageWareImportExportNorm.aspx</DependentUpon>
@@ -2781,6 +2873,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Teamplate\Teamplate.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

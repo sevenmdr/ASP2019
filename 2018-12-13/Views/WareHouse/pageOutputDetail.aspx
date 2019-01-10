@@ -268,7 +268,7 @@
                 element.NameProduct = $('#product').dropdown('get text');
                 element.UnitCountID = productDetailUnit;
                 element.NameUnit = $('#productDetailUnit').dropdown('get text');
-                element.Number = numberProduct;
+                element.Number = numberProduct.toString();;
                 element.state = "1";
                 element.idDetail = "0";
                 DataProductChoosen.push(element);

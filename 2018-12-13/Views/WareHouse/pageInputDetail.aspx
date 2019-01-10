@@ -320,7 +320,7 @@
                 element.NameSupplier = $('#supplier').dropdown('get text');
                 element.UnitCountID = productDetailUnit;
                 element.NameUnit = $('#productDetailUnit').dropdown('get text');
-                element.Number = numberProduct;
+                element.Number = numberProduct.toString();;
                 element.Amount = amountProduct;
                 element.state = "1";
                 element.idDetail = "0";
