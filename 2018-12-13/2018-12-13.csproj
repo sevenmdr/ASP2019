@@ -1956,6 +1956,7 @@
     <Content Include="Views\Service\pageServiceList.aspx" />
     <Content Include="Views\Service\pageServiceTypeDetail.aspx" />
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
+    <Content Include="Views\Setting\pageSettingGeneral.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
     <Content Include="Views\WareHouse\pageWareImportExportNorm.aspx" />
@@ -2565,6 +2566,13 @@
     <Compile Include="Views\Service\pageServiceTypeList.aspx.designer.cs">
       <DependentUpon>pageServiceTypeList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Setting\pageSettingGeneral.aspx.cs">
+      <DependentUpon>pageSettingGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageSettingGeneral.aspx.designer.cs">
+      <DependentUpon>pageSettingGeneral.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sms\pageSmsDetail.aspx.cs">
       <DependentUpon>pageSmsDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2917,7 +2925,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\" />
     <Folder Include="Models\BindingList\" />
-    <Folder Include="Views\Setting\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

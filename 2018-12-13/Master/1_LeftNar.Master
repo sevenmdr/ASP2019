@@ -159,8 +159,6 @@
                     <i class="dropdown icon"></i>Nhân Viên & User
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Employee/pageTicketList.aspx">Chi Nhánh
-                    </a>
                     <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
                     </a>
                     <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
@@ -170,6 +168,14 @@
                     <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
                     </a>
                     <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    </a>
+                </div>
+                      <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Cấu Hình
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
                     </a>
                 </div>
             </div>
