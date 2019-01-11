@@ -102,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bug.txt" />
+    <Content Include="Views\Report\build\d3.min.js" />
+    <Content Include="Views\Report\build\d3.v3.min.js" />
+    <Content Include="Views\Report\build\nv.d3.css" />
+    <Content Include="Views\Report\build\nv.d3.js" />
+    <Content Include="Views\Report\build\nv.d3.min.css" />
+    <Content Include="Views\Report\build\nv.d3.min.js" />
     <Content Include="Content\components\accordion.css" />
     <Content Include="Content\components\accordion.js" />
     <Content Include="Content\components\accordion.min.css" />
@@ -1951,6 +1957,21 @@
     <Content Include="Views\Permission\pagePermissionGroupControlList.aspx" />
     <Content Include="Views\Permission\pagePermissionGroupPageList.aspx" />
     <Content Include="Views\Permission\pagePermissionPageList.aspx" />
+    <Content Include="Views\Report\Report\images\background.png" />
+    <Content Include="Views\Report\Report\images\body-background.png" />
+    <Content Include="Views\Report\Report\images\bullet.png" />
+    <Content Include="Views\Report\Report\images\hr.png" />
+    <Content Include="Views\Report\Report\images\octocat-logo.png" />
+    <Content Include="Views\Report\Report\lib\colorbrewer.js" />
+    <Content Include="Views\Report\Report\lib\stream_layers.js" />
+    <Content Include="Views\Report\Report\pageReportCustomerSource.aspx" />
+    <Content Include="Views\Report\Report\pageRevenuePerTeleSale.aspx" />
+    <Content Include="Views\Report\Report\pageRevenueTreatment.aspx" />
+    <Content Include="Views\Report\Report\pageRevenueConsultant.aspx" />
+    <Content Include="Views\Report\Report\pageReportOverView.aspx" />
+    <Content Include="Views\Report\Report\pageRevenue.aspx" />
+    <Content Include="Views\Report\Report\stylesheets\pygment_trac.css" />
+    <Content Include="Views\Report\Report\stylesheets\styles.css" />
     <Content Include="Views\Searching\Searching.aspx" />
     <Content Include="Views\Service\pageServiceDetail.aspx" />
     <Content Include="Views\Service\pageServiceList.aspx" />
@@ -1996,6 +2017,9 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="libman.json" />
+    <Content Include="Views\Report\build\nv.d3.js.map" />
+    <Content Include="Views\Report\build\nv.d3.min.css.map" />
+    <Content Include="Views\Report\build\nv.d3.min.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -2532,6 +2556,48 @@
     <Compile Include="Views\Permission\pagePermissionPageList.aspx.designer.cs">
       <DependentUpon>pagePermissionPageList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\Report\pageReportCustomerSource.aspx.cs">
+      <DependentUpon>pageReportCustomerSource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportCustomerSource.aspx.designer.cs">
+      <DependentUpon>pageReportCustomerSource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenuePerTeleSale.aspx.cs">
+      <DependentUpon>pageRevenuePerTeleSale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenuePerTeleSale.aspx.designer.cs">
+      <DependentUpon>pageRevenuePerTeleSale.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenueTreatment.aspx.cs">
+      <DependentUpon>pageRevenueTreatment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenueTreatment.aspx.designer.cs">
+      <DependentUpon>pageRevenueTreatment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenueConsultant.aspx.cs">
+      <DependentUpon>pageRevenueConsultant.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenueConsultant.aspx.designer.cs">
+      <DependentUpon>pageRevenueConsultant.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportOverView.aspx.cs">
+      <DependentUpon>pageReportOverView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportOverView.aspx.designer.cs">
+      <DependentUpon>pageReportOverView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenue.aspx.cs">
+      <DependentUpon>pageRevenue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageRevenue.aspx.designer.cs">
+      <DependentUpon>pageRevenue.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Searching\Searching.aspx.cs">
       <DependentUpon>Searching.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2924,8 +2990,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\" />
+    <Folder Include="ChartJS\" />
     <Folder Include="Models\BindingList\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

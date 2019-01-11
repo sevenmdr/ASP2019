@@ -361,3 +361,209 @@ function RenderTableImportExcel(data, id) {
     else { document.getElementById(id).innerHTML = '' }
 
 }
+
+
+//Render REport 6 months
+function RenderReportSixMonth(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.Month}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Target}</td>
+                                                <td>${item.UpDown}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render REport Customer Source
+function RenderReportCustomerSource(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.SourceName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.NewCustomer}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render OverView Receipt
+function RenderReportOverViewReceipt(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.ReceiptName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.CreatedName}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render OverView Import
+function RenderReportOverViewImport(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.CreatedName}</td>
+                                                <td>${item.Amount}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render OverView Payment
+function RenderReportOverViewPayment(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.CustomerName}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.Amount}</td>
+<td>${item.CreatedName}</td>
+<td>${item.SourceName}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Doanh THu TU VAN
+function RenderReportRevenueConsultant(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.GroupName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.Status}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Doanh THu Dieu Tri
+function RenderReportRevenueTreatment(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.GroupName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.Status}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Report Telesale
+function RenderReportTeleSale(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.NumTicketCreated}</td>
+                                                <td>${item.NumTicketExecute}</td>
+                                                <td>${item.NumAppCreated}</td>
+                                                <td>${item.NumAppChecked}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}

@@ -1148,3 +1148,139 @@ function GetDataPermissionGroupControlList(link, fn) {
     })
     return x;
 }
+
+////////////////////////REPORT
+//....Revenue
+function GetRevenueBranch(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//....Customer Source
+function GetRevenueCustomerSource(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//....OverView
+function GetReportOverView(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"],JSON.parse(data.d)["Table3"]);
+        }
+    })
+    return x;
+}
+/// .... Doanh THu TU Van
+function GetRevenueConsultant(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+/// .... Doanh THu Dieu Tri
+function GetRevenueTreatment(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+/// .... Doanh THu Dieu Tri
+function GetReportTeleSale(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}

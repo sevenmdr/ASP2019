@@ -170,7 +170,7 @@
                     <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
                     </a>
                 </div>
-                      <div class="title item">
+                <div class="title item">
                     <i class="dollar sign icon titleIcon icon"></i>
                     <i class="dropdown icon"></i>Cấu Hình
                 </div>
@@ -178,6 +178,29 @@
                     <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
                     </a>
                 </div>
+
+
+                <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Report
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
+                    </a>
+
+                    <a class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    </a>
+                </div>
+
+
             </div>
 
 
@@ -338,7 +361,7 @@
                             </div>
                         </div>--%>
                         <div class="ui dropdown item">
-                            <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px"/>
+                            <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px" />
 
                             <div class="menu">
                                 <a class="item" href="/Error/index.html">Thư Cá Nhân</a>
@@ -362,7 +385,7 @@
         </div>
     </div>
     <script>
-         var circleAvatar = ("<%=_circleAvatar %>");
+        var circleAvatar = ("<%=_circleAvatar %>");
         $('#divDetailPopup').modal({
             autofocus: false
         });
@@ -411,9 +434,6 @@
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
 
 
-    <%--    <script src="/plugins/jsgrid/jsgrid.js"></script>
-    <script src="/plugins/jsgrid/db.js"></script>
-    <script src="/plugins/editable/mindmup-editabletable.js"></script>
-    <script src="/js/customjs/custom-editable.js"></script>--%>
+
 </body>
 </html>
