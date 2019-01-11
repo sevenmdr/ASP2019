@@ -1946,6 +1946,11 @@
     <Content Include="Views\Marketing\pageTicketSourceDetail.aspx" />
     <Content Include="Views\Marketing\pageTicketColorCodeList.aspx" />
     <Content Include="Views\Marketing\pageTicketSourceList.aspx" />
+    <Content Include="Views\Permission\pagePermissionControlList.aspx" />
+    <Content Include="Views\Permission\pagePermissionGeneral.aspx" />
+    <Content Include="Views\Permission\pagePermissionGroupControlList.aspx" />
+    <Content Include="Views\Permission\pagePermissionGroupPageList.aspx" />
+    <Content Include="Views\Permission\pagePermissionPageList.aspx" />
     <Content Include="Views\Searching\Searching.aspx" />
     <Content Include="Views\Service\pageServiceDetail.aspx" />
     <Content Include="Views\Service\pageServiceList.aspx" />
@@ -2490,6 +2495,41 @@
     </Compile>
     <Compile Include="Views\Marketing\pageTicketSourceList.aspx.designer.cs">
       <DependentUpon>pageTicketSourceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionControlList.aspx.cs">
+      <DependentUpon>pagePermissionControlList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionControlList.aspx.designer.cs">
+      <DependentUpon>pagePermissionControlList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGeneral.aspx.cs">
+      <DependentUpon>pagePermissionGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGeneral.aspx.designer.cs">
+      <DependentUpon>pagePermissionGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGroupControlList.aspx.cs">
+      <DependentUpon>pagePermissionGroupControlList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGroupControlList.aspx.designer.cs">
+      <DependentUpon>pagePermissionGroupControlList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGroupPageList.aspx.cs">
+      <DependentUpon>pagePermissionGroupPageList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionGroupPageList.aspx.designer.cs">
+      <DependentUpon>pagePermissionGroupPageList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionPageList.aspx.cs">
+      <DependentUpon>pagePermissionPageList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Permission\pagePermissionPageList.aspx.designer.cs">
+      <DependentUpon>pagePermissionPageList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Searching\Searching.aspx.cs">
       <DependentUpon>Searching.aspx</DependentUpon>

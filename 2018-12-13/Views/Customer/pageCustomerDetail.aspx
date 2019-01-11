@@ -74,7 +74,8 @@
 
     <div class="image content">
         <div class="ui massive image">
-            <img id="avatarCustomerUpload" src="#" style="width: 100%; height: 150px" />
+
+                <img id="avatarCustomerUpload" class="ui mini circular image" src="#" alt="label-image" style="width: 150px; height: 150px"/>
             <div>&nbsp</div>
             <div class="btn btn-success upload-btn-wrapper">
                 <button class="btn" style="width: 100%">3Mp ( png ,jpg )</button>

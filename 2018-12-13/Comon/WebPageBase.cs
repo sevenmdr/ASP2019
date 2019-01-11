@@ -8,6 +8,8 @@ namespace _2018_12_13.Comon
 {
     public partial class WebPageBase : System.Web.UI.Page
     {
+
+        public static string PermissionTableControl = Global.sys_permissionTable;
         protected override void OnInit(EventArgs e)
         {
             if (Session.GetCurrentUser() == null)

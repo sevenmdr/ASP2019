@@ -92,6 +92,14 @@
         var DataComboStatus = "";
         var DataComboSource = "";
         $(document).ready(function () {
+ 
+             let persmisionTable = ([<%=PermissionTableControl%>][0]);
+            persmisionTable = persmisionTable.filter(word => word["PageName"] == getPageName(window.location.pathname));
+            let index = 0;
+            for (index; index < persmisionTable.length; index++) {
+                $("#" + persmisionTable[index]["ControlID"]).hide();
+            }
+
             $(".flatpickr").flatpickr({
                 dateFormat: 'd-m-Y',
                 enableTime: false,

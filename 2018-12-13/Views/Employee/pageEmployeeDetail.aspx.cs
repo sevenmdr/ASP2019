@@ -15,9 +15,10 @@ namespace _2018_12_13.Views.Employee
         public static string _CurrentID { get; set; }
         public static string _dataEmployeeList { get; set; }
 
-
+        public static string _defaultAvatar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            _defaultAvatar = Comon.Global.sys_DefaultAvatar;
             var curr = Request.QueryString["CurrentID"];
             if (curr != null)
             {
@@ -90,6 +91,7 @@ namespace _2018_12_13.Views.Employee
                      "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                      "@Group_ID", SqlDbType.Int, DataMain.Group,
                      "@State_ID", SqlDbType.Int, DataMain.State,
+                       "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                      "@Brithday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
@@ -108,6 +110,7 @@ namespace _2018_12_13.Views.Employee
                       "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                       "@Group_ID", SqlDbType.Int, DataMain.Group,
                       "@State_ID", SqlDbType.Int, DataMain.State,
+                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                       "@Brithday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                          "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
@@ -135,6 +138,6 @@ namespace _2018_12_13.Views.Employee
         public int State { get; set; }
         public int Group { get; set; }
         public string Birthday { get; set; }
-
+        public string Avatar { get; set; }
     }
 }

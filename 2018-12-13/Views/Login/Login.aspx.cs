@@ -34,11 +34,13 @@ namespace _2018_12_13.Views.Login
                     });
                     Label1.Text = "";
                     Response.Redirect("~/Views/Appointment/pageAppointmentInDay.aspx");
+                  
                 }
                 else
                 {
                     Label1.Text = "Sai Username , Password";
                     Session.SetCurrentUser(null);
+ 
                 }
             }
         }

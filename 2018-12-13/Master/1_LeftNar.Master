@@ -47,6 +47,7 @@
         <div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
             <a class="item logo" href="/Views/Login/Logout.aspx">
                 <img src="/img/logo.png" alt="stagblogo" /><img src="/img/thumblogo.png" alt="stagblogo" class="displaynone" />
+
             </a>
             <div class="ui accordion inverted">
                 <div class="title item">
@@ -151,10 +152,34 @@
                     </a>
                     <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
                     </a>
-
                 </div>
 
+                <div class="title item">
+                    <i class="dollar sign icon titleIcon icon"></i>
+                    <i class="dropdown icon"></i>Nhân Viên & User
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Employee/pageTicketList.aspx">Chi Nhánh
+                    </a>
+                    <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
+                    </a>
+                    <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
+                    </a>
+                    <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    </a>
+                </div>
             </div>
+
+
+
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
 
             <div class="ui dropdown item displaynone scrolling">
                 <span>Lịch Hẹn</span>
@@ -307,7 +332,8 @@
                             </div>
                         </div>--%>
                         <div class="ui dropdown item">
-                            <img class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" />
+                            <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px"/>
+
                             <div class="menu">
                                 <a class="item" href="/Error/index.html">Thư Cá Nhân</a>
                                 <a class="item" href="/Error/index.html">Thông Tin Cá Nhân</a>
@@ -330,6 +356,7 @@
         </div>
     </div>
     <script>
+         var circleAvatar = ("<%=_circleAvatar %>");
         $('#divDetailPopup').modal({
             autofocus: false
         });
@@ -354,6 +381,19 @@
             $("#divDetailPopup").load("/Views/Customer/pageCustomerDetail.aspx");
             $('#divDetailPopup').modal('show');
         }
+        // Using all page
+        function getPageName(url) {
+            var index = url.lastIndexOf("/") + 1;
+            var filenameWithExtension = url.substr(index);
+            var filename = filenameWithExtension.split(".")[0];
+            return filename;
+        }
+
+        $(document).ready(function () {
+
+            $('#avatarofUserCircle').attr('src', 'data:image/png;base64, ' + circleAvatar);
+
+        });
     </script>
 
     <script src="/dist/semantic.min.js"></script>
