@@ -193,6 +193,15 @@ $('.ui.form3').form({
                 }
             ]
         },
+        phonenumberNotMain: {
+            identifier: 'phonenumberNotMain',
+            rules: [
+                {
+                    type: 'number',
+                    prompt: 'Please enter number'
+                }
+            ]
+        },
         codewarehouse: {
             identifier: 'codewarehouse',
             rules: [
@@ -505,6 +514,16 @@ $('.ui.form3').form({
                 prompt: 'Please enter sourceType'
             }]
         },
+        url: {
+            identifier: 'url',
+            rules: [
+                {
+                    type: 'url',
+                    prompt: 'Please enter a url'
+                }
+            ]
+        },
+
     }
 });
 

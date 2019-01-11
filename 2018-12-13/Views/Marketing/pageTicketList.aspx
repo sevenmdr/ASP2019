@@ -185,7 +185,9 @@
 
             })
         }
-        function ExecuteTicket(TicketID, CustomerID) {
+  function ExecuteTicket(TicketID, CustomerID) {
+            window.open("/Views/Marketing/pageTicketAction.aspx?CustomerID="+CustomerID + "&TicketID="+TicketID);
+
 
         }
         function CreateTicket() {

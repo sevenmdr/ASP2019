@@ -18,6 +18,17 @@ namespace _2018_12_13.Views.Customer
         protected string Phone { get; set; }
         protected string Avatar { get; set; }
         protected string defaultAvatar { get; set; }
+
+        protected string facebookurl { get; set; }
+        protected string instgramurl { get; set; }
+
+
+        protected string totalmoneyRaise { get; set; }
+
+        protected string totalmoneyPaid { get; set; }
+
+        protected string totalmoneyLeft { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var v = Request.QueryString["CustomerID"];
@@ -46,12 +57,18 @@ namespace _2018_12_13.Views.Customer
                 CustCode = ds.Tables["Table"].Rows[0]["Cust_Code"].ToString();
                 Phone = ds.Tables["Table"].Rows[0]["Phone1"].ToString();
                 Avatar = ds.Tables["Table"].Rows[0]["Avatar"].ToString();
+                facebookurl = ds.Tables["Table"].Rows[0]["facebookurl"].ToString();
+                instgramurl = ds.Tables["Table"].Rows[0]["instgramurl"].ToString();
+                totalmoneyRaise = ds.Tables["Table"].Rows[0]["TOTALPRICE"].ToString();
+                totalmoneyPaid = ds.Tables["Table"].Rows[0]["TOTALPAID"].ToString();
+                totalmoneyLeft =(Convert.ToDecimal(totalmoneyRaise) -Convert.ToDecimal(totalmoneyPaid)).ToString();
             }
             else
             {
                 CustName = "";
                 CustCode = "";
-                Phone = ""; Avatar = "";
+                Phone = ""; Avatar = ""; instgramurl = ""; facebookurl = "";
+                totalmoneyRaise = ""; totalmoneyPaid = ""; totalmoneyLeft = "";
             }
 
         }

@@ -64,7 +64,6 @@
                                             <th style="text-align: center">Tên Nhân Viên</th>
                                             <th style="text-align: center">Bộ Phận</th>
                                             <th style="text-align: center">Doanh Thu</th>
-                                            <th style="text-align: center">Ngày</th>
                                             <th style="text-align: center">Tình Trạng</th>
                                         </tr>
                                     </thead>

@@ -21,15 +21,6 @@
                                 <div style="float: left; width: 100px">
                                     <input id="dateTo" class="flatpickr" type="text" placeholder="Date To .." />
                                 </div>
-                                <div style="float: right; width: 200px">
-                                    <div class="ui fluid search selection dropdown" id="branch">
-                                        <input type="hidden" name="branch" />
-                                        <input class="search" autocomplete="off" tabindex="0" />
-                                        <div class="default text">Chọn Chi Nhánh</div>
-                                        <div id="cbbBranch" class="menu" tabindex="-1">
-                                        </div>
-                                    </div>
-                                </div>
                                 <div style="float: left;">&nbsp</div>
                                 <div style="float: left;">
                                     <div class="ui blue button" onclick="event.preventDefault();return LoadData()">Xem</div>
@@ -101,7 +92,7 @@
             var dateTo = $('#dateTo').val() ? $('#dateTo').val() : new Date();
 
             let branchID = Number($('#branch').dropdown('get value')) ? Number($('#branch').dropdown('get value')) : 0;
-            GetReportTeleSale("/Views/Report/Report/pageRevenuePerTeleSale.aspx/LoadData", dateFrom, dateTo, branchID.toString(), function (data) {
+            GetReportTeleSale("/Views/Report/Report/pageRevenuePerTeleSale.aspx/LoadData", dateFrom, dateTo, function (data) {
                 RenderReportTeleSale(data, "dtContentTeleSale");
             
 

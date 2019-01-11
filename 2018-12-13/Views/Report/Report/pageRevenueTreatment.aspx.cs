@@ -30,10 +30,16 @@ namespace _2018_12_13.Views.Report.Report
         [System.Web.Services.WebMethod]
         public static string LoadData(string dateFrom, string dateTo, string branchID)
         {
-            // STT,EmployeeName,GroupName,Amount,Date,Status
+            // STT,EmployeeName,GroupName,Amount,Status
 
             DataTable dt = new DataTable();
-          
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Report_RevenueTreat]", CommandType.StoredProcedure
+                  , "@dateFrom", SqlDbType.DateTime, Convert.ToDateTime(dateFrom)
+                  , "@dateTo", SqlDbType.DateTime, Convert.ToDateTime(dateTo)
+                  , "@branchID", SqlDbType.Int, Convert.ToInt32(branchID));
+            }
             if (dt != null)
             {
                 return JsonConvert.SerializeObject(dt);

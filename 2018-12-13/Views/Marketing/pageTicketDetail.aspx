@@ -108,14 +108,14 @@
         function LoadDataUpdate() {
             let TicketMainDetail = ([<%=_TicketMainDetail%>][0]);
             if (TicketMainDetail) {
-                $('#txtNameTicket').val((DataInputMain[0].Name));
-                $('#Phone1').val((DataInputMain[0].Phone1));
-                $('#Email1').val((DataInputMain[0].Email1));
-                $('#txtContent').val((DataInputMain[0].Content));
+                $('#txtNameTicket').val((TicketMainDetail[0].Name));
+                $('#Phone1').val((TicketMainDetail[0].Phone));
+                $('#Email1').val((TicketMainDetail[0].Email));
+                $('#txtContent').val((TicketMainDetail[0].Content));
                 $("#sourceType").dropdown("refresh");
-                $("#sourceType").dropdown("set selected", DataInputMain[0].Source);
+                $("#sourceType").dropdown("set selected", TicketMainDetail[0].Source);
                  $("#genderType").dropdown("refresh");
-                $("#genderType").dropdown("set selected", DataInputMain[0].Gender);
+                $("#genderType").dropdown("set selected", TicketMainDetail[0].Gender);
 
             }
         }
@@ -146,6 +146,7 @@
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
+                            location.reload();
                         } else {
                             notiError("Lỗi Thao Tác");
                         }

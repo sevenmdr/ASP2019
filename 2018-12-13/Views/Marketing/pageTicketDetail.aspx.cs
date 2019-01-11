@@ -64,8 +64,8 @@ namespace _2018_12_13.Views.Marketing
                 DataTable dt = new DataTable();
                 using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
                 {
-                    //dt = confunc.ExecuteDataSet("[YYY_sp_Product_Reciept_LoadDetail]", CommandType.StoredProcedure,
-                    //  "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
+                    dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_LoadDetail]", CommandType.StoredProcedure,
+                      "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
                 }
                 _TicketMainDetail = JsonConvert.SerializeObject(dt);
             }
@@ -104,7 +104,7 @@ namespace _2018_12_13.Views.Marketing
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
-                        connFunc.ExecuteDataTable("[YYY_sp_Customer_Ticket]", CommandType.StoredProcedure,
+                        connFunc.ExecuteDataTable("[YYY_sp_Ticket_Update]", CommandType.StoredProcedure,
                       "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
                       "@Email1", SqlDbType.NVarChar, DataMain.Email.Replace("'", "").Trim(),
                       "@Phone1", SqlDbType.NVarChar, DataMain.Phone.Replace("'", "").Trim(),

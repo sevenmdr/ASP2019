@@ -131,6 +131,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
     <script>
+        var TicketID = 0;
         function ChangeTypeScheule() {
 
             if (Number($('#TypeSchedule').dropdown('get value')) == 1) {
@@ -153,7 +154,6 @@
             data.Doctor_ID = Number($('#Doctor_ID').dropdown('get value')) ? Number($('#Doctor_ID').dropdown('get value')) : 0;
             data.TypeSchedule = Number($('#TypeSchedule').dropdown('get value')) ? Number($('#TypeSchedule').dropdown('get value')) : 0;
             data.ServiceCare_ID = $('#tokenServiceCare').dropdown('get value').toString().substring(0, ($('#tokenServiceCare').dropdown('get value').toString().length) / 2) ? $('#tokenServiceCare').dropdown('get value').toString().substring(0, ($('#tokenServiceCare').dropdown('get value').toString().length) / 2) : "";
-            data.Customer_ID = 7;
             data.Note = $('#NoteSchedule').val() ? $('#NoteSchedule').val() : "";
             data.Date_from = $('#Date_from').val() ? $('#Date_from').val() : "";
 
@@ -196,7 +196,8 @@
 
         });
         function LoadDataUpdate() {
-
+            TicketID = (<%=_TicketID%>);
+            
             if (dataInfo) {
                 $("#branch_ID ").dropdown("refresh");
                 $("#branch_ID ").dropdown("set selected", dataInfo.Branch_ID);
@@ -215,6 +216,11 @@
                 //   $('#tokenServiceCare ').val();
                 $('#NoteSchedule').val((dataInfo.Content));
                 $(".flatpickr").flatpickr({ defaultDate: dataInfo.Date_From });
+            }
+            else {
+                $("#TypeSchedule ").dropdown("refresh");
+                $("#TypeSchedule ").dropdown("set selected", 1);
+                $("#TypeSchedule ").addClass("disabled");
             }
         }
 

@@ -16,6 +16,7 @@ namespace _2018_12_13.Views.Sms
         private static int Type { get; set; }
         protected static int AppID { get; set; }
         protected static int MasterID { get; set; }
+        protected static int TicketID { get; set; }
         static string Phone;
         static string Cust_Code = "";
         protected void Page_Load(object sender, EventArgs e)
@@ -26,8 +27,10 @@ namespace _2018_12_13.Views.Sms
                 var typeid = Request.QueryString["Type"];
                 var appid = Request.QueryString["AppID"];
                 var masterid = Request.QueryString["MasterID"];
+                var ticketID = Request.QueryString["TicketID"];
                 CustomerID = Convert.ToInt32(cusID == null ? "0" : cusID.ToString());
                 Type = Convert.ToInt32(typeid == null ? "0" : typeid.ToString());
+                TicketID = Convert.ToInt32(ticketID == null ? "0" : ticketID.ToString());
                 AppID = Convert.ToInt32(appid == null ? "0" : appid.ToString());
                 MasterID = Convert.ToInt32(masterid == null ? "0" : masterid.ToString());
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", string.Format("ChaneUpdateData('{0}')", Loadata(CustomerID)), true);
@@ -40,7 +43,7 @@ namespace _2018_12_13.Views.Sms
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 dt = confunc.ExecuteDataTable("[YYY_sp_Customer_LoadPhone]", CommandType.StoredProcedure,
-                  "@CurrentID", SqlDbType.Int, Convert.ToInt32(id));
+                  "@CurrentID", SqlDbType.Int, Convert.ToInt32(id), "@ticketID", SqlDbType.Int, Convert.ToInt32(TicketID));
             }
             if (dt != null)
             {

@@ -75,7 +75,7 @@
     <div class="image content">
         <div class="ui massive image">
 
-                <img id="avatarCustomerUpload" class="ui mini circular image" src="#" alt="label-image" style="width: 150px; height: 150px"/>
+            <img id="avatarCustomerUpload" class="ui mini circular image" src="#" alt="label-image" style="width: 150px; height: 150px" />
             <div>&nbsp</div>
             <div class="btn btn-success upload-btn-wrapper">
                 <button class="btn" style="width: 100%">3Mp ( png ,jpg )</button>
@@ -98,8 +98,26 @@
                                 <input id="Phone1" name="phonenumber" type="text" />
                             </div>
                             <div class="field">
+                                <label>Điện Thoại ( 10 Ký Tự Số )</label>
+                                <input id="Phone2" name="phonenumberNotMain" type="text" />
+                            </div>
+
+                        </div>
+                        <div class="field">
+                            <div class="field">
                                 <label>Email</label>
                                 <input id="Email1" name="email" type="text" />
+
+                            </div>
+                        </div>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Instagram</label>
+                                <input id="instgramurl" name="instgramurl" type="text" />
+                            </div>
+                            <div class="field">
+                                <label>Facebook</label>
+                                <input id="facebookurl" name="facebookurl" type="text" />
 
                             </div>
                         </div>
@@ -174,9 +192,14 @@
             data.Email1 = $('#Email1').val() ? $('#Email1').val() : "";
             data.Address = $('#Address').val() ? $('#Address').val() : "";
             data.Phone1 = $('#Phone1').val() ? $('#Phone1').val() : "";
+            data.Phone2 = $('#Phone2').val() ? $('#Phone2').val() : "";
+
             data.Name = $('#Name').val() ? $('#Name').val() : "";
             data.Birthday = $('#Birthday').val() ? $('#Birthday').val() : "";
             data.Avatar = avatarString;
+            data.instgramurl = $('#instgramurl').val() ? $('#instgramurl').val() : "";
+            data.facebookurl = $('#facebookurl').val() ? $('#facebookurl').val() : "";
+
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
@@ -213,7 +236,7 @@
             });
         }
         $(document).ready(function () {
-     
+
             $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
             LoadComboCustomer();
             $(".flatpickr").flatpickr({
@@ -257,6 +280,9 @@
                 $('#Email1').val((dataInfo[0].Email1));
                 $('#Address').val((dataInfo[0].Address));
                 $('#Phone1').val((dataInfo[0].Phone1));
+                $('#Phone2').val((dataInfo[0].Phone2));
+                $('#instgramurl').val((dataInfo[0].instgramurl));
+                $('#facebookurl').val((dataInfo[0].facebookurl));
                 if (dataInfo[0].Avatar == '' || dataInfo[0].Avatar == undefined) {
                     $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
                 }

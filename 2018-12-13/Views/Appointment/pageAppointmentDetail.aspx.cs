@@ -13,13 +13,17 @@ namespace _2018_12_13.Views.Appointment
     {
         private static int id { get; set; }
         private static int CustomerID { get; set; }
+
+        public static int _TicketID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             var v = Request.QueryString["id"];
             if (Request.QueryString["CustomerID"] != null)
             {
                 var cusID = Request.QueryString["CustomerID"];
+                var _ticketID = Request.QueryString["TicketID"];
                 CustomerID = Convert.ToInt32(cusID == null ? "0" : cusID.ToString());
+                _TicketID = Convert.ToInt32(_ticketID == null ? "0" : _ticketID.ToString());
             }
             id = Convert.ToInt32(v == null ? "0" : v.ToString());
          //   id = 95;
@@ -106,6 +110,7 @@ namespace _2018_12_13.Views.Appointment
                          "@Customer_ID", SqlDbType.Int, CustomerID,
                          "@branch_ID", SqlDbType.Int, DataMain.branch_ID,
                          "@Doctor_ID", SqlDbType.Int, DataMain.Doctor_ID,
+                         "@TicketID", SqlDbType.Int, _TicketID,
                          "@TypeSchedule", SqlDbType.Int, DataMain.TypeSchedule,
                          "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                          "@Note", SqlDbType.NVarChar, DataMain.Note.Replace("'", ""),

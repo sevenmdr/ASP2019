@@ -28,11 +28,17 @@ namespace _2018_12_13.Views.Report.Report
         }
 
         [System.Web.Services.WebMethod]
-        public static string LoadData(string dateFrom, string dateTo, string branchID)
+        public static string LoadData(string dateFrom, string dateTo)
         {
             // STT,EmployeeName,NumTicketCreated,NumTicketExecute,NumAppCreated,NumAppChecked
-
             DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Report_PerTeleSale]", CommandType.StoredProcedure
+                  , "@dateFrom", SqlDbType.DateTime, Convert.ToDateTime(dateFrom)
+                  , "@dateTo", SqlDbType.DateTime, Convert.ToDateTime(dateTo));
+            }
+        
           
             if (dt != null)
             {

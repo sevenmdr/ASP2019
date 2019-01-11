@@ -53,7 +53,7 @@
 
                             <div class="ui  statistic">
                                 <div class="value counter" id="totalReceipt">
-                                    3,952
+                                    0
                                 </div>
                                 <div class="label">
                                     Tổng Chi
@@ -70,7 +70,7 @@
 
                             <div class="ui  statistic">
                                 <div class="value counter" id="totalImport">
-                                    3,952
+                                   0
                                 </div>
                                 <div class="label">
                                     Tổng Tiền Nhập
@@ -86,7 +86,7 @@
 
                             <div class="ui  statistic">
                                 <div class="value counter" id="totalPayment">
-                                    3,952
+                                   0
                                 </div>
                                 <div class="label">
                                     Tổng Thu
@@ -103,7 +103,7 @@
                             <div class="ui  statistic">
 
                                 <div class="value counter" id="totalMain">
-                                    9,582
+                                   0
                                 </div>
                                 <div class="label">
                                     Lời Lỗ
@@ -225,10 +225,11 @@
                 RenderReportOverViewReceipt(datareceipt, "dtContentReceipt");
                 RenderReportOverViewImport(dataImport, "dtContentImport");
                 RenderReportOverViewPayment(dataPayment, "dtContentPayment");
-                document.getElementById("totalReceipt").innerHTML = dataGeneral[0];
-                document.getElementById("totalImport").innerHTML = dataGeneral[0];
-                document.getElementById("totalPayment").innerHTML = dataGeneral[0];
-                document.getElementById("totalMain").innerHTML = dataGeneral[0];
+                
+                document.getElementById("totalReceipt").innerHTML = !dataGeneral[0]?0:dataGeneral[0].totalReceipt;
+                document.getElementById("totalImport").innerHTML = !dataGeneral[0]?0:dataGeneral[0].totalImport;
+                document.getElementById("totalPayment").innerHTML = !dataGeneral[0]?0:dataGeneral[0].totalPayment;
+                document.getElementById("totalMain").innerHTML = !dataGeneral[0]?0:dataGeneral[0].totalMain;
 
             })
         }

@@ -42,7 +42,7 @@ namespace _2018_12_13.Views.Customer
             }
             if (dt != null)
             {
-                _dataInfo= JsonConvert.SerializeObject(dt);
+                _dataInfo = JsonConvert.SerializeObject(dt);
             }
             else
             {
@@ -93,6 +93,7 @@ namespace _2018_12_13.Views.Customer
                      "@Email1", SqlDbType.NVarChar, DataMain.Email1.Replace("'", "").Trim(),
                      "@Address", SqlDbType.NVarChar, DataMain.Address.Replace("'", "").Trim(),
                      "@Phone1", SqlDbType.NVarChar, DataMain.Phone1.Replace("'", "").Trim(),
+                      "@Phone2", SqlDbType.NVarChar, DataMain.Phone2.Replace("'", "").Trim(),
                      "@Branch_ID", SqlDbType.Int, Comon.Global.sys_branchID,
                      "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                      "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
@@ -100,6 +101,8 @@ namespace _2018_12_13.Views.Customer
                      "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                      "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
+                     "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
+                     "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
                    );
@@ -114,12 +117,16 @@ namespace _2018_12_13.Views.Customer
                       "@Email1", SqlDbType.NVarChar, DataMain.Email1.Replace("'", "").Trim(),
                       "@Address", SqlDbType.NVarChar, DataMain.Address.Replace("'", "").Trim(),
                       "@Phone1", SqlDbType.NVarChar, DataMain.Phone1.Replace("'", "").Trim(),
+                      "@Phone2", SqlDbType.NVarChar, DataMain.Phone2.Replace("'", "").Trim(),
+
                       "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                       "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                       "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                       "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
                       "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
+                      "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
+                     "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                          "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                          "@CurrentID", SqlDbType.Int, _CurrentID
@@ -145,6 +152,7 @@ namespace _2018_12_13.Views.Customer
         public string Address { get; set; }
         public string Content { get; set; }
         public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
         public string Name { get; set; }
         public string CustomerID { get; set; }
         public int Gender_ID { get; set; }
@@ -152,5 +160,7 @@ namespace _2018_12_13.Views.Customer
         public int Language_ID { get; set; }
         public string Birthday { get; set; }
         public string Avatar { get; set; }
+        public string instgramurl { get; set; }
+        public string facebookurl { get; set; }
     }
 }

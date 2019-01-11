@@ -6,11 +6,16 @@
 <head runat="server">
     <title>VTTech Solution</title>
     <meta charset="utf-8" />
+
     <link href="/dist/semantic.min.custom.css" rel="stylesheet" />
     <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="IE=10" />
+
 
 </head>
 
@@ -30,16 +35,18 @@
                         <input id="ColorCount" name="name" type="text" />
                     </div>
                     <div class="field">
-                        <label>Mã màu</label>
-                        <input id="NoteColorCount" name="name" type="text" />
-                    </div>
-
-                    <div class="field">
                         <div class="field">
                             <label>Ghi chú</label>
-                            <textarea id="notecolor" name="content"></textarea>
+                            <input id="notecolor" type="text" name="content" />
                         </div>
                     </div>
+                    <div class="field">
+                        <label>Mã màu</label>
+                        <input id="ColorCode" name="name" type="text" />
+
+                    </div>
+
+
 
                 </form>
             </div>
@@ -54,11 +61,14 @@
 
     </div>
 
+
+
     <script type="text/javascript">
         function ExcuteData() {
             var data = new Object();
             data.Name = $('#ColorCount').val() ? $('#ColorCount').val() : "";
-            data.ColorCode = $('#NoteColorCount').val() ? $('#NoteColorCount').val() : "";
+            debugger
+            data.ColorCode = $('#ColorCode').val() ? $('#ColorCode').val() : "";
             data.Note = $('#notecolor').val() ? $('#notecolor').val() : "";
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
@@ -75,7 +85,7 @@
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
-                            LoadUnitAjax();
+                            LoadTicketColorCodeAjax();
                         } else {
                             notiError(result.d);
                         }
@@ -89,6 +99,7 @@
         }
 
         $(document).ready(function () {
+         
             LoadDataUpdate();
         });
 
@@ -96,10 +107,10 @@
         function LoadDataUpdate() {
             let dataColor = ([<%=_dataColor%>][0]);
             if (dataColor) {
-
+                debugger
                 $('#ColorCount').val((dataColor[0].Name));
-                $('#notecolor').val((dataColor[0].Color));
-                $('#NoteColorCount').val((dataColor[0].Note));
+                $('#ColorCode').val((dataColor[0].ColorCode));
+                $('#notecolor').val((dataColor[0].Note));
             }
         }
     </script>

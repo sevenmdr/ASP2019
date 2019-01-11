@@ -20,6 +20,7 @@ namespace _2018_12_13.Views.Employee
         {
             _defaultAvatar = Comon.Global.sys_DefaultAvatar;
             var curr = Request.QueryString["CurrentID"];
+            var Type = Request.QueryString["Type"];
             if (curr != null)
             {
                 _CurrentID = curr.ToString();
@@ -27,8 +28,17 @@ namespace _2018_12_13.Views.Employee
             }
             else
             {
-                _CurrentID = null;
-                _dataEmployeeList = null;
+                if(Type!=null)
+                {
+                    _CurrentID = Comon.Global.sys_employeeid.ToString();
+                    Loadata(Convert.ToInt32(_CurrentID));
+                }
+                else
+                {
+                    _CurrentID = null;
+                    _dataEmployeeList = null;
+                }
+
             }
         }
         private void Loadata(int id)
@@ -73,14 +83,14 @@ namespace _2018_12_13.Views.Employee
         }
 
         [System.Web.Services.WebMethod]
-    
-            public static string ExcuteData(string data)
+
+        public static string ExcuteData(string data)
+        {
+            try
             {
-                try
-                {
                 EmployeeDetail DataMain = JsonConvert.DeserializeObject<EmployeeDetail>(data);
-                    if (_CurrentID == null)
-                    {
+                if (_CurrentID == null)
+                {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
                         var dt = connFunc.ExecuteDataTable("YYY_sp_Employee_Insert", CommandType.StoredProcedure,
@@ -98,8 +108,8 @@ namespace _2018_12_13.Views.Employee
                    );
                     }
                 }
-                    else
-                    {
+                else
+                {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
                         connFunc.ExecuteDataTable("YYY_sp_Employee_Update", CommandType.StoredProcedure,
@@ -119,12 +129,12 @@ namespace _2018_12_13.Views.Employee
                     }
                 }
                 return "1";
-                }
-                catch (Exception ex)
-                {
-                    return "Lỗi Hệ Thống";
-                }
             }
+            catch (Exception ex)
+            {
+                return "Lỗi Hệ Thống";
+            }
+        }
     }
     public class EmployeeDetail
     {
