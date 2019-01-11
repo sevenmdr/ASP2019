@@ -86,6 +86,7 @@
         var fileName = "";
         var DataComboSource = "";
         var DataTableExcelImport;
+        var FileName;
         $(document).ready(function () {
             DataComboSource = ([<%=_DataComboSource%>][0]);
             LoadCombo(DataComboSource, "cbbsourceType");
@@ -99,7 +100,7 @@
             var i, f, j;
             for (i = 0, f = files[i]; i != files.length; ++i) {
                 var reader = new FileReader();
-                var name = f.name;
+                FileName = f.name;
                 reader.onload = function (e) {
                     var data = e.target.result;
                     var result;
@@ -137,7 +138,7 @@
                         url: "/Views/Marketing/pageImport.aspx/ExcuteData",
                         dataType: "json",
                         type: "POST",
-                        data: JSON.stringify({ 'data': JSON.stringify(DataTableExcelImport), 'sourceID': sourceID.toString() }),
+                        data: JSON.stringify({ 'data': JSON.stringify(DataTableExcelImport), 'sourceID': sourceID.toString(), 'filename': fileName.toString() }),
                         contentType: 'application/json; charset=utf-8',
                         async: true,
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -147,7 +148,7 @@
                             if (result.d == "1") {
                                 notiSuccess();
                             } else {
-                                notiError();
+                                notiError(result.d);
                             }
 
                         }

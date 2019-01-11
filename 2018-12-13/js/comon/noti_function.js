@@ -78,5 +78,25 @@ async function notiConfirm() {
             }
         });
 }
+async function notiConfirmDeleteTicket() {
+    let result = await swal(
+        {
+            title: "Xác Nhận",
+            text: "Bạn Thật Sự Muốn Khôi Phục",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+}
 
 

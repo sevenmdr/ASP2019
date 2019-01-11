@@ -11,16 +11,11 @@
                             <div class="ui segment" style="border: none;">
                                 <div class="five fields" style="margin: 0px;">
                                     <div class="field">
-                                        <h5>Dữ Liệu Theo Ngày</h5>
-                                    </div>
-                                    <div class="field">
-                                    </div>
-                                    <div class="field">
-                                        <div class="ui fluid search selection dropdown clear" id="typetakecare" onchange="LoadDataTicketAll()">
-                                            <input type="hidden" name="customerCareType" />
+                                        <div class="ui fluid search selection dropdown" id="statusTicketAll">
+                                            <input type="hidden" name="statusTicketAll" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Tình Trạng</div>
-                                            <div id="cbbcustomerCareType" class="menu" tabindex="-1">
+                                            <div id="cbbstatusTicketAll" class="menu" tabindex="-1">
                                                 <div class="item" data-value="2">Tất Cả</div>
                                                 <div class="item" data-value="1">Đã Xử Lý</div>
                                                 <div class="item" data-value="0">Chưa Xử Lýc</div>
@@ -33,10 +28,13 @@
                                     <div class="field">
                                         <input id="dateTo" class="flatpickr" type="text" placeholder="Select Date.." />
                                     </div>
+                                    <div class="field">
+                                        <div class="ui red button" onclick="event.preventDefault();LoadDataTicketAll();">Xem</div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
-                        <div class="ui cards" id="cardaftertreatment" style="margin: -.875em -0.01em">
+                        <div class="ui cards" id="careTicketMainALl" style="margin: -.875em -0.01em">
                         </div>
                     </div>
                 </div>
@@ -47,7 +45,7 @@
 
 
     <script type="text/javascript">
-        var dataListMain;
+        var dataTicketMainAll;
         function LoadCardView(data, id) {
             if (data && data.length > 0) {
                 var myNode = document.getElementById(id);
@@ -55,25 +53,34 @@
                 var re = new RegExp(",", 'g');
                 const markup = `
     ${(data).map(item => `
-                            <div class="card">
-                                <div class="content">
-                                    <div class="header">
-                                        ${item.CusDetail}
-                                    </div>
-                                    <div class="meta">
-                                        ${item.isTakeCare == 1 ? "Đã Chăm Sóc" : "Chưa Chăm Sóc"}
-                                    </div>
-                                    <div class="description">
-                                        <b>${item.Content.lenght > 10 ? item.Content.substring(0, 10) + "..." : item.Content}</b>
-                                    </div>
-                                </div>
-                                <div class="extra content">
-                                    <div value=${item.CustID} class="ui two buttons">
-                                        <button class="ui basic green button" value=${item.CustID}>Đến Khách Hàng</button>
-                                        <button class="ui basic red button" name=${item.CustID} value=${item.ID}>Chăm Sóc</button>
-                                    </div>
-                                </div>
+
+
+<div class="card" style="
+    width: 250px;
+    height: 73px;
+    background-color: ${item.ColorCode};
+    ">
+                                <div class="content" style="">
+                                    <div class="header" style="font-size: 13px;color: white;max-height: 20px;">${item.CustomerName}
+            <div style="float:right">
+
+
+            <img src= ${item.isExecute == 0 ? "/img/ButtonImg/checked.png" : ""}>
+</div></div>
+                                    <div class="meta" style="color: #c3f1ce;font-size: 13px;height: 20px;max-height: 30px;width: 180px;max-width: 180px;font-style: italic;">${item.ServiceCare}</div>
+    
+                                    
+<a style="
+    font-size: 21px;color:white;float: right">${item.HourApp}</a>
+
+                               </div>
+                           
                             </div>
+
+
+
+
+
 `)
                     }
 `;
@@ -82,30 +89,25 @@
             else { document.getElementById(id).innerHTML = '' }
         }
         function LoadDataTicketAll() {
-            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {
-                dataListMain = data;
-                if ($('#typetakecare').dropdown('get value') != "" && $('#typetakecare').dropdown('get value') != "2") {
-                    dataListMain = data.filter(word => word["isTakeCare"] == Number($('#typetakecare').dropdown('get value')));
-                }
+            GetDataTicketMainByDay("/Views/Marketing/pageTicketAllByDay.aspx/LoadData"
+                , $('#dateFrom').val() ? $('#dateFrom').val() : new Date()
+                , $('#dateTo').val() ? $('#dateTo').val() : new Date()
+                , function (data) {
+                    dataTicketMainAll = data;
+                    let statusid = $('#statusTicketAll').dropdown('get value');
+                    if (statusid != "" && statusid != "2") {
+                        dataTicketMainAll = data.filter(word => word["isExecute"] == Number(statusid));
+                    }
 
-                LoadCardView(dataListMain, "cardaftertreatment")
-                // di den khach hang
-                $(".ui.basic.red.button").click(function (e) {
-                    window.open("/Views/CustomerCare/pageCustomerCareList.aspx?CustomerID=" + $(this).attr('name') + "&MasterID=" + $(this).val() + "&Type=5");
+                    LoadCardView(dataTicketMainAll, "careTicketMainALl")
+                    //$(".ui.basic.red.button").click(function (e) {
+                    //  //  window.open("/Views/CustomerCare/pageCustomerCareList.aspx?CustomerID=" + $(this).attr('name') + "&MasterID=" + $(this).val() + "&Type=5");
+                    //});
 
-                });
-                // Cham soc khach hang
-                $(".ui.basic.green.button").click(function (e) {
-                    window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + $(this).val());
-                });
-            })
+                })
 
         }
-        function LoadComboBranch() {
-            GetDataComboBranch("/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx/LoadComboMain", function (data) {
-                LoadCombo(data, "cbbBranch");
-            });
-        }
+
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
                 dateFormat: 'd-m-Y',
@@ -113,14 +115,9 @@
                 defaultDate: new Date(),
             });
 
-
-
-            LoadComboBranch();
-            $("#Branch_ID").dropdown("refresh");
-            $("#Branch_ID").dropdown("set selected", 1);
-            $("#typetakecare").dropdown("refresh");
-            $("#typetakecare").dropdown("set selected", 2);
-            LoadDataTicketAll();
+            $("#statusTicketAll").dropdown("refresh");
+            $("#statusTicketAll").dropdown("set selected", 2);
+           // LoadDataTicketAll();
         });
 
 

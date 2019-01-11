@@ -123,8 +123,8 @@
         function ExcuteData() {
             var data = new Object();
             data.Name = $('#txtNameTicket').val() ? $('#txtNameTicket').val() : "";
-            data.Phone1 = $('#Phone1').val() ? $('#Phone1').val() : "";
-            data.Email1 = $('#Email1').val() ? $('#Email1').val() : "";
+            data.Phone = $('#Phone1').val() ? $('#Phone1').val() : "";
+            data.Email = $('#Email1').val() ? $('#Email1').val() : "";
             data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
             data.Source = Number($('#sourceType').dropdown('get value')) ? Number($('#sourceType').dropdown('get value')) : 0;
             data.Gender = Number($('#genderType').dropdown('get value')) ? Number($('#genderType').dropdown('get value')) : 0;

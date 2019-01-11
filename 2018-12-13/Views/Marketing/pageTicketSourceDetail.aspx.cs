@@ -35,7 +35,7 @@ namespace _2018_12_13.Views.Marketing
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("[YYY_sp_Product_Unit_LoadDetail]", CommandType.StoredProcedure,
+                dt = confunc.ExecuteDataTable("[YYY_sp_TicketSource_LoadDetail]", CommandType.StoredProcedure,
                   "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
             }
             if (dt != null)
@@ -60,7 +60,7 @@ namespace _2018_12_13.Views.Marketing
                     {
                         using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                         {
-                            DataTable dt = connFunc.ExecuteDataTable("[YYY_sp_Product_Unit_Insert]", CommandType.StoredProcedure,
+                            DataTable dt = connFunc.ExecuteDataTable("[YYY_sp_Ticket_Source_Insert]", CommandType.StoredProcedure,
                                   "@Name ", SqlDbType.Int, DataMain.Name.Replace("'", "").Trim(),
                                   "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                                   "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
@@ -87,7 +87,7 @@ namespace _2018_12_13.Views.Marketing
                     {
                         using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                         {
-                            DataTable dt = connFunc.ExecuteDataTable("YYY_sp_Product_Unit_Update", CommandType.StoredProcedure,
+                            DataTable dt = connFunc.ExecuteDataTable("YYY_sp_ticket_Source_Update", CommandType.StoredProcedure,
                                 "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                                 "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                                 "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
@@ -122,7 +122,6 @@ namespace _2018_12_13.Views.Marketing
     }
         public class Unit
         {
-
             public string Name { get; set; }
             public string Note { get; set; }
         }

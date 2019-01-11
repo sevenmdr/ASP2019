@@ -72,7 +72,27 @@ namespace _2018_12_13.Views.Marketing
             }
         }
 
-       
+        [System.Web.Services.WebMethod]
+        public static string Recover(int id)
+        {
+            try
+            {
+                using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                {
+                    connFunc.ExecuteDataTable("[YYY_sp_ticket_Recover]", CommandType.StoredProcedure,
+                        "@CurrentID", SqlDbType.Int, id,
+                        "@Datenow", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                        "@userID", SqlDbType.Int, Comon.Global.sys_userid
+                    );
+                }
+                return "1";
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+
+        }
 
     }
 }

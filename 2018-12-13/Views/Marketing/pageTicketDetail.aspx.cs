@@ -32,7 +32,7 @@ namespace _2018_12_13.Views.Marketing
             }
             else
             {
-                _CurrentID = null;
+                _CurrentID = "0";
                 _TicketMainDetail = null;
             }
 
@@ -80,48 +80,61 @@ namespace _2018_12_13.Views.Marketing
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data)
         {
+
             try
             {
-                
-                if (_CurrentID == null)
+                TicketDetail DataMain = JsonConvert.DeserializeObject<TicketDetail>(data);
+                if (_CurrentID.ToString() == "0")
                 {
-                    //using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-                    //{
-                    //    connFunc.ExecuteDataTable("YYY_sp_Product_Receipt_Insert", CommandType.StoredProcedure,
-                    //        "@date", SqlDbType.DateTime,Convert.ToDateTime( DataMain.DateInput),
-                    //        "@Amount", SqlDbType.Decimal, DataMain.TotalAmount,
-                    //        "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                    //        "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-                    //        "@Ware_ID", SqlDbType.Int, DataMain.Ware,
-                    //        "@Note", SqlDbType.Int, DataMain.Content.Replace("'", "").Trim(),
-                    //        "@table_data", SqlDbType.Structured, DataProductDetail.Rows.Count > 0 ? DataProductDetail : null
-                    //    );
-                    //}
+                    using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                    {
+                        var dt = connFunc.ExecuteDataTable("[YYY_sp_Ticket_Insert]", CommandType.StoredProcedure,
+                     "@Email1", SqlDbType.NVarChar, DataMain.Email.Replace("'", "").Trim(),
+                     "@Phone1", SqlDbType.NVarChar, DataMain.Phone.Replace("'", "").Trim(),
+                     "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
+                     "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
+                     "@Gender_ID", SqlDbType.Int, DataMain.Gender,
+                     "@Source", SqlDbType.Int, DataMain.Source,
+                     "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
+                        "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
+                   );
+                    }
                 }
                 else
                 {
-                    //using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-                    //{
-                    //    connFunc.ExecuteDataTable("YYY_sp_Product_Receipt_Update", CommandType.StoredProcedure,
-                    //        "@date", SqlDbType.NVarChar, Convert.ToDateTime(DataMain.DateInput),
-                    //        "@Amount", SqlDbType.Decimal, DataMain.TotalAmount,
-                    //        "@Ware_ID", SqlDbType.Int, DataMain.Ware,
-                    //        "@Note", SqlDbType.Int, DataMain.Content.Replace("'", "").Trim(),
-                    //        "@data", SqlDbType.Structured, DataProductDetail.Rows.Count > 0 ? DataProductDetail : null,
-                    //        "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
-                    //        "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-                    //        "@CurrentID", SqlDbType.Int, Convert.ToInt32(_CurrentID)
-
-
-                    //    );
-                    //}
+                    using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                    {
+                        connFunc.ExecuteDataTable("[YYY_sp_Customer_Ticket]", CommandType.StoredProcedure,
+                      "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
+                      "@Email1", SqlDbType.NVarChar, DataMain.Email.Replace("'", "").Trim(),
+                      "@Phone1", SqlDbType.NVarChar, DataMain.Phone.Replace("'", "").Trim(),
+                      "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
+                      "@Gender_ID", SqlDbType.Int, DataMain.Gender,
+                      "@Source", SqlDbType.Int, DataMain.Source,
+                      "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
+                         "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                         "@CurrentID", SqlDbType.Int, _CurrentID
+                    );
+                    }
                 }
                 return "1";
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return "0";
             }
+
+
         }
+    }
+    public class TicketDetail
+    {
+        public string Email { get; set; }
+        public string Content { get; set; }
+        public string Phone { get; set; }
+        public string Name { get; set; }
+        public int Gender { get; set; }
+        public int Source { get; set; }
     }
 }

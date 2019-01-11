@@ -136,8 +136,30 @@
             })
         }
         function RecoverTicket(TicketID) {
-
+                    const promise = notiConfirmDeleteTicket();
+        promise.then(function () { ExecuteRecover(TicketID); }, function () { });
         }
+            function ExecuteRecover(id) {
+        $.ajax({
+            url: "/Views/Marketing/pageTicketListRecover.aspx/Recover",
+            dataType: "json",
+            type: "POST",
+            data: JSON.stringify({ 'id': id }),
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                notiError();
+            },
+            success: function (result) {
+                if (result.d == "1") {
+                    notiSuccess();
+                    LoadTicket();
+                } else {
+                    notiError(result.d);
+                }
+            }
+        })
+    }
 
     </script>
 

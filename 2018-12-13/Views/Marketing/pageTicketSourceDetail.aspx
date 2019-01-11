@@ -19,21 +19,21 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div class="header">
-        Đơn Vị Tính
+        Nguồn Khách Hàng
     </div>
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
                   <form class="ui form segment form3" id="form3">
                        <div class="field">
-                                <label>Đơn Vị Tính</label>
-                                <input id="UnitCount" name="name" type="text" />
+                                <label>Nguồn Khách Hàng</label>
+                                <input id="SourceCount" name="name" type="text" />
                             </div>
 
                     <div class="field">
                         <div class="field">
                             <label>Ghi Chú</label>
-                            <textarea id="NoteUnitCount" name="content"></textarea>
+                            <textarea id="NoteSourceCount" name="content"></textarea>
                         </div>
                     </div>
 
@@ -53,12 +53,12 @@
     <script type="text/javascript">
         function ExcuteData() {
             var data = new Object();
-            data.Name = $('#UnitCount').val() ? $('#UnitCount').val() : "";
-           data.Note = $('#NoteUnitCount').val() ? $('#NoteUnitCount').val() : "";
+            data.Name = $('#SourceCount').val() ? $('#SourceCount').val() : "";
+           data.Note = $('#NoteSourceCount').val() ? $('#NoteSourceCount').val() : "";
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
-                    url: "/Views/WareHouse/pageUnitCountDetail.aspx/ExcuteData",
+                    url: "/Views/Marketing/pageTicketSourceDetail.aspx/ExcuteData",
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({ 'data': JSON.stringify(data) }),
@@ -70,7 +70,7 @@
                     success: function (result) {
                         if (result.d == "1") {
                             notiSuccess();
-                            LoadUnitAjax();
+                            LoadTicketSourceAjax();
                         } else {
                             notiError(result.d);
                         }
@@ -92,8 +92,8 @@
             let dataUnit = ([<%=_dataUnit%>][0]);
             if (dataUnit) {
 
-                $('#UnitCount').val((dataUnit[0].Name));
-                 $('#NoteUnitCount').val((dataUnit[0].Note));
+                $('#SourceCount').val((dataUnit[0].Name));
+                 $('#NoteSourceCount').val((dataUnit[0].Note));
             }
         }
     </script>

@@ -12,35 +12,22 @@ namespace _2018_12_13.Views.Marketing
 {
     public partial class pageTicketAllByDay : WebPageBase
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        [System.Web.Services.WebMethod]
-        public static string LoadComboMain()
-        {
-
-            DataSet ds = new DataSet();
-            //LoadBranch
-            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
-            {
-                DataTable dt = new DataTable();
-                dt = confunc.ExecuteDataTable("YYY_sp_Branch_Load", CommandType.StoredProcedure);
-                ds.Tables.Add(dt);
-            }
-
-            //
-            return JsonConvert.SerializeObject(ds, Formatting.Indented);
-        }
 
         [System.Web.Services.WebMethod]
-    public static string LoadataCustomerCare(int Branch_ID,string Date)
+    public static string LoadData(string dateFrom,string dateTo)
     {
         DataTable dt = new DataTable();
         using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
         {
-            dt = confunc.ExecuteDataTable("[YYY_CustomerCare_GetCustomerTreatment]", CommandType.StoredProcedure,
-              "@Branch_ID", SqlDbType.Int, Branch_ID,@"Date",SqlDbType.DateTime,Convert.ToDateTime(Date));
+            dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_AllTicketByDay_Load]", CommandType.StoredProcedure,
+              "@UserID", SqlDbType.Int, Comon.Global.sys_userid
+              , "@dateFrom", SqlDbType.DateTime,Convert.ToDateTime(dateFrom)
+              , "@dateTo", SqlDbType.DateTime, Convert.ToDateTime(dateTo));
         }
         if (dt != null)
         {

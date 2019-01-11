@@ -19,21 +19,25 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div class="header">
-        Đơn Vị Tính
+        Danh mục Màu
     </div>
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                  <form class="ui form segment form3" id="form3">
-                       <div class="field">
-                                <label>Đơn Vị Tính</label>
-                                <input id="UnitCount" name="name" type="text" />
-                            </div>
+                <form class="ui form segment form3" id="form3">
+                    <div class="field">
+                        <label>Tên</label>
+                        <input id="ColorCount" name="name" type="text" />
+                    </div>
+                    <div class="field">
+                        <label>Mã màu</label>
+                        <input id="NoteColorCount" name="name" type="text" />
+                    </div>
 
                     <div class="field">
                         <div class="field">
-                            <label>Ghi Chú</label>
-                            <textarea id="NoteUnitCount" name="content"></textarea>
+                            <label>Ghi chú</label>
+                            <textarea id="notecolor" name="content"></textarea>
                         </div>
                     </div>
 
@@ -53,12 +57,13 @@
     <script type="text/javascript">
         function ExcuteData() {
             var data = new Object();
-            data.Name = $('#UnitCount').val() ? $('#UnitCount').val() : "";
-           data.Note = $('#NoteUnitCount').val() ? $('#NoteUnitCount').val() : "";
+            data.Name = $('#ColorCount').val() ? $('#ColorCount').val() : "";
+            data.ColorCode = $('#NoteColorCount').val() ? $('#NoteColorCount').val() : "";
+            data.Note = $('#notecolor').val() ? $('#notecolor').val() : "";
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
-                    url: "/Views/WareHouse/pageUnitCountDetail.aspx/ExcuteData",
+                    url: "/Views/Marketing/pageTicketColorCodeDetail.aspx/ExcuteData",
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({ 'data': JSON.stringify(data) }),
@@ -84,30 +89,31 @@
         }
 
         $(document).ready(function () {
-            LoadDataUpdateProductType();
+            LoadDataUpdate();
         });
 
 
-            function LoadDataUpdateProductType() {
-            let dataUnit = ([<%=_dataUnit%>][0]);
-            if (dataUnit) {
+        function LoadDataUpdate() {
+            let dataColor = ([<%=_dataColor%>][0]);
+            if (dataColor) {
 
-                $('#UnitCount').val((dataUnit[0].Name));
-                 $('#NoteUnitCount').val((dataUnit[0].Note));
+                $('#ColorCount').val((dataColor[0].Name));
+                $('#notecolor').val((dataColor[0].Color));
+                $('#NoteColorCount').val((dataColor[0].Note));
             }
         }
     </script>
 
-    
+
     <script src="/dist/semantic.min.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
-        <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
- <%--   <script src="/js/customjs/custom-modal.js"></script>--%>
+    <%--   <script src="/js/customjs/custom-modal.js"></script>--%>
 </body>
 
 </html>

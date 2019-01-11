@@ -1046,3 +1046,26 @@ function GetDataTicketColorCode(link, fn) {
     })
     return x;
 }
+
+
+//Load Data Ticket Main By Day
+function GetDataTicketMainByDay(link, dateFrom,dateTo,fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}

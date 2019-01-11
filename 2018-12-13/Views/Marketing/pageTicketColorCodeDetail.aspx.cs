@@ -13,7 +13,7 @@ namespace _2018_12_13.Views.Marketing
     public partial class pageTicketColorCodeDetail : WebPageBase
     {
         public static string _CurrentID { get; set; }
-        public static string _dataUnit { get; set; }
+        public static string _dataColor { get; set; }
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,8 +26,8 @@ namespace _2018_12_13.Views.Marketing
             }
             else
             {
-                _CurrentID = null;
-                _dataUnit = null;
+                _CurrentID = "0";
+                _dataColor = null;
             }
         }
         private void Loadata(int id)
@@ -35,16 +35,16 @@ namespace _2018_12_13.Views.Marketing
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("[YYY_sp_Product_Unit_LoadDetail]", CommandType.StoredProcedure,
+                dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_Color_LoadDetail]", CommandType.StoredProcedure,
                   "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
             }
             if (dt != null)
             {
-                _dataUnit = JsonConvert.SerializeObject(dt);
+                _dataColor = JsonConvert.SerializeObject(dt);
             }
             else
             {
-                _dataUnit = "";
+                _dataColor = "";
             }
 
         }
@@ -55,16 +55,17 @@ namespace _2018_12_13.Views.Marketing
             {
                 try
                 {
-                Unit DataMain = JsonConvert.DeserializeObject<Unit>(data);
-                    if (_CurrentID == null)
+                Color DataMain = JsonConvert.DeserializeObject<Color>(data);
+                    if (_CurrentID == "0")
                     {
                         using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                         {
-                            DataTable dt = connFunc.ExecuteDataTable("[YYY_sp_Product_Unit_Insert]", CommandType.StoredProcedure,
+                            DataTable dt = connFunc.ExecuteDataTable("[YYY_sp_Ticket_Color_Insert]", CommandType.StoredProcedure,
                                   "@Name ", SqlDbType.Int, DataMain.Name.Replace("'", "").Trim(),
                                   "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                                   "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-                                  "@Note ", SqlDbType.Int, DataMain.Note.Replace("'", "").Trim()
+                                  "@Note ", SqlDbType.Int, DataMain.Note.Replace("'", "").Trim(),
+                                  "@Color ", SqlDbType.NVarChar, DataMain.ColorCode.Replace("'", "").Trim()
                               );
                             if (dt.Rows.Count > 0)
                             {
@@ -87,12 +88,13 @@ namespace _2018_12_13.Views.Marketing
                     {
                         using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                         {
-                            DataTable dt = connFunc.ExecuteDataTable("YYY_sp_Product_Unit_Update", CommandType.StoredProcedure,
+                            DataTable dt = connFunc.ExecuteDataTable("[YYY_sp_ticket_color_Update]", CommandType.StoredProcedure,
                                 "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                                 "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                                 "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                                  "@currentID ", SqlDbType.Int, _CurrentID,
-                                  "@Note ", SqlDbType.NVarChar, DataMain.Note.Replace("'", "").Trim()
+                                  "@Note ", SqlDbType.NVarChar, DataMain.Note.Replace("'", "").Trim(),
+                                  "@Color ", SqlDbType.NVarChar, DataMain.ColorCode.Replace("'", "").Trim()
 
                             );
                             if (dt.Rows.Count > 0)
@@ -120,5 +122,11 @@ namespace _2018_12_13.Views.Marketing
                 }
             }
     }
-
+    public class Color
+    {
+        public string Name { get; set; }
+        public string ColorCode { get; set; }
+        public string Note { get; set; }
     }
+
+}

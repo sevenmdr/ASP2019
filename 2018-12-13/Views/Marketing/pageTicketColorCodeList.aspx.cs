@@ -21,7 +21,7 @@ namespace _2018_12_13.Views.Marketing
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("YYY_sp_Product_Unit_LoadList", CommandType.StoredProcedure,
+                dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_Color_LoadList]", CommandType.StoredProcedure,
                   "@UserID", SqlDbType.Int, Comon.Global.sys_userid);
             }
             if (dt != null)
@@ -40,7 +40,7 @@ namespace _2018_12_13.Views.Marketing
             {
                 using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                 {
-                    connFunc.ExecuteDataTable("[YYY_sp_Product_Unit_Delete]", CommandType.StoredProcedure,
+                    connFunc.ExecuteDataTable("[YYY_sp_Ticket_Color_Delete]", CommandType.StoredProcedure,
                         "@CurrentID", SqlDbType.Int, id,
                         "@Datenow", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                         "@userID", SqlDbType.Int, Comon.Global.sys_userid
