@@ -13561,7 +13561,7 @@ ol.ui.list li[value]:before {
         background: #FFF6F6;
         border-color: #E0B4B4;
         color: #9F3A38;
-        border-radius: '';
+        border-radius: 0;
         box-shadow: none
     }
 

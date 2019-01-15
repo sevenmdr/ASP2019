@@ -1151,7 +1151,7 @@ function GetDataPermissionGroupControlList(link, fn) {
 
 ////////////////////////REPORT
 //....Revenue
-function GetRevenueBranch(link, dateFrom, dateTo, branchID, fn) {
+function GetRevenueBranch(link,  branchID, fn) {
 
     var x = "";
     $.ajax({
@@ -1159,7 +1159,7 @@ function GetRevenueBranch(link, dateFrom, dateTo, branchID, fn) {
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        data: JSON.stringify({ "branchID": branchID }),
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -1263,7 +1263,7 @@ function GetRevenueTreatment(link, dateFrom, dateTo, branchID, fn) {
 }
 
 /// .... Doanh THu Dieu Tri
-function GetReportTeleSale(link, dateFrom, dateTo, branchID, fn) {
+function GetReportTeleSale(link, dateFrom, dateTo, fn) {
 
     var x = "";
     $.ajax({
@@ -1271,7 +1271,7 @@ function GetReportTeleSale(link, dateFrom, dateTo, branchID, fn) {
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 

@@ -154,7 +154,7 @@
 
 <script src="/dist/semantic.min.js"></script>
 <script src="/js/customjs/custom-modal.js"></script>
-<script src="/plugins/datatable/jquery.dataTables.js"></script>
+<%--<script src="/plugins/datatable/jquery.dataTables.js"></script>--%>
 <script src="/js/customjs/custom-datatable.js"></script>
 <script src="/js/comon/load_datasource.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>

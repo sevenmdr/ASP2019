@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using _2018_12_13.Comon;
 namespace _2018_12_13.Views.Service
 {
-    public partial class pageServiceTypeList : System.Web.UI.Page
+    public partial class pageServiceTypeList :WebPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

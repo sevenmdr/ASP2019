@@ -107,6 +107,7 @@ namespace _2018_12_13.Views.Customer
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
                    );
                     }
+                    return "2";
                 }
                 else
                 {

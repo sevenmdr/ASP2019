@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/2_Master.Master" AutoEventWireup="true" CodeBehind="Searching.aspx.cs" Inherits="_2018_12_13.Views.Searching.Searching" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/1_LeftNar.Master" AutoEventWireup="true" CodeBehind="Searching.aspx.cs" Inherits="_2018_12_13.Views.Searching.Searching" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pusher">
@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="sixteen wide tablet ten wide computer column">
                     <div class="ui segments" style="background-color: white">
-                        <form class="ui form segment form3" id="form3">
+                        <form class="ui form segment form3">
                             <div class="ui segment" style="border: none;">
                                 <div class="five fields" style="margin: 0px;">
                                     <div class="field">

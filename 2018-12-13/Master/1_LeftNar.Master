@@ -29,7 +29,7 @@
     <script src="/js/comon/load_datasource.js"></script>
     <script src="/js/comon/renderControl.js"></script>
 
-
+        <script src="/plugins/datatable/jquery.dataTables.js"></script>
 
     <%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
     <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">
@@ -98,8 +98,7 @@
                 <div class="content">
                     <a class="item" id="createNewCustomer1" href="#">Tạo Mới Khách Hàng
                     </a>
-                    <a class="item" href="/Views/Searching/Searching.aspx">Tìm Kiếm Khách Hàng
-                    </a>
+   
 
                 </div>
 
@@ -269,8 +268,7 @@
                     <div class="ui divider"></div>
                     <a class="item" id="createNewCustomer2" href="#">Tạo Mới Khách Hàng
                     </a>
-                    <a class="item" href="/Views/Searching/Searching.aspx">Tìm Kiếm Khách Hàng
-                    </a>
+
 
                 </div>
             </div>
@@ -422,55 +420,14 @@
                     </a>
                     <div class="item ui colhidden">
                         <div class="ui icon input">
-                            <input id="searchCustomerID" type="text" placeholder="Search...">
+                            <input id="searchCustomerID" type="text" placeholder="Nhập 5 Ký Tự Trở Lên">
                             <i class="search icon"></i>
                         </div>
                     </div>
                     <div class="right menu colhidden">
-                        <%--                        <div class="ui dropdown item labeled icon">
-                            <i class="bell icon"></i>
-                            <div class="ui red label mini circular">6</div>
-                            <div class="menu">
-                                <div class="header">
-                                    People You Might Know
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/enid.png" alt="label-image" />
-                                    Janice Robinson
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Hershell.png" alt="label-image" />
-                                    Cynthia May
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Rick.png" alt="label-image" />
-                                    Hugh Carter
-                                </div>
-                                <div class="header">
-                                    Your Friends' Friends
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Meggie.png" alt="label-image" />
-                                    Pauline Cain
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Glenn.png" alt="label-image" />
-                                    Marco Beck
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Daryl.png" alt="label-image" />
-                                    Sue Quinn
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui dropdown item">
-                            Language <i class="dropdown icon"></i>
-                            <div class="menu">
-                                <a class="item"><i class="united kingdom flag"></i>English</a>
-                                <a class="item"><i class="turkey flag"></i>Turkish</a>
-                                <a class="item"><i class="spain flag"></i>Spanish</a>
-                            </div>
-                        </div>--%>
+
+                        <div id="userNameCurrent" style="margin: auto; color: green; font-size: 15px;">
+                         </div>
                         <div class="ui dropdown item">
                             <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px" />
 
@@ -482,9 +439,7 @@
                                 <a class="item" href="/Views/Login/Logout.aspx">Đăng Xuất</a>
                             </div>
                         </div>
-                        <%--  <a class="item labeled rightsidebar computer only">
-                            <i class="ion-wrench large icon"></i>
-                        </a>--%>
+    
                     </div>
                 </div>
             </div>
@@ -516,10 +471,7 @@
             event.preventDefault();
             AddNewCustomer();
         });
-        document.getElementById("createNewCustomer1").addEventListener("click", function (event) {
-            event.preventDefault();
-            AddNewCustomer();
-        });
+
         function AddNewCustomer() {
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Customer/pageCustomerDetail.aspx");
@@ -546,6 +498,18 @@
         $(document).ready(function () {
 
             $('#avatarofUserCircle').attr('src', 'data:image/png;base64, ' + circleAvatar);
+            document.getElementById("userNameCurrent").innerHTML = ("<%=_userNameCurrent %>");
+
+
+          <%--  let persmisionTable = ([<%=PermissionTableControl%>][0]);
+            persmisionTable = persmisionTable.filter(word => word["PageName"] == getPageName(window.location.pathname));
+            let index = 0;
+            for (index; index < persmisionTable.length; index++) {
+                //$("#" + persmisionTable[index]["ControlID"]).hide();
+                //document.getElementById(persmisionTable[index]["ControlID"]).style.display = "none!important";
+                $('#'+persmisionTable[index]["ControlID"]).attr('disabled', 'true');
+            }--%>
+
 
         });
     </script>
@@ -556,7 +520,7 @@
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 
-    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+
 
 
 

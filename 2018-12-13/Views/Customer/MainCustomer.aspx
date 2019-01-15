@@ -312,7 +312,7 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+<%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>--%>
     <script src="/js/customjs/custom-datatable.js"></script>
     <script src="/js/comon/renderControl.js"></script>
     <script src="/js/customjs/custom-progress.js"></script>

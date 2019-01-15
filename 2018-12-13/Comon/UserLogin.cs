@@ -9,7 +9,6 @@ namespace _2018_12_13.Comon
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-
-
+        public string id { get; set; }
     }
 }

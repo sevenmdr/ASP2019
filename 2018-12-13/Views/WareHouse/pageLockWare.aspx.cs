@@ -7,10 +7,10 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using _2018_12_13.Comon;
 namespace _2018_12_13.Views.WareHouse
 {
-    public partial class pageLockWare : System.Web.UI.Page
+    public partial class pageLockWare :WebPageBase
     {
         public static string _DataWare { get; set; }
         protected void Page_Load(object sender, EventArgs e)

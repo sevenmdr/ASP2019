@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using _2018_12_13.Comon;
 namespace _2018_12_13.Views.WareHouse
 {
-    public partial class pageWareImportExportNorm : System.Web.UI.Page
+    public partial class pageWareImportExportNorm :WebPageBase
     {
         public static string _DataWare { get; set; }
         public static string _DataType { get; set; }

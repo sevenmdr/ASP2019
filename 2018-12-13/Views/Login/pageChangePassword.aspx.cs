@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2018_12_13.Comon;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.Login
 {
-    public partial class pageChangePassword : System.Web.UI.Page
+    public partial class pageChangePassword : WebPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

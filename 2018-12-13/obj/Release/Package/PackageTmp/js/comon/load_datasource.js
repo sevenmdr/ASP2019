@@ -12,7 +12,7 @@
         success: function (result) {
 
             fn(JSON.parse(result.d)["Table1"]);
-        //    LoadComboDetail(JSON.parse(result.d)["Table1"], "ccbServiceTab");
+            //    LoadComboDetail(JSON.parse(result.d)["Table1"], "ccbServiceTab");
             // LoadCombo(JSON.parse(result.d)["Table2"], "ccbDiscountTab");
 
 
@@ -228,13 +228,13 @@ function GetDataComboTreatment(link, fn) {
 
 //LoadData CustomerCare AfterTreatment
 function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
-        var x = "";
+    var x = "";
     $.ajax({
         url: link,
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "Branch_ID": Branch_ID, "Date": Date}),
+        data: JSON.stringify({ "Branch_ID": Branch_ID, "Date": Date }),
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -247,7 +247,7 @@ function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
     })
     return x;
 }
-      //GetCombo CustomerCare AfterTreatment
+//GetCombo CustomerCare AfterTreatment
 function GetDataComboBranch(link, fn) {
     var x = "";
     $.ajax({
@@ -376,7 +376,7 @@ function GetImageByFolder(link, folderName, fn) {
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "folderName": folderName}),
+        data: JSON.stringify({ "folderName": folderName }),
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -437,7 +437,7 @@ function GetDataSourceAppointmentList(link, Branch_ID, fn) {
 
 
 // Load list Appointment By Dat,
-function GetDataSourceAppointmentListByDay(link, Branch_ID,dateFrom,dateTo, fn) {
+function GetDataSourceAppointmentListByDay(link, Branch_ID, dateFrom, dateTo, fn) {
     var x = "";
     $.ajax({
         url: link,
@@ -468,6 +468,853 @@ function GetDataSourceSerchCustomer(link, keyword, fn) {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({ "keyword": keyword }),
         async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//LoadComboBranchh
+function GetDataComboBranch(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}
+// Load list WareHouse,
+function GetDataSourceWareHouse(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Load list Supplier,
+function GetDataSourceSupplier(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Load list Supplier,
+function GetDataSourceProductType(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataSourceUnit(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+///////////// DISCOUNT //////////////////
+// Load list Discount
+function GetDataDiscount(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+
+// Execute DataTable Left and right
+function ExecuteDataTableLeftAndRight(link, type, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "type": type }),
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load Combo Discount
+function GetDataComboDiscount(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"]);
+        }
+    })
+    return x;
+}
+///////////////////////
+
+
+//////////////EmployeeGroup
+//LoadList
+function GetDataSourceGroupEmployee(link, fn) {
+    debugger
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//////////////
+//////////////Employee
+//LoadList
+function GetDataSourceEmployee(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataComboEmployee(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"]);
+        }
+    })
+    return x;
+}
+//////////////
+/////////////User
+function GetDataSourceGroupUser(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+function GetDataSourceUserList(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataComboUser(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"], JSON.parse(data.d)["Table3"], JSON.parse(data.d)["Table4"]);
+        }
+    })
+    return x;
+}
+/////////
+
+
+/////////////Product//////////////
+function GetDataSourceProduct(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+function GetDataSourceInputList(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "datefrom": dateFrom, "dateto": dateTo }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+function GetDataSourceoutList(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "datefrom": dateFrom, "dateto": dateTo }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//////////////ServiceType
+function GetDataSourceServiceType(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load Lock Detail New, and Not New
+
+function GetDataLockDetailNew(link,wareID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "wareID": wareID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataLockDetail(link, idLock, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "idLock": idLock}),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+function GetDataReviewWareHouse(link, wareID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "wareID": wareID}),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+function GetDataWareHouseExImNor(link, wareID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "wareID": wareID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// load Data Source Service
+function GetDataSourceService(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+//.... Martketing Load TIcket List
+function GetDataTicketList(link, dateFrom, dateTo,statusID,sourceID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "statusID": statusID, "sourceID": sourceID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+//.... Martketing Load TIcket List
+function GetDataTicketListDelete(link, dateFrom, dateTo, sourceID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo,  "sourceID": sourceID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load Ticket Source
+
+function GetDataTicketSource(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load Ticket Color Code
+
+function GetDataTicketColorCode(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+
+//Load Data Ticket Main By Day
+function GetDataTicketMainByDay(link, dateFrom,dateTo,fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+/////////////////////Permission////////////
+
+function GetDataPermissionPageList(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataPermissionControlList(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataPermissionGroupPageList(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataPermissionGroupControlList(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+////////////////////////REPORT
+//....Revenue
+function GetRevenueBranch(link,  branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//....Customer Source
+function GetRevenueCustomerSource(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+//....OverView
+function GetReportOverView(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"],JSON.parse(data.d)["Table3"]);
+        }
+    })
+    return x;
+}
+/// .... Doanh THu TU Van
+function GetRevenueConsultant(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+/// .... Doanh THu Dieu Tri
+function GetRevenueTreatment(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+/// .... Doanh THu Dieu Tri
+function GetReportTeleSale(link, dateFrom, dateTo, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+////////////////////////////Ticket
+function LoadDatasourceticket(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load list Discount
+function GetDataAccount(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);

@@ -1,20 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/1_LeftNar.Master" AutoEventWireup="true" CodeBehind="pageAppointmentInDay.aspx.cs" Inherits="_2018_12_13.Views.Appointment.pageAppointmentInDay" %>
 
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pusher">
         <div class="navslide navwrap">
             <div class="row">
                 <div class="sixteen wide tablet ten wide computer column">
                     <div class="ui segments" style="background-color: white">
-                        <form class="ui form segment form3" id="form3" style="height: 65px">
+                        <form class="ui form segment form3" style="height: 65px">
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
                                     <div style="float: left">
                                         <h3>Lịch Hẹn Trong Ngày</h3>
                                     </div>
-                                    <div style="float: right;width:200px">
+                                    <div style="float: right; width: 200px">
                                         <div class="ui fluid search selection dropdown" id="ScheduleBranchID" onchange="LoadAppointmentListAjax()">
                                             <input type="hidden" name="branch" />
                                             <input class="search" autocomplete="off" tabindex="0" />
@@ -23,7 +21,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="float: right;width:200px">
+                                    <div style="float: right; width: 200px">
                                         <div class="ui fluid search selection dropdown" id="ScheduleTypeList" onchange="LoadAppointmentListAjax()">
                                             <input type="hidden" name="branch" />
                                             <input class="search" autocomplete="off" tabindex="0" />
@@ -32,11 +30,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-
-
                             </div>
                         </form>
                         <div class="ui segment" id="TableContent">
@@ -120,9 +114,10 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-    <script src="/js/customjs/custom-modal.js"></script>
-    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+<%--    <script src="/js/customjs/custom-modal.js"></script>--%>
     <script src="/js/comon/load_datasource.js"></script>
+
+
     <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 </asp:Content>
 

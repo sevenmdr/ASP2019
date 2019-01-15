@@ -16,6 +16,13 @@ $('.ui.form1').form({
                 prompt: 'Please select at least two skills'
             }]
         },
+        branchwarehouse: {
+            identifier: 'branchwarehouse',
+            rules: [{
+                type: 'minCount[1]',
+                prompt: 'Please select at least two skills'
+            }]
+        },
         gender: {
             identifier: 'gender',
             rules: [{
@@ -118,6 +125,28 @@ $('.ui.form3').form({
                 prompt: 'Please select a gender'
             }]
         },
+        State: {
+            identifier: 'State',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+        }, 
+        Employee: {
+            identifier: 'Employee',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+    },
+        GroupUser: {
+            identifier: 'GroupUser',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please select a gender'
+            }]
+        },
+
         username: {
             identifier: 'username',
             rules: [{
@@ -160,6 +189,28 @@ $('.ui.form3').form({
                 },
                 {
                     type: 'number',
+                    prompt: 'Please enter number'
+                }
+            ]
+        },
+        phonenumberNotMain: {
+            identifier: 'phonenumberNotMain',
+            rules: [
+                {
+                    type: 'number',
+                    prompt: 'Please enter number'
+                }
+            ]
+        },
+        codewarehouse: {
+            identifier: 'codewarehouse',
+            rules: [
+                {
+                    type: 'exactLength[5]',
+                    prompt: 'Please enter exactly 10 characters'
+                },
+                {
+                    type: 'empty',
                     prompt: 'Please enter number'
                 }
             ]
@@ -243,6 +294,13 @@ $('.ui.form3').form({
                 prompt: 'Please enter status type'
             }]
         },
+        discountType: {
+            identifier: 'discountType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter status type'
+            }]
+        },      
         serviceTab: {
             identifier: 'serviceTab',
             rules: [{
@@ -255,6 +313,20 @@ $('.ui.form3').form({
             rules: [{
                 type: 'integer[1..100]',
                 prompt: 'Please enter number of unit'
+            }]
+        },
+        discountPercent: {
+            identifier: 'discountPercent',
+            rules: [{
+                type: 'integer[1..100]',
+                prompt: 'Please enter number of unit'
+            }]
+        },
+        discountAmount: {
+            identifier: 'discountAmount',
+            rules: [{
+                type: 'regExp[/^[0-9,]{0,12}$/]',
+                prompt: 'Please enter amount discount'
             }]
         },
         discountOther: {
@@ -414,6 +486,44 @@ $('.ui.form3').form({
                 prompt: 'Please enter folder name'
             }]
         },
+        productType: {
+            identifier: 'productType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter doctor'
+            }]
+        },
+        CountTypeDefault: {
+            identifier: 'CountTypeDefault',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter doctor'
+            }]
+        },
+        ware: {
+            identifier: 'ware',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter branch'
+            }]
+        },
+        sourceType: {
+            identifier: 'sourceType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter sourceType'
+            }]
+        },
+        url: {
+            identifier: 'url',
+            rules: [
+                {
+                    type: 'url',
+                    prompt: 'Please enter a url'
+                }
+            ]
+        },
+
     }
 });
 
@@ -463,7 +573,23 @@ $('.ui.form4').form({
                 type: 'checked',
                 prompt: 'You must agree to the terms and conditions'
             }]
-        }
+        },
+        sourceType: {
+            identifier: 'sourceType',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter a sourceType'
+            }]
+        },
+
+        fileUpload: {
+            identifier: 'fileUpload',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please enter a fileUpload'
+            }]
+        },
+        
     }
 });
 $(".setdata.button").on("click", function () {

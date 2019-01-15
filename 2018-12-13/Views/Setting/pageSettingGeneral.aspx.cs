@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using _2018_12_13.Comon;
 namespace _2018_12_13.Views.Setting
 {
-    public partial class pageSettingGeneral : System.Web.UI.Page
+    public partial class pageSettingGeneral :WebPageBase
     {
         public static string _DataBranch { get; set; }
         public static string _DataCompany { get; set; }

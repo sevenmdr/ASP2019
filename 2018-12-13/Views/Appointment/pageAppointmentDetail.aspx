@@ -211,16 +211,20 @@
                 //  $("#tokenServiceCare").val(tokenServiceCare.Service_care);
                 // $("#tokenServiceCare").multiselect("refresh");
                 $('#tokenServiceCare').dropdown('clear')
-                $('#tokenServiceCare').dropdown('set selected', ['67', '68']);
+                $('#tokenServiceCare').dropdown('set selected',  dataInfo.Service_care.split(",") );
                 // $('#tokenServiceCare').dropdown('set exactly',['67','68']);
                 //   $('#tokenServiceCare ').val();
                 $('#NoteSchedule').val((dataInfo.Content));
                 $(".flatpickr").flatpickr({ defaultDate: dataInfo.Date_From });
             }
             else {
-                $("#TypeSchedule ").dropdown("refresh");
+                if (TicketID != 0) {
+                    
+                              $("#TypeSchedule ").dropdown("refresh");
                 $("#TypeSchedule ").dropdown("set selected", 1);
                 $("#TypeSchedule ").addClass("disabled");
+                    }
+          
             }
         }
 

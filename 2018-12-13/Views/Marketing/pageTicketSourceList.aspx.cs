@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using _2018_12_13.Comon;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.Marketing
 {
-    public partial class pageTicketSourceList : System.Web.UI.Page
+    public partial class pageTicketSourceList : WebPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,8 +22,8 @@ namespace _2018_12_13.Views.Marketing
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                //dt = confunc.ExecuteDataTable("YYY_sp_Product_Unit_LoadList", CommandType.StoredProcedure,
-                //  "@UserID", SqlDbType.Int, Comon.Global.sys_userid);
+                dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_Source_LoadList]", CommandType.StoredProcedure,
+                  "@UserID", SqlDbType.Int, Comon.Global.sys_userid);
             }
             if (dt != null)
             {

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Stagb Admin Template</title>
+    <title>VTTech Solution</title>
     <meta charset="utf-8" />
     <link rel="icon" href="/img/favicon.ico" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +13,7 @@
     <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/img/favicon.ico" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
     <script src="/js/comon/noti_function.js"></script>
     <script src="/js/comon/load_datasource.js"></script>

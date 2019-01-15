@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <div class="ui small test modal" id="divDetailPopup"></div>
+   <%-- <div class="ui small test modal" id="divDetailPopup"></div>--%>
     <script type="text/javascript">
               var dataMainCustomerCare;
         var DataMain;

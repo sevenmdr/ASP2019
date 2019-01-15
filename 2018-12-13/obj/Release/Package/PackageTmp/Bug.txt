@@ -1,0 +1,11 @@
+LoadList Sup khi insert
+Vali Kho Code Tao ma  5 ky tu khong ky tu la  (chinh sua lable de ng ta hieu)
+Product List chuy?n Mã s?n ph?m thành SMP
+T? l? THêm don v? tính trong s?n ph?m chuy?n int  - > float
+Load cài d?t d?nh m?c
+Khi t?o product khi mapping v?i don v? tính c?n ph?i t?o chính nó luu ý khi hu?ng d?n user
+Map Product voi Service S? Lu?ng khi pushs xu?ng không d?i , Update không du?c
+LoadComboServiceTabDetail
+Khi nh?p treatment push thêm kho
+Lable ? serviceTab d?i % thành s? lu?ng
+sua ngay gio 3 list kho

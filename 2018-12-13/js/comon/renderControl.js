@@ -500,7 +500,6 @@ function RenderReportRevenueConsultant(data, id) {
                                                 <td>${item.EmployeeName}</td>
                                                 <td>${item.GroupName}</td>
                                                 <td>${item.Amount}</td>
-                                                <td>${item.Date}</td>
                                                 <td>${item.Status}</td>
                                             </tr>                          
 
@@ -527,7 +526,6 @@ function RenderReportRevenueTreatment(data, id) {
                                                 <td>${item.EmployeeName}</td>
                                                 <td>${item.GroupName}</td>
                                                 <td>${item.Amount}</td>
-                                                <td>${item.Date}</td>
                                                 <td>${item.Status}</td>
                                             </tr>                          
 

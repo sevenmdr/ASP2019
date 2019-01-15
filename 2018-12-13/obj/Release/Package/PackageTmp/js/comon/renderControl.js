@@ -1,82 +1,106 @@
 ﻿//LoadCombo - Normal
 function LoadCombo(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
-
-
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
 <div class="item" data-value=${item.ID}>${item.Name}</div>
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
 }
 //LoadCombo - With Value
 function LoadComboWithValue(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
 
 
     ${ (data).map(item => ` <div class="item" data-value=${item.Value}>${item.Name}</div>`)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+    else { document.getElementById(id).innerHTML = '' }
 }
 
 //LoadCombo - Token
 function LoadComboToken(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `
 
 
     ${ (data).map(item => `  <option value=${item.ID}>${item.Name}</option>`)
-        }
+            }
 `;
 
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+    else { document.getElementById(id).innerHTML = '' }
 }
 //LoadCombo - DetailValue
 function LoadComboDetail(data, id) {
-    var re = new RegExp(",", 'g');
-    const markup = `${(data).map(item => `<div class="item" data-value=${item.ID}><div>${item.Name}</div><div class="money" id=${item.ID}money>${item.Price}</div></div>`)}`;
-    document.getElementById(id).innerHTML = markup.replace(re, '');;
+    if (data && data.length > 0) {
+        var re = new RegExp(",", 'g');
+        const markup = `${(data).map(item => `<div class="item" data-value=${item.ID}><div>${item.Name}</div><div class="money" id=${item.ID}money>${item.Price}</div></div>`)}`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');;
+    }
+
+
+    else { document.getElementById(id).innerHTML = '' }
 }
+
 
 //RenFoderImage
 function RenFoder(data, id) {
-    debugger
-    var myNode = document.getElementById(id);
+    // debugger
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
         myNode.innerHTML = '';
         var re = new RegExp(",", 'g');
         const markup = `${(data).map(item => ` <a class="item">${item.FolderName}</a>`)}`;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
 
 }
 
-     //RenFoderImage
-function RenderImage (data, id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+//RenFoderImage
+function RenderImage(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
                          
                               
                             <img src=${item.link} alt="" title="" style="width: 200px;height: 200px;"/></a>
             
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
 
 }
 
 //RenderSchedule - pageGeneralInfo
-function RenScheduleList (data, id) {
-    var myNode = document.getElementById(id);
-    myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-    const markup = `
+function RenScheduleList(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
     ${(data).map(item => `
                              <div class="event">
                                             <div class="label">
@@ -95,14 +119,17 @@ function RenScheduleList (data, id) {
                                             </div>
                                         </div>
 `)
-        }
+            }
 `;
-    document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
 
 }
 
 //Render Radio - pageGeneralInfo
 function RenStatusNotYet(id) {
+
     var myNode = document.getElementById(id);
     myNode.innerHTML = '';
     var re = new RegExp(",", 'g');
@@ -128,8 +155,10 @@ function RenStatusNotYet(id) {
 `;
     document.getElementById(id).innerHTML = markup.replace(re, '');
 
+
 }
 function RenStatusCheckIn(id) {
+
     var myNode = document.getElementById(id);
     myNode.innerHTML = '';
     var re = new RegExp(",", 'g');
@@ -155,8 +184,10 @@ function RenStatusCheckIn(id) {
 `;
     document.getElementById(id).innerHTML = markup.replace(re, '');
 
+
 }
 function RenStatusCheckOUT(id) {
+
     var myNode = document.getElementById(id);
     myNode.innerHTML = '';
     var re = new RegExp(",", 'g');
@@ -182,6 +213,355 @@ function RenStatusCheckOUT(id) {
 `;
     document.getElementById(id).innerHTML = markup.replace(re, '');
 
+
 }
 
 
+//Render Table Ware Lock
+function RenderLockDetail(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.ID}</td>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+<td><div class="ui right labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input class="numberLeftDetail" type="number" value=${item.NumberLeft} />
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+//Render Table Ware Review
+function RenderLockReview(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.ID}</td>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+<td>${item.Norm}</td>
+<td>${item.Import}</td>
+<td>${item.Export}</td>
+
+
+<td><div class="ui right disabled labeled fluid input" style="background-color: ${item.ColorCode}">
+                                    <div class="ui label">|||</div>
+                                    <input type="number" value=${item.NumberLeft} disabled/>
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+
+//Render Table Ware Review
+function RenderImportExportNorm(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.ID}</td>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+
+<td><div class="ui right disabled labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input type="number" value=${item.Number} disabled/>
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+<td><div class="ui right disabled labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input type="number" value=${item.NumberMain} disabled/>
+                                    <div class="ui basic label">${item.UnitMainName}</div>
+                                </div></td>
+
+<td>${item.DateExe}</td>
+<td>${item.TypeName}</td>
+
+
+
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+// Render Table Import Excel
+function RenderTableImportExcel(data, id) {
+  
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+
+<td>${item.Name}</td>
+<td>${item.Phone}</td>
+
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+//Render REport 6 months
+function RenderReportSixMonth(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.Month}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Target}</td>
+                                                <td>${item.UpDown}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render REport Customer Source
+function RenderReportCustomerSource(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.SourceName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.NewCustomer}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render OverView Receipt
+function RenderReportOverViewReceipt(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.ReceiptName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.CreatedName}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render OverView Import
+function RenderReportOverViewImport(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.CreatedName}</td>
+                                                <td>${item.Amount}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render OverView Payment
+function RenderReportOverViewPayment(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.CustomerName}</td>
+                                                <td>${item.Date}</td>
+                                                <td>${item.Amount}</td>
+<td>${item.CreatedName}</td>
+<td>${item.SourceName}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Doanh THu TU VAN
+function RenderReportRevenueConsultant(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.GroupName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Status}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Doanh THu Dieu Tri
+function RenderReportRevenueTreatment(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.GroupName}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Status}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+//Render Report Telesale
+function RenderReportTeleSale(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.STT}</td>
+                                                <td>${item.EmployeeName}</td>
+                                                <td>${item.NumTicketCreated}</td>
+                                                <td>${item.NumTicketExecute}</td>
+                                                <td>${item.NumAppCreated}</td>
+                                                <td>${item.NumAppChecked}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}

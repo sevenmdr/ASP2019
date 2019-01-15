@@ -38,6 +38,9 @@
         }
     </script>--%>
 
+    <%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>--%>
+    <script src="/js/comon/renderControl.js"></script>
     <style>
         .upload-btn-wrapper {
             position: relative;
@@ -128,12 +131,12 @@
                             </div>
                             <div class="field">
                                 <label>Giới Tính</label>
-                                <div class="ui fluid search selection dropdown" id="Gender_ID">
+                                <div class="ui fluid search selection dropdown" id="Gender_ID" onchange="event.preventDefault();">
                                     <input type="hidden" name="gender" />
                                     <i class="dropdown icon"></i>
                                     <input class="search" autocomplete="off" tabindex="0" />
                                     <div class="default text">Giới Tính</div>
-                                    <div id="cbbGender" class="menu" tabindex="-1">
+                                    <div id="cbbGenderCustomer" class="menu" tabindex="-1">
                                     </div>
                                 </div>
                             </div>
@@ -142,23 +145,23 @@
                         <div class="two fields">
                             <div class="field">
                                 <label>Nguồn</label>
-                                <div class="ui fluid search selection dropdown" id="Type_Cat_ID">
+                                <div class="ui fluid search selection dropdown" id="Type_Cat_ID" onchange="event.preventDefault();">
                                     <input type="hidden" name="source" />
                                     <i class="dropdown icon"></i>
                                     <input class="search" autocomplete="off" tabindex="0" />
                                     <div class="default text">Nguồn Khách Hàng</div>
-                                    <div id="cbbSource" class="menu" tabindex="-1">
+                                    <div id="cbbSourceCustomer" class="menu" tabindex="-1">
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Ngôn Ngữ</label>
-                                <div class="ui fluid search selection dropdown" id="Language_ID">
+                                <div class="ui fluid search selection dropdown" id="Language_ID" onchange="event.preventDefault();">
                                     <input type="hidden" name="language" />
                                     <i class="dropdown icon"></i>
                                     <input class="search" autocomplete="off" tabindex="0" />
                                     <div class="default text">Ngôn Ngữ</div>
-                                    <div id="cbbLanguage" class="menu" tabindex="-1">
+                                    <div id="cbbLanguageCustomer" class="menu" tabindex="-1">
                                     </div>
                                 </div>
                             </div>
@@ -176,13 +179,14 @@
     </div>
     <div class="actions">
         <div style="float: right">
-            <button class="ui teal button" form="form3" onclick="ExcuteData()">Save</button>
+            <button class="ui teal button" form="form3" onclick="event.preventDefault();ExcuteData()">Save</button>
         </div>
     </div>
     <script>
         var urlAvatar = "/UploadClass/FileUploadHandler.ashx?Type=Avatar";
         var avatarString = ("<%=_defaultAvatar %>");
         var DataComboGender;
+        var loadtemp = 1;
         function ExcuteData() {
 
             var data = new Object();
@@ -214,9 +218,12 @@
                     },
                     success: function (result) {
                         if (result.d == "1") {
-                            notiSuccess();
                             location.reload();
-                        } else {
+                        }
+                        else if (result.d == "2") {
+                             notiSuccess();
+                        }
+                        else {
                             notiError("Lỗi Thêm Mới");
                         }
                     }
@@ -230,9 +237,16 @@
         function LoadComboCustomer() {
 
             GetDataComboCustomer("/Views/Customer/pageCustomerDetail.aspx/LoadComboMain", function (dataLangue, dataSource, dataGender) {
-                LoadCombo(dataGender, "cbbGender")
-                LoadCombo(dataSource, "cbbSource")
-                LoadCombo(dataLangue, "cbbLanguage")
+                if (loadtemp == 1) {
+                    LoadCombo(dataGender, "cbbGenderCustomer")
+                    LoadCombo(dataSource, "cbbSourceCustomer")
+                    LoadCombo(dataLangue, "cbbLanguageCustomer")
+                    $("#Gender_ID ").dropdown("refresh");
+                    $("#Type_Cat_ID ").dropdown("refresh");
+                    $("#Language_ID ").dropdown("refresh");
+
+                }
+                loadtemp = 0;
             });
         }
         $(document).ready(function () {

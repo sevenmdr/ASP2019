@@ -4,16 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Stagb Admin Template</title>
+    <title>VTTech Solution</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="~/img/favicon.ico" />
+    <link rel="icon" href="/img/favicon.ico" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <link href="/dist/semantic.min.custom.css" rel="stylesheet" />
     <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/img/favicon.ico" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
     <script src="/js/comon/noti_function.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
-                <form class="ui form segment form3" id="form3">
+                <form class="ui form segment form3">
                     <div class="field">
                         <div class="field">
                             <label>Loại Dịch Vụ</label>

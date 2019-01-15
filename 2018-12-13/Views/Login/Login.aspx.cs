@@ -30,17 +30,20 @@ namespace _2018_12_13.Views.Login
                     Session.SetCurrentUser(new UserLogin()
                     {
                         UserName = u_name.Value.Replace("'", "").Trim(),
-                        Password = u_pass.Value.Replace("'", "").Trim()
+                        Password = u_pass.Value.Replace("'", "").Trim(),
+                        id = "12"
                     });
                     Label1.Text = "";
+                    Comon.Global.Initalize();
                     Response.Redirect("~/Views/Appointment/pageAppointmentInDay.aspx");
-                  
+
                 }
                 else
                 {
                     Label1.Text = "Sai Username , Password";
                     Session.SetCurrentUser(null);
- 
+                    
+
                 }
             }
         }

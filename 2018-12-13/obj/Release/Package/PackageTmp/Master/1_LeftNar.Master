@@ -5,96 +5,209 @@
 <head runat="server">
     <title>VT-Tech Solution</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="~/img/favicon.ico">
+    <link rel="icon" href="/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <script src="/js/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <link href="~/dist/semantic.min.css" rel="stylesheet" />
-    <link href="~/dist/semantic.min.custom.css" rel="stylesheet" />
-    <link href="~/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
-    <link href="~/css/main.css" rel="stylesheet" />
-    <link href="~/css/main.custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/img/favicon.ico" />
-    <link href="~/plugins/pacejs/pace.css" rel="stylesheet" />
+    <link href="/dist/semantic.min.css" rel="stylesheet" />
+    <script src="/dist/semantic.min.js"></script>
+    <link href="/dist/semantic.min.custom.css" rel="stylesheet" />
+    <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/main.custom.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link href="/plugins/pacejs/pace.css" rel="stylesheet" />
     <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
     <link href="/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <script src="/plugins/sweetalert2/custom-alert.js"></script>
-    <link href="~/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
+    <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
     <script src="/plugins/lobibox/js/notifications.js"></script>
     <script src="/js/comon/noti_function.js"></script>
-
-    <script src="/dist/semantic.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
-
     <script src="/js/comon/load_datasource.js"></script>
     <script src="/js/comon/renderControl.js"></script>
 
+        <script src="/plugins/datatable/jquery.dataTables.js"></script>
+
+    <%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
+    <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">
+    <link href="/plugins/editable/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="/plugins/datatable/dataTables.semanticui.css" />--%>
+
+
+    <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div id="contextWrap">
-        <!--sidebar-->
         <div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
             <a class="item logo" href="/Views/Login/Logout.aspx">
                 <img src="/img/logo.png" alt="stagblogo" /><img src="/img/thumblogo.png" alt="stagblogo" class="displaynone" />
+
             </a>
             <div class="ui accordion inverted">
                 <div class="title item">
-                    <i class="calendar outline icon titleIcon icon"></i>
+                    <img src="/img/ButtonImg/apointment.png" />
                     <i class="dropdown icon"></i>Lịch Hẹn
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">
-                        <i class="calendar alternate icon titleIcon icon"></i>
-                        Trong Ngày
+                    <a class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">Trong Ngày
                     </a>
-                    <a class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">
-                        <i class="calendar alternate outline icon titleIcon icon"></i>
-                        Theo Ngày
+                    <a class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">Theo Ngày
                     </a>
                 </div>
 
                 <div class="title item">
-                    <i class="server icon titleIcon icon"></i>
-                    <i class="dropdown icon"></i>Chăm Sóc Khách Hàng
+                    <img src="/img/ButtonImg/customercare.png" />
+                    <i class="dropdown icon"></i>Chăm Sóc
                 </div>
                 <div class="content">
-                  <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Sau Điều Trị
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">Sinh Nhật
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Chưa Đến Chi Nhánh
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Chưa Làm Dịch Vụ
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
                     </a>
-                     <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Lịch
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
                     </a>
                 </div>
 
-
-
                 <div class="title item">
-                    <i class="dollar sign icon titleIcon icon"></i>
+                    <img src="/img/ButtonImg/account.png" />
                     <i class="dropdown icon"></i>Kế Toán
                 </div>
                 <div class="content">
-                    <a class="item" href="#">Chi Tại Chi Nhánh
+                    <a class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
                     </a>
-                    <a class="item" href="#">Danh Sách Thu Chi
+                    <a class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
                     </a>
-                    <a class="item" href="#">Công Nợ Khách Hàng
+                    <a class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
                     </a>
+                </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/customer.png" />
+                    <i class="dropdown icon"></i>Khách Hàng
+                </div>
+                <div class="content">
+                    <a class="item" id="createNewCustomer1" href="#">Tạo Mới Khách Hàng
+                    </a>
+   
 
                 </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/service.png" />
+                    <i class="dropdown icon"></i>Khuyến Mãi
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
+                    </a>
+                </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/warehouse.png" />
+                    <i class="dropdown icon"></i>Kho
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
+                    </a>
+                </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/marketing.png" />
+                    <i class="dropdown icon"></i>Marketing
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
+                    </a>
+                </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/employee.png" />
+                    <i class="dropdown icon"></i>Nhân Viên & User
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
+                    </a>
+                    <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
+                    </a>
+                    <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    </a>
+                </div>
+                <div class="title item">
+                    <img src="/img/ButtonImg/setting.png" />
+                    <i class="dropdown icon"></i>Cấu Hình
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    </a>
+                </div>
+
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/report.png" />
+                    <i class="dropdown icon"></i>Report
+                </div>
+                <div class="content">
+                    <a class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
+                    </a>
+
+                    <a class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    </a>
+                </div>
+
+
             </div>
+
+
+
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+            <%-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
 
             <div class="ui dropdown item displaynone scrolling">
                 <span>Lịch Hẹn</span>
-                <i class="calendar outline icon"></i>
+                <img src="/img/ButtonImg/apointment.png" />
                 <div class="menu">
                     <div class="header">
                         Lịch Hẹn
@@ -109,47 +222,174 @@
 
             <div class="ui dropdown item displaynone scrolling">
                 <span>Chăm Sóc</span>
-                <i class="server icon"></i>
+                <img src="/img/ButtonImg/customercare.png" />
                 <div class="menu">
                     <div class="header">
                         Chăm Sóc
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Sau Điều Trị
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">Sinh Nhật
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Chưa Đến Chi Nhánh
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Chưa Làm Dịch Vụ
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
                     </a>
-                     <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Lịch
+                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
                     </a>
                 </div>
             </div>
-        
-
 
             <div class="ui dropdown item displaynone scrolling">
                 <span>Kế Toán</span>
-                <i class="dollar sign icon"></i>
+                <img src="/img/ButtonImg/account.png" />
                 <div class="menu">
                     <div class="header">
                         Kế Toán
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="#">Chi Tại Chi Nhánh
+                    <a class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
                     </a>
-                    <a class="item" href="#">Danh Sách Thu Chi
+                    <a class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
                     </a>
-                    <a class="item" href="#">Công Nợ Khách Hàng
+                    <a class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
                     </a>
                 </div>
             </div>
 
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Khách Hàng</span>
+                <img src="/img/ButtonImg/customer.png" />
+                <div class="menu">
+                    <div class="header">
+                        Khách Hàng
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" id="createNewCustomer2" href="#">Tạo Mới Khách Hàng
+                    </a>
+
+
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Khuyến Mãi</span>
+                <img src="/img/ButtonImg/service.png" />
+                <div class="menu">
+                    <div class="header">
+                        Khuyến Mãi
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
+                    </a>
+                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Kho</span>
+                <img src="/img/ButtonImg/warehouse.png" />
+                <div class="menu">
+                    <div class="header">
+                        Kho
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
+                    </a>
+                    <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Marketing</span>
+                <img src="/img/ButtonImg/marketing.png" />
+                <div class="menu">
+                    <div class="header">
+                        Marketing
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
+                    </a>
+                    <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Nhân Viên & User</span>
+                <img src="/img/ButtonImg/employee.png" />
+                <div class="menu">
+                    <div class="header">
+                        Nhân Viên & User
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
+                    </a>
+                    <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
+                    </a>
+                    <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
+                    </a>
+                    <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Cấu Hình</span>
+                <img src="/img/ButtonImg/setting.png" />
+                <div class="menu">
+                    <div class="header">
+                        Cấu Hình
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui dropdown item displaynone scrolling">
+                <span>Report</span>
+                <img src="/img/ButtonImg/report.png" />
+                <div class="menu">
+                    <div class="header">
+                        Report
+                    </div>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
+                    </a>
+
+                    <a class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
+                    </a>
+                    <a class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    </a>
+                </div>
+            </div>
             <div class="ui divider"></div>
-
-
             <a class="item hiddenCollapse">
                 <div class="ui one mini inverted statistics">
                     <div class="statistic">
@@ -167,13 +407,9 @@
                         </div>
                     </div>
                 </div>
+            </a>
         </div>
-
-        <!--sidebar-->
-
         <div class="pusher">
-            <!--navbar-->
-
             <div class="navslide navwrap">
                 <div class="ui menu icon borderless grid" data-color="inverted white">
                     <a class="item labeled openbtn">
@@ -184,108 +420,109 @@
                     </a>
                     <div class="item ui colhidden">
                         <div class="ui icon input">
-                            <input id="searchCustomerID" type="text" placeholder="Search...">
+                            <input id="searchCustomerID" type="text" placeholder="Nhập 5 Ký Tự Trở Lên">
                             <i class="search icon"></i>
                         </div>
                     </div>
                     <div class="right menu colhidden">
 
-                        <%--                        <div class="ui dropdown item labeled icon">
-                            <i class="bell icon"></i>
-                            <div class="ui red label mini circular">6</div>
-                            <div class="menu">
-                                <div class="header">
-                                    People You Might Know
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/enid.png" alt="label-image" />
-                                    Janice Robinson
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Hershell.png" alt="label-image" />
-                                    Cynthia May
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Rick.png" alt="label-image" />
-                                    Hugh Carter
-                                </div>
-                                <div class="header">
-                                    Your Friends' Friends
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Meggie.png" alt="label-image" />
-                                    Pauline Cain
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Glenn.png" alt="label-image" />
-                                    Marco Beck
-                                </div>
-                                <div class="item">
-                                    <img class="ui avatar image" src="/img/avatar/people/Daryl.png" alt="label-image" />
-                                    Sue Quinn
-                                </div>
-                            </div>
-                        </div>
+                        <div id="userNameCurrent" style="margin: auto; color: green; font-size: 15px;">
+                         </div>
                         <div class="ui dropdown item">
-                            Language <i class="dropdown icon"></i>
+                            <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px" />
+
                             <div class="menu">
-                                <a class="item"><i class="united kingdom flag"></i>English</a>
-                                <a class="item"><i class="turkey flag"></i>Turkish</a>
-                                <a class="item"><i class="spain flag"></i>Spanish</a>
-                            </div>
-                        </div>--%>
-                        <div class="ui dropdown item">
-                            <img class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" />
-                            <div class="menu">
-                                <a class="item" href="/Error/index.html">Thư Cá Nhân</a>
-                                <a class="item" href="/Error/index.html">Thông Tin Cá Nhân</a>
-                                <a class="item" href="/Error/index.html">Cài Đặt</a>
+                                <%--                                <a class="item" href="/Error/index.html">Thư Cá Nhân</a>--%>
+                                <a class="item" id="updatePersonalInfo" href="#">Thông Tin Cá Nhân</a>
+                                <%--                                <a class="item" href="/Error/index.html">Cài Đặt</a>--%>
                                 <div class="ui divider"></div>
                                 <a class="item" href="/Views/Login/Logout.aspx">Đăng Xuất</a>
                             </div>
                         </div>
-                        <a class="item labeled rightsidebar computer only">
-                            <i class="ion-wrench large icon"></i>
-                        </a>
+    
                     </div>
                 </div>
             </div>
-            <%--<div class="ui medium test modal" id="divDetailPopup"></div>--%>
+
+
+            <div class="ui small test modal" id="divDetailPopup"></div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
-
     </div>
-
-    <script src="/dist/semantic.min.js"></script>
-    <script src="/plugins/cookie/js.cookie.js"></script>
-    <script src="/js/main.js"></script>
-<%--    <script src="/js/customjs/custom-modal.js"></script>--%>
-     
-
-
-
-
-
-
-
     <script>
+        var circleAvatar = ("<%=_circleAvatar %>");
+        $('#divDetailPopup').modal({
+            autofocus: false
+        });
         var input = document.getElementById("searchCustomerID");
         input.addEventListener("keyup", function (event) {
             event.preventDefault();
             if (event.keyCode === 13) {
-
                 window.open("/Views/Searching/Searching.aspx?SeachingText=" + $("#searchCustomerID").val());
                 //window.location.href="/Views/Searching/Searching.aspx?SeachingText=" + $("#searchCustomerID").val();
             }
         });
+        document.getElementById("createNewCustomer2").addEventListener("click", function (event) {
+            event.preventDefault();
+            AddNewCustomer();
+        });
+        document.getElementById("createNewCustomer1").addEventListener("click", function (event) {
+            event.preventDefault();
+            AddNewCustomer();
+        });
 
-        function addNewCustomer() {
+        function AddNewCustomer() {
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Customer/pageCustomerDetail.aspx");
             $('#divDetailPopup').modal('show');
         }
+        document.getElementById("updatePersonalInfo").addEventListener("click", function (event) {
+            event.preventDefault();
+            UpdatePersonnalInfo();
+        });
+        function UpdatePersonnalInfo() {
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Employee/pageEmployeeDetail.aspx?Type=updatePersonal");
+            $('#divDetailPopup').modal('show');
+        }
+
+        // Using all page
+        function getPageName(url) {
+            var index = url.lastIndexOf("/") + 1;
+            var filenameWithExtension = url.substr(index);
+            var filename = filenameWithExtension.split(".")[0];
+            return filename;
+        }
+
+        $(document).ready(function () {
+
+            $('#avatarofUserCircle').attr('src', 'data:image/png;base64, ' + circleAvatar);
+            document.getElementById("userNameCurrent").innerHTML = ("<%=_userNameCurrent %>");
+
+
+          <%--  let persmisionTable = ([<%=PermissionTableControl%>][0]);
+            persmisionTable = persmisionTable.filter(word => word["PageName"] == getPageName(window.location.pathname));
+            let index = 0;
+            for (index; index < persmisionTable.length; index++) {
+                //$("#" + persmisionTable[index]["ControlID"]).hide();
+                //document.getElementById(persmisionTable[index]["ControlID"]).style.display = "none!important";
+                $('#'+persmisionTable[index]["ControlID"]).attr('disabled', 'true');
+            }--%>
+
+
+        });
     </script>
+
+    <script src="/dist/semantic.min.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/plugins/cookie/js.cookie.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
+
+
+
+
+
 </body>
 </html>

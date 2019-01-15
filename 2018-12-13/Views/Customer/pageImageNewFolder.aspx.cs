@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using _2018_12_13.Comon;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.Customer
 {
-    public partial class pageImageNewFolder : System.Web.UI.Page
+    public partial class pageImageNewFolder : WebPageBase
     {
         public static string _CustomerID { get; set; }
         protected void Page_Load(object sender, EventArgs e)

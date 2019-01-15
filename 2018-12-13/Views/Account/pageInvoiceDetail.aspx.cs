@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using _2018_12_13.Comon;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.Account
 {
-    public partial class pageInvoiceDetail : System.Web.UI.Page
+    public partial class pageInvoiceDetail :WebPageBase
     {
         public static string _CurrentID { get; set; }
         public static string _DataComboReceiptype{ get; set; }

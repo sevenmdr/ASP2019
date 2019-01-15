@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2018_12_13.Comon;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.CustomerCare
 {
-    public partial class pageCallDetail : System.Web.UI.Page
+    public partial class pageCallDetail : WebPageBase
     {
         protected static int CustomerID { get; set; }
         protected static int Type_Care { get; set; }

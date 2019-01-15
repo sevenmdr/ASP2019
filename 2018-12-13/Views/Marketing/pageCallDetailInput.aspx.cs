@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using _2018_12_13.Comon;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace _2018_12_13.Views.Marketing
 {
-    public partial class pageCallDetailInput : System.Web.UI.Page
+    public partial class pageCallDetailInput : WebPageBase
     {
         public static int TicketID { get; set; }
         public static string _DataComboTypeinput { get; set; }
