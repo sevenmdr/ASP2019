@@ -12,22 +12,22 @@ namespace _2018_12_13.Views.Customer
 {
     public partial class MainCustomer : WebPageBase
     {
-        protected string CustomerID { get; set; }
-        protected string CustName { get; set; }
-        protected string CustCode { get; set; }
-        protected string Phone { get; set; }
-        protected string Avatar { get; set; }
-        protected string defaultAvatar { get; set; }
+        public static string CustomerID { get; set; }
+        public static string CustName { get; set; }
+        public static string CustCode { get; set; }
+        public static string Phone { get; set; }
+        public static string Avatar { get; set; }
+        public static string defaultAvatar { get; set; }
 
-        protected string facebookurl { get; set; }
-        protected string instgramurl { get; set; }
+        public static string facebookurl { get; set; }
+        public static string instgramurl { get; set; }
 
 
-        protected string totalmoneyRaise { get; set; }
+        public static string totalmoneyRaise { get; set; }
 
-        protected string totalmoneyPaid { get; set; }
+        public static string totalmoneyPaid { get; set; }
 
-        protected string totalmoneyLeft { get; set; }
+        public static string totalmoneyLeft { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {

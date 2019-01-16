@@ -401,14 +401,7 @@
     </script>
 
 
-    <script src="/dist/semantic.min.js"></script>
-    <script src="/plugins/cookie/js.cookie.js"></script>
-    <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
-    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/comon/noti_function.js"></script>
-    <script src="/js/customjs/custom-validation.js"></script>
-    <script src="/js/comon/load_datasource.js"></script>
+
 
 </body>
 

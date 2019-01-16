@@ -6,17 +6,13 @@
 <head runat="server">
     <title>VTTech Solution</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="/img/favicon.ico" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <link href="/dist/semantic.min.custom.css" rel="stylesheet" />
     <link href="/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/main.custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="/img/favicon.ico" />
     <link href="/plugins/lobibox/css/lobibox.css" rel="stylesheet" />
-    <script src="/js/comon/noti_function.js"></script>
-    <script type="text/javascript">
+
+    <%--    <script type="text/javascript">
         var dataInfo;
         function LoadComboSchedule() {
             GetDataComboAppointment("/Views/Appointment/pageAppointmentDetail.aspx/LoadCombo", function (dataScheduleType, ServiceCare, Doctor, Branch, TimeTreatment) {
@@ -33,12 +29,12 @@
             dataInfo = data[0];
         }
 
-    </script>
+    </script>--%>
 </head>
 
 <body>
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
     <div class="header">
         Lịch Hẹn Khách Hàng
@@ -117,21 +113,13 @@
         </div>
 
     </div>
-    <script>
-        var url = "/js/comon/load_datasource.js";
-        $.getScript(url);
-    </script>
 
-    <%--Script--%>
-    <script src="/dist/semantic.min.js"></script>
-    <script src="/plugins/cookie/js.cookie.js"></script>
-    <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
-    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
-    <script src="/js/customjs/custom-validation.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/comon/load_datasource.js"></script>
     <script>
         var TicketID = 0;
+        var dataComboDoc;
+        var dataComboScheduleType;
+        var dataComboBranch;
+        var dataComboServicetype;
         function ChangeTypeScheule() {
 
             if (Number($('#TypeSchedule').dropdown('get value')) == 1) {
@@ -156,27 +144,31 @@
             data.ServiceCare_ID = $('#tokenServiceCare').dropdown('get value').toString().substring(0, ($('#tokenServiceCare').dropdown('get value').toString().length) / 2) ? $('#tokenServiceCare').dropdown('get value').toString().substring(0, ($('#tokenServiceCare').dropdown('get value').toString().length) / 2) : "";
             data.Note = $('#NoteSchedule').val() ? $('#NoteSchedule').val() : "";
             data.Date_from = $('#Date_from').val() ? $('#Date_from').val() : "";
-
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
-                    url: "/Views/Appointment/pageAppointmentDetail.aspx/ExcuteData",
+                    url: "/Views/Appointment/pageAppointmentDetail.aspx/ExcuteDataAppointmentData",
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({ 'data': JSON.stringify(data) }),
                     contentType: 'application/json; charset=utf-8',
-                    async: true,
+                    async: false,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        debugger
+                        alert(textStatus);
+                        alert(errorThrown);
                         notiError("Lỗi Hệ Thống");
                     },
                     success: function (result) {
+                        debugger
                         if (result.d == "1") {
                             notiSuccess();
-                            LoadStatusAjax();
+                            //LoadStatusAjax();
+                            location.reload();
                         } else {
+
                             notiError(result.d);
                         }
-
                     }
                 });
                 $('#divDetailPopup').modal('hide');
@@ -185,7 +177,17 @@
             return false;
         }
         $(document).ready(function () {
-            LoadComboSchedule();
+            debugger
+        //    dataComboDoc = ([<%=_dataComboDoc%>][0]);
+            dataComboScheduleType = ([<%=_dataComboScheduleType%>][0]);
+            dataComboBranch = ([<%=_dataComboBranch%>][0]);
+            dataComboServicetype = ([<%=_dataComboServicetype%>][0]);
+            LoadCombo(dataComboScheduleType, "ccbTypeSchedule");
+            LoadComboToken(dataComboServicetype, "tokenServiceCare");
+          //  LoadCombo(dataComboDoc, "ccboDoctor");
+            LoadCombo(dataComboBranch, "ccbBranch");
+
+
             $('#Doctor_ID').addClass("disabled");
             $(".flatpickr").flatpickr({
                 dateFormat: 'd-m-Y H:i',
@@ -196,39 +198,47 @@
 
         });
         function LoadDataUpdate() {
+            let DataAppointment = ([<%=_dataAppointment%>][0]);
             TicketID = (<%=_TicketID%>);
-            
-            if (dataInfo) {
+
+            if (DataAppointment) {
                 $("#branch_ID ").dropdown("refresh");
-                $("#branch_ID ").dropdown("set selected", dataInfo.Branch_ID);
+                $("#branch_ID ").dropdown("set selected", DataAppointment.Branch_ID);
                 $("#Doctor_ID ").dropdown("refresh");
-                $("#Doctor_ID ").dropdown("set selected", dataInfo.DoctorID);
+                $("#Doctor_ID ").dropdown("set selected", DataAppointment.DoctorID);
                 $("#TypeSchedule ").dropdown("refresh");
-                $("#TypeSchedule ").dropdown("set selected", dataInfo.Type_ID);
+                $("#TypeSchedule ").dropdown("set selected", DataAppointment.Type_ID);
 
 
                 // $("#tokenServiceCare").dropdown("refresh");
                 //  $("#tokenServiceCare").val(tokenServiceCare.Service_care);
                 // $("#tokenServiceCare").multiselect("refresh");
                 $('#tokenServiceCare').dropdown('clear')
-                $('#tokenServiceCare').dropdown('set selected',  dataInfo.Service_care.split(",") );
+                $('#tokenServiceCare').dropdown('set selected', DataAppointment.Service_care.split(","));
                 // $('#tokenServiceCare').dropdown('set exactly',['67','68']);
                 //   $('#tokenServiceCare ').val();
-                $('#NoteSchedule').val((dataInfo.Content));
-                $(".flatpickr").flatpickr({ defaultDate: dataInfo.Date_From });
+                $('#NoteSchedule').val((DataAppointment.Content));
+                $(".flatpickr").flatpickr({ defaultDate: DataAppointment.Date_From });
             }
             else {
                 if (TicketID != 0) {
-                    
-                              $("#TypeSchedule ").dropdown("refresh");
-                $("#TypeSchedule ").dropdown("set selected", 1);
-                $("#TypeSchedule ").addClass("disabled");
-                    }
-          
+                    $("#TypeSchedule ").dropdown("refresh");
+                    $("#TypeSchedule ").dropdown("set selected", 1);
+                    $("#TypeSchedule ").addClass("disabled");
+                }
+
             }
         }
 
     </script>
+        <script src="/dist/semantic.min.js"></script>
+    <script src="/plugins/cookie/js.cookie.js"></script>
+    <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
+    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/comon/noti_function.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/comon/load_datasource.js"></script>
 </body>
 
 </html>
