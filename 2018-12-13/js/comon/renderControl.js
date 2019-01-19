@@ -1,5 +1,6 @@
 ﻿//LoadCombo - Normal
 function LoadCombo(data, id) {
+
     if (data && data.length > 0) {
         var re = new RegExp(",", 'g');
         const markup = `
@@ -348,7 +349,8 @@ function RenderTableImportExcel(data, id) {
 
 <td>${item.Name}</td>
 <td>${item.Phone}</td>
-
+<td>${item.Facebook}</td>
+<td>${item.ServiceCare}</td>
 
   </tr>                            
 

@@ -40,6 +40,7 @@
                                         <th style="text-align: center">Nội Dung</th>
                                         <th style="text-align: center">Số Tiền</th>
                                         <th style="text-align: center">Hình Thúc</th>
+                                        <th style="text-align: center; width: 30px;">In</th>
                                         <th style="text-align: center; width: 30px;">Sửa</th>
                                         <th style="text-align: center; width: 30px;">Xóa</th>
                                     </tr>
@@ -57,7 +58,8 @@
         function LoadAccountAjax() {
             let dateFrom = $('#dateFrom').val() ? $('#dateFrom').val() : new Date();
             let dateTo = $('#dateTo').val() ? $('#dateTo').val() : new Date()
-            GetDataAccount("/Views/Account/pageInvoiceList.aspx/LoadataAccount", dateFrom, dateTo, function (data) {
+            GetDataAccountList("/Views/Account/pageInvoiceList.aspx/LoadataAccount", dateFrom, dateTo, function (data) {
+   
                 $('#dtContent').DataTable().destroy();
                 $("#TableContent").replaceWith(divClone.clone());
                 var table = $('#dtContent').DataTable({
@@ -92,6 +94,13 @@
                                 "<button class='ui blue basic button modalfour' style='margin-bottom: -3rem;margin-top: -0.5rem;box-shadow: 0 0 0 1px #ffffff !important;"
                                 + "'data-value='fade up'><img class='buttonDeleteClass' src='/img/ButtonImg/delete.png' alt='delete' width='20' height='20'></button>",
                         },
+                                             {
+                        "targets": -3,
+                        "data": null,
+                        "defaultContent":
+                            "<button class='ui blue basic button modalfour' style='margin-bottom: -3rem;margin-top: -0.5rem;box-shadow: 0 0 0 1px #ffffff !important;"
+                            + "'data-value='fade up'><img class='buttonPrintClass' src='/img/ButtonImg/printer.png' alt='delete' width='20' height='20'></button>",
+                    },
 
                     ],
                 });
@@ -105,6 +114,10 @@
                     var data = table.row($(this).parents('tr')).data();
                     DeleteAccountList(data["ID"]);
                 });
+                            $('#dtContent tbody ').on('click', '.buttonPrintClass', function () {
+                var data = table.row($(this).parents('tr')).data();
+                window.open("/Views/Account/pageInvoicePrint.aspx?id="+data["ID"], '_blank', 'location=yes,height=650,width=800,scrollbars=yes,status=yes');
+            });
 
             })
         }

@@ -72,7 +72,7 @@
     <script>
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 mode: "multiple",
                 minDate: new Date(),
                 enableTime: false,

@@ -187,6 +187,9 @@
         var avatarString = ("<%=_defaultAvatar %>");
         var DataComboGender;
         var loadtemp = 1;
+        var dataGender;
+        var dataSource;
+        var dataLangue;
         function ExcuteData() {
 
             var data = new Object();
@@ -199,7 +202,7 @@
             data.Phone2 = $('#Phone2').val() ? $('#Phone2').val() : "";
 
             data.Name = $('#Name').val() ? $('#Name').val() : "";
-            data.Birthday = $('#Birthday').val() ? $('#Birthday').val() : "";
+            data.Birthday = $('#Birthday').val();
             data.Avatar = avatarString;
             data.instgramurl = $('#instgramurl').val() ? $('#instgramurl').val() : "";
             data.facebookurl = $('#facebookurl').val() ? $('#facebookurl').val() : "";
@@ -217,14 +220,15 @@
                         notiError("Lỗi Hệ Thống");
                     },
                     success: function (result) {
+                        debugger
                         if (result.d == "1") {
                             location.reload();
                         }
                         else if (result.d == "2") {
-                             notiSuccess();
+                            notiSuccess();
                         }
                         else {
-                            notiError("Lỗi Thêm Mới");
+                            notiError(result.d);
                         }
                     }
                 });
@@ -234,27 +238,25 @@
             return false;
         }
 
+
         function LoadComboCustomer() {
+            dataGender = ([<%=_dataGender%>][0]);
+            dataSource = ([<%=_dataSource%>][0]);
+            dataLangue = ([<%=_dataLangue%>][0]);
 
-            GetDataComboCustomer("/Views/Customer/pageCustomerDetail.aspx/LoadComboMain", function (dataLangue, dataSource, dataGender) {
-                if (loadtemp == 1) {
-                    LoadCombo(dataGender, "cbbGenderCustomer")
-                    LoadCombo(dataSource, "cbbSourceCustomer")
-                    LoadCombo(dataLangue, "cbbLanguageCustomer")
-                    $("#Gender_ID ").dropdown("refresh");
-                    $("#Type_Cat_ID ").dropdown("refresh");
-                    $("#Language_ID ").dropdown("refresh");
-
-                }
-                loadtemp = 0;
-            });
+            LoadCombo(dataGender, "cbbGenderCustomer")
+            LoadCombo(dataSource, "cbbSourceCustomer")
+            LoadCombo(dataLangue, "cbbLanguageCustomer")
+            $("#Gender_ID ").dropdown("refresh");
+            $("#Type_Cat_ID ").dropdown("refresh");
+            $("#Language_ID ").dropdown("refresh");
         }
         $(document).ready(function () {
 
             $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
             LoadComboCustomer();
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -281,6 +283,7 @@
             });
             LoadDataUpdate();
         });
+
         function LoadDataUpdate() {
             let dataInfo = ([<%=_dataInfo%>][0]);
             if (dataInfo != undefined) {
@@ -309,9 +312,12 @@
         }
     </script>
     <script src="/dist/semantic.min.js"></script>
-    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
+    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/comon/noti_function.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
 </body>
 

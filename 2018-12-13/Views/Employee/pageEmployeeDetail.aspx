@@ -203,7 +203,7 @@
             LoadComboEmp();
 
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+               dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });

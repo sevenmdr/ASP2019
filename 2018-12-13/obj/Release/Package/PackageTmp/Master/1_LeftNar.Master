@@ -30,6 +30,10 @@
     <script src="/js/comon/renderControl.js"></script>
 
         <script src="/plugins/datatable/jquery.dataTables.js"></script>
+        <link href="/MultiColumnCombo/jquery.inputpicker.css" rel="stylesheet" />
+    <script src="/MultiColumnCombo/jquery.inputpicker.js"></script>
+<script src="/NumberThousand/number-divider.js"></script>
+
 
     <%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
     <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">

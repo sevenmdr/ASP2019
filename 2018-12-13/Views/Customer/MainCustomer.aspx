@@ -40,6 +40,7 @@
                 <a class="item">Điều Trị</a>
                 <a class="item">Hình Ảnh</a>
                 <a class="item">Lịch Sử</a>
+                <a class="item">Lịch Hẹn</a>
                 <div class="right menu">
                     <a class="item" id="totalMoneyCustomerRaise">
                         <div class="ui mini statistic">
@@ -170,6 +171,12 @@
                     document.getElementById("totalMoneyCustomerLeft").style.display = "block";
                     $("#divMainPage").load("/Views/Customer/pageHistoryList.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
                     break;
+                 case "Lịch Hẹn":
+                    document.getElementById("totalMoneyCustomerRaise").style.display = "block";
+                    document.getElementById("totalMoneyCustomerPaid").style.display = "block";
+                    document.getElementById("totalMoneyCustomerLeft").style.display = "block";
+                    $("#divMainPage").load("/Views/Customer/pageScheduleList.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
+                    break;
                 case "Dịch Vụ":
                     document.getElementById("totalMoneyCustomerRaise").style.display = "block";
                     document.getElementById("totalMoneyCustomerPaid").style.display = "block";
@@ -270,6 +277,23 @@
 
         }
         ///////////////////
+
+           // Schedule //////////////
+        function addNewSchedule(customerID) {
+
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Appointment/pageAppointmentDetail.aspx?CustomerID=" + customerID + "&typeHistory=1");
+        }
+        function editSchedule(id, customerid) {
+            debugger
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Appointment/pageAppointmentDetail.aspx?CurrentID=" + id + "&CustomerID=" + customerid);
+            $('#divDetailPopup').modal('show');
+
+        }
+        ///////////////////
+
+
         //Payment ///////////////////
         function addNewPayment(customerID) {
 

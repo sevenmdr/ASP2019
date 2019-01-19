@@ -134,7 +134,7 @@
         }
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -142,7 +142,6 @@
             LoadInputAjax();
         });
         function AddNewInput() {
-            debugger
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/WareHouse/pageInputDetail.aspx");
             $('#divDetailPopup').modal('show');

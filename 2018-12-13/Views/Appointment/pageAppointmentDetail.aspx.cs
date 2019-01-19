@@ -25,10 +25,11 @@ namespace _2018_12_13.Views.Appointment
             LoadCombo();
             var cus = Request.QueryString["CustomerID"];
             var curr = Request.QueryString["CurrentID"];
-            _TicketID = "0";
+            var tic = Request.QueryString["TicketID"];
             if (cus != null)
             {
                 _CustomerID = cus.ToString();
+                _TicketID = (tic != null) ? tic.ToString() : "0";
                 if (curr != null)
                 {
                     _CurrentID = curr.ToString();
@@ -116,7 +117,7 @@ namespace _2018_12_13.Views.Appointment
             try
             {
                 ScheduleDetail DataMain = JsonConvert.DeserializeObject<ScheduleDetail>(data);
-                if (_CurrentID == "0")
+                if (_CurrentID == null)
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {

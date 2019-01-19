@@ -41,6 +41,8 @@ namespace _2018_12_13.Views.Service
         public string PerTreatPercent { get; set; }
         public string Content { get; set; }
         public string IsPro { get; set; }
+        public string TimeToTreatment { get; set; }
+        
     }
 
 
@@ -170,6 +172,8 @@ namespace _2018_12_13.Views.Service
                             "@PerTreatAmount", SqlDbType.Int, DataMain.PerTreatAmount,
                              "@PerTreatPercent", SqlDbType.Int, DataMain.PerTreatPercent,
                              "@IsPro", SqlDbType.Int, DataMain.IsPro,
+                             "@TimeToTreatment", SqlDbType.Int, DataMain.TimeToTreatment,
+                             
                             "@table_data", SqlDbType.Structured, DataService.Rows.Count > 0 ? DataService : null
                         );
                     }
@@ -191,6 +195,7 @@ namespace _2018_12_13.Views.Service
                             "@PerTreatAmount", SqlDbType.Int, DataMain.PerTreatAmount,
                              "@PerTreatPercent", SqlDbType.Int, DataMain.PerTreatPercent,
                              "@IsPro", SqlDbType.Int, DataMain.IsPro,
+                             "@TimeToTreatment", SqlDbType.Int, DataMain.TimeToTreatment,
                             "@currentID", SqlDbType.Int, Convert.ToInt32(_CurrentID)
                         );
                     }

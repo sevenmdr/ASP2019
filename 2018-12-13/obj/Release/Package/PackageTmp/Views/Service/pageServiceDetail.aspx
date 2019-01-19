@@ -31,7 +31,7 @@
                             <input id="txtName" name="name" type="text" />
                         </div>
                     </div>
-                    <div class="two fields">
+                    <div class="three fields">
                         <div class="field">
                             <label>Loại Dịch Vụ</label>
                             <div class="ui fluid search selection dropdown" id="serviceType">
@@ -47,9 +47,13 @@
                             <label>Giá Tiền</label>
                             <div class="ui right labeled fluid input">
                                 <div class="ui label">$</div>
-                                <input id="txtAmount" name="discountAmount" type="number" />
+                                <input id="txtAmount" name="discountAmount" type="text" />
                                 <div class="ui basic label">VND</div>
                             </div>
+                        </div>
+                                                <div class="field">
+                           <label>Số Lần Điều trị</label>
+                            <input id="spTotalTreatment" name="Notvalid" type="number" onchange="return ExecuteAmountTreat()" />
                         </div>
                     </div>
                     <div class="two fields">
@@ -64,13 +68,13 @@
                                         <div class="ui segment">
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerConsulAmount" name="discountAmount" type="number" onchange="return ExecuteAmountConsult()" />
+                                                <input id="txtPerConsulAmount" name="Notvalid" type="text" onchange="return ExecuteAmountConsult()" />
                                                 <div class="ui basic label">VND</div>
                                             </div>
                                             <div class="ui divider"></div>
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerConsulPercent" name="discountPercent" type="number" onchange="return ExecutePercentConsult()" />
+                                                <input id="txtPerConsulPercent" name="Notvalid" type="number" onchange="return ExecutePercentConsult()" />
                                                 <div class="ui basic label">%</div>
                                             </div>
                                         </div>
@@ -89,13 +93,13 @@
                                         <div class="ui segment">
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerTreatAmount" name="discountAmount" type="number" onchange="return ExecuteAmountTreat()" />
+                                                <input id="txtPerTreatAmount" name="Notvalid" type="text" onchange="return ExecuteAmountTreat()" />
                                                 <div class="ui basic label">VND</div>
                                             </div>
                                             <div class="ui divider"></div>
                                             <div class="ui right labeled fluid input">
                                                 <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerTreatPercent" name="discountPercent" type="number" onchange="return ExecutePercentTreat()" />
+                                                <input id="txtPerTreatPercent" name="Notvalid" type="number" onchange="return ExecutePercentTreat()" />
                                                 <div class="ui basic label">%</div>
                                             </div>
                                         </div>
@@ -106,13 +110,13 @@
                     </div>
 
 
-                    <div class="field">
+
                         <div class="field">
                             <label>Ghi Chú</label>
                             <input id="txtContent" name="content" type="text" />
 
                         </div>
-                    </div>
+
                     <div class="field">
                         <div class="field">
                             <div class="ui toggle checkbox">
@@ -215,14 +219,14 @@
                 $("#txtPerConsulAmount").attr('name', "discountAmount");
                 $('#txtPerConsulPercent').val(0);
 
-                $("#txtPerConsulPercent").attr('name', "NotVali");
+                //$("#txtPerConsulPercent").attr('name', "NotVali");
             }
         }
         function ExecutePercentConsult() {
             if (Number($('#txtPerConsulPercent').val()) != 0) {
                 $("#txtPerConsulPercent").attr('name', "discountPercent");
                 $('#txtPerConsulAmount').val(0);
-                $("#txtPerConsulAmount").attr('name', "NotVali");
+                // $("#txtPerConsulAmount").attr('name', "NotVali");
             }
         }
         function ExecuteAmountTreat() {
@@ -230,14 +234,14 @@
                 $("#txtPerTreatAmount").attr('name', "discountAmount");
                 $('#txtPerTreatPercent').val(0);
 
-                $("#txtPerTreatPercent").attr('name', "NotVali");
+                //   $("#txtPerTreatPercent").attr('name', "NotVali");
             }
         }
         function ExecutePercentTreat() {
             if (Number($('#txtPerTreatPercent').val()) != 0) {
                 $("#txtPerTreatPercent").attr('name', "discountPercent");
                 $('#txtPerTreatAmount').val(0);
-                $("#txtPerTreatAmount").attr('name', "NotVali");
+                //   $("#txtPerTreatAmount").attr('name', "NotVali");
             }
         }
         function LoadComboUnit() {
@@ -248,14 +252,18 @@
 
             divContentProductDetail = $("#TableProductDetail").clone();
             document.getElementById("textShowMessage").innerHTML = "";
-             $('#numberProduct').val(1);
+            $('#numberProduct').val(1);
+             $('#spTotalTreatment').val(1);
             DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
-                    DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
-                    DataComboProduct = ([<%=_DataComboProduct%>][0]);
+            DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
+            DataComboProduct = ([<%=_DataComboProduct%>][0]);
 
-                    DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
-                    DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
+            DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
+            DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
 
+            $('#txtAmount').divide();
+            $('#txtPerConsulAmount').divide();
+            $('#txtPerTreatAmount').divide();
 
             LoadCombo(DataComboTypeService, "cbbserviceType")
             // Load test unit name
@@ -333,13 +341,14 @@
             let DataProductMain = ([<%=_DataProductMain%>][0]);
             LoadDataTable();
             if (DataProductMain) {
+                
                 $("#txtPerConsulAmount").attr('name', "NotVali");
                 $("#txtPerConsulPercent").attr('name', "NotVali");
                 $("#txtPerTreatAmount").attr('name', "NotVali");
                 $("#txtPerTreatPercent").attr('name', "NotVali");
                 $("#serviceType").dropdown("refresh");
                 $("#serviceType").dropdown("set selected", DataProductMain[0].ServiceType); //ServiceType
-
+                  $('#spTotalTreatment').val((DataProductMain[0].TimeToTreatment));
                 $('#txtName').val((DataProductMain[0].Name));  //Name
                 $('#txtAmount').val((DataProductMain[0].Amount)); //Amount
                 $('#txtPerConsulAmount').val((DataProductMain[0].PerConsulAmount)); //PerConsulAmount
@@ -408,6 +417,7 @@
             data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
             data.Name = $('#txtName').val() ? $('#txtName').val() : "";
             data.IsPro = (document.getElementById("chkIsproduct").checked) ? "1" : "0";
+            data.TimeToTreatment = Number($('#spTotalTreatment').val()) ? Number($('#spTotalTreatment').val()) : 1;
 
 
             // Execute datatable UNIT

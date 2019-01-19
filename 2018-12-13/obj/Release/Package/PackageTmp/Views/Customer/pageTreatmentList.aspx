@@ -26,8 +26,10 @@
                                 <th style="text-align: center; width: 25px;">STT</th>
                                 <th style="text-align: center">Bác Sĩ</th>
                                 <th style="text-align: center">KTV</th>
-                                 <th style="text-align: center">Nội Dung</th>
+                                <th style="text-align: center">Nội Dung</th>
                                 <th style="text-align: center">Dịch Vụ</th>
+                                <th style="text-align: center">Tồng Lần Điều Trị</th>
+                                <th style="text-align: center">Lần Đã Điều Trị</th>
                                 <th style="text-align: center">Ngày</th>
                                 <th style="text-align: center; width: 30px;">Sửa</th>
                                 <th style="text-align: center; width: 30px;">Xóa</th>
@@ -47,7 +49,7 @@
     var customerID = ("<%=CustomerID %>");
     function LoadTreatmentAjax() {
         GetDataSourceTreatment("/Views/Customer/pageTreatmentList.aspx/LoadataTreatment", customerID, function (data) {
-             $('#dtContent').DataTable().destroy();
+            $('#dtContent').DataTable().destroy();
             $("#TableContent").replaceWith(divClone.clone());
 
             var table = $('#dtContent').DataTable({
@@ -58,14 +60,17 @@
                 searching: false,
                 destroy: true,
                 "columnDefs": [
-                    { "visible": false, "targets": 0, "data": "ID"  },
-                    { "visible": true, "targets": 1, "data": "STT", width: "50px", "className":"center" },
-                    { "visible": true, "targets": 2, "data": "DocName" , width:"200px"},
-                    { "visible": true, "targets": 3, "data": "PTname" , width:"200px"},
-                    { "visible": true, "targets": 4, "data": "Content"  ,},
-                    { "visible": true, "targets": 5, "data": "ServiceName" , width:"250px" },
-                    { "visible": true, "targets": 6, "data": "CreatedString" , width:"200px" , "className":"center"},
-                    
+                    { "visible": false, "targets": 0, "data": "ID" },
+                    { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
+                    { "visible": true, "targets": 2, "data": "DocName", width: "200px" },
+                    { "visible": true, "targets": 3, "data": "PTname", width: "200px" },
+                    { "visible": true, "targets": 4, "data": "Content", },
+                    { "visible": true, "targets": 5, "data": "ServiceName", width: "250px" },
+                    { "visible": true, "targets": 6, "data": "TimeToTreatment" },
+                    { "visible": true, "targets": 7, "data": "TotalTreatment"},
+
+                    { "visible": true, "targets": 8, "data": "CreatedString", width: "200px", "className": "center" },
+
                     {
                         "targets": -2,
                         "data": null,
@@ -87,7 +92,7 @@
             document.getElementById("dtContent").className = "ui celled table";
             $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                 var data = table.row($(this).parents('tr')).data();
-                editTreatment(data["ID"],customerID);
+                editTreatment(data["ID"], customerID);
             });
             $('#dtContent tbody ').on('click', '.buttonDeleteClass', function () {
                 var data = table.row($(this).parents('tr')).data();
@@ -101,29 +106,29 @@
         const promise = notiConfirm();
         promise.then(function () { ExecuteDeleteTreatment(id); }, function () { });
     }
-              function ExecuteDeleteTreatment(id) {
-                $.ajax({
-                    url: "/Views/Customer/pageTreatmentList.aspx/DeleteItem",
-                    dataType: "json",
-                    type: "POST",
-                    data: JSON.stringify({ 'id':id  }),
-                    contentType: 'application/json; charset=utf-8',
-                    async: true,
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        notiError();
-                    },
-                    success: function (result) {
-                        if (result.d == "1") {
-                            notiSuccess();
-                            LoadTreatmentAjax();
-                        } else {
-                            notiError();
-                        }
-                    }
-                })
-        }
+    function ExecuteDeleteTreatment(id) {
+        $.ajax({
+            url: "/Views/Customer/pageTreatmentList.aspx/DeleteItem",
+            dataType: "json",
+            type: "POST",
+            data: JSON.stringify({ 'id': id }),
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                notiError();
+            },
+            success: function (result) {
+                if (result.d == "1") {
+                    notiSuccess();
+                    LoadTreatmentAjax();
+                } else {
+                    notiError();
+                }
+            }
+        })
+    }
     $(document).ready(function () {
-       divClone = $("#TableContent").clone();
+        divClone = $("#TableContent").clone();
         LoadTreatmentAjax();
 
     });

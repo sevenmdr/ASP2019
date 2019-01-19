@@ -16,9 +16,15 @@ namespace _2018_12_13.Views.Customer
         public static string _defaultAvatar { get; set; }
 
         public static string _dataInfo { get; set; }
+        public static string _dataGender { get; set; }
+        public static string _dataSource { get; set; }
+        public static string _dataLangue { get; set; }
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadComboMain();
             _defaultAvatar = Comon.Global.sys_DefaultAvatar;
             var v = Request.QueryString["CustomerID"];
             if (v != null)
@@ -50,40 +56,39 @@ namespace _2018_12_13.Views.Customer
             }
 
         }
-        [System.Web.Services.WebMethod]
-        public static string LoadComboMain()
+
+        public void LoadComboMain()
         {
-            DataSet ds = new DataSet();
             //LoadLanguage
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.LoadPara("Language");
-                ds.Tables.Add(dt);
+                _dataLangue = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
             //LoadSourceCustomer
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.LoadPara("SourceCustomer");
-                ds.Tables.Add(dt);
+                _dataSource = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
             //LoadGender
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.LoadPara("Gender");
-                ds.Tables.Add(dt);
+                _dataGender = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
 
-            return JsonConvert.SerializeObject(ds, Formatting.Indented);
         }
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data)
         {
+
+            CustomerDetail DataMain = JsonConvert.DeserializeObject<CustomerDetail>(data);
             try
             {
-                CustomerDetail DataMain = JsonConvert.DeserializeObject<CustomerDetail>(data);
                 if (_CurrentID == 0)
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
@@ -100,14 +105,17 @@ namespace _2018_12_13.Views.Customer
                      "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                      "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
-                     "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
+                     "@Birthday", SqlDbType.NVarChar, Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss"),
                      "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
                    );
                     }
+                    Console.WriteLine("1");
                     return "2";
+
+
                 }
                 else
                 {
@@ -125,7 +133,7 @@ namespace _2018_12_13.Views.Customer
                       "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                       "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
-                      "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday),
+                      "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss"),
                       "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
@@ -134,12 +142,13 @@ namespace _2018_12_13.Views.Customer
                     );
                     }
                 }
+                Console.WriteLine("1");
                 return "1";
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                return "0";
+                return DataMain.Birthday.ToString();
+      
             }
 
 

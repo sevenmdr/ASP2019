@@ -74,7 +74,7 @@
                                     <div class="ui vertical divider">
                                     </div>
                                     <div class="center aligned column">
-                                        <img id="avatarCompany" class="ui mini circular image" src="#" alt="label-image" style="width: 150px; height: 150px;margin: auto;" />
+                                        <img id="avatarCompany" class="ui mini circular image" src="#" alt="label-image" style="width: 150px; height: 150px; margin: auto;" />
                                         <div>&nbsp</div>
                                         <div class="btn btn-success upload-btn-wrapper">
                                             <button class="btn" style="width: 100%">3Mp ( png ,jpg )</button>
@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="field">
                                             <label>Chỉ Tiêu</label>
-                                            <input id="Target" type="number" />
+                                            <input id="Target" type="text" />
                                         </div>
                                     </div>
                                     <div class="field">
@@ -189,10 +189,10 @@
         var avatarString = ("<%=_defaultAvatar %>");
         var urlAvatar = "/UploadClass/FileUploadHandler.ashx?Type=Avatar";
         $(document).ready(function () {
-    
+
             $('#avatarCompany').attr('src', 'data:image/png;base64, ' + avatarString);
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -217,7 +217,7 @@
                 acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 
             });
-
+            $('#Target').divide();
             DataBranch = ([<%=_DataBranch%>][0]);
             DataCompany = ([<%=_DataCompany%>][0]);
             DataOption = ([<%=_DataOption%>]);
@@ -336,7 +336,7 @@
                 $('#CompanyName').val((DataCompany[0].Name));
                 $('#CompanyHotline').val((DataCompany[0].Phone));
                 $('#CompanyAddress').val((DataCompany[0].Address));
-    
+
                 if (DataCompany[0].Avatar == '' || DataCompany[0].Avatar == undefined) {
                     $('#avatarCompany').attr('src', 'data:image/png;base64, ' + avatarString);
                 }

@@ -171,11 +171,11 @@ $('.ui.form3').form({
                 prompt: 'You must agree to the terms and conditions'
             }]
         },
-        email: {
-            identifier: 'email',
+        emailValidate: {
+            identifier: 'emailValidate',
             rules: [
                 {
-                    type: 'email',
+                    type: 'emailValidate',
                     prompt: 'Please enter a valid e-mail'
                 }
             ]
@@ -690,8 +690,8 @@ $('.ui.form6').form({
                 }
             ]
         },
-        email: {
-            identifier: 'email',
+        emailValidate: {
+            identifier: 'emailValidate',
             rules: [
                 {
                     type: 'email',

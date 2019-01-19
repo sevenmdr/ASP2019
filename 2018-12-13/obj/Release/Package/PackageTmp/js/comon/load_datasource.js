@@ -205,26 +205,6 @@ function GetDataSourceTreatment(link, CustomerID, fn) {
     return x;
 }
 
-//GetCombo Treatment
-function GetDataComboTreatment(link, fn) {
-    var x = "";
-    $.ajax({
-        url: link,
-        dataType: "json",
-        type: "POST",
-        contentType: 'application/json; charset=utf-8',
-        async: false,
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
-        },
-        success: function (data) {
-
-            fn(JSON.parse(data.d)["Table1"], JSON.parse(data.d)["Table2"], JSON.parse(data.d)["Table3"]);
-        }
-    })
-    return x;
-}
 
 //LoadData CustomerCare AfterTreatment
 function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
@@ -1314,6 +1294,48 @@ function GetDataAccount(link, dateFrom, dateTo, fn) {
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}
+
+// Load list Discount
+function GetDataAccountList(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load list customer Schedule,
+function GetDataSourceSchedule(link, CustomerID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "CustomerID": CustomerID }),
         async: true,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 

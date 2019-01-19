@@ -59,8 +59,10 @@
                             <table class="ui celled table" id="dtTableExecelImport" style="font-size: 11px; max-width: 100%; min-width: 100%">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center">Name</th>
-                                        <th style="text-align: center">Phone</th>
+                                        <th style="text-align: center">Tên</th>
+                                        <th style="text-align: center">Số Điện Thoại</th>
+                                                     <th style="text-align: center">Facebook</th>
+                                        <th style="text-align: center">Dịch Vụ Quan Tâm</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dtTableExecelImportBody">
@@ -116,6 +118,8 @@
                         let element = {};
                         element.Name = result[j]["Name"];
                         element.Phone = result[j]["Phone"];
+                        element.Facebook = result[j]["Facebook"];
+                         element.ServiceCare = result[j]["ServiceCare"];
                         DataTableExcelImport.push(element);
                     }
                     RenderTableImportExcel(DataTableExcelImport, "dtTableExecelImportBody");

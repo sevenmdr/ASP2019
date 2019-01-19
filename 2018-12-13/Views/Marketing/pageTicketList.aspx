@@ -70,6 +70,7 @@
                                         <th style="text-align: center">Tên</th>
                                         <th style="text-align: center">Nguồn</th>
                                         <th style="text-align: center">Số Điện Thoại</th>
+                                        <th style="text-align: center">Ghi Chú</th>
                                         <th style="text-align: center">Trạng Thái</th>
                                         <th style="text-align: center">Ngày Xử Lý</th>
                                         <th style="text-align: center">Giờ Xứ Lý</th>
@@ -92,11 +93,11 @@
         var DataComboStatus = "";
         var DataComboSource = "";
         $(document).ready(function () {
- 
+
 
 
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -146,11 +147,12 @@
                         { "visible": true, "targets": 5, "data": "TicketName" },
                         { "visible": true, "targets": 6, "data": "SrourceName" },
                         { "visible": true, "targets": 7, "data": "Phone", width: "250px" },
-                        { "visible": true, "targets": 8, "data": "StatusName", width: "250px" },
-                        { "visible": true, "targets": 9, "data": "DateExe", width: "100px" },
-                        { "visible": true, "targets": 10, "data": "HourExe", width: "100px" },
+                         { "visible": true, "targets": 8, "data": "Content" },
+                        { "visible": true, "targets": 9, "data": "StatusName", width: "250px" },
+                        { "visible": true, "targets": 10, "data": "DateExe", width: "100px" },
+                        { "visible": true, "targets": 11, "data": "HourExe", width: "100px" },
                         {
-                            "visible": true, "targets": 11, "data": "isExecute", width: "80px", "className": "center", "render": function (data, type, row, meta) {
+                            "visible": true, "targets": 12, "data": "isExecute", width: "80px", "className": "center", "render": function (data, type, row, meta) {
                                 if (type === 'display') {
                                     if (Number(data) == 1)
                                         data = "<img class='buttonActionClass' src='/img/ButtonImg/checked.png' alt='delete' width='20' height='20'>"
@@ -176,12 +178,10 @@
                     var data = table.row($(this).parents('tr')).data();
                     ExecuteTicket(data["TicketID"], data["CustomerID"]);
                 });
-
-
             })
         }
-  function ExecuteTicket(TicketID, CustomerID) {
-            window.open("/Views/Marketing/pageTicketAction.aspx?CustomerID="+CustomerID + "&TicketID="+TicketID);
+        function ExecuteTicket(TicketID, CustomerID) {
+            window.open("/Views/Marketing/pageTicketAction.aspx?CustomerID=" + CustomerID + "&TicketID=" + TicketID);
 
 
         }

@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageDiscountDetail.aspx.cs" Inherits="_2018_12_13.Views.Discount.pageDiscountDetail" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -46,7 +47,7 @@
                             <label>Số Tiền</label>
                             <div class="ui right labeled fluid input">
                                 <div class="ui label">$</div>
-                                <input id="amountDiscount" name="discountAmount" type="number" class="money" onchange="return ExecuteAmountDiscount()" />
+                                <input id="amountDiscount" name="discountAmount" type="text" class="money" onchange="return ExecuteAmountDiscount()" />
                                 <div class="ui basic label">VND</div>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                             <input id="dateTodetail" class="flatpickr" type="text" placeholder="Date To .." />
                         </div>
                     </div>
-                    <div class="sixteen wide column" style="overflow-y: scroll !important; overflow-x:hidden !important;  max-height: 350px">
+                    <div class="sixteen wide column" style="overflow-y: scroll !important; overflow-x: hidden !important; max-height: 350px">
                         <div class="ui segments">
                             <div class="ui segment">
                                 <h5 class="ui header">Chọn Dịch Vụ / Nhóm Dịch Vụ
@@ -81,7 +82,7 @@
                             <div class="ui segment">
                                 <div class="ui two column very relaxed stackable grid">
                                     <div class="column" id="TableContentLeft">
-                                        <table class="ui celled padded table" id="dtContentLeft" style="width: 100%;font-size:10px">
+                                        <table class="ui celled padded table" id="dtContentLeft" style="width: 100%; font-size: 10px">
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center">ID</th>
@@ -94,7 +95,7 @@
                                     <div class="ui vertical divider">
                                     </div>
                                     <div class="column" id="TableContentRight">
-                                        <table class="ui celled padded table" id="dtContentRight" style="width: 100%;font-size:10px" >
+                                        <table class="ui celled padded table" id="dtContentRight" style="width: 100%; font-size: 10px">
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center">ID</th>
@@ -133,17 +134,17 @@
                 $("#percentDiscount").attr('name', "discountPercent");
                 $('#amountDiscount').val(0);
                 $("#amountDiscount").attr('name', "NotVali");
-            }    
+            }
         }
         function ExecuteAmountDiscount() {
             if (Number($('#amountDiscount').val()) != 0) {
-                 $("#amountDiscount").attr('name', "discountAmount");
+                $("#amountDiscount").attr('name', "discountAmount");
                 $('#percentDiscount').val(0);
-                
-                 $("#percentDiscount").attr('name', "NotVali");
+
+                $("#percentDiscount").attr('name', "NotVali");
             }
 
-            
+
 
         }
         function ChangeDiscountType() {
@@ -238,7 +239,7 @@
                 pageResize: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
-                    { "visible": true, "targets": 1, "data": "Name"},
+                    { "visible": true, "targets": 1, "data": "Name" },
                     {
                         "targets": -1,
                         "data": null,
@@ -283,7 +284,7 @@
                 pageResize: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
-                    { "visible": true, "targets": 1, "data": "Name"},
+                    { "visible": true, "targets": 1, "data": "Name" },
                     {
                         "targets": -1,
                         "data": null,
@@ -363,9 +364,11 @@
             });
         }
         function ExcuteData() {
-            if (DataTableServiceRight != undefined && Number($('#TypeDiscountType').dropdown('get value'))) {
+
+            let typediscount = Number($('#TypeDiscountType').dropdown('get value')) ? Number($('#TypeDiscountType').dropdown('get value')) : 0;
+            if ((DataTableServiceRight!="") || (typediscount==3)) {
                 var data = new Object();
-                data.Type = Number($('#TypeDiscountType').dropdown('get value')) ? Number($('#TypeDiscountType').dropdown('get value')) : 0;
+                data.Type = typediscount;
                 data.Content = $('#txtContent').val() ? $('#txtContent').val() : "";
                 data.Name = $('#txtName').val() ? $('#txtName').val() : "";
                 data.Amount = $('#amountDiscount').val() ? $('#amountDiscount').val() : 0;
@@ -376,11 +379,11 @@
                 var Rule;
                 if (DataTableServiceRight != "") {
                     DataTableServiceRight.forEach(function (x) {
-                    if (Rule) { Rule = Rule + '-' + x["ID"]; }
+                        if (Rule) { Rule = Rule + '-' + x["ID"]; }
                         else { Rule = x["ID"]; }
-                     
+
                     });
-                    Rule=   Rule + "-";
+                    Rule = Rule + "-";
                 }
                 else {
                     Rule = "";
@@ -388,7 +391,6 @@
                 data.Rule = Rule;
                 $('#form3').form('validate form');
                 if ($('#form3').form('is valid')) {
-                    debugger
                     $.ajax({
                         url: "/Views/Discount/pageDiscountDetail.aspx/ExcuteData",
                         dataType: "json",
@@ -421,7 +423,7 @@
 
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -433,7 +435,7 @@
 
             DataTableServiceLeft = ([<%=_DataTableServiceLeft%>][0]);
             DataTableServiceRight = ([<%=_DataTableServiceRight%>][0]);
-
+            $('#amountDiscount').divide();
 
             LoadTableLeftAndRight();
         });
@@ -443,9 +445,9 @@
 
             if (DataDiscount) {
                 $("#amountDiscount").attr('name', "NotVali");
-                 $("#percentDiscount").attr('name', "NotVali");
+                $("#percentDiscount").attr('name', "NotVali");
                 $('#percentDiscount').val(DataDiscount[0].Percent);
-                $('#amountDiscount').val(DataDiscount[0].Amount);  
+                $('#amountDiscount').val(DataDiscount[0].Amount);
                 $("#TypeDiscountType ").dropdown("set selected", DataDiscount[0].Type);
                 $("#dateFromdetail").flatpickr({ defaultDate: DataDiscount[0].DateForm });
                 $("#dateTodetail").flatpickr({ defaultDate: DataDiscount[0].DateTo });
@@ -457,15 +459,15 @@
     </script>
 
 
-     <script src="/dist/semantic.min.js"></script>
+    <script src="/dist/semantic.min.js"></script>
     <script src="/plugins/cookie/js.cookie.js"></script>
     <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
     <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/comon/noti_function.js"></script>
-        <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
-    
+
 </body>
 
 </html>

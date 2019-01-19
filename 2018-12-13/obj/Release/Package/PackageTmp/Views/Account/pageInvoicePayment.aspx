@@ -10,10 +10,15 @@
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
                                     <div style="float: left">
-                                        <h3>Danh Sách Thu Và Chi</h3>
+                                        <a class="ui teal image label" style="height: 30px!important; font-size: 13px;">Tổng Thu<div class="detail" id="totalPayment">0</div>
+                                        </a>
+                                        <a class="ui blue image label" style="height: 30px!important; font-size: 13px;">Tổng Chi<div class="detail" id="totalInvoice">0</div>
+                                        </a>
+                                        <a class="ui yellow image label" style="height: 30px!important; font-size: 13px;">Còn Lại<div class="detail" id="totalLeft">0</div>
+                                        </a>
                                     </div>
                                     <div style="float: right">
-                                        <div class="ui fluid search selection dropdown" id="TypeTranfer" style="width:200px;" onchange="LoadReceiPaymentAjax()">
+                                        <div class="ui fluid search selection dropdown" id="TypeTranfer" style="width: 200px;" onchange="LoadReceiPaymentAjax()">
                                             <input type="hidden" name="branch" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Loại Thu Chi</div>
@@ -59,12 +64,12 @@
         function LoadReceiPaymentAjax() {
             let dateFrom = $('#dateFrom').val() ? $('#dateFrom').val() : new Date();
             let dateTo = $('#dateTo').val() ? $('#dateTo').val() : new Date()
-            GetDataAccount("/Views/Account/pageInvoicePayment.aspx/LoadataReceipt", dateFrom, dateTo, function (data) {
+            GetDataAccount("/Views/Account/pageInvoicePayment.aspx/LoadataReceipt", dateFrom, dateTo, function (dataList, dataTotal) {
                 if ($('#TypeTranfer').dropdown('get value') && $('#TypeTranfer').dropdown('get value') != "0") {
-                    DataListReceiptPayment = data.filter(word => word["TYPE_ID"] == $('#TypeTranfer').dropdown('get value'));
+                    DataListReceiptPayment = dataList.filter(word => word["TYPE_ID"] == $('#TypeTranfer').dropdown('get value'));
                 }
                 else {
-                    DataListReceiptPayment = data;
+                    DataListReceiptPayment = dataList;
                 }
 
                 $('#dtContent').DataTable().destroy();
@@ -77,20 +82,23 @@
                     searching: false,
                     destroy: true,
                     "columnDefs": [
-                        { "visible": true, "targets": 0, "data": "type",width: "120px", },
-                        { "visible": true, "targets": 1, "data": "Content",  "className": "center" },
+                        { "visible": true, "targets": 0, "data": "type", width: "120px", },
+                        { "visible": true, "targets": 1, "data": "Content", "className": "center" },
                         { "visible": true, "targets": 2, "data": "Amount", width: "170px" },
                         { "visible": true, "targets": 3, "data": "Createdstring", width: "250px" },
 
 
                     ],
                 });
-                 document.getElementById("dtContent").className = "ui celled table";
+                document.getElementById("dtContent").className = "ui celled table";
+                document.getElementById("totalPayment").innerHTML = !dataTotal[0] ? 0 : dataTotal[0].totalPayment;
+                document.getElementById("totalInvoice").innerHTML = !dataTotal[0] ? 0 : dataTotal[0].totalInvoice;
+                document.getElementById("totalLeft").innerHTML = !dataTotal[0] ? 0 : dataTotal[0].totalLeft;
             })
         }
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });

@@ -14,13 +14,14 @@ namespace _2018_12_13.Views.Customer
     {
         public static string _CustomerID { get; set; }
         public static string _CurrentID { get; set; }
-
+        public static string _ServiceTab { get; set; }
+        public static string _DiscountTab { get; set; }
         public static string _dataTab { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             var cus = Request.QueryString["CustomerID"];
             var curr = Request.QueryString["CurrentID"];
-
+            LoadComboMain();
             if (cus != null)
             {
                 _CustomerID = cus.ToString();
@@ -41,27 +42,22 @@ namespace _2018_12_13.Views.Customer
                 Response.Redirect("~/Error/index.html");
             }
         }
-       // protected string id { get { return Request.QueryString["id"]; } }
-        [System.Web.Services.WebMethod]
-        public static string LoadComboMain()
+
+        private void LoadComboMain()
         {
-            DataSet ds = new DataSet();
-            //LoadService
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.ExecuteDataTable("YYY_sp_Customer_TabService_LoadComBo_Service", CommandType.StoredProcedure);
-                ds.Tables.Add(dt);
+                _ServiceTab= JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
             //Load Discount
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                DataTable
+                DataTable dt = new DataTable();
                 dt = confunc.ExecuteDataTable("[YYY_sp_Customer_TabService_LoadComBo_Discount]", CommandType.StoredProcedure);
-                ds.Tables.Add(dt);
+                _DiscountTab = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
-            //
-            return JsonConvert.SerializeObject(ds, Formatting.Indented);
         }
         private void Loadata(int id)
         {

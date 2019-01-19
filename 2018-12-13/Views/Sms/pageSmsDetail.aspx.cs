@@ -82,7 +82,7 @@ namespace _2018_12_13.Views.Sms
                         "@Customer_ID", SqlDbType.Int, CustomerID,
                         "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim(),
                         "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                        "@Created", SqlDbType.DateTime, DateTime.Now,
+                        "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                         "@Type", SqlDbType.NVarChar, Type.ToString()
 
                         );
@@ -100,7 +100,7 @@ namespace _2018_12_13.Views.Sms
                                     "@AppID", SqlDbType.Int, AppID,
                                     "@Type", SqlDbType.Int, 0,
                                     "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                                    "@Created", SqlDbType.DateTime, DateTime.Now,
+                                    "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                                     "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim()
 
                                 );
@@ -118,7 +118,7 @@ namespace _2018_12_13.Views.Sms
                                      "@AppID", SqlDbType.Int, AppID,
                                      "@Type", SqlDbType.Int, 0,
                                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                                     "@Created", SqlDbType.DateTime, DateTime.Now,
+                                     "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                                      "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim()
 
                                  );
@@ -133,7 +133,7 @@ namespace _2018_12_13.Views.Sms
                                     "@AppID", SqlDbType.Int, AppID,
                                     "@Type", SqlDbType.Int, 0,
                                     "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                                    "@Created", SqlDbType.DateTime, DateTime.Now,
+                                    "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                                     "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim()
 
                                 );
@@ -148,7 +148,7 @@ namespace _2018_12_13.Views.Sms
                                     "@MasterID", SqlDbType.Int, MasterID,
                                      "@Type", SqlDbType.Int, 0,
                                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                                     "@Created", SqlDbType.DateTime, DateTime.Now,
+                                     "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                                      "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim()
                                  );
                             }
@@ -161,7 +161,7 @@ namespace _2018_12_13.Views.Sms
                                          "@CustomerID", SqlDbType.Int, CustomerID,
                                          "@Type", SqlDbType.Int, 0,
                                          "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                                         "@Created", SqlDbType.DateTime, DateTime.Now,
+                                         "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                                          "@Content", SqlDbType.NVarChar, content.Replace("'", "").Trim()
                                      );
                             }

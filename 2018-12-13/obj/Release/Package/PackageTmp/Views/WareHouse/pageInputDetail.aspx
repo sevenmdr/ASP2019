@@ -39,7 +39,7 @@
                             <div class="ui input">
                                 <div class="ui right disabled labeled fluid input">
                                     <div class="ui label">$</div>
-                                    <input id="TotalAmount" type="number" class="money" disabled />
+                                    <input id="TotalAmount" type="text" class="money" disabled />
                                     <div class="ui basic label">VND</div>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="field">
                                             <label>Thành Tiền</label>
-                                            <input id="amountProduct" name="amountProduct" type="number" />
+                                            <input id="amountProduct" name="amountProduct" type="text" />
                                         </div>
 
                                     </div>
@@ -186,7 +186,7 @@
         }
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
@@ -202,9 +202,12 @@
 
             DataProductChoosen = ([<%=_DataProductChoosen%>][0]) === undefined ? [] : ([<%=_DataProductChoosen%>][0]);
             DataProductChoosenInitialize = ([<%=_DataProductChoosen%>][0]) === undefined ? [] : ([<%=_DataProductChoosen%>][0]);
-            LoadCombo(DataComboSupplier, "cbbSupplier")
-            LoadCombo(DataComboProduct, "cbbProduct")
-            LoadCombo(DataComboWare, "cbbWare")
+
+            LoadCombo(DataComboSupplier, "cbbSupplier");
+            LoadCombo(DataComboProduct, "cbbProduct");
+            LoadCombo(DataComboWare, "cbbWare");
+            $('#TotalAmount').divide();
+            $('#amountProduct').divide();
 
             LoadDataUpdate();
         });
@@ -400,7 +403,14 @@
         }
     </script>
 
-
+       <script src="/dist/semantic.min.js"></script>
+    <script src="/plugins/cookie/js.cookie.js"></script>
+    <script src="/plugins/nicescrool/jquery.nicescroll.min.js"></script>
+    <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/comon/noti_function.js"></script>
+    <script src="/js/customjs/custom-validation.js"></script>
+    <script src="/js/comon/load_datasource.js"></script>
 
 
 </body>

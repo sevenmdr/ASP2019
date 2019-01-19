@@ -16,14 +16,22 @@ namespace _2018_12_13.Views.Customer
         public static string _CurrentID { get; set; }
 
         public static string _dataTreatment { get; set; }
+
+        public static string _dataComboDoctor { get; set; }
+        public static string _dataComboAssist { get; set; }
+        public static string _dataComboService { get; set; }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             var cus = Request.QueryString["CustomerID"];
             var curr = Request.QueryString["CurrentID"];
 
             if (cus != null)
             {
                 _CustomerID = cus.ToString();
+                LoadComboMain();
                 if (curr != null)
                 {
                     _CurrentID = curr.ToString();
@@ -60,31 +68,34 @@ namespace _2018_12_13.Views.Customer
             }
 
         }
-        [System.Web.Services.WebMethod]
-        public static string LoadComboMain()
+
+        private void LoadComboMain()
         {
-            DataSet ds = new DataSet();
+            _dataComboDoctor = "";
+            _dataComboAssist = "";
+            _dataComboService = "";
+
             //LoadDoctor
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.LoadEmployee("Doctor", 0);
-                ds.Tables.Add(dt);
+                _dataComboDoctor = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.LoadEmployee("Assistant", 0);
-                ds.Tables.Add(dt);
+                _dataComboAssist = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
                 DataTable dt = new DataTable();
                 dt = confunc.ExecuteDataTable("YYY_sp_Customer_Treatment_LoadComboService", CommandType.StoredProcedure,
                  "@Customer_ID", SqlDbType.Int, _CustomerID);
-                ds.Tables.Add(dt);
+                _dataComboService = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
-            return JsonConvert.SerializeObject(ds, Formatting.Indented);
+
         }
         [System.Web.Services.WebMethod]
         public static string ExcuteData(string data)

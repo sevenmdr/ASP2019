@@ -16,25 +16,31 @@
                                     <div class="sixteen wide column">
                                         <div class="ui segments">
                                             <div class="ui segment">
-                                                   <div class="center aligned column" style="text-align: right; padding-bottom: 0rem">
-                                                <div class="ui buttons">
-                                                    <button class="ui blue basic button modalfour" data-value="fade up" onclick="EditTicket()">Sửa Hồ Sơ</button>
+                                                <div class="center aligned column" style="text-align: right; padding-bottom: 0rem">
+                                                    <div class="ui buttons">
+                                                        <button class="ui blue basic button modalfour" data-value="fade up" onclick="EditTicket()">Sửa Hồ Sơ</button>
+                                                    </div>
                                                 </div>
-                                            </div>
                                                 <div class="ui column grid">
                                                     <div class="column">
                                                         <div class="ui raised segment">
                                                             <a class="ui red ribbon label">Hồ Sơ Khách Hàng</a>
                                                             <div class="ui divided selection list">
-                                                                <a id="txtName" class="item">Nguyễn Văn Test
-                                                                </a>
-                                                                <a id="txtPhone" class="item">0936944427
-                                                                </a>
-                                                                <a id="txtSource" class="item">Facebook
-                                                                </a>
-                                                                <a id="txtgender" class="item">Nam
-                                                                </a>
-                                                                <a id="txtAddress" class="item"></a>
+                                                                <div>
+                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_customer.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtName" class="item"></a>
+                                                                </div>
+                                                                <div>
+                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_phone.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtPhone" class="item"></a>
+                                                                </div>
+                                                                <div>
+                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_source.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtSource" class="item"></a>
+                                                                </div>
+                                                                <div>
+                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_facebook.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtFacebook" class="item"></a>
+                                                                </div>
+                                                                <div>
+                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_content.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtContent" class="item"></a>
+                                                                </div>
                                                             </div>
 
                                                         </div>
@@ -84,7 +90,7 @@
                                     <div class="sixteen wide column">
                                         <div class="ui segments">
                                             <div class="ui segment">
-                                                <div class="ui two column middle aligned very relaxed stackable grid" >
+                                                <div class="ui two column middle aligned very relaxed stackable grid">
                                                     <div class="column">
                                                         <div class="ui fluid search selection dropdown" id="typeCare" onchange="LoadTickedValueAjax()">
                                                             <input type="hidden" name="customerCareType" />
@@ -120,7 +126,7 @@
                                                             <th>Ngày</th>
                                                             <th>Nội Dung</th>
                                                             <th>Nhân Viên </th>
- 
+
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -138,25 +144,25 @@
         </div>
     </div>
 
-   <%-- <div class="ui small test modal" id="divDetailPopup"></div>--%>
+    <%-- <div class="ui small test modal" id="divDetailPopup"></div>--%>
     <script type="text/javascript">
         var CustomerID;
         var TicketID;
 
-      
+
 
         $(document).ready(function () {
-            
-                  $("#typeCare").dropdown("refresh");
-                $("#typeCare").dropdown("set selected", 3);
+
+            $("#typeCare").dropdown("refresh");
+            $("#typeCare").dropdown("set selected", 3);
             LoadDataUpdate();
             DisableNewCustomer();
-          //  LoadTickedValueAjax();
+            //  LoadTickedValueAjax();
         });
-                function EditTicket() {
+        function EditTicket() {
             document.getElementById("divDetailPopup").innerHTML = '';
-                    $("#divDetailPopup").load("/Views/Marketing/pageTicketDetail.aspx?CurrentID=" + TicketID);
-                    
+            $("#divDetailPopup").load("/Views/Marketing/pageTicketDetail.aspx?CurrentID=" + TicketID);
+
         }
         function callTakeCare() {
             document.getElementById("divDetailPopup").innerHTML = '';
@@ -164,59 +170,59 @@
         }
         function smsTakeCare() {
             document.getElementById("divDetailPopup").innerHTML = '';
-            $("#divDetailPopup").load("/Views/SMS/pageSmsDetail.aspx?CustomerID="  + CustomerID + "&TicketID=" + TicketID);
+            $("#divDetailPopup").load("/Views/SMS/pageSmsDetail.aspx?CustomerID=" + CustomerID + "&TicketID=" + TicketID);
         }
         function makeAppointment() {
             document.getElementById("divDetailPopup").innerHTML = '';
-            $("#divDetailPopup").load("/Views/Appointment/pageAppointmentDetail.aspx?CustomerID=" + CustomerID+ "&TicketID=" + TicketID);
+            $("#divDetailPopup").load("/Views/Appointment/pageAppointmentDetail.aspx?CustomerID=" + CustomerID + "&TicketID=" + TicketID);
         }
         function LoadDataUpdate() {
 
-              CustomerID = (<%=_CustomerID%>);
-        TicketID = (<%=_TicketID%>);
+            CustomerID = (<%=_CustomerID%>);
+            TicketID = (<%=_TicketID%>);
             let DataMain = ([<%=_DataMain%>][0]);
             if (DataMain) {
-                  $('#txtName').text((DataMain[0].Name));
+                $('#txtName').text((DataMain[0].Name));
                 $('#txtPhone').text((DataMain[0].Phone));
                 $('#txtSource').text((DataMain[0].Source));
-                $('#txtgender').text((DataMain[0].Gender));
-                $('#txtAddress').text((DataMain[0].Address));
+                $('#txtFacebook').text((DataMain[0].Facebook));
+                $('#txtContent').text((DataMain[0].Content));
                 $('#txtServiceTab').text((DataMain[0].ServiceAmount));
                 $('#txtPayment').text((DataMain[0].Payment));
-                $('#txtRest').text(Number(DataMain[0].Balance)); 
+                $('#txtRest').text(Number(DataMain[0].Balance));
             }
         }
         function NewCustomer() {
 
-                $.ajax({
-                    url: "/Views/Marketing/pageTicketAction.aspx/AddnewCustomer",
-                    type: "POST",
-                    dataType: "json",
-                    data:JSON.stringify({ 'TicketID':  TicketID }) ,
-                    contentType: 'application/json; charset=utf-8',
-                    async: true,
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.ajax({
+                url: "/Views/Marketing/pageTicketAction.aspx/AddnewCustomer",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({ 'TicketID': TicketID }),
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    notiError();
+                },
+                success: function (result) {
+                    if (result.d != "1") {
+                        notiSuccess();
+                        CustomerID = result.d;
+                        LoadTickedValueAjax();
+                        DisableNewCustomer();
+                    } else {
                         notiError();
-                    },
-                    success: function (result) {
-                        if (result.d != "1") {
-                            notiSuccess();
-                            CustomerID = result.d;
-                            LoadTickedValueAjax();
-                            DisableNewCustomer();
-                        } else {
-                            notiError();
-                        }
                     }
-                });
-            
+                }
+            });
+
             return false;
         }
         function DisableNewCustomer() {
             debugger
             if (CustomerID && Number(CustomerID) != 0) {
                 $('#btnNewCustomer').addClass("disabled");
-                 $('#btnNewApp').removeClass("disabled");
+                $('#btnNewApp').removeClass("disabled");
             }
             else {
                 $('#btnNewCustomer').removeClass("disabled");
@@ -225,17 +231,17 @@
         }
 
         function LoadTickedValueAjax() {
-         
+
             LoadDatasourceticket("/Views/Marketing/pageTicketAction.aspx/LoadataCustomerCareList", function (data) {
 
                 debugger
                 let _DataList;
-               
+
                 if ($('#typeCare').dropdown('get value') && $('#typeCare').dropdown('get value') != "3") {
                     _DataList = data.filter(word => word["TYPE"] == $('#typeCare').dropdown('get value'));
                 }
                 else {
-                     _DataList=data
+                    _DataList = data
                 }
                 var table = $('#TableListCare').DataTable({
                     data: _DataList,
@@ -247,7 +253,7 @@
                     "columnDefs": [
                         { "visible": true, "targets": 0, "data": "STT", width: "50px", "className": "center" },
                         { "visible": true, "targets": 1, "data": "CreatedString", width: "180px", "className": "center" },
-                        { "visible": true, "targets": 2, "data": "Content"},
+                        { "visible": true, "targets": 2, "data": "Content" },
                         { "visible": true, "targets": 3, "data": "Emp", width: "200px" },
                     ],
                 });
@@ -259,6 +265,6 @@
     <script src="/dist/semantic.min.js"></script>
     <script src="/js/customjs/custom-modal.js"></script>
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
 
 </asp:Content>

@@ -39,7 +39,7 @@
                             <label>Số Tiền</label>
                             <div class="ui right labeled fluid input">
                                 <div class="ui label">$</div>
-                                <input id="AmountPayment" name="discountOther" type="number" class="money" />
+                                <input id="AmountPayment" name="discountOther" type="text" class="money" />
                                 <div class="ui basic label">VND</div>
                             </div>
                         </div>
@@ -114,6 +114,7 @@
         $(document).ready(function () {
             LoadComboPayment();
             LoadDataUpdate();
+             $('#AmountPayment').divide();
         });
         function LoadDataUpdate() {
      

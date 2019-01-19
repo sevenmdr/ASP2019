@@ -57,7 +57,7 @@
                             <label>Số Tiền</label>
                             <div class="ui right labeled fluid input">
                                 <div class="ui label">$</div>
-                                <input id="accountMoney"  type="number" class="money" />
+                                <input id="accountMoney"  type="text" class="money" />
                                 <div class="ui basic label">VND</div>
                             </div>
                         </div>
@@ -95,6 +95,7 @@
             DataComboMethod = ([<%=_DataComboMethod%>][0]);
             LoadCombo(DataComboReceiptype, "ccbAccountType")
             LoadCombo(DataComboMethod, "ccbAccountMethod")
+                $('.money').divide();
             LoadDataUpdate();
         });
         function LoadDataUpdate() {

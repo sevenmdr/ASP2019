@@ -50,7 +50,7 @@ namespace _2018_12_13.Views.Marketing
                         "@Typeinput", SqlDbType.Int, DataMain.Typeinput,
                         "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@TimeCallBack", SqlDbType.DateTime,Convert.ToDateTime(DataMain.TimeCallBack),
-                        "@Created", SqlDbType.DateTime, DateTime.Now,
+                        "@Created", SqlDbType.DateTime,  Comon.Comon.GetDateTimeNow(),
                         "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim()
 
                     );

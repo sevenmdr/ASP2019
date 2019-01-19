@@ -52,9 +52,9 @@
                                         <th style="text-align: center">Mã Dịch Vụ</th>
                                         <th style="text-align: center">Tên Dịch Vụ</th>
                                         <th style="text-align: center">Giá Tiền</th>
+                                        <th style="text-align: center">Số Lần Điều trị</th>
                                         <th style="text-align: center">Hoa Hồng Tư Vấn</th>
                                         <th style="text-align: center">Hoa Hồng Điều Trị</th>
-                                        <th style="text-align: center">Ghi Chú</th>
                                         <th style="text-align: center; width: 30px;">Sửa</th>
                                         <th style="text-align: center; width: 30px;">Xóa</th>
                                     </tr>
@@ -94,10 +94,10 @@
                         { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
                         { "visible": true, "targets": 2, "data": "Service_Code", width: "100px", "className": "center" },
                         { "visible": true, "targets": 3, "data": "Name", width: "400px" },
-                        { "visible": true, "targets": 4, "data": "Amount" , width: "200px"},
-                        { "visible": true, "targets": 5, "data": "PerConsult", width: "200px" },
-                        { "visible": true, "targets": 6, "data": "PerTreat", width: "200px" },
-                        { "visible": true, "targets": 7, "data": "Content" },
+                        { "visible": true, "targets": 4, "data": "Amount", width: "200px" },
+                         { "visible": true, "targets": 5, "data": "TimeToTreatment", width: "200px" },
+                        { "visible": true, "targets": 6, "data": "PerConsult", width: "200px" },
+                        { "visible": true, "targets": 7, "data": "PerTreat", width: "200px" },
                         {
                             "targets": -2,
                             "data": null,
