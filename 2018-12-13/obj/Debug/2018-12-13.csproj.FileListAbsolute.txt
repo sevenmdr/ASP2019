@@ -440,3 +440,4 @@ D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csproj.CoreCompileInputs.cache
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csproj.CopyComplete
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.dll
 D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.pdb
+D:\Source\2019\2018-12-13\obj\Debug\2018-12-13.csprojAssemblyReference.cache
