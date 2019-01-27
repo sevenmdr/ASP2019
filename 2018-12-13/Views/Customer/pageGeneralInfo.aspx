@@ -204,6 +204,7 @@
          var customerID = ("<%=CustomerID %>");
         $(document).ready(function () {
             LoadDataUpdate();
+  
         });
        
         var idSchedule;

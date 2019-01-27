@@ -142,7 +142,8 @@
             if (facebookurl == '') $("#buttonfacebook").hide()
             else $("#buttonfacebook").show()
             if (instgramurl == '') $("#buttoninstagram").hide()
-            else $("#buttoninstagram").show()
+            else $("#buttoninstagram").show();
+     
         });
 
         $('.ui.menu a.item').on('click', function () {
@@ -171,7 +172,7 @@
                     document.getElementById("totalMoneyCustomerLeft").style.display = "block";
                     $("#divMainPage").load("/Views/Customer/pageHistoryList.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
                     break;
-                 case "Lịch Hẹn":
+                case "Lịch Hẹn":
                     document.getElementById("totalMoneyCustomerRaise").style.display = "block";
                     document.getElementById("totalMoneyCustomerPaid").style.display = "block";
                     document.getElementById("totalMoneyCustomerLeft").style.display = "block";
@@ -278,7 +279,7 @@
         }
         ///////////////////
 
-           // Schedule //////////////
+        // Schedule //////////////
         function addNewSchedule(customerID) {
 
             document.getElementById("divDetailPopup").innerHTML = '';
@@ -336,7 +337,7 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-<%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>--%>
+    <%--    <script src="/plugins/datatable/jquery.dataTables.js"></script>--%>
     <script src="/js/customjs/custom-datatable.js"></script>
     <script src="/js/comon/renderControl.js"></script>
     <script src="/js/customjs/custom-progress.js"></script>

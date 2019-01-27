@@ -204,6 +204,7 @@
     <Content Include="NumberThousand\number-divider.js" />
     <Content Include="NumberThousand\number-divider.min.js" />
     <Content Include="Views\Account\pageInvoicePrint.aspx" />
+    <Content Include="Views\Customer\pageListCustomer.aspx" />
     <Content Include="Views\Customer\pageScheduleList.aspx" />
     <Content Include="Views\Marketing\pageCallDetailInput.aspx" />
     <Content Include="Views\Marketing\pageTicketAction.aspx" />
@@ -2083,6 +2084,11 @@
     <Content Include="Views\Service\pageServiceTypeDetail.aspx" />
     <Content Include="Views\Service\pageServiceTypeList.aspx" />
     <Content Include="Views\Setting\pageSettingGeneral.aspx" />
+    <Content Include="Views\Setting\pageSettingListParam.aspx" />
+    <Content Include="Views\Setting\pageTypeAccountDetail.aspx" />
+    <Content Include="Views\Setting\pageTypeAccountList.aspx" />
+    <Content Include="Views\Setting\pageTypeHistoryDetail.aspx" />
+    <Content Include="Views\Setting\pageTypeHistoryList.aspx" />
     <Content Include="Views\Sms\pageSmsDetail.aspx" />
     <Content Include="Views\User\pageUserDetail.aspx" />
     <Content Include="Views\WareHouse\pageWareImportExportNorm.aspx" />
@@ -2222,6 +2228,7 @@
     <Compile Include="Comon\WebPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PermissionPage.cs" />
     <Compile Include="Views\Account\pageInvoiceList.aspx.cs">
       <DependentUpon>pageInvoiceList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2398,6 +2405,13 @@
     </Compile>
     <Compile Include="Views\Customer\pageGeneralInfo.aspx.designer.cs">
       <DependentUpon>pageGeneralInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\pageListCustomer.aspx.cs">
+      <DependentUpon>pageListCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\pageListCustomer.aspx.designer.cs">
+      <DependentUpon>pageListCustomer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\pageMainCustomer.aspx.cs">
       <DependentUpon>pageMainCustomer.aspx</DependentUpon>
@@ -2774,6 +2788,41 @@
     </Compile>
     <Compile Include="Views\Setting\pageSettingGeneral.aspx.designer.cs">
       <DependentUpon>pageSettingGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting\pageSettingListParam.aspx.cs">
+      <DependentUpon>pageSettingListParam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageSettingListParam.aspx.designer.cs">
+      <DependentUpon>pageSettingListParam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeAccountDetail.aspx.cs">
+      <DependentUpon>pageTypeAccountDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeAccountDetail.aspx.designer.cs">
+      <DependentUpon>pageTypeAccountDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeAccountList.aspx.cs">
+      <DependentUpon>pageTypeAccountList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeAccountList.aspx.designer.cs">
+      <DependentUpon>pageTypeAccountList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeHistoryDetail.aspx.cs">
+      <DependentUpon>pageTypeHistoryDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeHistoryDetail.aspx.designer.cs">
+      <DependentUpon>pageTypeHistoryDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeHistoryList.aspx.cs">
+      <DependentUpon>pageTypeHistoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Setting\pageTypeHistoryList.aspx.designer.cs">
+      <DependentUpon>pageTypeHistoryList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Sms\pageSmsDetail.aspx.cs">
       <DependentUpon>pageSmsDetail.aspx</DependentUpon>

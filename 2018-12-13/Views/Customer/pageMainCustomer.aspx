@@ -288,6 +288,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#radios").radiosToSlider();
+
     });
     //Addnew
     function newAppointment() {

@@ -117,7 +117,8 @@ namespace _2018_12_13.Views.Customer
                     "@BS1", SqlDbType.Int, DataMain.Doc1,
                     "@BS2", SqlDbType.Int, DataMain.Doc2,
                      "@PT1", SqlDbType.Int, DataMain.Ass1,
-                    "@PT2", SqlDbType.Int, DataMain.Ass2);
+                    "@PT2", SqlDbType.Int, DataMain.Ass2,
+                    "@TreatmentAmount", SqlDbType.Decimal, DataMain.TreatmentAmount);
                     }
                 }
                 else
@@ -132,7 +133,8 @@ namespace _2018_12_13.Views.Customer
                             "@BS2", SqlDbType.Int, DataMain.Doc2,
                             "@PT1", SqlDbType.Int, DataMain.Ass1,
                             "@PT2", SqlDbType.Int, DataMain.Ass2,
-                            "@CurrentID", SqlDbType.Int, _CurrentID
+                            "@CurrentID", SqlDbType.Int, _CurrentID,
+                            "@TreatmentAmount", SqlDbType.Decimal, DataMain.TreatmentAmount
 
                         );
                     }
@@ -156,5 +158,6 @@ namespace _2018_12_13.Views.Customer
         public int Ass1 { get; set; }
         public int Ass2 { get; set; }
         public int Tab_ID { get; set; }
+        public decimal TreatmentAmount { get; set; }
     }
 }

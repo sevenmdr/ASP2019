@@ -14,7 +14,7 @@ namespace _2018_12_13.Views.Appointment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
         [System.Web.Services.WebMethod]
         public static string LoadCombo()

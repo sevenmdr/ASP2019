@@ -15,6 +15,7 @@ namespace _2018_12_13.Views.Customer
         public static string _CustomerID { get; set; }
         public static string _CurrentID { get; set; }
         public static string _ServiceTab { get; set; }
+        public static string _EmployeeTab { get; set; }
         public static string _DiscountTab { get; set; }
         public static string _dataTab { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -57,6 +58,12 @@ namespace _2018_12_13.Views.Customer
                 DataTable dt = new DataTable();
                 dt = confunc.ExecuteDataTable("[YYY_sp_Customer_TabService_LoadComBo_Discount]", CommandType.StoredProcedure);
                 _DiscountTab = JsonConvert.SerializeObject(dt, Formatting.Indented);
+            }
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                DataTable dt = new DataTable();
+                dt = confunc.ExecuteDataTable("[YYY_sp_LoadCombo_EmployeeFull]", CommandType.StoredProcedure);
+                _EmployeeTab = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
         }
         private void Loadata(int id)
@@ -102,7 +109,8 @@ namespace _2018_12_13.Views.Customer
                              "@Discount_Percent", SqlDbType.Int, DataMain.Discount_Percent,
                              "@Discount_Amount_Doctor", SqlDbType.Decimal, DataMain.Discount_Amount_Doctor,
                              "@Price_Discounted", SqlDbType.Decimal, DataMain.Price_Discounted,
-                             "@Employee_ID", SqlDbType.Int, Comon.Global.sys_employeeid
+                             "@Employee_ID", SqlDbType.Int, DataMain.Consult,
+                             "@AmountConsult", SqlDbType.Decimal, DataMain.ConsultAmount
 
                         );
                     }
@@ -123,7 +131,9 @@ namespace _2018_12_13.Views.Customer
                             "@Discount_Amount", SqlDbType.Decimal, DataMain.Discount_Amount,
                             "@Discount_Amount_Doctor", SqlDbType.DateTime, DataMain.Discount_Amount_Doctor,
                             "@Price_Discounted", SqlDbType.Decimal, DataMain.Price_Discounted,
-                            "@Current_ID", SqlDbType.Int, _CurrentID
+                            "@Current_ID", SqlDbType.Int, _CurrentID,
+                            "@Employee_ID", SqlDbType.Int, DataMain.Consult,
+                             "@AmountConsult", SqlDbType.Decimal, DataMain.ConsultAmount
                         );
                     }
 
@@ -161,8 +171,9 @@ namespace _2018_12_13.Views.Customer
             public decimal Discount_Percent { get; set; }
             public decimal Discount_Amount_Doctor { get; set; }
             public decimal Price_Discounted { get; set; }
-
-            public int Employee_ID { get; set; }
+            public decimal ConsultAmount { get; set; }
+            
+            public int Consult { get; set; }
         }
     }
 }

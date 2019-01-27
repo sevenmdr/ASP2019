@@ -169,6 +169,7 @@
             LoadDataUpdate();
            // LoadCustomerCareAjax();
            // alert(CustomerIDCare);
+
         });
         function callTakeCare() {
             document.getElementById("divDetailPopup").innerHTML = '';

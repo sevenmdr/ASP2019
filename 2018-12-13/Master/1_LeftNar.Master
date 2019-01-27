@@ -29,19 +29,11 @@
     <script src="/js/comon/load_datasource.js"></script>
     <script src="/js/comon/renderControl.js"></script>
 
-        <script src="/plugins/datatable/jquery.dataTables.js"></script>
-        <link href="/MultiColumnCombo/jquery.inputpicker.css" rel="stylesheet" />
+    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+    <link href="/MultiColumnCombo/jquery.inputpicker.css" rel="stylesheet" />
     <script src="/MultiColumnCombo/jquery.inputpicker.js"></script>
-<script src="/NumberThousand/number-divider.js"></script>
+    <script src="/NumberThousand/number-divider.js"></script>
 
-
-    <%--    <link href="/plugins/jsgrid/jsgrid.css" rel="stylesheet">
-    <link href="/plugins/jsgrid/jsgrid-theme.css" rel="stylesheet">
-    <link href="/plugins/editable/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="/plugins/datatable/dataTables.semanticui.css" />--%>
-
-
-    <%--    <script src="/js/customjs/custom-validation.js"></script>--%>
 </head>
 <body>
     <form runat="server">
@@ -59,9 +51,9 @@
                     <i class="dropdown icon"></i>Lịch Hẹn
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">Trong Ngày
+                    <a id="menuAppointInDay" class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">Trong Ngày
                     </a>
-                    <a class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">Theo Ngày
+                    <a id="menuAppointByDay" class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">Theo Ngày
                     </a>
                 </div>
 
@@ -70,15 +62,15 @@
                     <i class="dropdown icon"></i>Chăm Sóc
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
+                    <a id="menuTakeRemind" class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
+                    <a id="menuTakeNotSerivice" class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
+                    <a id="menuTakeHoliday" class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
+                    <a id="menuTakeNotChecked" class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
+                    <a id="menuTakeAfterTreat" class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
                     </a>
                 </div>
 
@@ -87,11 +79,11 @@
                     <i class="dropdown icon"></i>Kế Toán
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
+                    <a id="menuAccountInvoiceList" class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
                     </a>
-                    <a class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
+                    <a id="menuAccountInvoicePayment" class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
                     </a>
-                    <a class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
+                    <a id="menuAccountLiability" class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
                     </a>
                 </div>
 
@@ -100,9 +92,10 @@
                     <i class="dropdown icon"></i>Khách Hàng
                 </div>
                 <div class="content">
-                    <a class="item" id="createNewCustomer1" href="#">Tạo Mới Khách Hàng
+                    <a class="item" id="menuCustomerCreate" href="#">Tạo Mới Khách Hàng
                     </a>
-   
+                    <a id="menuCustomerList" class="item" href="/Views/Customer/pageListCustomer.aspx">Danh Sách Khách Hàng
+                    </a>
 
                 </div>
 
@@ -111,11 +104,11 @@
                     <i class="dropdown icon"></i>Khuyến Mãi
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
+                    <a id="menuDiscountServiceType" class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
+                    <a id="menuDiscountService" class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
+                    <a id="menuDiscountDiscount" class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
                     </a>
                 </div>
 
@@ -124,17 +117,17 @@
                     <i class="dropdown icon"></i>Kho
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
+                    <a id="menuWareInput" class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
+                    <a id="menuWareOutput" class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    <a id="menuWareReview" class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
+                    <a id="menuWareReviewDetail" class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
+                    <a id="menuWareLock" class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
+                    <a id="menuWareSetting" class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
                     </a>
                 </div>
 
@@ -143,13 +136,13 @@
                     <i class="dropdown icon"></i>Marketing
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
+                    <a id="menuMarTicketList" class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
+                    <a id="menuMarDeletedTicket" class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
+                    <a id="menuMarTicketByDay" class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
+                    <a id="menuMarTicketSetting" class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
                     </a>
                 </div>
 
@@ -158,15 +151,15 @@
                     <i class="dropdown icon"></i>Nhân Viên & User
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
+                    <a id="menuEmpDepartment" class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
                     </a>
-                    <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
+                    <a id="menuEmpEmployeeList" class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
                     </a>
-                    <a class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
+                    <a id="menuEmpUserGroup" class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
                     </a>
-                    <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
+                    <a id="menuEmpUserList" class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
                     </a>
-                    <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    <a id="menuEmpPermissionSetting" class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
                     </a>
                 </div>
                 <div class="title item">
@@ -174,7 +167,9 @@
                     <i class="dropdown icon"></i>Cấu Hình
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    <a id="menuSettingGeneral" class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    </a>
+                                       <a id="menuSettingList" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
                     </a>
                 </div>
 
@@ -184,18 +179,18 @@
                     <i class="dropdown icon"></i>Report
                 </div>
                 <div class="content">
-                    <a class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
+                    <a id="menuReportOverview" class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
+                    <a id="menuReportRevenue" class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
+                    <a id="menuReportConsulRevenue" class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
+                    <a id="menuReportTreatRevenue" class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
                     </a>
 
-                    <a class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
+                    <a id="menuReportBySourceCustomer" class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    <a id="menuReportTelesale" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
                 </div>
 
@@ -217,9 +212,9 @@
                         Lịch Hẹn
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">Trong Ngày
+                    <a id="menuAppointInDay_S" class="item" href="/Views/Appointment/pageAppointmentInDay.aspx">Trong Ngày
                     </a>
-                    <a class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">Theo Ngày
+                    <a id="menuAppointByDay_S" class="item" href="/Views/Appointment/pageAppointmentByDay.aspx">Theo Ngày
                     </a>
                 </div>
             </div>
@@ -232,15 +227,15 @@
                         Chăm Sóc
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
+                    <a id="menuTakeRemind_S" class="item" href="/Views/CustomerCare/pageCustomerCare_RemindAppointment.aspx">Nhắc Hẹn
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
+                    <a id="menuTakeNotSerivice_S" class="item" href="/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx">Đến Không Làm Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
+                    <a id="menuTakeHoliday_S" class="item" href="/Views/CustomerCare/pageCustomerCare_Holiday.aspx">HoliDay
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
+                    <a id="menuTakeNotChecked_S" class="item" href="/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx">Đặt Hẹn KHông Đến
                     </a>
-                    <a class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
+                    <a id="menuTakeAfterTreat_S" class="item" href="/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx">Chăm Sóc Sau Dịch Vụ
                     </a>
                 </div>
             </div>
@@ -253,11 +248,11 @@
                         Kế Toán
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
+                    <a id="menuAccountInvoiceList_S" class="item" href="/Views/Account/pageInvoiceList.aspx">Chi Tại Chi Nhánh
                     </a>
-                    <a class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
+                    <a id="menuAccountInvoicePayment_S" class="item" href="/Views/Account/pageInvoicePayment.aspx">Danh Sách Thu Chi
                     </a>
-                    <a class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
+                    <a id="menuAccountLiability_S" class="item" href="/Views/Account/pageLiability.aspx">Công Nợ Khách Hàng
                     </a>
                 </div>
             </div>
@@ -270,9 +265,10 @@
                         Khách Hàng
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" id="createNewCustomer2" href="#">Tạo Mới Khách Hàng
+                    <a class="item" id="menuCustomerCreate_S" href="#">Tạo Mới Khách Hàng
                     </a>
-
+                    <a id="menuCustomerList_S" class="item" href="/Views/Customer/pageListCustomer.aspx">Danh Sách Khách Hàng
+                    </a>
 
                 </div>
             </div>
@@ -285,11 +281,11 @@
                         Khuyến Mãi
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
+                    <a id="menuDiscountServiceType_S" class="item" href="/Views/Service/pageServiceTypeList.aspx">Loại Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
+                    <a id="menuDiscountService_S" class="item" href="/Views/Service/pageServiceList.aspx">Dịch Vụ
                     </a>
-                    <a class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
+                    <a id="menuDiscountDiscount_S" class="item" href="/Views/Discount/pageDiscountList.aspx">Chương Trình Khuyến Mãi
                     </a>
                 </div>
             </div>
@@ -302,17 +298,17 @@
                         Kho
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
+                    <a id="menuWareInput_S" class="item" href="/Views/WareHouse/pageInputList.aspx">Nhập Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
+                    <a id="menuWareOutput_S" class="item" href="/Views/WareHouse/pageOutputList.aspx">Xuất Kho 
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
+                    <a id="menuWareReview_S" class="item" href="/Views/WareHouse/pageWareReview.aspx">Xem Tồn Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
+                    <a id="menuWareReviewDetail_S" class="item" href="/Views/WareHouse/pageWareImportExportNorm.aspx">Xem Chi Tiết
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
+                    <a id="menuWareLock_S" class="item" href="/Views/WareHouse/pageLockWare.aspx">Chốt Kho
                     </a>
-                    <a class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
+                    <a id="menuWareSetting_S" class="item" href="/Views/WareHouse/pageWareHouseGeneral.aspx">Cài Đặt
                     </a>
                 </div>
             </div>
@@ -325,13 +321,13 @@
                         Marketing
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
+                    <a id="menuMarTicketList_S" class="item" href="/Views/Marketing/pageTicketList.aspx">Danh Sách Ticket
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
+                    <a id="menuMarDeletedTicket_S" class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
+                    <a id="menuMarTicketByDay_S" class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
                     </a>
-                    <a class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
+                    <a id="menuMarTicketSetting_S" class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
                     </a>
                 </div>
             </div>
@@ -344,15 +340,15 @@
                         Nhân Viên & User
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
+                    <a id="menuEmpDepartment_S" class="item" href="/Views/Employee/pageEmployeeGroupList.aspx">Phòng Ban
                     </a>
-                    <a class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
+                    <a id="menuEmpEmployeeList_S" class="item" href="/Views/Employee/pageEmployeeList.aspx">Nhân Viên
                     </a>
-                    <a class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
+                    <a id="menuEmpUserGroup_S" class="item" href="/Views/Employee/pageUserGroupList.aspx">Nhóm User
                     </a>
-                    <a class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
+                    <a id="menuEmpUserList_S" class="item" href="/Views/Employee/pageUserList.aspx">Danh Sách User
                     </a>
-                    <a class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
+                    <a id="menuEmpPermissionSetting_S" class="item" href="/Views/Permission/pagePermissionGeneral.aspx">Cài Đặt Phân Quyền
                     </a>
                 </div>
             </div>
@@ -365,7 +361,9 @@
                         Cấu Hình
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    <a id="menuSettingGeneral_S" class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
+                    </a>
+                             <a id="menuSettingList_S" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
                     </a>
                 </div>
             </div>
@@ -378,18 +376,18 @@
                         Report
                     </div>
                     <div class="ui divider"></div>
-                    <a class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
+                    <a id="menuReportOverview_S" class="item" href="/Views/Report/Report/pageReportOverView.aspx">Tổng Quan
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
+                    <a id="menuReportRevenue_S" class="item" href="/Views/Report/Report/pageRevenue.aspx">Doanh Thu Chi Nhánh
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
+                    <a id="menuReportConsulRevenue_S" class="item" href="/Views/Report/Report/pageRevenueConsultant.aspx">Hoa Hồng Tư Vấn
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
+                    <a id="menuReportTreatRevenue_S" class="item" href="/Views/Report/Report/pageRevenueTreatment.aspx">Hoa Hồng Điều Trị
                     </a>
 
-                    <a class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
+                    <a id="menuReportBySourceCustomer_S" class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
                     </a>
-                    <a class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    <a id="menuReportTelesale_S" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
                 </div>
             </div>
@@ -431,7 +429,7 @@
                     <div class="right menu colhidden">
 
                         <div id="userNameCurrent" style="margin: auto; color: green; font-size: 15px;">
-                         </div>
+                        </div>
                         <div class="ui dropdown item">
                             <img id="avatarofUserCircle" class="ui mini circular image" src="/img/avatar/people/enid.png" alt="label-image" style="width: 37px; height: 37px" />
 
@@ -443,7 +441,7 @@
                                 <a class="item" href="/Views/Login/Logout.aspx">Đăng Xuất</a>
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
@@ -467,11 +465,11 @@
                 //window.location.href="/Views/Searching/Searching.aspx?SeachingText=" + $("#searchCustomerID").val();
             }
         });
-        document.getElementById("createNewCustomer2").addEventListener("click", function (event) {
+        document.getElementById("menuCustomerCreate_S").addEventListener("click", function (event) {
             event.preventDefault();
             AddNewCustomer();
         });
-        document.getElementById("createNewCustomer1").addEventListener("click", function (event) {
+        document.getElementById("menuCustomerCreate").addEventListener("click", function (event) {
             event.preventDefault();
             AddNewCustomer();
         });
@@ -500,22 +498,29 @@
         }
 
         $(document).ready(function () {
-
             $('#avatarofUserCircle').attr('src', 'data:image/png;base64, ' + circleAvatar);
             document.getElementById("userNameCurrent").innerHTML = ("<%=_userNameCurrent %>");
-
-
-          <%--  let persmisionTable = ([<%=PermissionTableControl%>][0]);
-            persmisionTable = persmisionTable.filter(word => word["PageName"] == getPageName(window.location.pathname));
-            let index = 0;
-            for (index; index < persmisionTable.length; index++) {
-                //$("#" + persmisionTable[index]["ControlID"]).hide();
-                //document.getElementById(persmisionTable[index]["ControlID"]).style.display = "none!important";
-                $('#'+persmisionTable[index]["ControlID"]).attr('disabled', 'true');
-            }--%>
-
-
+            PermissionForMenu();
+            PermissionForControl();
         });
+        /////////////////// Permission ////////////////////
+        function PermissionForMenu() {
+
+            let _PermissionTableMenu = ([<%=PermissionTable_Menu%>][0]);
+            let index = 0;
+            for (index; index < _PermissionTableMenu.length; index++) {
+                $('#' + _PermissionTableMenu[index]["ControlID"]).remove();
+            }
+        }
+        function PermissionForControl() {
+<%--            let _PermissionTableMenu = ([<%=PermissionTable_Menu%>][0]);
+            _PermissionTableMenu = _PermissionTableMenu.filter(word => word["PageName"] == getPageName(window.location.pathname));
+            let index = 0;
+            for (index; index < _PermissionTableMenu.length; index++) {
+                $('#' + _PermissionTableMenu[index]["ControlID"]).remove();
+            }--%>
+        }
+        ///////////////////////////////////////////////////
     </script>
 
     <script src="/dist/semantic.min.js"></script>

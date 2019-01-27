@@ -12,6 +12,7 @@ namespace _2018_12_13.Comon
         public static int sys_userid { get; set; }
         public static string sys_username { get; set; }
         public static string sys_Role { get; set; }
+        public static string sys_RoleID { get; set; }
         public static string sys_BranchName { get; set; }
         public static int sys_branchID { get; set; }
         public static int sys_employeeid { get; set; }
@@ -32,18 +33,11 @@ namespace _2018_12_13.Comon
         public static string sys_SMSRemind { get; set; }
 
 
-        public static string sys_permissionTable;
+        public static string sys_PermissionTableMenu;
+        public static DataTable sys_PermissionTableMenu_Table;
         public static void Initalize()
         {
             sys_SMSRemind = "JaRim kính chào quý khách {0}";
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("PageName");
-            dt.Columns.Add("ControlID");
-            DataRow dr = dt.NewRow();
-            dr[0] = "pageTicketList"; dr[1] = "TakeCareStatus";
-            dt.Rows.Add(dr);
-            sys_permissionTable = JsonConvert.SerializeObject(dt);
 
 
             DataTable dtContent = new DataTable();
@@ -101,7 +95,22 @@ namespace _2018_12_13.Comon
                 sys_username = dtUser.Rows[0]["Username"].ToString();
                 sys_BranchName= dtUser.Rows[0]["BranchName"].ToString();
                 sys_Role = dtUser.Rows[0]["Role"].ToString();
+                sys_RoleID = dtUser.Rows[0]["Group_ID"].ToString();
+                
             }
+
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Permission_LoadMenuGroup]", CommandType.StoredProcedure, "@GroupID", SqlDbType.Int, Convert.ToInt32(sys_RoleID));
+            }
+            //    dt.Columns.Add("PageName");
+            //dt.Columns.Add("ControlID");
+            //DataRow dr = dt.NewRow();
+            //dr[0] = "pageAppointmentByDay"; dr[1] = "menuAppointByDay";
+            //dt.Rows.Add(dr);
+            sys_PermissionTableMenu_Table = dt;
+            sys_PermissionTableMenu = JsonConvert.SerializeObject(sys_PermissionTableMenu_Table);
 
         }
 

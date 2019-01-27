@@ -168,6 +168,45 @@
                         </div>
                         <div class="field">
                             <div class="field">
+                                <div class="ui toggle checkbox">
+                                    <input id="chkIsOldCustomer" type="checkbox" checked="checked" name="newsletter" />
+                                    <label id="lbOldCustomr" class="coloring blue">Khách Hàng Cũ</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Ghi Chú</label>
+                            <input id="txtContent" name="content" type="text" />
+
+                        </div>
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Thành Phố</label>
+                                <div class="ui fluid search selection dropdown" id="CityID" onchange="return LoadComboCity()">
+                                    <input type="hidden" name="source" />
+                                    <i class="dropdown icon"></i>
+                                    <input class="search" autocomplete="off" tabindex="0" />
+                                    <div class="default text"></div>
+                                    <div id="cbbCity" class="menu" tabindex="-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Quận/Huyện</label>
+                                <div class="ui fluid search selection dropdown" id="DistrictID" onchange="return ExcuteAddress();">
+                                    <input type="hidden" name="language" />
+                                    <i class="dropdown icon"></i>
+                                    <input class="search" autocomplete="off" tabindex="0" />
+                                    <div class="default text"></div>
+                                    <div id="cbbDisstrict" class="menu" tabindex="-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="field">
                                 <label>Địa Chỉ</label>
                                 <input id="Address" name="address" type="text" />
                             </div>
@@ -190,6 +229,8 @@
         var dataGender;
         var dataSource;
         var dataLangue;
+        var dataCity;
+        var dataDistrict;
         function ExcuteData() {
 
             var data = new Object();
@@ -206,7 +247,10 @@
             data.Avatar = avatarString;
             data.instgramurl = $('#instgramurl').val() ? $('#instgramurl').val() : "";
             data.facebookurl = $('#facebookurl').val() ? $('#facebookurl').val() : "";
-
+            data.City = Number($('#CityID').dropdown('get value')) ? Number($('#CityID').dropdown('get value')) : 0;
+            data.District = Number($('#DistrictID').dropdown('get value')) ? Number($('#DistrictID').dropdown('get value')) : 0;
+            data.Note = $('#txtContent').val() ? $('#txtContent').val() : "";
+            data.OldCustomer = (document.getElementById("chkIsOldCustomer").checked) ? "1" : "0";
             $('#form3').form('validate form');
             if ($('#form3').form('is valid')) {
                 $.ajax({
@@ -220,15 +264,17 @@
                         notiError("Lỗi Hệ Thống");
                     },
                     success: function (result) {
-                        debugger
+
                         if (result.d == "1") {
                             location.reload();
                         }
-                        else if (result.d == "2") {
-                            notiSuccess();
+                        else if (result.d == "0") {
+                            notiError(result.d);
+
                         }
                         else {
-                            notiError(result.d);
+                            //  notiSuccess();
+                            window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + result.d);
                         }
                     }
                 });
@@ -243,13 +289,35 @@
             dataGender = ([<%=_dataGender%>][0]);
             dataSource = ([<%=_dataSource%>][0]);
             dataLangue = ([<%=_dataLangue%>][0]);
-
+            dataCity = ([<%=_dataCity%>][0]);
+            
             LoadCombo(dataGender, "cbbGenderCustomer")
             LoadCombo(dataSource, "cbbSourceCustomer")
             LoadCombo(dataLangue, "cbbLanguageCustomer")
+            
+                LoadCombo(dataCity, "cbbCity");
+            dataDistrict = ([<%=_dataDistrict%>][0]);
+
             $("#Gender_ID ").dropdown("refresh");
             $("#Type_Cat_ID ").dropdown("refresh");
             $("#Language_ID ").dropdown("refresh");
+            $("#CityID ").dropdown("refresh");
+            $("#DistrictID ").dropdown("refresh");
+        }
+        function LoadComboCity() {
+
+            let _dataDistrict = dataDistrict
+            if (Number($('#CityID').dropdown('get value'))) {
+                _dataDistrict = dataDistrict.filter(word => word["CityID"] == Number($('#CityID').dropdown('get value')));
+            }
+            LoadCombo(_dataDistrict, "cbbDisstrict")
+
+            ExcuteAddress();
+            return false;
+        }
+        function ExcuteAddress() {
+            $('#Address').val(($('#DistrictID').dropdown('get text') ? "," + $('#DistrictID').dropdown('get text') : "") + ($('#CityID').dropdown('get text') ? "," + $('#CityID').dropdown('get text') : ""));
+            return false;
         }
         $(document).ready(function () {
 
@@ -285,8 +353,10 @@
         });
 
         function LoadDataUpdate() {
+        
             let dataInfo = ([<%=_dataInfo%>][0]);
             if (dataInfo != undefined) {
+                
                 $("#Gender_ID ").dropdown("refresh");
                 $("#Gender_ID ").dropdown("set selected", dataInfo[0].Gender_ID);
                 $("#Type_Cat_ID ").dropdown("refresh");
@@ -294,12 +364,20 @@
                 $("#Language_ID ").dropdown("refresh");
                 $("#Language_ID ").dropdown("set selected", dataInfo[0].Language_ID);
                 $('#Name').val((dataInfo[0].Name));
+                $('#txtContent').val((dataInfo[0].Note));
                 $('#Email1').val((dataInfo[0].Email1));
-                $('#Address').val((dataInfo[0].Address));
                 $('#Phone1').val((dataInfo[0].Phone1));
                 $('#Phone2').val((dataInfo[0].Phone2));
                 $('#instgramurl').val((dataInfo[0].instgramurl));
                 $('#facebookurl').val((dataInfo[0].facebookurl));
+                $("#CityID ").dropdown("refresh");
+                $("#CityID ").dropdown("set selected", dataInfo[0].City_ID);
+                $("#DistrictID ").dropdown("refresh");
+                $("#DistrictID ").dropdown("set selected", dataInfo[0].District_ID);
+
+
+                $('#Address').val((dataInfo[0].Address));
+                (dataInfo[0].OldCustomer) == 1 ? $("#chkIsOldCustomer").prop('checked', true) : $("#chkIsOldCustomer").prop('checked', false);
                 if (dataInfo[0].Avatar == '' || dataInfo[0].Avatar == undefined) {
                     $('#avatarCustomerUpload').attr('src', 'data:image/png;base64, ' + avatarString);
                 }

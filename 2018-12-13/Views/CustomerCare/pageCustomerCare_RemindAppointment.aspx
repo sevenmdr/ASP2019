@@ -125,7 +125,8 @@
             $("#Branch_ID").dropdown("set selected", 1);
             $("#typetakecare").dropdown("refresh");
             $("#typetakecare").dropdown("set selected", 2);
-             LoadDataCustomerCareRemindAppointment();
+            LoadDataCustomerCareRemindAppointment();
+
         });
 
 

@@ -128,6 +128,7 @@
             $("#typetakecare").dropdown("refresh");
             $("#typetakecare").dropdown("set selected", 2);
             LoadDataCustomerCareTreat();
+
         });
 
 

@@ -17,6 +17,8 @@ namespace _2018_12_13.Views.Customer
 
         public static string _dataInfo { get; set; }
         public static string _dataGender { get; set; }
+        public static string _dataCity { get; set; }
+        public static string _dataDistrict { get; set; }
         public static string _dataSource { get; set; }
         public static string _dataLangue { get; set; }
 
@@ -80,6 +82,18 @@ namespace _2018_12_13.Views.Customer
                 dt = confunc.LoadPara("Gender");
                 _dataGender = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                DataTable dt = new DataTable();
+                dt = confunc.ExecuteDataTable("[YYY_sp_LoadCombo_LocationCity]", CommandType.StoredProcedure);
+                _dataCity = JsonConvert.SerializeObject(dt, Formatting.Indented);
+            }
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                DataTable dt = new DataTable();
+                dt = confunc.ExecuteDataTable("[YYY_sp_LoadCombo_LocationDistrict]", CommandType.StoredProcedure);
+                _dataDistrict = JsonConvert.SerializeObject(dt, Formatting.Indented);
+            }
 
         }
         [System.Web.Services.WebMethod]
@@ -91,10 +105,11 @@ namespace _2018_12_13.Views.Customer
             {
                 if (_CurrentID == 0)
                 {
+                    DataTable dt = new DataTable();
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
-                        var dt = connFunc.ExecuteDataTable("YYY_sp_Customer_Insert", CommandType.StoredProcedure,
-                     "@Note", SqlDbType.NVarChar, "",
+                         dt = connFunc.ExecuteDataTable("YYY_sp_Customer_Insert", CommandType.StoredProcedure,
+                     "@Note", SqlDbType.NVarChar, DataMain.Note.Replace("'", "").Trim(),
                      "@Email1", SqlDbType.NVarChar, DataMain.Email1.Replace("'", "").Trim(),
                      "@Address", SqlDbType.NVarChar, DataMain.Address.Replace("'", "").Trim(),
                      "@Phone1", SqlDbType.NVarChar, DataMain.Phone1.Replace("'", "").Trim(),
@@ -109,11 +124,14 @@ namespace _2018_12_13.Views.Customer
                      "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                        "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
+                        "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                        "@CityID", SqlDbType.Int, DataMain.City,
+                        "@District", SqlDbType.Int, DataMain.District,
+                        "@OldCustomer", SqlDbType.Int, DataMain.OldCustomer
                    );
                     }
-                    Console.WriteLine("1");
-                    return "2";
+                    return dt.Rows[0][0].ToString();
+                  
 
 
                 }
@@ -122,12 +140,11 @@ namespace _2018_12_13.Views.Customer
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
                         connFunc.ExecuteDataTable("YYY_sp_Customer_Update", CommandType.StoredProcedure,
-                      "@Note", SqlDbType.NVarChar, "",
+                      "@Note", SqlDbType.NVarChar, DataMain.Note.Replace("'", "").Trim(),
                       "@Email1", SqlDbType.NVarChar, DataMain.Email1.Replace("'", "").Trim(),
                       "@Address", SqlDbType.NVarChar, DataMain.Address.Replace("'", "").Trim(),
                       "@Phone1", SqlDbType.NVarChar, DataMain.Phone1.Replace("'", "").Trim(),
                       "@Phone2", SqlDbType.NVarChar, DataMain.Phone2.Replace("'", "").Trim(),
-
                       "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                       "@Gender_ID", SqlDbType.Int, DataMain.Gender_ID,
                       "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
@@ -138,7 +155,10 @@ namespace _2018_12_13.Views.Customer
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                          "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
-                         "@CurrentID", SqlDbType.Int, _CurrentID
+                         "@CurrentID", SqlDbType.Int, _CurrentID,
+                                                 "@CityID", SqlDbType.Int, DataMain.City,
+                        "@District", SqlDbType.Int, DataMain.District,
+                        "@OldCustomer", SqlDbType.Int, DataMain.OldCustomer
                     );
                     }
                 }
@@ -147,8 +167,8 @@ namespace _2018_12_13.Views.Customer
             }
             catch (Exception ex)
             {
-                return DataMain.Birthday.ToString();
-      
+                return "0";
+
             }
 
 
@@ -172,5 +192,8 @@ namespace _2018_12_13.Views.Customer
         public string Avatar { get; set; }
         public string instgramurl { get; set; }
         public string facebookurl { get; set; }
+        public string OldCustomer { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
     }
 }

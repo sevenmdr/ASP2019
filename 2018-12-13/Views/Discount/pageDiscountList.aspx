@@ -156,6 +156,7 @@
             });
             divClone = $("#TableContent").clone();
             LoadDiscountAjax();
+
         });
 
 

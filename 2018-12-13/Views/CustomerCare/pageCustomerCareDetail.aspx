@@ -79,6 +79,7 @@
                 defaultDate: new Date(),
             });
             document.getElementById("header").focus();
+
         });
     </script>
 </body>
