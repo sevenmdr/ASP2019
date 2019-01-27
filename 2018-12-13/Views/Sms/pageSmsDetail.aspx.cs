@@ -170,6 +170,17 @@ namespace _2018_12_13.Views.Sms
 
 
                     }
+                    if (Convert.ToInt32(TicketID) != 0)
+                    {
+                        using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                        {
+                            connFunc.ExecuteDataTable("[YYY_sp_Update_Excuteticket]", CommandType.StoredProcedure,
+                                     "@TicketID", SqlDbType.Int, Convert.ToInt32(TicketID),
+                                     "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
+                                     "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow()
+                                 );
+                        }
+                    }
                     return "1";
                 }
                 catch (Exception ex)
