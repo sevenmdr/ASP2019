@@ -169,7 +169,7 @@
                 <div class="content">
                     <a id="menuSettingGeneral" class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
                     </a>
-                                       <a id="menuSettingList" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
+                    <a id="menuSettingList" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
                     </a>
                 </div>
 
@@ -192,7 +192,9 @@
                     </a>
                     <a id="menuReportTelesale" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
-                                                       <a id="menuReportOldNewCustomer" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
+                    <a id="menuReportOldNewCustomer" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
+                    </a>
+                          <a id="menuReportRevenueNewOld" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
                     </a>
                 </div>
 
@@ -365,7 +367,7 @@
                     <div class="ui divider"></div>
                     <a id="menuSettingGeneral_S" class="item" href="/Views/Setting/pageSettingGeneral.aspx">Cài Đặt Cấu Hình
                     </a>
-                             <a id="menuSettingList_S" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
+                    <a id="menuSettingList_S" class="item" href="/Views/Setting/pageSettingListParam.aspx">Danh Mục
                     </a>
                 </div>
             </div>
@@ -391,7 +393,7 @@
                     </a>
                     <a id="menuReportTelesale_S" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
-                                   <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Tỷ Lệ Tele Sale
+                    <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Tỷ Lệ Tele Sale
                     </a>
                 </div>
             </div>

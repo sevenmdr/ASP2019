@@ -8,39 +8,37 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace _2018_12_13.Views.CustomerCare
+namespace _2018_12_13.Views.Report.Report
 {
-    public partial class pageCustomerCare_RemindAppointment : WebPageBase
+    public partial class pageReportRevenueNewOld : WebPageBase
     {
+        public static string _DataComboBranch { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            InitializeCombo();
         }
-        [System.Web.Services.WebMethod]
-        public static string LoadComboMain()
+        private void InitializeCombo()
         {
-
-            DataSet ds = new DataSet();
-            //LoadBranch
-            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
-            {
-                DataTable dt = new DataTable();
-                dt = confunc.ExecuteDataTable("YYY_sp_Branch_Load", CommandType.StoredProcedure);
-                ds.Tables.Add(dt);
-            }
-
-            //
-            return JsonConvert.SerializeObject(ds, Formatting.Indented);
-        }
-
-        [System.Web.Services.WebMethod]
-        public static string LoadataCustomerCare(int Branch_ID, string DateFrom, string DateTo)
-        {
+            _DataComboBranch = "";
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("[YYY_CustomerCare_GetAppointment_ToRemindInDay]", CommandType.StoredProcedure,
-"@Branch_ID", SqlDbType.Int, Branch_ID, @"Date", SqlDbType.DateTime, Convert.ToDateTime(DateFrom), @"DateTo", SqlDbType.DateTime, Convert.ToDateTime(DateTo));
+                dt = confunc.ExecuteDataTable("YYY_sp_Branch_Load", CommandType.StoredProcedure);
+            }
+            _DataComboBranch = JsonConvert.SerializeObject(dt);
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string LoadData(string dateFrom, string dateTo, string branchID)
+        {
+
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Report_ServiceNewOld]", CommandType.StoredProcedure
+                  , "@dateFrom", SqlDbType.DateTime, Convert.ToDateTime(dateFrom)
+                  , "@dateTo", SqlDbType.DateTime, Convert.ToDateTime(dateTo)
+                  , "@branchID", SqlDbType.Int, Convert.ToInt32(branchID));
             }
             if (dt != null)
             {
@@ -51,6 +49,5 @@ namespace _2018_12_13.Views.CustomerCare
                 return "";
             }
         }
-
     }
 }

@@ -148,17 +148,17 @@
                                         <a class="ui tag label">
                                             <div>Tổng Tiền</div>
                                             <div>&nbsp</div>
-                                            <div style="font-size: 15px" id="txtServiceTab">70.000.000</div>
+                                            <div style="font-size: 15px" id="txtServiceTab"></div>
                                         </a>
                                         <a class="ui red tag label">
                                             <div>Đã Thanh Toán</div>
                                             <div>&nbsp</div>
-                                            <div style="font-size: 15px" id="txtPayment">40.000.000</div>
+                                            <div style="font-size: 15px" id="txtPayment"></div>
                                         </a>
                                         <a class="ui teal tag label">
                                             <div>Còn Nợ</div>
                                             <div>&nbsp</div>
-                                            <div style="font-size: 15px" id="txtRest">30.000.000</div>
+                                            <div style="font-size: 15px" id="txtRest"></div>
                                         </a>
                                     </div>
                                 </div>
@@ -297,9 +297,10 @@
                 $('#txtBirthday').text(dataMainCustomer.Birthday);
                 $('#txtgender').text(dataMainCustomer.Gender);
                 $('#txtAddress').text(dataMainCustomer.Address);
+                
                 $('#txtServiceTab').text(dataMainCustomer.TOTALPRICE);
                 $('#txtPayment').text(dataMainCustomer.TOTALPAID);
-                $('#txtRest').text(Number(dataMainCustomer.TOTALPRICE) - Number(dataMainCustomer.TOTALPAID));
+                $('#txtRest').text(dataMainCustomer.Rest);
 
                 if (Number(dataMainCustomer.AppID) == 0) {
                     $('#divCheckAppointment').remove();

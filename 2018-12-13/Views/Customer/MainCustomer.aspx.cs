@@ -61,7 +61,7 @@ namespace _2018_12_13.Views.Customer
                 instgramurl = ds.Tables["Table"].Rows[0]["instgramurl"].ToString();
                 totalmoneyRaise = ds.Tables["Table"].Rows[0]["TOTALPRICE"].ToString();
                 totalmoneyPaid = ds.Tables["Table"].Rows[0]["TOTALPAID"].ToString();
-                totalmoneyLeft =(Convert.ToDecimal(totalmoneyRaise) -Convert.ToDecimal(totalmoneyPaid)).ToString();
+                totalmoneyLeft = ds.Tables["Table"].Rows[0]["Rest"].ToString();
             }
             else
             {

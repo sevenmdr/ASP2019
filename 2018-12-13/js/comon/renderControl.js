@@ -412,7 +412,28 @@ function RenderReportCustomerSource(data, id) {
     else { document.getElementById(id).innerHTML = '' }
 
 }
+//Render REport Service NEW oLD
+function RenderReportServiceNewOld(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.TypeName}</td>
+                                                <td>${item.Amount}</td>
+                                            </tr>                          
 
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
 //Render OverView Receipt
 function RenderReportOverViewReceipt(data, id) {
     if (data && data.length > 0) {

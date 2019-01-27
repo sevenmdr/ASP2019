@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <div class="ui fluid search selection dropdown clear" id="typetakecare"onchange="LoadDataCustomerCareNotCheckIN()">
+                                        <div class="ui fluid search selection dropdown" id="typetakecare"onchange="LoadDataCustomerCareNotCheckIN()">
                                             <input type="hidden" name="customerCareType" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Tình Trạng</div>
@@ -37,7 +37,10 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <input class="flatpickr" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotCheckIN()"/>
+                                        <input class="flatpickr" id="DateFrom" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotCheckIN()" />
+                                    </div>
+                                    <div class="field">
+                                        <input class="flatpickr" id="DateTo" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotCheckIN()" />
                                     </div>
 
                                 </div>
@@ -90,7 +93,7 @@
     else { document.getElementById(id).innerHTML = '' }
 }
         function LoadDataCustomerCareNotCheckIN() {
-            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {
+            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_NotCheckIn.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $("#DateFrom").val(), $("#DateTo").val(), function (data) {
                 dataListMainNotCheckIn = data;
                 if ($('#typetakecare').dropdown('get value') != ""&& $('#typetakecare').dropdown('get value') != "2") {
                     dataListMainNotCheckIn = data.filter(word => word["isTakeCare"] == Number($('#typetakecare').dropdown('get value')));

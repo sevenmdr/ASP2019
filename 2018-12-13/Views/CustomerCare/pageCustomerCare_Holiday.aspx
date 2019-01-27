@@ -6,7 +6,7 @@
         <div class="navslide navwrap">
             <div class="row">
                 <div class="sixteen wide tablet ten wide computer column">
-                    <div class="ui segments" style="background-color: white;border: none;">
+                    <div class="ui segments" style="background-color: white; border: none;">
                         <form class="ui form segment form3">
                             <div class="ui segment" style="border: none;">
                                 <div class="five fields" style="margin: 0px;">
@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <div class="ui fluid search selection dropdown clear" id="typetakecare"onchange="LoadDataCustomerCareHoliday()">
+                                        <div class="ui fluid search selection dropdown" id="typetakecare" onchange="LoadDataCustomerCareHoliday()">
                                             <input type="hidden" name="customerCareType" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Tình Trạng</div>
@@ -37,14 +37,16 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <input class="flatpickr" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareHoliday()"/>
+                                        <input class="flatpickr" id="DateFrom" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareHoliday()" />
+                                    </div>
+                                    <div class="field">
+                                        <input class="flatpickr" id="DateTo" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareHoliday()" />
                                     </div>
 
                                 </div>
                             </div>
                         </form>
                         <div class="ui cards" id="cardaftertreatment" style="margin: -.875em -0.01em">
-     
                         </div>
                     </div>
                 </div>
@@ -58,10 +60,10 @@
         var dataListMainCheckInNotService;
         function LoadCardView(data, id) {
             if (data && data.length > 0) {
-            var myNode = document.getElementById(id);
-            myNode.innerHTML = '';
-    var re = new RegExp(",", 'g');
-            const markup = `
+                var myNode = document.getElementById(id);
+                myNode.innerHTML = '';
+                var re = new RegExp(",", 'g');
+                const markup = `
     ${(data).map(item => `
                             <div class="card">
                                 <div class="content">
@@ -69,7 +71,7 @@
                                         ${item.CusDetail}
                                     </div>
                                     <div class="meta">
-                                        ${item.isTakeCare==1?"Đã Chăm Sóc":"Chưa Chăm Sóc"}
+                                        ${item.isTakeCare == 1 ? "Đã Chăm Sóc" : "Chưa Chăm Sóc"}
                                     </div>
                                     <div class="description">
                                         <b>${item.Content.lenght > 10 ? item.Content.substring(0, 10) + "..." : item.Content}</b>
@@ -83,30 +85,30 @@
                                 </div>
                             </div>
 `)
-        }
+                    }
 `;
                 document.getElementById(id).innerHTML = markup.replace(re, '');;
-                   }
-    else { document.getElementById(id).innerHTML = '' }
-}
+            }
+            else { document.getElementById(id).innerHTML = '' }
+        }
         function LoadDataCustomerCareHoliday() {
-            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_Holiday.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {
+            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_Holiday.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $("#DateFrom").val(), $("#DateTo").val(), function (data) {
                 dataListMainCheckInNotService = data;
-                if ($('#typetakecare').dropdown('get value') != ""&& $('#typetakecare').dropdown('get value') != "2") {
+                if ($('#typetakecare').dropdown('get value') != "" && $('#typetakecare').dropdown('get value') != "2") {
                     dataListMainCheckInNotService = data.filter(word => word["isTakeCare"] == Number($('#typetakecare').dropdown('get value')));
                 }
-                
+
                 LoadCardView(dataListMainCheckInNotService, "cardaftertreatment")
-                            // di den khach hang
-                  $(".ui.basic.red.button").click(function (e) {
-                      window.open("/Views/CustomerCare/pageCustomerCareList.aspx?CustomerID="  + $(this).val() +"&Type=3");
-                
-            });
-            // Cham soc khach hang
-            $(".ui.basic.green.button").click(function (e) {
-                window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + $(this).val());
-                
-            });
+                // di den khach hang
+                $(".ui.basic.red.button").click(function (e) {
+                    window.open("/Views/CustomerCare/pageCustomerCareList.aspx?CustomerID=" + $(this).val() + "&Type=3");
+
+                });
+                // Cham soc khach hang
+                $(".ui.basic.green.button").click(function (e) {
+                    window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + $(this).val());
+
+                });
             })
 
         }
@@ -119,19 +121,19 @@
 
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
-               dateFormat: 'Y-m-d',
+                dateFormat: 'Y-m-d',
                 enableTime: false,
                 defaultDate: new Date(),
             });
-                 LoadComboBranchNotCheckIn();
-             $("#Branch_ID").dropdown("refresh");
+            LoadComboBranchNotCheckIn();
+            $("#Branch_ID").dropdown("refresh");
             $("#Branch_ID").dropdown("set selected", 1);
             $("#typetakecare").dropdown("refresh");
             $("#typetakecare").dropdown("set selected", 2);
-             LoadDataCustomerCareHoliday();
-    
-           
-       
+            LoadDataCustomerCareHoliday();
+
+
+
         });
 
 

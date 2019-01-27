@@ -169,7 +169,7 @@
                         <div class="field">
                             <div class="field">
                                 <div class="ui toggle checkbox">
-                                    <input id="chkIsOldCustomer" type="checkbox" checked="checked" name="newsletter" />
+                                    <input id="chkIsOldCustomer" type="checkbox"  name="newsletter" />
                                     <label id="lbOldCustomr" class="coloring blue">Khách Hàng Cũ</label>
                                 </div>
                             </div>

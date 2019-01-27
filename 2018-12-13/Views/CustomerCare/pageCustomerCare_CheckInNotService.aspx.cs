@@ -34,14 +34,14 @@ namespace _2018_12_13.Views.CustomerCare
         }
 
         [System.Web.Services.WebMethod]
-    public static string LoadataCustomerCare(int Branch_ID,string Date)
+    public static string LoadataCustomerCare(int Branch_ID,string DateFrom, string DateTo)
     {
         DataTable dt = new DataTable();
         using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
         {
-            dt = confunc.ExecuteDataTable("[YYY_CustomerCare_GetAppointment_NotService]", CommandType.StoredProcedure,
-              "@Branch_ID", SqlDbType.Int, Branch_ID);
-        }
+                dt = confunc.ExecuteDataTable("[YYY_CustomerCare_GetAppointment_NotService]", CommandType.StoredProcedure,
+  "@Branch_ID", SqlDbType.Int, Branch_ID, @"Date", SqlDbType.DateTime, Convert.ToDateTime(DateFrom), @"DateTo", SqlDbType.DateTime, Convert.ToDateTime(DateTo));
+            }
         if (dt != null)
         {
             return JsonConvert.SerializeObject(dt);

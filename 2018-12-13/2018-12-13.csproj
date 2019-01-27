@@ -2070,6 +2070,7 @@
     <Content Include="Views\Report\Report\images\octocat-logo.png" />
     <Content Include="Views\Report\Report\lib\colorbrewer.js" />
     <Content Include="Views\Report\Report\lib\stream_layers.js" />
+    <Content Include="Views\Report\Report\pageReportRevenueNewOld.aspx" />
     <Content Include="Views\Report\Report\pageReportCustomerSource.aspx" />
     <Content Include="Views\Report\Report\pageReportOldNewCustomer.aspx" />
     <Content Include="Views\Report\Report\pageRevenuePerTeleSale.aspx" />
@@ -2706,6 +2707,13 @@
     </Compile>
     <Compile Include="Views\Permission\pagePermissionPageList.aspx.designer.cs">
       <DependentUpon>pagePermissionPageList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportRevenueNewOld.aspx.cs">
+      <DependentUpon>pageReportRevenueNewOld.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportRevenueNewOld.aspx.designer.cs">
+      <DependentUpon>pageReportRevenueNewOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\Report\pageReportCustomerSource.aspx.cs">
       <DependentUpon>pageReportCustomerSource.aspx</DependentUpon>
