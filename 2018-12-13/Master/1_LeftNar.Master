@@ -192,6 +192,8 @@
                     </a>
                     <a id="menuReportTelesale" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
+                                                       <a id="menuReportOldNewCustomer" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
+                    </a>
                 </div>
 
 
@@ -388,6 +390,8 @@
                     <a id="menuReportBySourceCustomer_S" class="item" href="/Views/Report/Report/pageReportCustomerSource.aspx">Doanh Thu Theo Loại Khách Hàng
                     </a>
                     <a id="menuReportTelesale_S" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
+                    </a>
+                                   <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Tỷ Lệ Tele Sale
                     </a>
                 </div>
             </div>

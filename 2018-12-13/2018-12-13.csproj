@@ -2071,6 +2071,7 @@
     <Content Include="Views\Report\Report\lib\colorbrewer.js" />
     <Content Include="Views\Report\Report\lib\stream_layers.js" />
     <Content Include="Views\Report\Report\pageReportCustomerSource.aspx" />
+    <Content Include="Views\Report\Report\pageReportOldNewCustomer.aspx" />
     <Content Include="Views\Report\Report\pageRevenuePerTeleSale.aspx" />
     <Content Include="Views\Report\Report\pageRevenueTreatment.aspx" />
     <Content Include="Views\Report\Report\pageRevenueConsultant.aspx" />
@@ -2712,6 +2713,13 @@
     </Compile>
     <Compile Include="Views\Report\Report\pageReportCustomerSource.aspx.designer.cs">
       <DependentUpon>pageReportCustomerSource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportOldNewCustomer.aspx.cs">
+      <DependentUpon>pageReportOldNewCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\Report\pageReportOldNewCustomer.aspx.designer.cs">
+      <DependentUpon>pageReportOldNewCustomer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\Report\pageRevenuePerTeleSale.aspx.cs">
       <DependentUpon>pageRevenuePerTeleSale.aspx</DependentUpon>
