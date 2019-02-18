@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <div class="ui fluid search selection dropdown clear" id="typetakecare" onchange="LoadDataCustomerCareTreat()">
+                                        <div class="ui fluid search selection dropdown" id="typetakecare" onchange="LoadDataCustomerCareTreat()">
                                             <input type="hidden" name="customerCareType" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Tình Trạng</div>
@@ -37,7 +37,10 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <input class="flatpickr" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareTreat()" />
+                                        <input class="flatpickr" id="DateFrom" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareTreat()" />
+                                    </div>
+                                    <div class="field">
+                                        <input class="flatpickr" id="DateTo"   type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareTreat()" />
                                     </div>
 
                                 </div>
@@ -57,10 +60,10 @@
         var dataListMain;
         function LoadCardView(data, id) {
             if (data && data.length > 0) {
-            var myNode = document.getElementById(id);
-            myNode.innerHTML = '';
-            var re = new RegExp(",", 'g');
-            const markup = `
+                var myNode = document.getElementById(id);
+                myNode.innerHTML = '';
+                var re = new RegExp(",", 'g');
+                const markup = `
     ${(data).map(item => `
                             <div class="card">
                                 <div class="content">
@@ -82,14 +85,14 @@
                                 </div>
                             </div>
 `)
-                }
+                    }
 `;
                 document.getElementById(id).innerHTML = markup.replace(re, '');;
-                 }
-    else { document.getElementById(id).innerHTML = '' }
+            }
+            else { document.getElementById(id).innerHTML = '' }
         }
         function LoadDataCustomerCareTreat() {
-            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {
+            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_AfterTreatment.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $("#DateFrom").val(), $("#DateTo").val(), function (data) {
                 dataListMain = data;
                 if ($('#typetakecare').dropdown('get value') != "" && $('#typetakecare').dropdown('get value') != "2") {
                     dataListMain = data.filter(word => word["isTakeCare"] == Number($('#typetakecare').dropdown('get value')));
@@ -99,11 +102,11 @@
                 // di den khach hang
                 $(".ui.basic.red.button").click(function (e) {
                     window.open("/Views/CustomerCare/pageCustomerCareList.aspx?CustomerID=" + $(this).attr('name') + "&MasterID=" + $(this).val() + "&Type=5");
-                    
+
                 });
                 // Cham soc khach hang
                 $(".ui.basic.green.button").click(function (e) {
-                  window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + $(this).val());
+                    window.open("/Views/Customer/MainCustomer.aspx?CustomerID=" + $(this).val());
                 });
             })
 
@@ -128,6 +131,7 @@
             $("#typetakecare").dropdown("refresh");
             $("#typetakecare").dropdown("set selected", 2);
             LoadDataCustomerCareTreat();
+
         });
 
 

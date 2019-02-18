@@ -206,6 +206,7 @@
     <Content Include="Views\Account\pageInvoicePrint.aspx" />
     <Content Include="Views\Customer\pageListCustomer.aspx" />
     <Content Include="Views\Customer\pageScheduleList.aspx" />
+    <Content Include="Views\Customer\pageTakeCareDetail.aspx" />
     <Content Include="Views\Marketing\pageCallDetailInput.aspx" />
     <Content Include="Views\Marketing\pageTicketAction.aspx" />
     <Content Include="Views\Report\build\d3.min.js" />
@@ -2485,6 +2486,13 @@
     <Compile Include="Views\Customer\pageTabList.aspx.designer.cs">
       <DependentUpon>pageTabList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer\pageTakeCareDetail.aspx.cs">
+      <DependentUpon>pageTakeCareDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\pageTakeCareDetail.aspx.designer.cs">
+      <DependentUpon>pageTakeCareDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customer\pageTreatmentDetail.aspx.cs">
       <DependentUpon>pageTreatmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3217,7 +3225,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5345</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5345/</IISUrl>
+          <IISUrl>http://localhost:5346/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -45,7 +45,7 @@ namespace _2018_12_13.Views.Report.Report
             //dt.Rows.Add(dr); dt.Rows.Add(dr1);
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                ds = confunc.ExecuteDataSet("[YYY_sp_Report_Overview]", CommandType.StoredProcedure,
+                ds = confunc.ExecuteDataSet("[YYY_sp_Report_CustomerNewOld]", CommandType.StoredProcedure,
                    "@dateFrom", SqlDbType.DateTime, Convert.ToDateTime(dateFrom)
                   , "@dateTo", SqlDbType.DateTime, Convert.ToDateTime(dateTo)
                   , "@branchID", SqlDbType.Int, Convert.ToInt32(branchID));

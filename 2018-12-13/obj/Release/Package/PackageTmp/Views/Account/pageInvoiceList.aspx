@@ -154,6 +154,7 @@
             });
             divClone = $("#TableContent").clone();
             LoadAccountAjax();
+
         });
         function AddNewAccount() {
             document.getElementById("divDetailPopup").innerHTML = '';

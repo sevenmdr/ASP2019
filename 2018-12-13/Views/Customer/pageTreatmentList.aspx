@@ -14,7 +14,9 @@
                         <div class="center aligned column" style="text-align: right; padding-bottom: 0rem">
                             <div class="ui buttons">
                                 <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewTreatment(customerID)">Thêm Mới</button>
+                                 <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewTakeCare(customerID)">Tạo Chăm Sóc</button>
                             </div>
+
                         </div>
                     </div>
                 </div>

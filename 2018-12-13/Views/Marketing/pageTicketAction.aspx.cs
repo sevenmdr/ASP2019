@@ -73,15 +73,13 @@ namespace _2018_12_13.Views.Marketing
             }
         }
         [System.Web.Services.WebMethod]
-        public static string AddnewCustomer()
+        public static string CheckCustomerExist()
         {
             DataTable dt = new DataTable();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_Customer_Insert]", CommandType.StoredProcedure,
-                  "@TicketID", SqlDbType.Int, Convert.ToInt32(Convert.ToInt32(_TicketID)),
-                  "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
-                  "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow());
+                dt = confunc.ExecuteDataTable("[YYY_sp_Ticket_Customer_CheckExist]", CommandType.StoredProcedure,
+                  "@TicketID", SqlDbType.Int, Convert.ToInt32(Convert.ToInt32(_TicketID)));
             }
             if (dt != null && dt.Rows.Count>0)
             {

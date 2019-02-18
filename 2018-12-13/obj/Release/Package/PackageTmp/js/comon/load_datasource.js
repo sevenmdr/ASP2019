@@ -207,14 +207,14 @@ function GetDataSourceTreatment(link, CustomerID, fn) {
 
 
 //LoadData CustomerCare AfterTreatment
-function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, Date, fn) {
+function GetDataSourceCustomerCareAfterTreatment(link, Branch_ID, DateFrom, DateTo, fn) {
     var x = "";
     $.ajax({
         url: link,
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({ "Branch_ID": Branch_ID, "Date": Date }),
+        data: JSON.stringify({ "Branch_ID": Branch_ID, "DateFrom": DateFrom, "DateTo": DateTo }),
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -1174,6 +1174,28 @@ function GetRevenueCustomerSource(link, dateFrom, dateTo, branchID, fn) {
     })
     return x;
 }
+//....Service New Old
+function GetRevenueServiceNewOld(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
 //....OverView
 function GetReportOverView(link, dateFrom, dateTo, branchID, fn) {
 
@@ -1344,6 +1366,86 @@ function GetDataSourceSchedule(link, CustomerID, fn) {
         success: function (data) {
 
             fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Danh muc
+function GetDataTypeHistory(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+function GetDataTypeAccount(link, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+// Load list Customer
+function GetListCustomer(link, dateFrom, dateTo, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo }),
+        async: true,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}
+function GetReportONewCustomer(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"]);
         }
     })
     return x;

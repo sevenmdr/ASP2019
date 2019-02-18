@@ -120,6 +120,7 @@
     $(document).ready(function () {
         divClone = $("#TableContent").clone();
         LoadStatusAjax();
+
     });
 
 

@@ -25,7 +25,7 @@
                                 <th style="text-align: center">ID</th>
                                 <th style="text-align: center; width: 25px;">STT</th>
                                 <th style="text-align: center">Ngươi Tạo</th>
-                                 <th style="text-align: center">Nội Dung</th>
+                                <th style="text-align: center">Nội Dung</th>
                                 <th style="text-align: center">Ngày</th>
                                 <th style="text-align: center">Loại</th>
                                 <th style="text-align: center; width: 30px;">Sửa</th>
@@ -42,10 +42,10 @@
 </div>
 
 <script type="text/javascript">
-        var divClone;
+    var divClone;
     var customerID = ("<%=CustomerID %>");
     function LoadHistoryAjax() {
-        GetDataSourceHistory("/Views/Customer/pageHistoryList.aspx/LoadataHistory",customerID, function (data) {
+        GetDataSourceHistory("/Views/Customer/pageHistoryList.aspx/LoadataHistory", customerID, function (data) {
             //$('#dtContent').DataTable().clear();
             //$('#dtContent').DataTable().state.clear()
             $('#dtContent').DataTable().destroy();
@@ -60,11 +60,11 @@
                 destroy: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
-                    { "visible": true, "targets": 1, "data": "STT" ,width: "50px" , "className":"center"},
-                    { "visible": true, "targets": 2, "data": "CreatedName", width:"120px" , "className":"center" },
-                    { "visible": true, "targets": 3, "data": "Content"},
-                    { "visible": true, "targets": 4, "data": "CreatedString", width:"100px" , "className":"center"},
-                    { "visible": true, "targets": 5, "data": "TypeName", width:"150px" },
+                    { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
+                    { "visible": true, "targets": 2, "data": "CreatedName", width: "120px", "className": "center" },
+                    { "visible": true, "targets": 3, "data": "Content" },
+                    { "visible": true, "targets": 4, "data": "CreatedString", width: "100px", "className": "center" },
+                    { "visible": true, "targets": 5, "data": "TypeName", width: "150px" },
                     {
                         "targets": -2,
                         "data": null,
@@ -86,7 +86,7 @@
             document.getElementById("dtContent").className = "ui celled table";
             $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                 var data = table.row($(this).parents('tr')).data();
-                editHistory(data["ID"],customerID);
+                editHistory(data["ID"], customerID);
             });
             $('#dtContent tbody ').on('click', '.buttonDeleteClass', function () {
                 var data = table.row($(this).parents('tr')).data();
@@ -96,7 +96,7 @@
         })
 
     }
-       function DeleteHistoryList(id) {
+    function DeleteHistoryList(id) {
         const promise = notiConfirm();
         promise.then(function () { ExecuteDeleteHistory(id); }, function () { });
     }
@@ -122,8 +122,9 @@
         })
     }
     $(document).ready(function () {
-         divClone = $("#TableContent").clone();
+        divClone = $("#TableContent").clone();
         LoadHistoryAjax();
+
     });
 
 

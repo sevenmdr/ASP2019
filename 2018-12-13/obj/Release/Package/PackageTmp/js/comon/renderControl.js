@@ -412,7 +412,30 @@ function RenderReportCustomerSource(data, id) {
     else { document.getElementById(id).innerHTML = '' }
 
 }
+//Render REport Service NEW oLD
+function RenderReportServiceNewOld(data, id) {
 
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.TypeName}</td>
+                                                <td>${item.AmountString}</td>
+
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup;
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
 //Render OverView Receipt
 function RenderReportOverViewReceipt(data, id) {
     if (data && data.length > 0) {
@@ -563,6 +586,33 @@ function RenderReportTeleSale(data, id) {
             }
 `;
         document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render  New/OldCustomer
+function RenderReportOldNewCustomer(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+
+
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.Cust_Code}</td>
+                                                <td>${item.Name}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Price}</td>
+                                                <td>${item.Balance}</td>
+
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup;
     }
     else { document.getElementById(id).innerHTML = '' }
 

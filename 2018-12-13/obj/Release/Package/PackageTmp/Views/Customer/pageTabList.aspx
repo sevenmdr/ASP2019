@@ -130,7 +130,7 @@
     $(document).ready(function () {
         divClone = $("#TableContent").clone();
         LoadTabAjax();
-      
+
     //    $('.money').simpleMoneyFormat();
 
     });

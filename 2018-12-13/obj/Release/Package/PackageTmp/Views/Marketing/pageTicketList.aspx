@@ -66,15 +66,15 @@
                                         <th style="text-align: center">CustomerID</th>
                                         <th style="text-align: center">SourceID</th>
                                         <th style="text-align: center">STT</th>
-                                        <th style="text-align: center">MSKH</th>
-                                        <th style="text-align: center">Tên</th>
-                                        <th style="text-align: center">Nguồn</th>
-                                        <th style="text-align: center">Số Điện Thoại</th>
+                                        <th style="text-align: center;width: 100px">MSKH</th>
+                                        <th style="text-align: center;width: 150px">Tên</th>
+                                        <th style="text-align: center;width: 150px">Nguồn</th>
+                                        <th style="text-align: center;width: 150px">Số Điện Thoại</th>
                                         <th style="text-align: center">Ghi Chú</th>
-                                        <th style="text-align: center">Trạng Thái</th>
-                                        <th style="text-align: center">Ngày Xử Lý</th>
-                                        <th style="text-align: center">Giờ Xứ Lý</th>
-                                        <th style="text-align: center">Xứ Lý</th>
+                                        <th style="text-align: center;width: 150px">Trạng Thái</th>
+                                        <th style="text-align: center; width: 110px">Ngày Xử Lý</th>
+                                        <th style="text-align: center; width: 90px">Giờ Xứ Lý</th>
+                                        <th style="text-align: center; width: 90px">Xứ Lý</th>
                                         <th style="text-align: center; width: 90px">Chăm Sóc</th>
                                     </tr>
                                 </thead>
@@ -138,19 +138,19 @@
                         { "visible": false, "targets": 2, "data": "SourceID" },
                         { "visible": true, "targets": 3, "data": "STT", width: "50px", "className": "center" },
                         {
-                            "visible": true, "targets": 4, "data": "CustCode", width: "120px", "className": "center", "render": function (data, type, row, meta) {
+                            "visible": true, "targets": 4, "data": "CustCode", width: "100px", "className": "center", "render": function (data, type, row, meta) {
                                 if (type === 'display') { data = '<a href="' + "/Views/Customer/MainCustomer.aspx?CustomerID=" + Number(data) + '">' + data + '</a>'; }
 
                                 return data;
                             }
                         },
-                        { "visible": true, "targets": 5, "data": "TicketName" },
-                        { "visible": true, "targets": 6, "data": "SrourceName" },
-                        { "visible": true, "targets": 7, "data": "Phone", width: "250px" },
+                        { "visible": true, "targets": 5, "data": "TicketName", width: "150px" },
+                        { "visible": true, "targets": 6, "data": "SrourceName", width: "150px"},
+                        { "visible": true, "targets": 7, "data": "Phone", width: "150px" },
                          { "visible": true, "targets": 8, "data": "Content" },
-                        { "visible": true, "targets": 9, "data": "StatusName", width: "250px" },
-                        { "visible": true, "targets": 10, "data": "DateExe", width: "100px" },
-                        { "visible": true, "targets": 11, "data": "HourExe", width: "100px" },
+                        { "visible": true, "targets": 9, "data": "StatusName", width: "150px" },
+                        { "visible": true, "targets": 10, "data": "DateExe", width: "110px" },
+                        { "visible": true, "targets": 11, "data": "HourExe", width: "90px" },
                         {
                             "visible": true, "targets": 12, "data": "isExecute", width: "80px", "className": "center", "render": function (data, type, row, meta) {
                                 if (type === 'display') {

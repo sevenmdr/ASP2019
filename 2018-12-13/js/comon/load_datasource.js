@@ -1429,3 +1429,24 @@ function GetListCustomer(link, dateFrom, dateTo, fn) {
     })
     return x;
 }
+function GetReportONewCustomer(link, dateFrom, dateTo, branchID, fn) {
+
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "dateFrom": dateFrom, "dateTo": dateTo, "branchID": branchID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}

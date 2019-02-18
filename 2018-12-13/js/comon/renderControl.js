@@ -414,6 +414,7 @@ function RenderReportCustomerSource(data, id) {
 }
 //Render REport Service NEW oLD
 function RenderReportServiceNewOld(data, id) {
+
     if (data && data.length > 0) {
         var myNode = document.getElementById(id);
         myNode.innerHTML = '';
@@ -422,14 +423,15 @@ function RenderReportServiceNewOld(data, id) {
     ${(data).map(item => `
 <tr>
                                                 <td>${item.TypeName}</td>
-                                                <td>${item.Amount}</td>
+                                                <td>${item.AmountString}</td>
+
                                             </tr>                          
 
             
 `)
             }
 `;
-        document.getElementById(id).innerHTML = markup.replace(re, '');
+        document.getElementById(id).innerHTML = markup;
     }
     else { document.getElementById(id).innerHTML = '' }
 
@@ -577,6 +579,32 @@ function RenderReportTeleSale(data, id) {
                                                 <td>${item.NumTicketExecute}</td>
                                                 <td>${item.NumAppCreated}</td>
                                                 <td>${item.NumAppChecked}</td>
+                                            </tr>                          
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+//Render  New/OldCustomer
+function RenderReportOldNewCustomer(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+
+        const markup = `
+    ${(data).map(item => `
+<tr>
+                                                <td>${item.Cust_Code}</td>
+                                                <td>${item.Name}</td>
+                                                <td>${item.Amount}</td>
+                                                <td>${item.Price}</td>
+                                                <td>${item.Balance}</td>
                                             </tr>                          
 
             

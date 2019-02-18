@@ -13,6 +13,7 @@ namespace _2018_12_13.Views.Customer
     public partial class pageCustomerDetail : WebPageBase
     {
         private static int _CurrentID { get; set; }
+        private static int _ticketID { get; set; }
         public static string _defaultAvatar { get; set; }
 
         public static string _dataInfo { get; set; }
@@ -39,6 +40,18 @@ namespace _2018_12_13.Views.Customer
                 _CurrentID = 0;
                 _dataInfo = "";
             }
+            var ticketID = Request.QueryString["TicketID"];
+            if (ticketID != null)
+            {
+           
+                _ticketID = Convert.ToInt32(ticketID == null ? "0" : ticketID.ToString());
+                LoadatabyTicket(_ticketID);
+            }
+            else
+            {
+                _ticketID = 0;
+                _dataInfo = "";
+            }
         }
         private void Loadata(int id)
         {
@@ -58,7 +71,24 @@ namespace _2018_12_13.Views.Customer
             }
 
         }
+        private void LoadatabyTicket(int id)
+        {
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Customer_LoadByTicketID]", CommandType.StoredProcedure,
+                  "@CurrentID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
+            }
+            if (dt != null)
+            {
+                _dataInfo = JsonConvert.SerializeObject(dt);
+            }
+            else
+            {
+                _dataInfo = "";
+            }
 
+        }
         public void LoadComboMain()
         {
             //LoadLanguage
@@ -120,14 +150,15 @@ namespace _2018_12_13.Views.Customer
                      "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                      "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
-                     "@Birthday", SqlDbType.NVarChar, Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss"),
+                     "@Birthday", SqlDbType.NVarChar, (DataMain.Birthday!="") ? Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss") : null,
                      "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                      "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
                         "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                         "@CityID", SqlDbType.Int, DataMain.City,
                         "@District", SqlDbType.Int, DataMain.District,
-                        "@OldCustomer", SqlDbType.Int, DataMain.OldCustomer
+                        "@OldCustomer", SqlDbType.Int, DataMain.OldCustomer,
+                         "@TicketID", SqlDbType.Int, _ticketID
                    );
                     }
                     return dt.Rows[0][0].ToString();
@@ -150,7 +181,7 @@ namespace _2018_12_13.Views.Customer
                       "@Type_Cat_ID", SqlDbType.Int, DataMain.Type_Cat_ID,
                       "@Language_ID", SqlDbType.Int, DataMain.Language_ID,
                        "@Avatar", SqlDbType.NVarChar, DataMain.Avatar.ToString(),
-                      "@Birthday", SqlDbType.DateTime, Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss"),
+                      "@Birthday", SqlDbType.DateTime, (DataMain.Birthday != "") ? Convert.ToDateTime(DataMain.Birthday).ToString("yyyy-MM-dd HH:mm:ss") :null,
                       "@instgramurl", SqlDbType.NVarChar, DataMain.instgramurl.Replace("'", "").Trim(),
                      "@facebookurl", SqlDbType.NVarChar, DataMain.facebookurl.Replace("'", "").Trim(),
                       "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,

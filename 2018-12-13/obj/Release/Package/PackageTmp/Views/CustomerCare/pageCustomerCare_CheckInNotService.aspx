@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <div class="ui fluid search selection dropdown clear" id="typetakecare"onchange="LoadDataCustomerCareNotService()">
+                                        <div class="ui fluid search selection dropdown" id="typetakecare"onchange="LoadDataCustomerCareNotService()">
                                             <input type="hidden" name="customerCareType" />
                                             <input class="search" autocomplete="off" tabindex="0" />
                                             <div class="default text">Tình Trạng</div>
@@ -37,7 +37,10 @@
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <input class="flatpickr" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotService()"/>
+                                        <input class="flatpickr" id="DateFrom" type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotService()" />
+                                    </div>
+                                    <div class="field">
+                                        <input class="flatpickr" id="DateTo"   type="text" placeholder="Select Date.." onchange="LoadDataCustomerCareNotService()" />
                                     </div>
 
                                 </div>
@@ -90,7 +93,7 @@
     else { document.getElementById(id).innerHTML = '' }
 }
         function LoadDataCustomerCareNotService() {
-            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $(".flatpickr").val(), function (data) {
+            GetDataSourceCustomerCareAfterTreatment("/Views/CustomerCare/pageCustomerCare_CheckInNotService.aspx/LoadataCustomerCare", Number($('#Branch_ID').dropdown('get value')), $("#DateFrom").val(), $("#DateTo").val(), function (data) {
                 dataListMainCheckInNotService = data;
                 if ($('#typetakecare').dropdown('get value') != ""&& $('#typetakecare').dropdown('get value') != "2") {
                     dataListMainCheckInNotService = data.filter(word => word["isTakeCare"] == Number($('#typetakecare').dropdown('get value')));
@@ -129,7 +132,7 @@
              LoadDataCustomerCareNotCheckIN();
             // di den khach hang
 
-           
+
        
         });
 

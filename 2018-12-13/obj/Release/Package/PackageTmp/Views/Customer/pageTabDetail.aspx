@@ -30,7 +30,19 @@
                             <input class="form-control" id="serviceTab" onchange="event.preventDefault();return onChangeServiceTab()" />
                         </div>
                     </div>
-
+                    <div class="field">
+                        <div class="field">
+                            <label>Nhân Viên Tư Vấn</label>
+                            <div class="ui fluid search selection dropdown" id="Consult">
+                                <input type="hidden" name="statusType" />
+                                <i class="dropdown icon"></i>
+                                <input class="search" autocomplete="off" tabindex="0" />
+                                <div class="default text">Nhân Viên Tư Vấn</div>
+                                <div id="ccbConsult" class="menu" tabindex="-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="field">
                         <div class="field">
                             <label>Khuyến Mãi</label>
@@ -82,6 +94,12 @@
                     </div>
                     <div class="two fields">
                         <div class="field">
+                            <label>Hoa Hồng Tư Vấn</label>
+                            <div class="ui right labeled fluid input">
+                                <div class="ui label">$</div>
+                                <input id="ConsultAmount" name="discountOther" type="text" class="money" />
+                                <div class="ui basic label">VND</div>
+                            </div>
                         </div>
                         <div class="field">
                             <label>Thành Tiền</label>
@@ -110,6 +128,7 @@
 
     <script type="text/javascript">
         var dataServiceTab;
+        var dataEmployee;
         var dataDiscountTab;
 
         var isExecuteDiscountCombo = 0;
@@ -130,6 +149,8 @@
                 let Percent = 0
                 let priceDiscountService = 0
                 let priceService = 0
+                let ConsultAmount = 0
+                let ConsultPer = 0
                 let discounttabChoosen = Number($('#discountTab').val()) ? Number($('#discountTab').val()) : 0;
                 if (discounttabChoosen != 0) {
                     Percent = dataDiscountTab.filter(word => word["ID"] == discounttabChoosen)[0]["Percent"];
@@ -137,22 +158,33 @@
                 }
                 let serviceTabChoosen = Number($('#serviceTab').val());
                 priceService = dataServiceTab.filter(word => word["ID"] == serviceTabChoosen)[0]["Price"];
+                ConsultAmount = dataServiceTab.filter(word => word["ID"] == serviceTabChoosen)[0]["AmountConsult"];
+                ConsultPer = dataServiceTab.filter(word => word["ID"] == serviceTabChoosen)[0]["PerConsult"];
                 if (Amount != 0) {
                     priceDiscountService = Amount;
                 }
                 else {
                     priceDiscountService = Percent * priceService / 100;
                 }
+                if (ConsultAmount != 0) {
+                    ConsultAmount = ConsultAmount;
+                }
+                else {
+                    ConsultAmount = ConsultPer * priceService / 100;
+                }
+                debugger
                 let priceRoot = priceService * Number($('#Quanlity').val() ? $('#Quanlity').val() : 1);
                 let discountedAmount = priceDiscountService * Number($('#Quanlity').val() ? $('#Quanlity').val() : 1);
-                let priceDiscounted = Number($('#PriceRoot').val() ? $('#PriceRoot').val() : 0) - Number($('#DiscountedAmount').val() ? $('#DiscountedAmount').val() : 0) - Number($('#DiscountedAmountOrder').val() ? $('#DiscountedAmountOrder').val() : 0);
-
+                let priceDiscounted =priceRoot - Number($('#DiscountedAmount').val() ? $('#DiscountedAmount').val() : 0) - Number($('#DiscountedAmountOrder').val() ? $('#DiscountedAmountOrder').val() : 0);
+                let ConsultAmountTotal = ConsultAmount * Number($('#Quanlity').val() ? $('#Quanlity').val() : 1);
                 $('#PriceRoot').val(Number(priceRoot));
                 $('#DiscountedAmount').val(Number(discountedAmount));
                 $('#PriceDiscounted').val(Number(priceDiscounted));
+                $('#ConsultAmount').val(Number(ConsultAmountTotal));
             }
         }
         function ExcuteData() {
+            debugger
             var data = new Object();
             data.ServiceID = Number($('#serviceTab').val()) ? Number($('#serviceTab').val()) : 0;
             data.Content = $('#note').val() ? $('#note').val() : "";
@@ -163,6 +195,8 @@
             data.Discount_Percent = $('#DiscountedAmount').val() ? $('#DiscountedAmount').val() : 0;
             data.Discount_Amount_Doctor = $('#DiscountedAmountOrder').val() ? $('#DiscountedAmountOrder').val() : 0;
             data.Price_Discounted = $('#PriceDiscounted').val() ? $('#PriceDiscounted').val() : 0;
+            data.Consult = Number($('#Consult').dropdown('get value')) ? Number($('#Consult').dropdown('get value')) : 0;
+            data.ConsultAmount = $('#ConsultAmount').val() ? $('#ConsultAmount').val() : 0;
             if ($('#form3').form('is valid')) {
                 $.ajax({
                     url: "/Views/Customer/pageTabDetail.aspx/ExcuteData",
@@ -244,7 +278,7 @@
                 fieldValue: 'ID'
             });
             $('#discountTab').val(0);
-            if (firstDiscount != 0) $('#discountTab').val(firstDiscount).change();
+            //   if (firstDiscount != 0) $('#discountTab').val(firstDiscount).change();
         }
         function LoadDataUpdate() {
             let dataTab = ([<%=_dataTab%>][0]);
@@ -257,6 +291,9 @@
                 $('#DiscountedAmount').val(Number(dataTab[0].Discount_Amount));
                 $('#PriceRoot').val(Number(dataTab[0].Price_Root));
                 $('#PriceDiscounted').val(Number(dataTab[0].Price_Discounted));
+                $("#Consult").dropdown("refresh");
+                $("#Consult").dropdown("set selected", dataTab[0].Consult);
+                $('#ConsultAmount').val(Number(dataTab[0].ConsultAmount));
             }
         }
 
@@ -264,12 +301,14 @@
             $('#Quanlity').val(Number(1));
             dataServiceTab = ([<%=_ServiceTab%>][0]);
             dataDiscountTab = ([<%=_DiscountTab%>][0]);
+            dataEmployee = ([<%=_EmployeeTab%>][0]);
+            LoadCombo(dataEmployee, "ccbConsult")
             $('#Quanlity').divide();
             $('#PriceRoot').divide();
             $('#DiscountedAmount').divide();
             $('#DiscountedAmountOrder').divide();
             $('#PriceDiscounted').divide();
-
+            $('#ConsultAmount').divide();
             $('#serviceTab').inputpicker({
                 data: dataServiceTab,
                 fields: [

@@ -27,19 +27,19 @@
                                                             <a class="ui red ribbon label">Hồ Sơ Khách Hàng</a>
                                                             <div class="ui divided selection list">
                                                                 <div>
-                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_customer.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtName" class="item"></a>
+                                                                    <img style="vertical-align: middle; width: 20px; height: 20px;" src="/img/ButtonImg/color_customer.png" /><a style="padding-left: 15px; font-size: 14px;" id="txtName" class="item"></a>
                                                                 </div>
                                                                 <div>
-                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_phone.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtPhone" class="item"></a>
+                                                                    <img style="vertical-align: middle; width: 20px; height: 20px;" src="/img/ButtonImg/color_phone.png" /><a style="padding-left: 15px; font-size: 14px;" id="txtPhone" class="item"></a>
                                                                 </div>
                                                                 <div>
-                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_source.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtSource" class="item"></a>
+                                                                    <img style="vertical-align: middle; width: 20px; height: 20px;" src="/img/ButtonImg/color_source.png" /><a style="padding-left: 15px; font-size: 14px;" id="txtSource" class="item"></a>
                                                                 </div>
                                                                 <div>
-                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_facebook.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtFacebook" class="item"></a>
+                                                                    <img style="vertical-align: middle; width: 20px; height: 20px;" src="/img/ButtonImg/color_facebook.png" /><a style="padding-left: 15px; font-size: 14px;" id="txtFacebook" class="item"></a>
                                                                 </div>
                                                                 <div>
-                                                                    <img style="vertical-align: middle;width: 20px;height: 20px;" src="/img/ButtonImg/color_content.png" /><a style="padding-left: 15px;font-size: 14px;" id="txtContent" class="item"></a>
+                                                                    <img style="vertical-align: middle; width: 20px; height: 20px;" src="/img/ButtonImg/color_content.png" /><a style="padding-left: 15px; font-size: 14px;" id="txtContent" class="item"></a>
                                                                 </div>
                                                             </div>
 
@@ -108,7 +108,7 @@
                                                     </div>
                                                     <div class="center aligned column" style="text-align: right; padding-bottom: 0rem">
                                                         <div class="ui buttons">
-                                                            <button class="ui yellow basic button modalfour" id="btnNewCustomer" data-value="fade up" onclick="NewCustomer()">Tạo Khách Hàng</button>
+                                                            <button class="ui yellow basic button modalfour" id="btnNewCustomer" data-value="fade up" onclick="return NewCustomer();">Tạo Khách Hàng</button>
                                                             <button class="ui blue basic button modalfour" data-value="fade up" onclick="callTakeCare()">Call Chăm Sóc</button>
                                                             <button class="ui green basic button modalfour" data-value="fade up" onclick="smsTakeCare()">SMS Chăm Sóc</button>
                                                             <button class="ui red basic button modalfour" id="btnNewApp" data-value="fade up" onclick="makeAppointment()">Đặt Lịch</button>
@@ -193,9 +193,8 @@
             }
         }
         function NewCustomer() {
-
             $.ajax({
-                url: "/Views/Marketing/pageTicketAction.aspx/AddnewCustomer",
+                url: "/Views/Marketing/pageTicketAction.aspx/CheckCustomerExist",
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify({ 'TicketID': TicketID }),
@@ -205,18 +204,19 @@
                     notiError();
                 },
                 success: function (result) {
-                    if (result.d != "1") {
-                        notiSuccess();
-                        CustomerID = result.d;
-                        LoadTickedValueAjax();
-                        DisableNewCustomer();
+                    if (result.d != "0") {
+                        ////notiSuccess();
+                        //CustomerID = result.d;
+                        //LoadTickedValueAjax();
+                        //DisableNewCustomer();
+                        location.reload();
                     } else {
-                        notiError();
+                        document.getElementById("divDetailPopup").innerHTML = '';
+                        $("#divDetailPopup").load("/Views/Customer/pageCustomerDetail.aspx?TicketID=" + TicketID);
                     }
                 }
             });
-
-            return false;
+            return true;
         }
         function DisableNewCustomer() {
             debugger

@@ -158,6 +158,7 @@
             data.url = url;
         });
         LoadFolderTree();
+
     });
     function LoadFolderTree() {
         GetDataSourceImageFolder("/Views/Customer/pageCustomerImage.aspx/LoadAllFolder", customerID, function (data) {

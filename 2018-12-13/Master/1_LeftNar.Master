@@ -393,7 +393,9 @@
                     </a>
                     <a id="menuReportTelesale_S" class="item" href="/Views/Report/Report/pageRevenuePerTeleSale.aspx">Tỷ Lệ Tele Sale
                     </a>
-                    <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Tỷ Lệ Tele Sale
+                    <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
+                    </a>
+                          <a id="menuReportRevenueNewOld_S" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
                     </a>
                 </div>
             </div>

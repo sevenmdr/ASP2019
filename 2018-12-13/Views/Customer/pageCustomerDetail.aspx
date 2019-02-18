@@ -353,7 +353,7 @@
         });
 
         function LoadDataUpdate() {
-        
+        debugger
             let dataInfo = ([<%=_dataInfo%>][0]);
             if (dataInfo != undefined) {
                 

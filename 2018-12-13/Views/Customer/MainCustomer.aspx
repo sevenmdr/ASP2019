@@ -143,7 +143,7 @@
             else $("#buttonfacebook").show()
             if (instgramurl == '') $("#buttoninstagram").hide()
             else $("#buttoninstagram").show();
-     
+
         });
 
         $('.ui.menu a.item').on('click', function () {
@@ -252,6 +252,12 @@
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Customer/pageTreatmentDetail.aspx?CustomerID=" + customerID);
         }
+        function addNewTakeCare(customerID) {
+
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Customer/pageTakeCareDetail.aspx?CustomerID=" + customerID);
+        }
+
         function editTreatment(id, customerid) {
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Customer/pageTreatmentDetail.aspx?CurrentID=" + id + "&CustomerID=" + customerid);

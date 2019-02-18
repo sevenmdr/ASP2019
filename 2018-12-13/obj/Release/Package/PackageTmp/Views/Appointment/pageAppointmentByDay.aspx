@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                     <div style="float: right; width: 200px">
-                                        <input id="dateTo" class="flatpickr" type="text" placeholder="Date To .." onchange ="LoadAppointmentListByDayAjax()" />
+                                        <input id="dateTo" class="flatpickr" type="text" placeholder="Date To .." onchange="LoadAppointmentListByDayAjax()" />
                                     </div>
                                     <div style="float: right; width: 200px">
                                         <input id="dateFrom" class="flatpickr" type="text" placeholder="Date From ...." onchange="LoadAppointmentListByDayAjax()" />
@@ -76,47 +76,47 @@
             });
         }
         function LoadAppointmentListByDayAjax() {
-         
+
             GetDataSourceAppointmentListByDay("/Views/Appointment/pageAppointmentByDay.aspx/LoadataAppointmentList"
                 , (Number($('#ScheduleBranchID').dropdown('get value')) ? Number($('#ScheduleBranchID').dropdown('get value')) : 0)
                 , $('#dateFrom').val() ? $('#dateFrom').val() : new Date()
                 , $('#dateTo').val() ? $('#dateTo').val() : new Date()
                 , function (data) {
 
-                if ($('#ScheduleTypeList').dropdown('get value')) {
-                    dataAppList = data.filter(word => word["TypeID"] == $('#ScheduleTypeList').dropdown('get value'));
-                }
-                else {
-                    dataAppList = data;
-                }
-                $('#dtContent').DataTable().destroy();
-                $("#TableContent").replaceWith(divClone.clone());
-                $('#dtContent').DataTable({
-                    data: dataAppList,
-                    info: false,
-                    paging: false,
-                    ordering: false,
-                    searching: false,
-                    destroy: true,
-                    "columnDefs": [
-                        { "visible": false, "targets": 0, "data": "ID" },
-                        { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                        {
-                            "visible": true, "targets": 2, "data": "CustCode", width: "120px", "className": "center", "render": function (data, type, row, meta) {
-                                if (type === 'display') { data = '<a href="' + "/Views/Customer/MainCustomer.aspx?CustomerID=" + Number(data) + '">' + data + '</a>'; }
+                    if ($('#ScheduleTypeList').dropdown('get value')) {
+                        dataAppList = data.filter(word => word["TypeID"] == $('#ScheduleTypeList').dropdown('get value'));
+                    }
+                    else {
+                        dataAppList = data;
+                    }
+                    $('#dtContent').DataTable().destroy();
+                    $("#TableContent").replaceWith(divClone.clone());
+                    $('#dtContent').DataTable({
+                        data: dataAppList,
+                        info: false,
+                        paging: false,
+                        ordering: false,
+                        searching: false,
+                        destroy: true,
+                        "columnDefs": [
+                            { "visible": false, "targets": 0, "data": "ID" },
+                            { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
+                            {
+                                "visible": true, "targets": 2, "data": "CustCode", width: "120px", "className": "center", "render": function (data, type, row, meta) {
+                                    if (type === 'display') { data = '<a href="' + "/Views/Customer/MainCustomer.aspx?CustomerID=" + Number(data) + '">' + data + '</a>'; }
 
-                                return data;
-                            }
-                        },
-                        { "visible": true, "targets": 3, "data": "CustName", width: "200px", "className": "center" },
-                        { "visible": true, "targets": 4, "data": "Content" },
-                        { "visible": true, "targets": 5, "data": "Service_care" },
-                        { "visible": true, "targets": 6, "data": "TypeName", width: "150px" },
-                        { "visible": true, "targets": 7, "data": "TimeFrom", width: "150px" },
-                    ],
-                });
-                document.getElementById("dtContent").className = "ui celled table";
-            })
+                                    return data;
+                                }
+                            },
+                            { "visible": true, "targets": 3, "data": "CustName", width: "200px", "className": "center" },
+                            { "visible": true, "targets": 4, "data": "Content" },
+                            { "visible": true, "targets": 5, "data": "Service_care" },
+                            { "visible": true, "targets": 6, "data": "TypeName", width: "150px" },
+                            { "visible": true, "targets": 7, "data": "TimeFrom", width: "150px" },
+                        ],
+                    });
+                    document.getElementById("dtContent").className = "ui celled table";
+                })
         }
         $(document).ready(function () {
             $(".flatpickr").flatpickr({
@@ -133,7 +133,7 @@
     </script>
 
     <script src="/dist/semantic.min.js"></script>
-   <%-- <script src="/js/customjs/custom-modal.js"></script>--%>
+    <%-- <script src="/js/customjs/custom-modal.js"></script>--%>
     <script src="/plugins/datatable/jquery.dataTables.js"></script>
     <script src="/js/comon/load_datasource.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
