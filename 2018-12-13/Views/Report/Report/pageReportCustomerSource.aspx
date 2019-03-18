@@ -18,7 +18,7 @@
         .nvd3.nv-pie.nv-chart-donut2 .nv-pie-title {
             fill: rgba(70, 107, 168, 0.78);
         }
-
+         
         .nvd3.nv-pie.nv-chart-donut1 .nv-pie-title {
             opacity: 0.4;
             fill: rgba(224, 116, 76, 0.91);
