@@ -33,3 +33,7 @@
 .ui.table {
     font-size:14px; /*New*/
 }
+.dimmable:not(.body) {
+    position: relative;
+    overflow: visible !important /*New*/
+}

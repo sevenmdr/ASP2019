@@ -182,7 +182,7 @@
              LoadCombo(dataComboDoc, "ccboDoctor");
             LoadCombo(dataComboBranch, "ccbBranch");
             $(".flatpickr").flatpickr({
-                dateFormat: 'd-m-Y H:i',
+                dateFormat: 'Y-m-d H:i',
                 enableTime: true,
                 defaultDate: new Date(),
             });

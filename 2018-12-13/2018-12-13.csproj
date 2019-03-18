@@ -195,6 +195,7 @@
     <Content Include="img\ButtonImg\customercare.png" />
     <Content Include="img\ButtonImg\employee.png" />
     <Content Include="img\ButtonImg\marketing.png" />
+    <Content Include="img\ButtonImg\material.png" />
     <Content Include="img\ButtonImg\report.png" />
     <Content Include="img\ButtonImg\service.png" />
     <Content Include="img\ButtonImg\setting.png" />
@@ -206,6 +207,8 @@
     <Content Include="Views\Account\pageInvoicePrint.aspx" />
     <Content Include="Views\Customer\pageListCustomer.aspx" />
     <Content Include="Views\Customer\pageScheduleList.aspx" />
+    <Content Include="Views\Customer\pageStatusDetailDental.aspx" />
+    <Content Include="Views\Customer\pageStatusListDental.aspx" />
     <Content Include="Views\Customer\pageTakeCareDetail.aspx" />
     <Content Include="Views\Marketing\pageCallDetailInput.aspx" />
     <Content Include="Views\Marketing\pageTicketAction.aspx" />
@@ -2082,6 +2085,7 @@
     <Content Include="Views\Report\Report\stylesheets\pygment_trac.css" />
     <Content Include="Views\Report\Report\stylesheets\styles.css" />
     <Content Include="Views\Searching\Searching.aspx" />
+    <Content Include="Views\Service\pageServiceDetailStage.aspx" />
     <Content Include="Views\Service\pageServiceDetail.aspx" />
     <Content Include="Views\Service\pageServiceList.aspx" />
     <Content Include="Views\Service\pageServiceTypeDetail.aspx" />
@@ -2458,12 +2462,26 @@
     <Compile Include="Views\Customer\pageScheduleList.aspx.designer.cs">
       <DependentUpon>pageScheduleList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer\pageStatusDetailDental.aspx.cs">
+      <DependentUpon>pageStatusDetailDental.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\pageStatusDetailDental.aspx.designer.cs">
+      <DependentUpon>pageStatusDetailDental.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customer\pageStatusDetail.aspx.cs">
       <DependentUpon>pageStatusDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Customer\pageStatusDetail.aspx.designer.cs">
       <DependentUpon>pageStatusDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\pageStatusListDental.aspx.cs">
+      <DependentUpon>pageStatusListDental.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\pageStatusListDental.aspx.designer.cs">
+      <DependentUpon>pageStatusListDental.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\pageStatusList.aspx.cs">
       <DependentUpon>pageStatusList.aspx</DependentUpon>
@@ -2778,6 +2796,12 @@
     </Compile>
     <Compile Include="Views\Searching\Searching.aspx.designer.cs">
       <DependentUpon>Searching.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\pageServiceDetailStage.aspx.cs">
+      <DependentUpon>pageServiceDetailStage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\pageServiceDetailStage.aspx.designer.cs">
+      <DependentUpon>pageServiceDetailStage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\pageServiceDetail.aspx.cs">
       <DependentUpon>pageServiceDetail.aspx</DependentUpon>

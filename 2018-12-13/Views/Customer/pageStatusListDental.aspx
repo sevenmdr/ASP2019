@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageTreatmentList.aspx.cs" Inherits="_2018_12_13.Views.Customer.pageTreatmentList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageStatusListDental.aspx.cs" Inherits="_2018_12_13.Views.Customer.pageStatusListDental" %>
+
 
 <div class="ui equal width left aligned padded grid stackable">
     <div class="row">
@@ -13,10 +14,8 @@
                         </div>
                         <div class="center aligned column" style="text-align: right; padding-bottom: 0rem">
                             <div class="ui buttons">
-                                <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewTreatment(customerID)">Thêm Mới</button>
-                                 <button class="ui blue basic button modalfour" data-value="fade up" onclick="addNewTakeCare(customerID)">Tạo Chăm Sóc</button>
+                                <button class="ui yellow button modalthree" data-value="fade up" onclick="addNewStatusDental(customerID)">Thêm Mới</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -27,33 +26,28 @@
                                 <th style="text-align: center">ID</th>
                                 <th style="text-align: center; width: 25px;">STT</th>
                                 <th style="text-align: center">Bác Sĩ</th>
-                                <th style="text-align: center">KTV</th>
                                 <th style="text-align: center">Nội Dung</th>
-                                <th style="text-align: center">Dịch Vụ</th>
-                                <th style="text-align: center">Tồng Lần Điều Trị</th>
-                                <th style="text-align: center">Lần Đã Điều Trị</th>
                                 <th style="text-align: center">Ngày</th>
+                                <th style="text-align: center">Loại</th>
                                 <th style="text-align: center; width: 30px;">Sửa</th>
                                 <th style="text-align: center; width: 30px;">Xóa</th>
-
-
                             </tr>
                         </thead>
                     </table>
                 </div>
             </div>
         </div>
+        <div class="ui fullscreen test modal" id="divDetailPopupLarge"></div>
     </div>
 </div>
 
 <script type="text/javascript">
     var divClone;
-    var customerID = ("<%=CustomerID %>");
-    function LoadTreatmentAjax() {
-        GetDataSourceTreatment("/Views/Customer/pageTreatmentList.aspx/LoadataTreatment", customerID, function (data) {
+    var customerID = ("<%=_CustomerID %>");
+    function LoadStatusAjax() {
+        GetDataSourceStatus("/Views/Customer/pageStatusListDental.aspx/LoadataStatus", customerID, function (data) {
             $('#dtContent').DataTable().destroy();
             $("#TableContent").replaceWith(divClone.clone());
-
             var table = $('#dtContent').DataTable({
                 data: data,
                 info: false,
@@ -64,15 +58,10 @@
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "ID" },
                     { "visible": true, "targets": 1, "data": "STT", width: "50px", "className": "center" },
-                    { "visible": true, "targets": 2, "data": "DocName", width: "200px" },
-                    { "visible": true, "targets": 3, "data": "PTname", width: "200px" },
-                    { "visible": true, "targets": 4, "data": "Content", },
-                    { "visible": true, "targets": 5, "data": "ServiceName", width: "250px" },
-                    { "visible": true, "targets": 6, "data": "TimeToTreatment" },
-                    { "visible": true, "targets": 7, "data": "TotalTreatment"},
-
-                    { "visible": true, "targets": 8, "data": "CreatedString", width: "200px", "className": "center" },
-
+                    { "visible": true, "targets": 2, "data": "DoctorName", width: "120px" },
+                    { "visible": true, "targets": 3, "data": "Content" },
+                    { "visible": true, "targets": 4, "data": "CreatedString", width: "120px", "className": "center" },
+                    { "visible": true, "targets": 5, "data": "TypeName", width: "120px" },
                     {
                         "targets": -2,
                         "data": null,
@@ -94,35 +83,35 @@
             document.getElementById("dtContent").className = "ui celled table";
             $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                 var data = table.row($(this).parents('tr')).data();
-                editTreatment(data["ID"], customerID);
+                editStatusDental(data["ID"], customerID);
             });
             $('#dtContent tbody ').on('click', '.buttonDeleteClass', function () {
                 var data = table.row($(this).parents('tr')).data();
-                DeleteTreatment(data["ID"])
+                DeleteStatusListDental(data["ID"]);
             });
 
         })
 
     }
-    function DeleteTreatment(id) {
+    function DeleteStatusListDental(id) {
         const promise = notiConfirm();
-        promise.then(function () { ExecuteDeleteTreatment(id); }, function () { });
+        promise.then(function () { ExecuteDeleteStatus(id); }, function () { });
     }
-    function ExecuteDeleteTreatment(id) {
+    function ExecuteDeleteStatus(id) {
         $.ajax({
-            url: "/Views/Customer/pageTreatmentList.aspx/DeleteItem",
+            url: "/Views/Customer/pageStatusListDental.aspx/DeleteItem",
             dataType: "json",
             type: "POST",
             data: JSON.stringify({ 'id': id }),
             contentType: 'application/json; charset=utf-8',
-            async: true,
+            async: false,
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 notiError();
             },
             success: function (result) {
                 if (result.d == "1") {
                     notiSuccess();
-                    LoadTreatmentAjax();
+                    LoadStatusAjax();
                 } else {
                     notiError();
                 }
@@ -131,11 +120,23 @@
     }
     $(document).ready(function () {
         divClone = $("#TableContent").clone();
-        LoadTreatmentAjax();
-
+        LoadStatusAjax();
     });
 
 
+
+    function addNewStatusDental(customerID) {
+
+        document.getElementById("divDetailPopupLarge").innerHTML = '';
+        $("#divDetailPopupLarge").load("/Views/Customer/pageStatusDetailDental.aspx?CustomerID=" + customerID);
+    }
+    function editStatusDental(id, customerid) {
+
+        document.getElementById("divDetailPopupLarge").innerHTML = '';
+        $("#divDetailPopupLarge").load("/Views/Customer/pageStatusDetailDental.aspx?CurrentID=" + id + "&CustomerID=" + customerid);
+        $('#divDetailPopupLarge').modal('show');
+
+    }
 
 </script>
 
@@ -144,4 +145,5 @@
 <%--<script src="/plugins/datatable/jquery.dataTables.js"></script>--%>
 <script src="/js/customjs/custom-datatable.js"></script>
 <script src="/js/comon/load_datasource.js"></script>
+<script src="/js/comon/renderControl.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/b-1.5.4/datatables.min.js"></script>

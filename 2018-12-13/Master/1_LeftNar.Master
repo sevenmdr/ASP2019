@@ -36,6 +36,7 @@
 
 </head>
 <body>
+
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" ScriptMode="Release" />
     </form>
@@ -133,6 +134,14 @@
 
                 <div class="title item">
                     <img src="/img/ButtonImg/marketing.png" />
+                    <i class="dropdown icon"></i>Ticket Theo Ngày
+                </div>
+                <div class="content">
+                    <a id="menuMarTicketByDay" class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày</a>
+                </div>
+
+                <div class="title item">
+                    <img src="/img/ButtonImg/marketing.png" />
                     <i class="dropdown icon"></i>Marketing
                 </div>
                 <div class="content">
@@ -140,8 +149,7 @@
                     </a>
                     <a id="menuMarDeletedTicket" class="item" href="/Views/Marketing/pageTicketListRecover.aspx">Danh Sách Ticket Đã Xóa
                     </a>
-                    <a id="menuMarTicketByDay" class="item" href="/Views/Marketing/pageTicketAllByDay.aspx">Ticket Theo Ngày
-                    </a>
+
                     <a id="menuMarTicketSetting" class="item" href="/Views/Marketing/pageTicketGeneral.aspx">Cài Đặt
                     </a>
                 </div>
@@ -194,7 +202,7 @@
                     </a>
                     <a id="menuReportOldNewCustomer" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
                     </a>
-                          <a id="menuReportRevenueNewOld" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
+                    <a id="menuReportRevenueNewOld" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
                     </a>
                 </div>
 
@@ -395,7 +403,7 @@
                     </a>
                     <a id="menuReportOldNewCustomer_S" class="item" href="/Views/Report/Report/pageReportOldNewCustomer.aspx">Khách Hàng Cũ Mới
                     </a>
-                          <a id="menuReportRevenueNewOld_S" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
+                    <a id="menuReportRevenueNewOld_S" class="item" href="/Views/Report/Report/pageReportRevenueNewOld.aspx">Doanh Thu Dịch Vụ Cũ Mới
                     </a>
                 </div>
             </div>
@@ -456,6 +464,7 @@
 
 
             <div class="ui small test modal" id="divDetailPopup"></div>
+
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

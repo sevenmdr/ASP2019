@@ -595,7 +595,7 @@ function RenderReportOldNewCustomer(data, id) {
     if (data && data.length > 0) {
         var myNode = document.getElementById(id);
         myNode.innerHTML = '';
-
+        var re = new RegExp(",", 'g');
 
         const markup = `
     ${(data).map(item => `
@@ -605,14 +605,77 @@ function RenderReportOldNewCustomer(data, id) {
                                                 <td>${item.Amount}</td>
                                                 <td>${item.Price}</td>
                                                 <td>${item.Balance}</td>
-
                                             </tr>                          
 
             
 `)
             }
 `;
-        document.getElementById(id).innerHTML = markup;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+//Render Table Treatment Matertial When Insert
+function RenderMaterialTreatmentDetail_Insert(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+<td><div class="ui right labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input class="numberLeftDetail" type="number" value=${item.Number} />
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
+    }
+    else { document.getElementById(id).innerHTML = '' }
+
+}
+
+
+//Render Table Treatment Matertial When Update
+function RenderMaterialTreatmentDetail_Update(data, id) {
+    if (data && data.length > 0) {
+        var myNode = document.getElementById(id);
+        myNode.innerHTML = '';
+        var re = new RegExp(",", 'g');
+        const markup = `
+    ${(data).map(item => `
+<tr>
+<td style="display:none">${item.IDUnit}</td>
+<td style="display:none">${item.IDProduct}</td>
+<td>${item.STT}</td>
+<td>${item.ProductName}</td>
+<td><div class="ui right labeled fluid input">
+                                    <div class="ui label">|||</div>
+                                    <input class="numberLeftDetail" type="number" value=${item.Number} disabled />
+                                    <div class="ui basic label">${item.UnitName}</div>
+                                </div></td>
+
+  </tr>                            
+
+            
+`)
+            }
+`;
+        document.getElementById(id).innerHTML = markup.replace(re, '');
     }
     else { document.getElementById(id).innerHTML = '' }
 

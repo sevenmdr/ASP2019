@@ -39,19 +39,19 @@ namespace _2018_12_13.Views.Customer
             {
                 _CurrentID = 0;
                 _dataInfo = "";
+                var ticketID = Request.QueryString["TicketID"];
+                if (ticketID != null)
+                {
+                    _ticketID = Convert.ToInt32(ticketID == null ? "0" : ticketID.ToString());
+                    LoadatabyTicket(_ticketID);
+                }
+                else
+                {
+                    _ticketID = 0;
+                    _dataInfo = "";
+                }
             }
-            var ticketID = Request.QueryString["TicketID"];
-            if (ticketID != null)
-            {
            
-                _ticketID = Convert.ToInt32(ticketID == null ? "0" : ticketID.ToString());
-                LoadatabyTicket(_ticketID);
-            }
-            else
-            {
-                _ticketID = 0;
-                _dataInfo = "";
-            }
         }
         private void Loadata(int id)
         {

@@ -84,6 +84,12 @@
                 <button class="btn" style="width: 100%">3Mp ( png ,jpg )</button>
                 <input id="fileuploadAvatar" type="file" name="files[]" />
             </div>
+            <div>
+                <div class="ui toggle checkbox">
+                    <input id="chkIsOldCustomer" type="checkbox" name="newsletter" />
+                    <label id="lbOldCustomr" class="coloring blue">Khách Hàng Cũ</label>
+                </div>
+            </div>
         </div>
         <div class="description">
             <div class="sixteen wide tablet eight wide computer column">
@@ -95,7 +101,7 @@
                                 <input id="Name" name="name" type="text" />
                             </div>
                         </div>
-                        <div class="two fields">
+                        <div class="three fields">
                             <div class="field">
                                 <label>Điện Thoại ( 10 Ký Tự Số )</label>
                                 <input id="Phone1" name="phonenumber" type="text" />
@@ -104,16 +110,18 @@
                                 <label>Điện Thoại ( 10 Ký Tự Số )</label>
                                 <input id="Phone2" name="phonenumberNotMain" type="text" />
                             </div>
-
-                        </div>
-                        <div class="field">
-                            <div class="field">
+                             <div class="field">
                                 <label>Email</label>
                                 <input id="Email1" name="email" type="text" />
 
                             </div>
                         </div>
-                        <div class="two fields">
+
+                        <div class="three fields">
+                             <div class="field">
+                                <label>Ngày Sinh</label>
+                                <input id="Birthday" class="flatpickr" type="text" placeholder="Select Date.." />
+                            </div>
                             <div class="field">
                                 <label>Instagram</label>
                                 <input id="instgramurl" name="instgramurl" type="text" />
@@ -124,11 +132,7 @@
 
                             </div>
                         </div>
-                        <div class="two fields">
-                            <div class="field">
-                                <label>Ngày Sinh</label>
-                                <input id="Birthday" class="flatpickr" type="text" placeholder="Select Date.." />
-                            </div>
+                        <div class="three fields">
                             <div class="field">
                                 <label>Giới Tính</label>
                                 <div class="ui fluid search selection dropdown" id="Gender_ID" onchange="event.preventDefault();">
@@ -140,9 +144,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="two fields">
                             <div class="field">
                                 <label>Nguồn</label>
                                 <div class="ui fluid search selection dropdown" id="Type_Cat_ID" onchange="event.preventDefault();">
@@ -167,21 +168,13 @@
                             </div>
                         </div>
                         <div class="field">
-                            <div class="field">
-                                <div class="ui toggle checkbox">
-                                    <input id="chkIsOldCustomer" type="checkbox"  name="newsletter" />
-                                    <label id="lbOldCustomr" class="coloring blue">Khách Hàng Cũ</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field">
                             <label>Ghi Chú</label>
                             <input id="txtContent" name="content" type="text" />
 
                         </div>
 
 
-                        <div class="two fields">
+                        <div class="three fields">
                             <div class="field">
                                 <label>Thành Phố</label>
                                 <div class="ui fluid search selection dropdown" id="CityID" onchange="return LoadComboCity()">
@@ -204,13 +197,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <div class="field">
+                             <div class="field">
                                 <label>Địa Chỉ</label>
                                 <input id="Address" name="address" type="text" />
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -290,12 +282,12 @@
             dataSource = ([<%=_dataSource%>][0]);
             dataLangue = ([<%=_dataLangue%>][0]);
             dataCity = ([<%=_dataCity%>][0]);
-            
+
             LoadCombo(dataGender, "cbbGenderCustomer")
             LoadCombo(dataSource, "cbbSourceCustomer")
             LoadCombo(dataLangue, "cbbLanguageCustomer")
-            
-                LoadCombo(dataCity, "cbbCity");
+
+            LoadCombo(dataCity, "cbbCity");
             dataDistrict = ([<%=_dataDistrict%>][0]);
 
             $("#Gender_ID ").dropdown("refresh");
@@ -353,10 +345,10 @@
         });
 
         function LoadDataUpdate() {
-        debugger
+            debugger
             let dataInfo = ([<%=_dataInfo%>][0]);
             if (dataInfo != undefined) {
-                
+
                 $("#Gender_ID ").dropdown("refresh");
                 $("#Gender_ID ").dropdown("set selected", dataInfo[0].Gender_ID);
                 $("#Type_Cat_ID ").dropdown("refresh");

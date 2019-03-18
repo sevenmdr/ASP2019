@@ -31,6 +31,7 @@ namespace _2018_12_13.Views.Customer
             }
             if (dt != null)
             {
+                dt.Rows[0]["Word"] = Comon.Comon.ConvertNumToString(Convert.ToDouble(dt.Rows[0]["Word"]));
                 return JsonConvert.SerializeObject(dt);
             }
             else

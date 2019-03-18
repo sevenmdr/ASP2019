@@ -227,6 +227,7 @@
           document.getElementById('Amount').innerHTML = dataPrint.Amount;
           document.getElementById('Content').innerHTML = dataPrint.Content;
         document.getElementById('Datenow').innerHTML = dataPrint.Datestring;
+          document.getElementById('AmountToday').innerHTML = dataPrint.AmountToday;
         document.getElementById('Company').innerHTML = dataPrint.Company;
         document.getElementById('Word').innerHTML = dataPrint.Word;
          document.getElementById('WordFull').innerHTML=dataPrint.Word;

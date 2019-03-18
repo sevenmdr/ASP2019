@@ -56,6 +56,7 @@
                                         <th style="text-align: center">Hoa Hồng Tư Vấn</th>
                                         <th style="text-align: center">Hoa Hồng Điều Trị</th>
                                         <th style="text-align: center; width: 30px;">Sửa</th>
+                                        <th style="text-align: center; width: 30px;">Tiêu Hao</th>
                                         <th style="text-align: center; width: 30px;">Xóa</th>
                                     </tr>
                                 </thead>
@@ -95,15 +96,22 @@
                         { "visible": true, "targets": 2, "data": "Service_Code", width: "100px", "className": "center" },
                         { "visible": true, "targets": 3, "data": "Name", width: "400px" },
                         { "visible": true, "targets": 4, "data": "Amount", width: "200px" },
-                         { "visible": true, "targets": 5, "data": "TimeToTreatment", width: "200px" },
+                        { "visible": true, "targets": 5, "data": "TimeToTreatment", width: "200px" },
                         { "visible": true, "targets": 6, "data": "PerConsult", width: "200px" },
                         { "visible": true, "targets": 7, "data": "PerTreat", width: "200px" },
+                        {
+                            "targets": -3,
+                            "data": null,
+                            "defaultContent":
+                                "<button class='ui blue basic button modalfour' style='margin-bottom: -3rem;margin-top: -0.5rem;box-shadow: 0 0 0 1px #ffffff !important;"
+                                + "'data-value='fade up'><img class='buttonEditClass' src='/img/ButtonImg/edit.png' alt='edit' width='20' height='20'></button>",
+                        },
                         {
                             "targets": -2,
                             "data": null,
                             "defaultContent":
                                 "<button class='ui blue basic button modalfour' style='margin-bottom: -3rem;margin-top: -0.5rem;box-shadow: 0 0 0 1px #ffffff !important;"
-                                + "'data-value='fade up'><img class='buttonEditClass' src='/img/ButtonImg/edit.png' alt='edit' width='20' height='20'></button>",
+                                + "'data-value='fade up'><img class='buttonMaterialClass' src='/img/ButtonImg/material.png' alt='edit' width='20' height='20'></button>",
                         },
                         {
                             "targets": -1,
@@ -124,7 +132,10 @@
                     var data = table.row($(this).parents('tr')).data();
                     DeleteServiceList(data["ID"]);
                 });
-
+                $('#dtContent tbody ').on('click', '.buttonMaterialClass', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    MaterialServiceList(data["ID"]);
+                });
             })
         }
         function DeleteServiceList(id) {
@@ -156,16 +167,22 @@
 
             divClone = $("#TableContent").clone();
             LoadServiceAjax();
-                    DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
-        LoadCombo(DataComboTypeService, "cbbTypeService");
+            DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
+            LoadCombo(DataComboTypeService, "cbbTypeService");
         });
         function AddNewService() {
             document.getElementById("divDetailPopup").innerHTML = '';
-            $("#divDetailPopup").load("/Views/Service/pageServiceDetail.aspx");
+            $("#divDetailPopup").load("/Views/Service/pageServiceDetailStage.aspx");
             $('#divDetailPopup').modal('show');
             return false;
         }
         function EditService(CurrentID) {
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Service/pageServiceDetailStage.aspx?CurrentID=" + CurrentID);
+            $('#divDetailPopup').modal('show');
+            return false;
+        }
+         function MaterialServiceList(CurrentID) {
             document.getElementById("divDetailPopup").innerHTML = '';
             $("#divDetailPopup").load("/Views/Service/pageServiceDetail.aspx?CurrentID=" + CurrentID);
             $('#divDetailPopup').modal('show');

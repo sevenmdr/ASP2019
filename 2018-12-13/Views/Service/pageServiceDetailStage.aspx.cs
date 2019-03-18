@@ -13,24 +13,9 @@ using System.ComponentModel;
 
 namespace _2018_12_13.Views.Service
 {
-    //public class UnitCountDetail
-    //{
-    //    public UnitCountDetail(string idUnit, float Number, string name, string state, string idDetail)
-    //    {
-    //        this.IDUnit = idUnit;
-    //        this.Name = name;
-    //        this.Number = Number;
-    //        this.state = state;
-    //        this.idDetail = idDetail;
-    //    }
-    //    public string IDUnit { get; set; }
-    //    public string Name { get; set; }
-    //    public float Number { get; set; }
-    //    public string state { get; set; }
-    //    public string idDetail { get; set; }
-    //}
 
-    public class DataService
+
+    public class DataServiceStage
     {
         public string Name { get; set; }
         public string ServiceType { get; set; }
@@ -42,86 +27,49 @@ namespace _2018_12_13.Views.Service
         public string Content { get; set; }
         public string IsPro { get; set; }
         public string TimeToTreatment { get; set; }
-        
+
     }
 
 
-    public partial class pageServiceDetail : WebPageBase
+    public partial class pageServiceDetailStage : WebPageBase
     {
         public static string _CurrentID { get; set; }
-        public static string _DataComboProduct { get; set; }
-        public static string _DataComboStage { get; set; }
-        
+        public static string _DataServiceStage { get; set; }
         public static string _DataComboTypeService { get; set; }
-        public static string _DataComboTypeUnitCount { get; set; }
-        public static string _DataproductChoosen { get; set; }
         public static string _DataProductMain { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             var curr = Request.QueryString["CurrentID"];
+            InitializeComboType();
+
             if (curr != null)
             {
                 _CurrentID = curr.ToString();
-                InitializeComboType();
                 Loadata(Convert.ToInt32(_CurrentID));
             }
             else
             {
                 _CurrentID = null;
                 _DataProductMain = null;
-                _DataproductChoosen = null;
             }
-            
-
         }
         private void InitializeComboType()
         {
             _DataComboTypeService = "";
-            _DataComboTypeUnitCount = "";
-            _DataComboProduct = "";
-            _DataComboStage = "";
-            DataTable dt = new DataTable();
-            using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            {
-                dt = connFunc.ExecuteDataTable("[YYY_sp_Product_Combo_UnitReceipt]", CommandType.StoredProcedure);
-            }
             DataTable dt1 = new DataTable();
             using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
             {
                 dt1 = connFunc.ExecuteDataTable("YYY_sp_Service_LoadCombo_ServiceType", CommandType.StoredProcedure);
             }
-            DataTable dt2 = new DataTable();
-            using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            {
-                dt2 = connFunc.ExecuteDataTable("YYY_sp_Product_Combo_Product_IsNotManager", CommandType.StoredProcedure);
-            }
-            DataTable dt3 = new DataTable();
-            using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
-            {
-                dt3 = connFunc.ExecuteDataTable("YYY_sp_Service_Combo_Stage", CommandType.StoredProcedure,
-                    "@ID", SqlDbType.Int, _CurrentID);
-            }
-
             _DataComboTypeService = JsonConvert.SerializeObject(dt1);
-            _DataComboTypeUnitCount = JsonConvert.SerializeObject(dt);
-            _DataComboProduct = JsonConvert.SerializeObject(dt2);
-            _DataComboStage= JsonConvert.SerializeObject(dt3);
         }
         private void Loadata(int id)
         {
             DataSet ds = new DataSet();
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
-                ds = confunc.ExecuteDataSet("[YYY_sp_Service_LoadDetail]", CommandType.StoredProcedure,
+                ds = confunc.ExecuteDataSet("[YYY_sp_Service_LoadDetail_Stage]", CommandType.StoredProcedure,
                   "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
-            }
-            if (ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
-            {
-                _DataproductChoosen = JsonConvert.SerializeObject(ds.Tables[1]);
-            }
-            else
-            {
-                _DataproductChoosen = null;
             }
             if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -131,34 +79,59 @@ namespace _2018_12_13.Views.Service
             {
                 _DataProductMain = "";
             }
-
+            if (ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
+            {
+                _DataServiceStage = JsonConvert.SerializeObject(ds.Tables[1]);
+            }
+            else
+            {
+                _DataServiceStage = null;
+            }
         }
-  
+
 
         [System.Web.Services.WebMethod]
-        public static string ExcuteData(string data, string dataService)
+        public static string ExcuteData(string data, string dataServiceStage)
         {
             try
             {
-                DataService DataMain = JsonConvert.DeserializeObject<DataService>(data);
+                DataServiceStage DataMain = JsonConvert.DeserializeObject<DataServiceStage>(data);
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-                DataTable DataService = new DataTable();
+                DataTable DataServiceStage = new DataTable();
 
-                DataService = JsonConvert.DeserializeObject<DataTable>(dataService);
+                DataServiceStage = JsonConvert.DeserializeObject<DataTable>(dataServiceStage);
                 if (_CurrentID == null)
                 {
-                    return "0";
+                    using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                    {
+                        connFunc.ExecuteDataTable("YYY_sp_Service_Stage_Insert", CommandType.StoredProcedure,
+                            "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
+                            "@Amount", SqlDbType.Decimal, DataMain.Amount,
+                            "@ServiceType", SqlDbType.Int, DataMain.ServiceType,
+                            "@Created_By", SqlDbType.Int, Comon.Global.sys_userid,
+                            "@Created", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
+                            "@Content", SqlDbType.Int, DataMain.Content.Replace("'", "").Trim(),
+                            "@PerConsulAmount", SqlDbType.Int, DataMain.PerConsulAmount,
+                            "@PerConsulPercent", SqlDbType.Int, DataMain.PerConsulPercent,
+                            "@PerTreatAmount", SqlDbType.Int, DataMain.PerTreatAmount,
+                             "@PerTreatPercent", SqlDbType.Int, DataMain.PerTreatPercent,
+                             "@IsPro", SqlDbType.Int, DataMain.IsPro,
+                             "@TimeToTreatment", SqlDbType.Int, DataMain.TimeToTreatment,
+
+                            "@table_data", SqlDbType.Structured, DataServiceStage.Rows.Count > 0 ? DataServiceStage : null
+                        );
+                    }
                 }
                 else
                 {
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
-                        connFunc.ExecuteDataTable("[YYY_sp_Service_Update]", CommandType.StoredProcedure,
+                        connFunc.ExecuteDataTable("[YYY_sp_Service_Stage_Update]", CommandType.StoredProcedure,
                             "@Name", SqlDbType.NVarChar, DataMain.Name.Replace("'", "").Trim(),
                             "@Amount", SqlDbType.Decimal, DataMain.Amount,
                             "@ServiceType", SqlDbType.Int, DataMain.ServiceType,
                             "@Content", SqlDbType.NVarChar, DataMain.Content.Replace("'", "").Trim(),
-                            "@table_data", SqlDbType.Structured, DataService.Rows.Count > 0 ? DataService : null,
+                            "@table_data", SqlDbType.Structured, DataServiceStage.Rows.Count > 0 ? DataServiceStage : null,
                             "@Modified_By", SqlDbType.Int, Comon.Global.sys_userid,
                             "@Modified", SqlDbType.DateTime, Comon.Comon.GetDateTimeNow(),
                             "@PerConsulAmount", SqlDbType.Int, DataMain.PerConsulAmount,
@@ -172,6 +145,27 @@ namespace _2018_12_13.Views.Service
                     }
                 }
                 return "1";
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string CheckDeleStage(string idStage)
+        {
+            try
+            {
+                DataTable dt1 = new DataTable();
+                using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
+                {
+                    dt1 = connFunc.ExecuteDataTable("[YYY_sp_Service_CheckDeleteStage]", CommandType.StoredProcedure,
+                    "@ID", SqlDbType.Int, Convert.ToInt32(idStage));
+                }
+                if (dt1 != null && dt1.Rows.Count != 0 && Convert.ToInt32(dt1.Rows[0][0]) != 0)
+                    return "0";
+                else return "1";
             }
             catch (Exception ex)
             {

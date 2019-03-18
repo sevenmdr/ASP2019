@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageServiceDetail.aspx.cs" Inherits="_2018_12_13.Views.Service.pageServiceDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pageServiceDetailStage.aspx.cs" Inherits="_2018_12_13.Views.Service.pageServiceDetailStage" %>
 
 <!DOCTYPE html>
 
@@ -26,10 +26,10 @@
             <div class="ui segments">
                 <form class="ui form segment form3" id="form3">
                     <div class="ui accordion field">
-                        <div class="title">
+                        <div class="title active">
                             <i class="icon dropdown"></i>Thông Tin Dịch Vụ
                         </div>
-                        <div class="content field">
+                        <div class="content field active">
                             <div class="field">
                                 <div class="field">
                                     <label>Tên</label>
@@ -116,49 +116,19 @@
                     <div class="row">
                         <div class="ui accordion field">
                             <div class="title active">
-                                <i class="icon dropdown"></i>Danh sách tiêu hao
+                                <i class="icon dropdown"></i>Các Bước Thực Hiện
                             </div>
                             <div class="content field active">
                                 <div class="sixteen wide column">
                                     <div class="ui segments">
                                         <div class="ui segment">
                                             <div class="ui form">
-                                                <div class="five fields">
+                                                <div class="two fields">
                                                     <div class="field">
-                                                        <div class="ui fluid search selection dropdown" id="stageDetail">
-                                                            <input type="hidden" name="stageDetail" />
-                                                            <i class="dropdown icon"></i>
-                                                            <input class="search" autocomplete="off" tabindex="0" />
-                                                            <div class="default text">Bước Thực Hiện</div>
-                                                            <div id="cbbstageDetail" class="menu" tabindex="-1">
-                                                            </div>
-                                                        </div>
+                                                        <input id="txtServiceStageName" name="ServiceStageName" type="text" />
                                                     </div>
                                                     <div class="field">
-                                                        <div class="ui fluid search selection dropdown" id="productDetail" onchange="LoadComboUnit()">
-                                                            <input type="hidden" name="productDetail" />
-                                                            <i class="dropdown icon"></i>
-                                                            <input class="search" autocomplete="off" tabindex="0" />
-                                                            <div class="default text">Vật Liệu</div>
-                                                            <div id="cbbproductDetail" class="menu" tabindex="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="field">
-                                                        <div class="ui fluid search selection dropdown" id="unitCount">
-                                                            <input type="hidden" name="unitCount" />
-                                                            <i class="dropdown icon"></i>
-                                                            <input class="search" autocomplete="off" tabindex="0" />
-                                                            <div class="default text">Đơn Vị Tính</div>
-                                                            <div id="cbbunitCount" class="menu" tabindex="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="field">
-                                                        <input id="numberProduct" name="numberProduct" type="number" />
-                                                    </div>
-                                                    <div class="field">
-                                                        <div class="ui blue button" onclick="return ExecuteUnitCount()">Thêm</div>
+                                                        <div class="ui blue button" onclick="return ExecuteServiceStage()">Thêm</div>
                                                     </div>
                                                 </div>
                                                 <div class="field">
@@ -168,19 +138,13 @@
                                                 </div>
                                             </div>
                                             <div class="ui divider"></div>
-                                            <div class="column" id="TableProductDetail">
-                                                <table class="ui celled table" id="dtContentProductDetail" style="font-size: 11px; max-width: 100%; min-width: 100%">
+                                            <div class="column" id="TableServiceStageDetail">
+                                                <table class="ui celled table" id="dtContentServiceStageDetail" style="font-size: 11px; max-width: 100%; min-width: 100%">
                                                     <thead>
                                                         <tr>
-                                                            <th style="text-align: center">idProduct</th>
-                                                            <th style="text-align: center">idUnit</th>
                                                             <th style="text-align: center">state</th>
-                                                            <th style="text-align: center">idDetail</th>
-                                                            <th style="text-align: left">Bước Thực Hiện</th>
-                                                             <th style="text-align: left">Tên Vật Liệu</th>
-                                                            <th style="text-align: center; max-width: 150px;">Số Lượng</th>
-                                                            <th style="text-align: left">Đơn Vị Tính</th>
-                                                              <th style="text-align: left">StageID</th>
+                                                            <th style="text-align: center">ID</th>
+                                                            <th style="text-align: center">Bước Thực Hiện</th>
                                                             <th style="text-align: center; max-width: 60px;">Xóa</th>
                                                         </tr>
                                                     </thead>
@@ -207,95 +171,72 @@
     </div>
 
     <script type="text/javascript">
-        var divContentProductDetail;
-        var DataComboTypeUnitCount; // data don vi tinh
-        var DataComboStage; // data buoc thuc hien
-        var DataComboProduct; // data vat lieu
+        var divContentServiceStageDetail;
+        //var DataServiceStage; // data vat lieu
         var DataComboTypeService; // Data loai dịch vụ
 
-        var DataproductChoosen;
-        var DataProductChoosenInitialize;
+        var DataServiceStageChoosen;
+        var DataServiceStageChoosenInitialize;
         function ExecuteAmountConsult() {
             if (Number($('#txtPerConsulAmount').val()) != 0) {
                 $("#txtPerConsulAmount").attr('name', "discountAmount");
                 $('#txtPerConsulPercent').val(0);
-
-                //$("#txtPerConsulPercent").attr('name', "NotVali");
             }
         }
         function ExecutePercentConsult() {
             if (Number($('#txtPerConsulPercent').val()) != 0) {
                 $("#txtPerConsulPercent").attr('name', "discountPercent");
                 $('#txtPerConsulAmount').val(0);
-                // $("#txtPerConsulAmount").attr('name', "NotVali");
             }
         }
         function ExecuteAmountTreat() {
             if (Number($('#txtPerTreatAmount').val()) != 0) {
                 $("#txtPerTreatAmount").attr('name', "discountAmount");
                 $('#txtPerTreatPercent').val(0);
-
-                //   $("#txtPerTreatPercent").attr('name', "NotVali");
             }
         }
         function ExecutePercentTreat() {
             if (Number($('#txtPerTreatPercent').val()) != 0) {
                 $("#txtPerTreatPercent").attr('name', "discountPercent");
                 $('#txtPerTreatAmount').val(0);
-                //   $("#txtPerTreatAmount").attr('name', "NotVali");
             }
-        }
-        function LoadComboUnit() {
-            var _DataComboUnitCount = DataComboTypeUnitCount.filter(word => word["Product_ID"] == Number($('#productDetail').dropdown('get value')));
-            LoadCombo(_DataComboUnitCount, "cbbunitCount")
         }
         $(document).ready(function () {
 
-            divContentProductDetail = $("#TableProductDetail").clone();
+            divContentServiceStageDetail = $("#TableServiceStageDetail").clone();
             document.getElementById("textShowMessage").innerHTML = "";
-            $('#numberProduct').val(1);
+
             $('#spTotalTreatment').val(1);
             DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
-            DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
-            DataComboProduct = ([<%=_DataComboProduct%>][0]);
-            DataComboStage = ([<%=_DataComboStage%>][0]);
-            DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
-            DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
+
+            DataServiceStageChoosen = ([<%=_DataServiceStage%>][0]) === undefined ? [] : ([<%=_DataServiceStage%>][0]);
+            DataServiceStageChoosenInitialize = ([<%=_DataServiceStage%>][0]) === undefined ? [] : ([<%=_DataServiceStage%>][0]);
 
             $('#txtAmount').divide();
             $('#txtPerConsulAmount').divide();
             $('#txtPerTreatAmount').divide();
-
             LoadCombo(DataComboTypeService, "cbbserviceType")
-
-           LoadCombo(DataComboStage, "cbbstageDetail")
-            LoadCombo(DataComboProduct, "cbbproductDetail")
             LoadDataUpdate();
         });
         function LoadDataTable() {
 
-            DataproductChoosen = DataproductChoosen.filter(word => word["state"] == "1");
-            $('#dtContentProductDetail').DataTable().destroy();
-            $("#TableProductDetail").replaceWith(divContentProductDetail.clone());
-            var table = $('#dtContentProductDetail').DataTable({
-                data: DataproductChoosen,
+            if (DataServiceStageChoosen != undefined)
+                DataServiceStageChoosen = DataServiceStageChoosen.filter(word => word["state"] == "1");
+            $('#dtContentServiceStageDetail').DataTable().destroy();
+            $("#TableServiceStageDetail").replaceWith(divContentServiceStageDetail.clone());
+            var table = $('#dtContentServiceStageDetail').DataTable({
+                data: DataServiceStageChoosen,
                 info: false,
                 paging: false,
                 ordering: false,
                 searching: false,
-                scrollY: "400px",
+                scrollY: "200px",
                 scrollCollapse: true,
                 destroy: true,
                 "columnDefs": [
-                    { "visible": false, "targets": 0, "data": "idProduct" },
-                    { "visible": false, "targets": 1, "data": "idUnit" },
-                    { "visible": false, "targets": 2, "data": "state" },
-                    { "visible": false, "targets": 3, "data": "idDetail" },
-                            { "visible": true, "targets": 4, "data": "StageName" },
-                    { "visible": true, "targets": 5, "data": "ProductName" },
-                    { "visible": true, "targets": 6, "data": "Number" },
-                    { "visible": true, "targets": 7, "data": "UnitName" },
-                     { "visible": false, "targets": 8, "data": "StageID" },
+                    { "visible": false, "targets": 0, "data": "state" },
+                    { "visible": false, "targets": 1, "data": "ID" },
+                    { "visible": true, "targets": 2, "data": "Name" },
                     {
                         "targets": -1,
                         "data": null,
@@ -305,17 +246,8 @@
                     },
                 ],
             });
-            document.getElementById("dtContentProductDetail").className = "ui celled table";
-            // Load lai Sản Phẩm
-            //var dataunit = DataComboProduct;
-            //for (var element in DataproductChoosen) {
-            //    let x = DataproductChoosen[element]["idProduct"];
-            //    dataunit = dataunit.filter(word => word["ID"] != x);
-            //}
-            //LoadCombo(dataunit, "cbbproductDetail")
-
-
-            $('#dtContentProductDetail tbody ').on('click', '.buttonDeleteClass', function (e) {
+            document.getElementById("dtContentServiceStageDetail").className = "ui celled table";
+            $('#dtContentServiceStageDetail tbody ').on('click', '.buttonDeleteClass', function (e) {
 
                 e.preventDefault();
                 var data = table.row($(this).parents('tr')).data();
@@ -327,7 +259,7 @@
                     if (selected_row.hasClass('child')) {
                         selected_row = selected_row.prev();
                     }
-                    var rowData = $('#dtContentProductDetail').DataTable().row(selected_row).data();
+                    var rowData = $('#dtContentServiceStageDetail').DataTable().row(selected_row).data();
                 }
                 else {
 
@@ -338,15 +270,34 @@
 
         }
         function DeleteProductDetail(index) {
-            DataproductChoosen[index].state = "0";
-            LoadDataTable();
+            let idStage= DataServiceStageChoosen[index].ID;
+            $.ajax({
+                url: "/Views/Service/pageServiceDetailStage.aspx/CheckDeleStage",
+                dataType: "json",
+                type: "POST",
+                data: JSON.stringify({'idStage': idStage }),
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    notiError("Lỗi Hệ Thống");
+                },
+                success: function (result) {
+                    if (result.d == "1") {
+                        DataServiceStageChoosen[index].state = "0";
+                        LoadDataTable();
+                    } else {
+                        notiError("Không thể xóa bước thực hiện. Đã có vật liệu tiêu hao ứng với bước thực hiện này");
+                    }
+                }
+            })
+
+
         }
         function LoadDataUpdate() {
 
             let DataProductMain = ([<%=_DataProductMain%>][0]);
             LoadDataTable();
             if (DataProductMain) {
-
                 $("#txtPerConsulAmount").attr('name', "NotVali");
                 $("#txtPerConsulPercent").attr('name', "NotVali");
                 $("#txtPerTreatAmount").attr('name', "NotVali");
@@ -384,38 +335,29 @@
             }
             return false;
         }
-        function ExecuteUnitCount() {
+        function ExecuteServiceStage() {
 
-            let productDetail = Number($('#productDetail').dropdown('get value')) ? Number($('#productDetail').dropdown('get value')) : 0;
-            let unitCount = Number($('#unitCount').dropdown('get value')) ? Number($('#unitCount').dropdown('get value')) : 0;
-            let numberProduct = parseFloat($('#numberProduct').val()) ? parseFloat($('#numberProduct').val()) : 0;
-            let stageDetail= Number($('#stageDetail').dropdown('get value')) ? Number($('#stageDetail').dropdown('get value')) : 0;
-            if (productDetail == 0 ||stageDetail==0|| unitCount == 0 || numberProduct <= 0) {
-                document.getElementById("textShowMessage").innerHTML = "Chọn Bước Thực Hiện, Vật Liệu, Đơn Vị Tính Và Số Lượng";
+            let servicestageDetail = $('#txtServiceStageName').val() ? $('#txtServiceStageName').val() : "";
+
+            if (servicestageDetail == "") {
+                document.getElementById("textShowMessage").innerHTML = "Nhập nội dung bước thực hiện";
             }
             else {
                 document.getElementById("textShowMessage").innerHTML = "";
                 var element = {};
-                element.idProduct = productDetail;
-                element.idUnit = unitCount;
                 element.state = "1";
-                element.idDetail = "0";
-                element.StageName = $('#stageDetail').dropdown('get text');
-                element.ProductName = $('#productDetail').dropdown('get text');
-                element.Number = numberProduct.toString();
-                element.UnitName = $('#unitCount').dropdown('get text');
-                element.StageID = stageDetail;
-                DataproductChoosen.push(element);
-                 $('#stageDetail').dropdown('clear');
-                $('#productDetail').dropdown('clear');
-                $('#unitCount').dropdown('clear');
-                $('#numberProduct').val(1);
+                element.ID = "0";
+                element.Name = servicestageDetail;
+                DataServiceStageChoosen.push(element);
+
+                $('#txtServiceStageName').val("");
                 LoadDataTable();
             }
 
             return false;
         }
         function ExcuteData() {
+         
             var data = new Object();
             data.ServiceType = Number($('#serviceType').dropdown('get value')) ? Number($('#serviceType').dropdown('get value')) : 0;
             data.PerConsulAmount = $('#txtPerConsulAmount').val() ? $('#txtPerConsulAmount').val() : 0;
@@ -428,23 +370,25 @@
             data.IsPro = (document.getElementById("chkIsproduct").checked) ? "1" : "0";
             data.TimeToTreatment = Number($('#spTotalTreatment').val()) ? Number($('#spTotalTreatment').val()) : 1;
 
-
+              
             // Execute datatable UNIT
-            for (var element in DataproductChoosen) {
-                let idunit = DataproductChoosen[element]["idProduct"];
-                let currentElement = DataProductChoosenInitialize.filter(word => word["idProduct"] == idunit);
-                if (currentElement == undefined || currentElement == "") // Chua ton tai
+            for (var element in DataServiceStageChoosen) {
+                let idunit = DataServiceStageChoosen[element]["ID"];
+                //let currentElement = DataServiceStageChoosenInitialize.filter(word => word["ID"] == idunit);
+                if (idunit==0) // Chua ton tai
                 {
-                    DataProductChoosenInitialize.push(DataproductChoosen[element]);
+                    DataServiceStageChoosenInitialize.push(DataServiceStageChoosen[element]);
                 }
             }
 
-            for (var element in DataProductChoosenInitialize) {
-                let idunit = DataProductChoosenInitialize[element]["idProduct"];
-                let currentElement = DataproductChoosen.filter(word => word["idProduct"] == idunit);
+            for (var element in DataServiceStageChoosenInitialize) {
+                let idunit = DataServiceStageChoosenInitialize[element]["ID"];
+                let currentElement = DataServiceStageChoosen.filter(word => word["ID"] == idunit);
                 if (currentElement == undefined || currentElement == "") // Chua ton tai
                 {
-                    DataProductChoosenInitialize[element]["state"] = 0
+                    DataServiceStageChoosenInitialize[element]["state"] = 0
+
+
                 }
 
             }
@@ -453,10 +397,10 @@
             if ($('#form3').form('is valid')) {
 
                 $.ajax({
-                    url: "/Views/Service/pageServiceDetail.aspx/ExcuteData",
+                    url: "/Views/Service/pageServiceDetailStage.aspx/ExcuteData",
                     dataType: "json",
                     type: "POST",
-                    data: JSON.stringify({ 'data': JSON.stringify(data), 'dataService': JSON.stringify(DataProductChoosenInitialize) }),
+                    data: JSON.stringify({ 'data': JSON.stringify(data), 'dataServiceStage': JSON.stringify(DataServiceStageChoosenInitialize) }),
                     contentType: 'application/json; charset=utf-8',
                     async: true,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {

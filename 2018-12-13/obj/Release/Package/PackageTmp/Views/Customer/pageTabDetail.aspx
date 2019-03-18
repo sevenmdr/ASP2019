@@ -172,7 +172,7 @@
                 else {
                     ConsultAmount = ConsultPer * priceService / 100;
                 }
-                debugger
+                
                 let priceRoot = priceService * Number($('#Quanlity').val() ? $('#Quanlity').val() : 1);
                 let discountedAmount = priceDiscountService * Number($('#Quanlity').val() ? $('#Quanlity').val() : 1);
                 let priceDiscounted =priceRoot - Number($('#DiscountedAmount').val() ? $('#DiscountedAmount').val() : 0) - Number($('#DiscountedAmountOrder').val() ? $('#DiscountedAmountOrder').val() : 0);
@@ -223,11 +223,13 @@
             }
         }
         function LoadDiscount() {
+            debugger
             let serviceIDChoosen = $('#serviceTab').val();
             let serviceTypeIDChoosen = Number(dataServiceTab.filter(word => word["ID"] == serviceIDChoosen)[0]["TypeID"]);
             let newDataDiscount = dataDiscountTab;
             let firstDiscount = 0;
             newDataDiscount.forEach(function (element) {
+                
                 let rule = element["Rule"];
                 let discountType = Number(element["DiscountType"]);
                 if (discountType == 3)// All Service

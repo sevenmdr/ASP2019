@@ -25,168 +25,168 @@
         <div class="sixteen wide tablet eight wide computer column">
             <div class="ui segments">
                 <form class="ui form segment form3" id="form3">
-                    <div class="field">
-                        <div class="field">
-                            <label>Tên</label>
-                            <input id="txtName" name="name" type="text" />
+                    <div class="ui accordion field">
+                        <div class="title">
+                            <i class="icon dropdown"></i>Thông Tin Dịch Vụ
                         </div>
-                    </div>
-                    <div class="three fields">
-                        <div class="field">
-                            <label>Loại Dịch Vụ</label>
-                            <div class="ui fluid search selection dropdown" id="serviceType">
-                                <input type="hidden" name="serviceType" />
-                                <i class="dropdown icon"></i>
-                                <input class="search" autocomplete="off" tabindex="0" />
-                                <div class="default text">Loại Sản Phẩm</div>
-                                <div id="cbbserviceType" class="menu" tabindex="-1">
+                        <div class="content field">
+                            <div class="field">
+                                <div class="field">
+                                    <label>Tên</label>
+                                    <input id="txtName" name="name" type="text" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <label>Giá Tiền</label>
-                            <div class="ui right labeled fluid input">
-                                <div class="ui label">$</div>
-                                <input id="txtAmount" name="discountAmount" type="text" />
-                                <div class="ui basic label">VND</div>
-                            </div>
-                        </div>
-                                                <div class="field">
-                           <label>Số Lần Điều trị</label>
-                            <input id="spTotalTreatment" name="Notvalid" type="number" onchange="return ExecuteAmountTreat()" />
-                        </div>
-                    </div>
-                    <div class="two fields">
-                        <div class="field">
-                            <div class="row">
-                                <div class="sixteen wide column">
-                                    <div class="ui segments">
-                                        <div class="ui segment">
-                                            <h5 class="ui header">Hoa Hồng Tư Vấn
-                                            </h5>
-                                        </div>
-                                        <div class="ui segment">
-                                            <div class="ui right labeled fluid input">
-                                                <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerConsulAmount" name="Notvalid" type="text" onchange="return ExecuteAmountConsult()" />
-                                                <div class="ui basic label">VND</div>
-                                            </div>
-                                            <div class="ui divider"></div>
-                                            <div class="ui right labeled fluid input">
-                                                <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerConsulPercent" name="Notvalid" type="number" onchange="return ExecutePercentConsult()" />
-                                                <div class="ui basic label">%</div>
-                                            </div>
+                            <div class="four fields">
+                                <div class="field">
+                                    <label>Loại Dịch Vụ</label>
+                                    <div class="ui fluid search selection dropdown" id="serviceType">
+                                        <input type="hidden" name="serviceType" />
+                                        <i class="dropdown icon"></i>
+                                        <input class="search" autocomplete="off" tabindex="0" />
+                                        <div class="default text">Loại Sản Phẩm</div>
+                                        <div id="cbbserviceType" class="menu" tabindex="-1">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="row">
-                                <div class="sixteen wide column">
-                                    <div class="ui segments">
-                                        <div class="ui segment">
-                                            <h5 class="ui header">Hoa Hồng Điều Trị
-                                            </h5>
-                                        </div>
-                                        <div class="ui segment">
-                                            <div class="ui right labeled fluid input">
-                                                <div class="ui label">Tiến Hoa Hồng</div>
-                                                <input id="txtPerTreatAmount" name="Notvalid" type="text" onchange="return ExecuteAmountTreat()" />
-                                                <div class="ui basic label">VND</div>
-                                            </div>
-                                            <div class="ui divider"></div>
-                                            <div class="ui right labeled fluid input">
-                                                <div class="ui label">Phần Trăm Giá</div>
-                                                <input id="txtPerTreatPercent" name="Notvalid" type="number" onchange="return ExecutePercentTreat()" />
-                                                <div class="ui basic label">%</div>
-                                            </div>
-                                        </div>
+                                <div class="field">
+                                    <label>Giá Tiền</label>
+                                    <div class="ui right labeled fluid input">
+                                        <div class="ui label">$</div>
+                                        <input id="txtAmount" name="discountAmount" type="text" />
+                                        <div class="ui basic label">VND</div>
                                     </div>
                                 </div>
+                                <div class="field">
+                                    <label>Số Lần Điều trị</label>
+                                    <input id="spTotalTreatment" name="Notvalid" type="number" onchange="return ExecuteAmountTreat()" />
+                                </div>
+
+                                <div class="field">
+                                    <label>Sản Phẩm / Dịch Vụ</label>
+                                    <div class="ui toggle checkbox">
+                                        <input id="chkIsproduct" type="checkbox" checked="checked" name="newsletter" onchange="return onChangeIsProduct()" />
+                                        <label id="lbProductIS" class="coloring red">Là Sản Phẩm</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="four fields">
+                                <div class="field">
+                                    <label>Hoa Hồng Tư Vấn </label>
+                                    <div class="ui right labeled fluid input">
+                                        <div class="ui label">$</div>
+                                        <input id="txtPerConsulAmount" name="Notvalid" type="text" onchange="return ExecuteAmountConsult()" />
+                                        <div class="ui basic label">VND</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Hoa Hồng Tư Vấn </label>
+                                    <div class="ui right labeled fluid input">
+                                        <div class="ui label">%</div>
+                                        <input id="txtPerConsulPercent" name="Notvalid" type="number" onchange="return ExecutePercentConsult()" />
+                                        <div class="ui basic label"></div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label>Hoa Hồng Điều Trị </label>
+                                    <div class="ui right labeled fluid input">
+                                        <div class="ui label">$</div>
+                                        <input id="txtPerTreatAmount" name="Notvalid" type="text" onchange="return ExecuteAmountTreat()" />
+                                        <div class="ui basic label">VND</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Hoa Hồng Điều Trị </label>
+                                    <div class="ui right labeled fluid input">
+                                        <div class="ui label">%</div>
+                                        <input id="txtPerTreatPercent" name="Notvalid" type="number" onchange="return ExecutePercentTreat()" />
+                                        <div class="ui basic label"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="field">
+                                <label>Ghi Chú</label>
+                                <input id="txtContent" name="content" type="text" />
+
                             </div>
                         </div>
                     </div>
-
-
-
-                        <div class="field">
-                            <label>Ghi Chú</label>
-                            <input id="txtContent" name="content" type="text" />
-
-                        </div>
-
-                    <div class="field">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input id="chkIsproduct" type="checkbox" checked="checked" name="newsletter" onchange="return onChangeIsProduct()" />
-                                <label id="lbProductIS" class="coloring red">Là Sản Phẩm</label>
-                            </div>
-                        </div>
-                    </div>
-
-
-
                     <div class="row">
-                        <div class="sixteen wide column">
-                            <div class="ui segments">
-                                <div class="ui segment">
-                                    <h5 class="ui header">Danh Sách Vật Liệu Tiêu Hao
-                                    </h5>
-                                </div>
-                                <div class="ui segment">
-                                    <div class="ui form">
-                                        <div class="four fields">
-                                            <div class="field">
-                                                <div class="ui fluid search selection dropdown" id="productDetail" onchange="LoadComboUnit()">
-                                                    <input type="hidden" name="productDetail" />
-                                                    <i class="dropdown icon"></i>
-                                                    <input class="search" autocomplete="off" tabindex="0" />
-                                                    <div class="default text">Vật Liệu</div>
-                                                    <div id="cbbproductDetail" class="menu" tabindex="-1">
+                        <div class="ui accordion field">
+                            <div class="title active">
+                                <i class="icon dropdown"></i>Danh sách tiêu hao
+                            </div>
+                            <div class="content field active">
+                                <div class="sixteen wide column">
+                                    <div class="ui segments">
+                                        <div class="ui segment">
+                                            <div class="ui form">
+                                                <div class="five fields">
+                                                    <div class="field">
+                                                        <div class="ui fluid search selection dropdown" id="stageDetail">
+                                                            <input type="hidden" name="stageDetail" />
+                                                            <i class="dropdown icon"></i>
+                                                            <input class="search" autocomplete="off" tabindex="0" />
+                                                            <div class="default text">Bước Thực Hiện</div>
+                                                            <div id="cbbstageDetail" class="menu" tabindex="-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="ui fluid search selection dropdown" id="productDetail" onchange="LoadComboUnit()">
+                                                            <input type="hidden" name="productDetail" />
+                                                            <i class="dropdown icon"></i>
+                                                            <input class="search" autocomplete="off" tabindex="0" />
+                                                            <div class="default text">Vật Liệu</div>
+                                                            <div id="cbbproductDetail" class="menu" tabindex="-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="ui fluid search selection dropdown" id="unitCount">
+                                                            <input type="hidden" name="unitCount" />
+                                                            <i class="dropdown icon"></i>
+                                                            <input class="search" autocomplete="off" tabindex="0" />
+                                                            <div class="default text">Đơn Vị Tính</div>
+                                                            <div id="cbbunitCount" class="menu" tabindex="-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <input id="numberProduct" name="numberProduct" type="number" />
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="ui blue button" onclick="return ExecuteUnitCount()">Thêm</div>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="field">
+                                                        <div style="font-size: 10px; color: red" id="textShowMessage"></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="field">
-                                                <div class="ui fluid search selection dropdown" id="unitCount">
-                                                    <input type="hidden" name="unitCount" />
-                                                    <i class="dropdown icon"></i>
-                                                    <input class="search" autocomplete="off" tabindex="0" />
-                                                    <div class="default text">Đơn Vị Tính</div>
-                                                    <div id="cbbunitCount" class="menu" tabindex="-1">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <input id="numberProduct" name="numberProduct" type="number" />
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui blue button" onclick="return ExecuteUnitCount()">Thêm</div>
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="field">
-                                                <div style="font-size: 10px; color: red" id="textShowMessage"></div>
+                                            <div class="ui divider"></div>
+                                            <div class="column" id="TableProductDetail">
+                                                <table class="ui celled table" id="dtContentProductDetail" style="font-size: 11px; max-width: 100%; min-width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="text-align: center">idProduct</th>
+                                                            <th style="text-align: center">idUnit</th>
+                                                            <th style="text-align: center">state</th>
+                                                            <th style="text-align: center">idDetail</th>
+                                                            <th style="text-align: left">Bước Thực Hiện</th>
+                                                             <th style="text-align: left">Tên Vật Liệu</th>
+                                                            <th style="text-align: center; max-width: 150px;">Số Lượng</th>
+                                                            <th style="text-align: left">Đơn Vị Tính</th>
+                                                              <th style="text-align: left">StageID</th>
+                                                            <th style="text-align: center; max-width: 60px;">Xóa</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="ui divider"></div>
-                                    <div class="column" id="TableProductDetail">
-                                        <table class="ui celled table" id="dtContentProductDetail" style="font-size: 11px; max-width: 100%; min-width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center">idProduct</th>
-                                                    <th style="text-align: center">idUnit</th>
-                                                    <th style="text-align: center">state</th>
-                                                    <th style="text-align: center">idDetail</th>
-                                                    <th style="text-align: left">Tên Vật Liệu</th>
-                                                    <th style="text-align: center; max-width: 150px;">Số Lượng</th>
-                                                    <th style="text-align: left">Đơn Vị Tính</th>
-                                                    <th style="text-align: center; max-width: 60px;">Xóa</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -209,6 +209,7 @@
     <script type="text/javascript">
         var divContentProductDetail;
         var DataComboTypeUnitCount; // data don vi tinh
+        var DataComboStage; // data buoc thuc hien
         var DataComboProduct; // data vat lieu
         var DataComboTypeService; // Data loai dịch vụ
 
@@ -253,11 +254,11 @@
             divContentProductDetail = $("#TableProductDetail").clone();
             document.getElementById("textShowMessage").innerHTML = "";
             $('#numberProduct').val(1);
-             $('#spTotalTreatment').val(1);
+            $('#spTotalTreatment').val(1);
             DataComboTypeService = ([<%=_DataComboTypeService%>][0]);
             DataComboTypeUnitCount = ([<%=_DataComboTypeUnitCount%>][0]);
             DataComboProduct = ([<%=_DataComboProduct%>][0]);
-
+            DataComboStage = ([<%=_DataComboStage%>][0]);
             DataproductChoosen = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
             DataProductChoosenInitialize = ([<%=_DataproductChoosen%>][0]) === undefined ? [] : ([<%=_DataproductChoosen%>][0]);
 
@@ -266,7 +267,8 @@
             $('#txtPerTreatAmount').divide();
 
             LoadCombo(DataComboTypeService, "cbbserviceType")
-            // Load test unit name
+
+           LoadCombo(DataComboStage, "cbbstageDetail")
             LoadCombo(DataComboProduct, "cbbproductDetail")
             LoadDataUpdate();
         });
@@ -281,16 +283,19 @@
                 paging: false,
                 ordering: false,
                 searching: false,
+                scrollY: "400px",
+                scrollCollapse: true,
                 destroy: true,
                 "columnDefs": [
                     { "visible": false, "targets": 0, "data": "idProduct" },
                     { "visible": false, "targets": 1, "data": "idUnit" },
                     { "visible": false, "targets": 2, "data": "state" },
                     { "visible": false, "targets": 3, "data": "idDetail" },
-                    { "visible": true, "targets": 4, "data": "ProductName" },
-                    { "visible": true, "targets": 5, "data": "Number" },
-                    { "visible": true, "targets": 6, "data": "UnitName" },
-
+                            { "visible": true, "targets": 4, "data": "StageName" },
+                    { "visible": true, "targets": 5, "data": "ProductName" },
+                    { "visible": true, "targets": 6, "data": "Number" },
+                    { "visible": true, "targets": 7, "data": "UnitName" },
+                     { "visible": false, "targets": 8, "data": "StageID" },
                     {
                         "targets": -1,
                         "data": null,
@@ -302,12 +307,12 @@
             });
             document.getElementById("dtContentProductDetail").className = "ui celled table";
             // Load lai Sản Phẩm
-            var dataunit = DataComboProduct;
-            for (var element in DataproductChoosen) {
-                let x = DataproductChoosen[element]["idProduct"];
-                dataunit = dataunit.filter(word => word["ID"] != x);
-            }
-            LoadCombo(dataunit, "cbbproductDetail")
+            //var dataunit = DataComboProduct;
+            //for (var element in DataproductChoosen) {
+            //    let x = DataproductChoosen[element]["idProduct"];
+            //    dataunit = dataunit.filter(word => word["ID"] != x);
+            //}
+            //LoadCombo(dataunit, "cbbproductDetail")
 
 
             $('#dtContentProductDetail tbody ').on('click', '.buttonDeleteClass', function (e) {
@@ -341,14 +346,14 @@
             let DataProductMain = ([<%=_DataProductMain%>][0]);
             LoadDataTable();
             if (DataProductMain) {
-                
+
                 $("#txtPerConsulAmount").attr('name', "NotVali");
                 $("#txtPerConsulPercent").attr('name', "NotVali");
                 $("#txtPerTreatAmount").attr('name', "NotVali");
                 $("#txtPerTreatPercent").attr('name', "NotVali");
                 $("#serviceType").dropdown("refresh");
                 $("#serviceType").dropdown("set selected", DataProductMain[0].ServiceType); //ServiceType
-                  $('#spTotalTreatment').val((DataProductMain[0].TimeToTreatment));
+                $('#spTotalTreatment').val((DataProductMain[0].TimeToTreatment));
                 $('#txtName').val((DataProductMain[0].Name));  //Name
                 $('#txtAmount').val((DataProductMain[0].Amount)); //Amount
                 $('#txtPerConsulAmount').val((DataProductMain[0].PerConsulAmount)); //PerConsulAmount
@@ -384,8 +389,9 @@
             let productDetail = Number($('#productDetail').dropdown('get value')) ? Number($('#productDetail').dropdown('get value')) : 0;
             let unitCount = Number($('#unitCount').dropdown('get value')) ? Number($('#unitCount').dropdown('get value')) : 0;
             let numberProduct = parseFloat($('#numberProduct').val()) ? parseFloat($('#numberProduct').val()) : 0;
-            if (productDetail == 0 || unitCount == 0 || numberProduct <= 0) {
-                document.getElementById("textShowMessage").innerHTML = "Chọn Vật Liệu, Đơn Vị Tính Và Số Lượng";
+            let stageDetail= Number($('#stageDetail').dropdown('get value')) ? Number($('#stageDetail').dropdown('get value')) : 0;
+            if (productDetail == 0 ||stageDetail==0|| unitCount == 0 || numberProduct <= 0) {
+                document.getElementById("textShowMessage").innerHTML = "Chọn Bước Thực Hiện, Vật Liệu, Đơn Vị Tính Và Số Lượng";
             }
             else {
                 document.getElementById("textShowMessage").innerHTML = "";
@@ -394,10 +400,13 @@
                 element.idUnit = unitCount;
                 element.state = "1";
                 element.idDetail = "0";
+                element.StageName = $('#stageDetail').dropdown('get text');
                 element.ProductName = $('#productDetail').dropdown('get text');
                 element.Number = numberProduct.toString();
                 element.UnitName = $('#unitCount').dropdown('get text');
+                element.StageID = stageDetail;
                 DataproductChoosen.push(element);
+                 $('#stageDetail').dropdown('clear');
                 $('#productDetail').dropdown('clear');
                 $('#unitCount').dropdown('clear');
                 $('#numberProduct').val(1);
@@ -436,8 +445,6 @@
                 if (currentElement == undefined || currentElement == "") // Chua ton tai
                 {
                     DataProductChoosenInitialize[element]["state"] = 0
-                    //  DataProductChoosenInitialize= DataProductChoosenInitialize.filter(word => word["ID"] != idunit);
-
                 }
 
             }

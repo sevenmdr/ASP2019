@@ -9,8 +9,9 @@
                         <form class="ui form segment form3" style="height: 65px">
                             <div class="ui segment" style="border: none; box-shadow: none;">
                                 <div>
-                                    <div style="float: left">
-                                        <h3>Tiền Chi Chi Nhánh</h3>
+                                      <div style="float: left">
+                                        <a class="ui blue image label" style="height: 30px!important; font-size: 13px;">Tổng Chi<div class="detail" id="totalInvoice">0</div>
+                                        </a>
                                     </div>
                                     <div style="float: right">
                                         <button class="ui blue basic button modalfour" data-value="fade up" onclick="event.preventDefault();AddNewAccount()">Thêm Mới</button>
@@ -104,7 +105,8 @@
 
                     ],
                 });
-
+                debugger
+                document.getElementById("totalInvoice").innerHTML = !data[0] ? 0 : data[0].totalInvoice;
                 document.getElementById("dtContent").className = "ui celled table";
                 $('#dtContent tbody ').on('click', '.buttonEditClass', function () {
                     var data = table.row($(this).parents('tr')).data();

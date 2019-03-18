@@ -652,19 +652,20 @@ function GetDataSourceGroupEmployee(link, fn) {
 //////////////Employee
 //LoadList
 function GetDataSourceEmployee(link, fn) {
+    debugger
     var x = "";
     $.ajax({
         url: link,
         dataType: "json",
         type: "POST",
         contentType: 'application/json; charset=utf-8',
-        async: true,
+        async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-
+            debugger
             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (data) {
-
+            debugger
             fn(JSON.parse(data.d));
         }
     })
@@ -1446,6 +1447,53 @@ function GetReportONewCustomer(link, dateFrom, dateTo, branchID, fn) {
         success: function (data) {
 
             fn(JSON.parse(data.d)["Table"], JSON.parse(data.d)["Table1"]);
+        }
+    })
+    return x;
+}
+
+
+// Load Treatment Material
+
+function GetDataTreatmentMaterial(link, stageID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "stageID": stageID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
+        }
+    })
+    return x;
+}
+
+// Load Treatment Stage By Service
+
+function GetDataStageByService(link, serviceID, fn) {
+    var x = "";
+    $.ajax({
+        url: link,
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ "serviceID": serviceID }),
+        async: false,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+
+            fn(JSON.parse(data.d));
         }
     })
     return x;

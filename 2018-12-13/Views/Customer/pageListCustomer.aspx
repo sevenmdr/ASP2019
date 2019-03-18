@@ -37,10 +37,14 @@
                                         <th style="text-align: center">STT</th>
                                         <th style="text-align: center">MSKH</th>
                                         <th style="text-align: center">Tên KH</th>
-                                        <th style="text-align: center">Giới Tính</th>
-                                        <th style="text-align: center">Ghi Chú</th>
-                                        <th style="text-align: center">Tổng Doanh Thu</th>
-                                        <th style="text-align: center">Ngày Tạo</th>
+                                        <th style="text-align: center">Số Điện Thoại</th>
+                                        <th style="text-align: center">Tổng Tiền SDDV</th>
+                                        <th style="text-align: center">Tổng Tiền Thanh Toán</th>
+                                        <th style="text-align: center">Tổng Tiền Nợ</th>
+                                        <th style="text-align: center">Tổng Số DVSD</th>
+                                        <th style="text-align: center">DV Mua Gần Nhất</th>
+                                        <th style="text-align: center">Ngày Mua DV Gần Nhất</th>
+                                        <th style="text-align: center">Còn/Hết LT</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -78,10 +82,14 @@
                             }
                         },
                         { "visible": true, "targets": 2, "data": "Name", width: "200px", },
-                        { "visible": true, "targets": 3, "data": "Gender", width: "120px", },
-                        { "visible": true, "targets": 4, "data": "Note", },
-                        { "visible": true, "targets": 5, "data": "Amount", width: "200px", },
-                        { "visible": true, "targets": 6, "data": "Createdstring", width: "250px" },
+                        { "visible": true, "targets": 3, "data": "Phone", width: "120px", },                      
+                        { "visible": true, "targets": 4, "data": "Price_Discouted", width: "200px", },
+                        { "visible": true, "targets": 5, "data": "Amount", width: "350px", },   
+                        { "visible": true, "targets": 6, "data": "Own", width: "200px",},                      
+                        { "visible": true, "targets": 7, "data": "Number", width: "200px", },
+                        { "visible": true, "targets": 8, "data": "ServiceLast", width: "200px", },
+                        { "visible": true, "targets": 9, "data": "Createdstring", width: "350px", },
+                        { "visible": true, "targets": 10, "data": "Status", width: "200px" },
 
 
                     ],

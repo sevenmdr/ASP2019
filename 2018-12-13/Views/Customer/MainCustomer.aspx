@@ -35,6 +35,7 @@
             <div class="ui pointing menu">
                 <a class="active item">Thông Tin Hồ Sơ</a>
                 <a class="item">Tư Vấn</a>
+                 <a class="item">Tư Vấn Nha Khoa</a>
                 <a class="item">Dịch Vụ</a>
                 <a class="item">Thanh Toán</a>
                 <a class="item">Điều Trị</a>
@@ -166,6 +167,12 @@
                     document.getElementById("totalMoneyCustomerLeft").style.display = "block";
                     $("#divMainPage").load("/Views/Customer/pageStatusList.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
                     break;
+                  case "Tư Vấn Nha Khoa":
+                    document.getElementById("totalMoneyCustomerRaise").style.display = "block";
+                    document.getElementById("totalMoneyCustomerPaid").style.display = "block";
+                    document.getElementById("totalMoneyCustomerLeft").style.display = "block";
+                    $("#divMainPage").load("/Views/Customer/pageStatusListDental.aspx?CustomerID=" + ("<%=CustomerID.ToString() %>"));
+                    break;
                 case "Lịch Sử":
                     document.getElementById("totalMoneyCustomerRaise").style.display = "block";
                     document.getElementById("totalMoneyCustomerPaid").style.display = "block";
@@ -204,7 +211,7 @@
                     break;
             }
         })
-
+        
         // Status //////////////
         function addNewStatus(customerID) {
 
@@ -218,7 +225,27 @@
 
         }
         ///////////////////
+                // Status Nha khoa //////////////
+        function addNewStatus(customerID) {
 
+            //document.getElementById("divDetailPopupLarge").innerHTML = '';
+            //$("#divDetailPopupLarge").load("/Views/Customer/pageStatusDetailDental.aspx?CustomerID=" + customerID);
+
+                        document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Customer/pageStatusDetail.aspx?CustomerID=" + customerID);
+        }
+        function editStatus(id, customerid) {
+
+            //            document.getElementById("divDetailPopupLarge").innerHTML = '';
+            //$("#divDetailPopupLarge").load("/Views/Customer/pageStatusDetailDental.aspx?CurrentID=" + id + "&CustomerID=" + customerid);
+            //$('#divDetailPopupLarge').modal('show');
+
+            document.getElementById("divDetailPopup").innerHTML = '';
+            $("#divDetailPopup").load("/Views/Customer/pageStatusDetail.aspx?CurrentID=" + id + "&CustomerID=" + customerid);
+            $('#divDetailPopup').modal('show');
+
+        }
+        ///////////////////
 
         // Image 
         function createFolder() {

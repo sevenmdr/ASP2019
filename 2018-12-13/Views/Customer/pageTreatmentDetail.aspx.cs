@@ -20,8 +20,8 @@ namespace _2018_12_13.Views.Customer
         public static string _dataComboDoctor { get; set; }
         public static string _dataComboAssist { get; set; }
         public static string _dataComboService { get; set; }
-
-
+        public static string _dataComboStage { get; set; }
+        public static string _dataMaterialWhenUpdate { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -36,6 +36,7 @@ namespace _2018_12_13.Views.Customer
                 {
                     _CurrentID = curr.ToString();
                     Loadata(Convert.ToInt32(_CurrentID));
+                    LoadataMaterial(Convert.ToInt32(_CurrentID));
                 }
                 else
                 {
@@ -48,6 +49,25 @@ namespace _2018_12_13.Views.Customer
                 _CustomerID = null;
                 Response.Redirect("~/Error/index.html");
             }
+        }
+        private void LoadataMaterial(int id)
+        {
+
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Customer_Treatment_LoadDetailMaterial]", CommandType.StoredProcedure,
+                  "@ID", SqlDbType.Int, Convert.ToInt32(id == 0 ? 0 : id));
+            }
+            if (dt != null)
+            {
+                _dataMaterialWhenUpdate = JsonConvert.SerializeObject(dt);
+            }
+            else
+            {
+                _dataMaterialWhenUpdate = "";
+            }
+
         }
         private void Loadata(int id)
         {
@@ -68,13 +88,11 @@ namespace _2018_12_13.Views.Customer
             }
 
         }
-
         private void LoadComboMain()
         {
             _dataComboDoctor = "";
             _dataComboAssist = "";
-            _dataComboService = "";
-
+            _dataComboStage = "";
             //LoadDoctor
             using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
             {
@@ -95,16 +113,59 @@ namespace _2018_12_13.Views.Customer
                  "@Customer_ID", SqlDbType.Int, _CustomerID);
                 _dataComboService = JsonConvert.SerializeObject(dt, Formatting.Indented);
             }
-
         }
         [System.Web.Services.WebMethod]
-        public static string ExcuteData(string data)
+        public static string LoadStageByService(string serviceID)
+        {
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Customer_Treatment_LoadStage]",
+                    CommandType.StoredProcedure
+                  , "@serviceID", SqlDbType.Int, Convert.ToInt32(serviceID));
+            }
+            if (dt != null)
+            {
+                return JsonConvert.SerializeObject(dt);
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string LoadProductByStage(string stageID)
+        {
+            DataTable dt = new DataTable();
+            using (Models.ExecuteDataBase confunc = new Models.ExecuteDataBase())
+            {
+                dt = confunc.ExecuteDataTable("[YYY_sp_Customer_Treatment_LoadMaterial]", CommandType.StoredProcedure,
+                  "@UserID", SqlDbType.Int, Comon.Global.sys_userid
+                  , "@stageID", SqlDbType.Int, Convert.ToInt32(stageID));
+            }
+            if (dt != null)
+            {
+                return JsonConvert.SerializeObject(dt);
+            }
+            else
+            {
+                return "";
+            }
+        }
+        [System.Web.Services.WebMethod]
+        public static string ExcuteData(string data, string dataDetailProduct)
         {
             try
             {
                 TreatDetail DataMain = JsonConvert.DeserializeObject<TreatDetail>(data);
+               
                 if (_CurrentID == null)
                 {
+                    DataTable DataDetailProduct = new DataTable();
+                    if (dataDetailProduct != "\"\"")
+                        DataDetailProduct = JsonConvert.DeserializeObject<DataTable>(dataDetailProduct);
+                    else DataDetailProduct = null;
                     using (Models.ExecuteDataBase connFunc = new Models.ExecuteDataBase())
                     {
                         connFunc.ExecuteDataTable("YYY_sp_Customer_Treatment_Insert", CommandType.StoredProcedure,
@@ -118,6 +179,8 @@ namespace _2018_12_13.Views.Customer
                     "@BS2", SqlDbType.Int, DataMain.Doc2,
                      "@PT1", SqlDbType.Int, DataMain.Ass1,
                     "@PT2", SqlDbType.Int, DataMain.Ass2,
+                     "@StageID", SqlDbType.Int, DataMain.StageID,
+                       "@table_data", SqlDbType.Structured,(DataDetailProduct!=null &&DataDetailProduct.Rows.Count > 0) ? DataDetailProduct : null,
                     "@TreatmentAmount", SqlDbType.Decimal, DataMain.TreatmentAmount);
                     }
                 }
@@ -158,6 +221,7 @@ namespace _2018_12_13.Views.Customer
         public int Ass1 { get; set; }
         public int Ass2 { get; set; }
         public int Tab_ID { get; set; }
+        public int StageID { get; set; }
         public decimal TreatmentAmount { get; set; }
     }
 }
